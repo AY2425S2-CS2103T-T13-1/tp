@@ -19,41 +19,41 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI
 
-### Jane Doe
+### David Vicedo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vikeedough.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/vikeedough)]
+[[portfolio](team/vikeedough.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Integration
 
-### Jean Doe
+### Desean
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/deseansoh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/deseansoh)] [[portfolio](team/deseansoh.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Development of Features, Testing
 
-### James Doe
+### Kai Ming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cloudkai.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/CloudKai)]
+[[portfolio](team/cloudkai.md)]
+
+* Role: Scheduling and tracking
+* Responsibilities: In charge of defining, assigning, and tracking project tasks.
+
+### Zong Hua
+
+<img src="images/wzhua02.png" width="200px">
+
+[[github](http://github.com/wzhua02)]
+[[portfolio](team/zonghua.md)]
 
 * Role: Developer
 * Responsibilities: UI
