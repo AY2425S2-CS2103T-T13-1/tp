@@ -4,13 +4,33 @@
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
+
+# Welcome to FitFlow!
+
+FitFlow is a new application, designed with **Singaporean personal trainers** in mind!
+
+Are you:
+- :weary: *Frustrated* at having to keep track of all your clients' schedules?
+- :computer: A *fast* typist?
+- :rocket: Someone who values *efficiency*?
+
+Then FitFlow is the app for you!
+
+## Main Features
+
+Fitflow is **easy to learn**, and **easy to master**!
+
+- Keep track of all your clients' details, all in one application
+- Save your client's preferred schedules
+- Easy edit information when you need to
+- View your daily schedules easily
+
+## Download and use FitFlow
+
+1. Download the latest release from the Releases tab
+2. Launch the application
+3. Explore and use FitFlow :thumbsup:
+
+## Help
+
+For the detailed documentation of this project, see the **[FitFlow Product Website](https://ay2425s2-cs2103t-t13-1.github.io/tp/)**.

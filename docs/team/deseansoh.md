@@ -38,7 +38,7 @@ Given below are my contributions to the project.
 
 [//]: # (    * Added documentation for the features `delete` and `find` [\#72]&#40;&#41;)
 [//]: # (    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]&#40;&#41;)
-  
+
 
 * **Community**:
 
