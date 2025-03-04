@@ -262,29 +262,56 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* a professional personal trainer in Singapore helping clients achieve fitness goals
+* needs to track and manage individual client goals
+* creates and edits customised training plans based on client needs
+* keeps track of client details (name, phone number, training days, goals, medical history and location)
+* manages weekly schedule and multiple training locations across Singapore
+* organise group workout sessions with clients who have similar exercise profiles and live close together
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: streamlines client management, workout planning, and scheduling, maximizing productivity
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                          | I want to …​                                                                   | So that I can…​                                                                        |
+|----------|----------------------------------|--------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| `* * *`  | user                             | add my clients' contact details and address to the app                         | I can contact them easily if there are any changes in plans                            |
+| `* * *`  | user                             | add my clients' workout goals in the app                                       | I can easily plan workout routines for my clients                                      |
+| `* * *`  | user                             | add my clients' previous or existing injuries in the app                       | I can better plan exercises that avoid aggrevating their injury                        |
+| `* * *`  | user                             | add my clients' preferred location                                             | I can collate a list of clients in the same area to train                              |
+| `* * *`  | user                             | sort my clients' information to see if they match with my schedule             | I can better plan the timing to train while I am free                                  |
+| `* * *`  | new user                         | look at the onboarding/help section                                            | I know the features the app provides and how to use them                               |
+| `* * *`  | user                             | sort my clients based on their training goals                                  | I know which clients have similar requirements                                         |
+| `* * *`  | new user                         | go through a guided tutorial from the application                              | learn the basic features of the app and test it out                                    |
+| `* * *`  | potential user                   | look through a dummy app with different clients already inside                 | get a rough idea of how the app works and how it might be beneficial to me             |
+| `* * *`  | user                             | view which clients have similar goals                                          | I can organise a joint training session to maximise productivity                       |
+| `* * *`  | user                             | view the schedule for each day                                                 | I can plan my day accordingly                                                          |
+| `* * *`  | user                             | update each clients' details                                                   | I can make changes and keep things up to date with what happens IRL                    |
+| `* * *`  | user                             | easily remind myself of the upcoming events in the week                        | I know at the back of my mind what I have to do in the coming week                     |
+| `* * *`  | user                             | view client's preference on solo or group trainings                            | I can organise a joint training session to maximise productivity                       |
+| `* * *`  | long-time user                   | I can back up the data I have on the app                                       | I can easily recover it if it is somehow corrupted or lost                             |
+| `* * *`  | gym-affiliated personal trainer  | separate my freelance clients from my company clients                          | -                                                                                      |
+| `* *`    | new user                         | look through the app and see if the GUI is easy to use and understand          | I can decide whether this app will be useful for my work                               |
+| `* *`    | user                             | look for my clients by searching one location (North, East, etc.)              | I can organise a joint training session to maximise productivity                       |
+| `* *`    | student user                     | use the app to add trainees that are students in my school                     | I can easily shedule a meet up when I am done with my lessons                          |
+| `* *`    | user interested in learning more | access advanced tutorials that teach the more complex functions of the app     | I can use the full power of the app in organising my clients' data                     |
+| `* *`    | user                             | add recurring events for clients that have training on the same day every week | I don't need to manually add and manage my schedule every single week                  |
+| `* *`    | user                             | be notified of a conflicting timeslot when I update a client's timeslot        | I know which timeslots are not available for my new clients                            |
+| `* *`    | user                             | delete client that I am not training anymore                                   | the client list I have is not messy                                                    |
+| `* *`    | forgetful user                   | search for a client by typing their name partially                             | I can still identify a client and find their details even if I forget their name       |
+| `* *`    | new user                         | purge all existing data from the dummy app                                     | I can immediately start a fresh app                                                    |
+| `* *`    | user                             | add to my personal todo list                                                   | I can keep track of the things I need to do not pertaining to the clients              |
+| `* *`    | forgetful user                   | set reminders for training sessions                                            | I do not forget or miss a training session with my client                              |
+| `* *`    | user                             | undo the last command I did                                                    | I can undo any mistakes I make while using the app                                     |
+| `* *`    | user                             | view which trainee I have not train by weeks or months                         | check on them or remove them from the list                                             |
+| `* *`    | user                             | set goal deadlines for clients                                                 | I know which session to have a sit down with client                                    |
+| `* *`    | long-time user                   | use short form for commands (eg. t instead of tag)                             | I can be quicker when using the app                                                    |
+| `*`      | lazy user                        | have the app create weekly schedules for me based on the clients' information  | I can spend more time planning out other things like the clients' diets, routines etc. |
+| `*`      | expert user                      | set a schedule on the spot with my client                                      | I can confirm with my client on the spot instead of over texts                         |
+| `*`      | organized user                   | sort my clients chronologically                                                | I will know which clients I will be meeting with soon.                                 |
+| `*`      | user                             | sort my clients based on months or weeks                                       | I can better plan for the clients that are in the upcoming months / weeks              |
 
 ### Use cases
 
