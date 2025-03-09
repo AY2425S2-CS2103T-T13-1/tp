@@ -78,7 +78,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidRecurringSchedule_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, INVALID_PHONE, INVALID_RECURRING_SCHEDULE,
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, INVALID_RECURRING_SCHEDULE,
                         VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         String expectedMessage = RecurringSchedule.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
