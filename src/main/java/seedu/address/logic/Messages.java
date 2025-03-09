@@ -39,6 +39,8 @@ public class Messages {
         builder.append(person.getName())
                 .append("; Phone: ")
                 .append(person.getPhone())
+                .append("; Recurring Schedule: ")
+                .append(person.getRecurringSchedule())
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")

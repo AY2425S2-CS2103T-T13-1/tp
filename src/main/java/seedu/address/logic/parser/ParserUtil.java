@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -63,6 +64,21 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String recurringSchedule} into a {@code RecurringSchedule}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code recurringSchedule} is invalid.
+     */
+    public static RecurringSchedule parseRecurringSchedule(String recurringSchedule) throws ParseException {
+        requireNonNull(recurringSchedule);
+        String trimmedRecurringSchedule = recurringSchedule.trim();
+        if (!RecurringSchedule.isValidSchedule(trimmedRecurringSchedule)) {
+            throw new ParseException(RecurringSchedule.MESSAGE_CONSTRAINTS);
+        }
+        return new RecurringSchedule(trimmedRecurringSchedule);
     }
 
     /**

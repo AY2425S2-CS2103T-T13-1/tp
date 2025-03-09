@@ -28,6 +28,7 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
+            .withRecurringSchedule("Mon 1400 1600")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
