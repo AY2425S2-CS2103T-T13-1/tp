@@ -12,8 +12,8 @@ import java.util.regex.Pattern;
  */
 public class RecurringSchedule {
 
-    public static final String MESSAGE_CONSTRAINTS = "Recurring schedules should be in the following format:" +
-            " [day HHmm HHmm].";
+    public static final String MESSAGE_CONSTRAINTS = "Recurring schedules should be in the following format:"
+            + " [day HHmm HHmm].";
 
     /*
      * A valid schedule format:
