@@ -29,7 +29,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, RecurringSchedule recurringSchedule, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, RecurringSchedule recurringSchedule,
+                  Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, recurringSchedule, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -46,7 +47,9 @@ public class Person {
     public Phone getPhone() {
         return phone;
     }
-    public RecurringSchedule getRecurringSchedule() { return recurringSchedule; }
+    public RecurringSchedule getRecurringSchedule() {
+        return recurringSchedule;
+    }
 
     public Email getEmail() {
         return email;

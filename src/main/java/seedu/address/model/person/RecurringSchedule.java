@@ -12,7 +12,8 @@ import java.util.regex.Pattern;
  */
 public class RecurringSchedule {
 
-    public static final String MESSAGE_CONSTRAINTS = "Recurring schedules should be in the following format: [day HHmm HHmm].";
+    public static final String MESSAGE_CONSTRAINTS = "Recurring schedules should be in the following format:" +
+            " [day HHmm HHmm].";
 
     /*
      * A valid schedule format:
@@ -20,10 +21,10 @@ public class RecurringSchedule {
      * - Followed by two sets of four-digit times (HHmm format, 00:00 to 23:59).
      */
     public static final String VALIDATION_REGEX =
-            "^(?i)(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|" +
-                    "Mon|Tue|Wed|Thu|Fri|Sat|Sun)\\s" +
-                    "(?:[01]\\d|2[0-3])[0-5]\\d\\s" +  // First HHmm (0000 - 2359)
-                    "(?:[01]\\d|2[0-3])[0-5]\\d$";     // Second HHmm (0000 - 2359)
+            "^(?i)(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|"
+                    + "Mon|Tue|Wed|Thu|Fri|Sat|Sun)\\s"
+                    + "(?:[01]\\d|2[0-3])[0-5]\\d\\s" // First HHmm (0000 - 2359)
+                    + "(?:[01]\\d|2[0-3])[0-5]\\d$"; // Second HHmm (0000 - 2359)
 
 
     private static final Pattern pattern = Pattern.compile(VALIDATION_REGEX, Pattern.CASE_INSENSITIVE);
