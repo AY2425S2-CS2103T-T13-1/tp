@@ -43,7 +43,16 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
+                .append("; OneTimeSchedule: ");
+
+        person.getOneTimeSchedules().forEach(schedule -> {
+            if (!builder.isEmpty() && builder.charAt(builder.length() - 1) != ' ') {
+                builder.append(", ");
+            }
+            builder.append(schedule);
+        });
+
+        builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
