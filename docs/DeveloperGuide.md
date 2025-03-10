@@ -277,7 +277,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                          | I want to …​                                                                   | So that I can…​                                                                        |
 |----------|----------------------------------|--------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| `* * *`  | user                             | add my clients' contact details and address to the app                         | I can contact them easily if there are any changes in plans                            |
+| `* * *`  | user                             | add my clients' contact details and location to the app                         | I can contact them easily if there are any changes in plans                            |
 | `* * *`  | user                             | add my clients' workout goals in the app                                       | I can easily plan workout routines for my clients                                      |
 | `* * *`  | user                             | add my clients' previous or existing injuries in the app                       | I can better plan exercises that avoid aggrevating their injury                        |
 | `* * *`  | user                             | add my clients' preferred location                                             | I can collate a list of clients in the same area to train                              |

@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING_SCHEDULE;
@@ -22,8 +22,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -45,7 +45,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_RECURRING_SCHEDULE + "RECURRING_SCHEDULE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_LOCATION + "LOCATION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -103,11 +103,11 @@ public class EditCommand extends Command {
         RecurringSchedule updatedRecurringSchedule = editPersonDescriptor.getRecurringSchedule()
                 .orElse(personToEdit.getRecurringSchedule());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Location updatedLocation = editPersonDescriptor.getLocation().orElse(personToEdit.getLocation());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedRecurringSchedule, updatedEmail,
-                updatedAddress, updatedTags);
+                updatedLocation, updatedTags);
     }
 
     @Override
@@ -143,7 +143,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private RecurringSchedule recurringSchedule;
         private Email email;
-        private Address address;
+        private Location location;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -157,7 +157,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setRecurringSchedule(toCopy.recurringSchedule);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setLocation(toCopy.location);
             setTags(toCopy.tags);
         }
 
@@ -165,7 +165,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, recurringSchedule, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, recurringSchedule, email, location, tags);
         }
 
         public void setName(Name name) {
@@ -198,12 +198,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setLocation(Location location) {
+            this.location = location;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Location> getLocation() {
+            return Optional.ofNullable(location);
         }
 
         /**
@@ -239,7 +239,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(recurringSchedule, otherEditPersonDescriptor.recurringSchedule)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(location, otherEditPersonDescriptor.location)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -250,7 +250,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("recurringSchedule", recurringSchedule)
                     .add("email", email)
-                    .add("address", address)
+                    .add("location", location)
                     .add("tags", tags)
                     .toString();
         }
