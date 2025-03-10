@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Goals;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -27,6 +28,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final String goals;
     private final String location;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -35,11 +37,12 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("location") String location,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("email") String email, @JsonProperty("goals") String goals,
+            @JsonProperty("location") String location, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.goals = goals;
         this.location = location;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -53,6 +56,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        goals = source.getGoals().value;
         location = source.getLocation().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -94,9 +98,17 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (goals == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Goals.class.getSimpleName()));
+        }
+        if (!Goals.isValidGoals(goals)) {
+            throw new IllegalValueException(Goals.MESSAGE_CONSTRAINTS);
+        }
+        final Goals modelGoals = new Goals(goals);
+
         if (location == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Location.class.getSimpleName()));
+            throw new
+                    IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Location.class.getSimpleName()));
         }
         if (!Location.isValidLocation(location)) {
             throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
@@ -104,7 +116,7 @@ class JsonAdaptedPerson {
         final Location modelLocation = new Location(location);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelLocation, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelGoals, modelLocation, modelTags);
     }
 
 }
