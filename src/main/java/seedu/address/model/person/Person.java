@@ -22,16 +22,19 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final RecurringSchedule recurringSchedule;
     private final Location location;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Location location, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, location, tags);
+    public Person(Name name, Phone phone, RecurringSchedule recurringSchedule,
+                  Email email, Location location, Set<Tag> tags) {
+        requireAllNonNull(name, phone, recurringSchedule, email, location, tags);
         this.name = name;
         this.phone = phone;
+        this.recurringSchedule = recurringSchedule;
         this.email = email;
         this.location = location;
         this.tags.addAll(tags);
@@ -43,6 +46,9 @@ public class Person {
 
     public Phone getPhone() {
         return phone;
+    }
+    public RecurringSchedule getRecurringSchedule() {
+        return recurringSchedule;
     }
 
     public Email getEmail() {
@@ -92,6 +98,7 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
+                && recurringSchedule.equals(otherPerson.recurringSchedule)
                 && email.equals(otherPerson.email)
                 && location.equals(otherPerson.location)
                 && tags.equals(otherPerson.tags);
@@ -100,7 +107,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, location, tags);
+        return Objects.hash(name, phone, recurringSchedule, email, location, tags);
     }
 
     @Override
@@ -108,6 +115,7 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
+                .add("recurringSchedule", recurringSchedule)
                 .add("email", email)
                 .add("location", location)
                 .add("tags", tags)

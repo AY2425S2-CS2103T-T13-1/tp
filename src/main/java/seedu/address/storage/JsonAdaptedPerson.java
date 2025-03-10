@@ -15,6 +15,7 @@ import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,6 +27,7 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String phone;
+    private final String recurringSchedule;
     private final String email;
     private final String location;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -35,10 +37,12 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("location") String location,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("recurringSchedule") String recurringSchedule,
+                             @JsonProperty("email") String email, @JsonProperty("location") String location,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
+        this.recurringSchedule = recurringSchedule;
         this.email = email;
         this.location = location;
         if (tags != null) {
@@ -52,6 +56,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
+        recurringSchedule = source.getRecurringSchedule().value;
         email = source.getEmail().value;
         location = source.getLocation().value;
         tags.addAll(source.getTags().stream()
@@ -86,6 +91,15 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
+        if (recurringSchedule == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    RecurringSchedule.class.getSimpleName()));
+        }
+        if (!RecurringSchedule.isValidSchedule(recurringSchedule)) {
+            throw new IllegalValueException(RecurringSchedule.MESSAGE_CONSTRAINTS);
+        }
+        final RecurringSchedule modelRecurringSchedule = new RecurringSchedule(recurringSchedule);
+
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
@@ -104,7 +118,7 @@ class JsonAdaptedPerson {
         final Location modelLocation = new Location(location);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelLocation, modelTags);
+        return new Person(modelName, modelPhone, modelRecurringSchedule, modelEmail, modelLocation, modelTags);
     }
 
 }
