@@ -421,7 +421,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
       Use case resumes at step 3.
-- **2a.** User provides a session timing that conflicts with an existing session timing. 
+- **2a.** User provides a session timing that conflicts with an existing session timing.
     - 2a1. FitFlow shows the existing session timing that conflicts with the given session timing.
     - 2a2. FitFlow prompts the user to enter a non-conflicting session timing.
     - 2a3. User re-enters the command.<br>
