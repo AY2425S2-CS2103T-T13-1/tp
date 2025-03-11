@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ONETIMESCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -16,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RecurringSchedule;
@@ -34,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_RECURRING_SCHEDULE, PREFIX_EMAIL, PREFIX_LOCATION, PREFIX_TAG);
+                        PREFIX_RECURRING_SCHEDULE, PREFIX_EMAIL, PREFIX_LOCATION, PREFIX_ONETIMESCHEDULE, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_RECURRING_SCHEDULE,
                 PREFIX_LOCATION, PREFIX_PHONE, PREFIX_EMAIL)
@@ -49,9 +51,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                 .getValue(PREFIX_RECURRING_SCHEDULE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
+        Set<OneTimeSchedule> oneTimeScheduleList = ParserUtil.parseOneTimeSchedules(argMultimap
+                .getAllValues(PREFIX_ONETIMESCHEDULE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, recurringSchedule, email, location, tagList);
+        Person person = new Person(name, phone, recurringSchedule, email, location, oneTimeScheduleList, tagList);
 
         return new AddCommand(person);
     }

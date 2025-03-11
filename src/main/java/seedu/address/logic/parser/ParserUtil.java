@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.tag.Tag;
@@ -112,6 +113,34 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String oneTimeSchedule} into an {@code OneTimeSchedule}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code oneTimeSchedule} is invalid.
+     */
+    public static OneTimeSchedule parseOneTimeSchedules(String oneTimeSchedule) throws ParseException {
+        requireNonNull(oneTimeSchedule);
+        String trimmedOneTimeSchedule = oneTimeSchedule.trim();
+        if (!OneTimeSchedule.isValidOneTimeSchedule(trimmedOneTimeSchedule)) {
+            throw new ParseException(OneTimeSchedule.MESSAGE_CONSTRAINTS);
+        }
+        return new OneTimeSchedule(trimmedOneTimeSchedule);
+    }
+
+    /**
+     * Parses {@code Collection<String> one time schedules} into a {@code Set<OneTimeSchedules>}.
+     */
+    public static Set<OneTimeSchedule> parseOneTimeSchedules(Collection<String> oneTimeSchedules)
+            throws ParseException {
+        requireNonNull(oneTimeSchedules);
+        final Set<OneTimeSchedule> oneTimeScheduleSet = new HashSet<>();
+        for (String oneTimeScheduleDate : oneTimeSchedules) {
+            oneTimeScheduleSet.add(parseOneTimeSchedules(oneTimeScheduleDate));
+        }
+        return oneTimeScheduleSet;
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -137,4 +166,5 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
 }

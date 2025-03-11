@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ONETIMESCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -28,6 +29,7 @@ public class AddCommand extends Command {
             + PREFIX_RECURRING_SCHEDULE + "RECURRING_SCHEDULE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_LOCATION + "LOCATION "
+            + PREFIX_ONETIMESCHEDULE + "ONE TIME SCHEDULE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -35,6 +37,7 @@ public class AddCommand extends Command {
             + PREFIX_RECURRING_SCHEDULE + "Mon 1400 1600 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_ONETIMESCHEDULE + "23/02/25 1000 1200 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

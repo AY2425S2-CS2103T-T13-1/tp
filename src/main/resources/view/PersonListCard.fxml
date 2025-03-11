@@ -31,6 +31,7 @@
       <Label fx:id="recurringSchedule" styleClass="cell_small_label" text="\$recurringSchedule" />
       <Label fx:id="trainingLocation" styleClass="cell_small_label" text="\$trainingLocation" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <FlowPane fx:id="oneTimeSchedules" />
     </VBox>
   </GridPane>
 </HBox>

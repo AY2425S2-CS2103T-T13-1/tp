@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ONETIMESCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -25,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RecurringSchedule;
@@ -46,6 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_RECURRING_SCHEDULE + "RECURRING_SCHEDULE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_LOCATION + "LOCATION] "
+            + "[" + PREFIX_ONETIMESCHEDULE + "ONE TIME SCHEDULE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -104,10 +107,12 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getRecurringSchedule());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Location updatedLocation = editPersonDescriptor.getLocation().orElse(personToEdit.getLocation());
+        Set<OneTimeSchedule> updatedOneTimeSchedules = editPersonDescriptor.getOneTimeSchedules()
+                .orElse(personToEdit.getOneTimeSchedules());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedRecurringSchedule, updatedEmail,
-                updatedLocation, updatedTags);
+                updatedLocation, updatedOneTimeSchedules, updatedTags);
     }
 
     @Override
@@ -144,6 +149,7 @@ public class EditCommand extends Command {
         private RecurringSchedule recurringSchedule;
         private Email email;
         private Location location;
+        private Set<OneTimeSchedule> oneTimeSchedules;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -158,6 +164,7 @@ public class EditCommand extends Command {
             setRecurringSchedule(toCopy.recurringSchedule);
             setEmail(toCopy.email);
             setLocation(toCopy.location);
+            setOneTimeSchedules(toCopy.oneTimeSchedules);
             setTags(toCopy.tags);
         }
 
@@ -165,7 +172,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, recurringSchedule, email, location, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, recurringSchedule, email, location, oneTimeSchedules, tags);
         }
 
         public void setName(Name name) {
@@ -206,6 +213,15 @@ public class EditCommand extends Command {
             return Optional.ofNullable(location);
         }
 
+        public void setOneTimeSchedules(Set<OneTimeSchedule> oneTimeSchedules) {
+            this.oneTimeSchedules = (oneTimeSchedules != null) ? new HashSet<>(oneTimeSchedules) : null;
+        }
+
+        public Optional<Set<OneTimeSchedule>> getOneTimeSchedules() {
+            return (oneTimeSchedules != null)
+                    ? Optional.of(Collections.unmodifiableSet(oneTimeSchedules)) : Optional.empty();
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -240,6 +256,7 @@ public class EditCommand extends Command {
                     && Objects.equals(recurringSchedule, otherEditPersonDescriptor.recurringSchedule)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(location, otherEditPersonDescriptor.location)
+                    && Objects.equals(oneTimeSchedules, otherEditPersonDescriptor.oneTimeSchedules)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -251,6 +268,7 @@ public class EditCommand extends Command {
                     .add("recurringSchedule", recurringSchedule)
                     .add("email", email)
                     .add("location", location)
+                    .add("oneTimeSchedule", oneTimeSchedules)
                     .add("tags", tags)
                     .toString();
         }

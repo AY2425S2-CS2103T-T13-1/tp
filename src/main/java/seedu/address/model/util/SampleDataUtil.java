@@ -9,6 +9,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RecurringSchedule;
@@ -23,27 +24,27 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"),
                     new RecurringSchedule("Mon 1400 1600"), new Email("alexyeoh@example.com"),
                 new Location("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
+                getOneTimeScheduleSet("25/02 1000 1200, 01/03 1000 1200"), getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"),
                     new RecurringSchedule("Mon 1400 1600"), new Email("berniceyu@example.com"),
                 new Location("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
+                getOneTimeScheduleSet("25/02 1000 1200"), getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                     new RecurringSchedule("Mon 1400 1600"), new Email("charlotte@example.com"),
                 new Location("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
+                getOneTimeScheduleSet("25/02 1000 1200"), getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"),
                     new RecurringSchedule("Mon 1400 1600"), new Email("lidavid@example.com"),
                 new Location("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
+                getOneTimeScheduleSet("25/02 1000 1200"), getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"),
                     new RecurringSchedule("Mon 1400 1600"), new Email("irfan@example.com"),
                 new Location("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
+                getOneTimeScheduleSet("25/02 1000 1200"), getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"),
                     new RecurringSchedule("Mon 1400 1600"), new Email("royb@example.com"),
                 new Location("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+                getOneTimeScheduleSet("25/02 1000 1200"), getTagSet("colleagues"))
         };
     }
 
@@ -61,6 +62,15 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a one time schedule set containing the list of strings given.
+     */
+    public static Set<OneTimeSchedule> getOneTimeScheduleSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(OneTimeSchedule::new)
                 .collect(Collectors.toSet());
     }
 

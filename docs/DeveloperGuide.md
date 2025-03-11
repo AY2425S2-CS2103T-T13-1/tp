@@ -337,11 +337,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case 3: View Client**
+**Use case 3: Find Client**
 
 **MSS**
 
-1. User requests to view a specific client.
+1. User requests to find a specific client.
 2. FitFlow shows the details of the client on the app.<br>
    Use case ends.
 
@@ -380,7 +380,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>view the client (Use Case 3)</ins> or find the client from the displayed client list.
+1. User requests to <ins>find client (Use Case 3)</ins> or find the client to delete from the displayed client list.
 2. User requests to delete the client.
 3. FitFlow shows the client’s details to be deleted and prompts the user to confirm the decision to delete.
 4. User confirms.
@@ -406,7 +406,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>view the client (Use Case 3)</ins> or find the client from the displayed client list.
+1. User requests to <ins>find client (Use Case 3)</ins> or find the client to edit from the displayed client list.
 2. User requests to edit the client's details.
 3. FitFlow stores the new details of the client and indicates success.
 4. FitFlow updates the details of the client on the displayed client list.<br>
@@ -421,6 +421,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
       Use case resumes at step 3.
+- **2a.** User provides a session timing that conflicts with an existing session timing. 
+    - 2a1. FitFlow shows the existing session timing that conflicts with the given session timing.
+    - 2a2. FitFlow prompts the user to enter a non-conflicting session timing.
+    - 2a3. User re-enters the command.<br>
+      Steps 2a1-2a3 repeat until a non-conflicting session timing is provided.<br>
+      Use case resumes at step 3.
 
 ---
 
@@ -428,7 +434,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>view the client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
+1. User requests to <ins>find client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
 2. User requests to <ins>edit client's details (Use Case 6)</ins> to add a session to the client.
 3. FitFlow stores the new session details to the client details.
 4. FitFlow updates the details on the displayed client list.<br>
@@ -450,7 +456,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>view the client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
+1. User requests to <ins>find client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
 2. User requests to <ins>edit client's details (Use Case 6)</ins> to delete a session from the client.
 3. FitFlow removes the session details from the client details.
 4. FitFlow removes the session details from the displayed client list.<br>
@@ -472,7 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>view the client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
+1. User requests to <ins>find client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
 2. User requests to <ins>edit client's details (Use Case 6)</ins> to modify session details for the client.
 3. FitFlow stores the new session details for the client.
 4. FitFlow modifies the session details on the displayed client list.<br>
@@ -483,6 +489,90 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **1a.** The schedule is empty.<br>
   Use case ends.
 - **2a.** The given client is invalid or the session details are given in the wrong format.
+    - 2a1. FitFlow shows an error message and prompts the user the format of the command.
+    - 2a2. User re-enters the command.<br>
+      Steps 2a1-2a2 repeat until the command is entered correctly.<br>
+      Use case resumes at step 3.
+
+---
+
+**Use case 10: Add session for multiple clients**
+
+**MSS**
+
+1. User requests to add a session and includes the clients' names involved with the session.
+2. FitFlow stores the new session details for each of the specified client.
+3. FitFlow modifies the session details on the displayed client list.<br>
+   Use case ends.
+
+**Extensions**
+
+- **2a.** The given client(s) is invalid or the session details are given in the wrong format.
+    - 2a1. FitFlow shows an error message and prompts the user the format of the command.
+    - 2a2. User re-enters the command.<br>
+      Steps 2a1-2a2 repeat until the command is entered correctly.<br>
+      Use case resumes at step 3.
+
+---
+
+**Use case 11: Delete session for multiple clients**
+
+**MSS**
+
+1. User requests to <ins>view schedule (Use Case 4)</ins> to find the session to delete.
+2. User requests to delete the specific session.
+3. FitFlow shows the session details and the clients involved in the session.
+4. FitFlow will prompt the user to confirm the decision to delete.
+5. User confirms.
+6. FitFlow removes the session details for each of the specified clients.
+7. FitFlow removes the session details on the displayed client list.<br>
+   Use case ends.
+
+**Extensions**
+
+- **2a.** The given client(s) is invalid or the session details are given in the wrong format.
+    - 2a1. FitFlow shows an error message and prompts the user the format of the command.
+    - 2a2. User re-enters the command.<br>
+      Steps 2a1-2a2 repeat until the command is entered correctly.<br>
+      Use case resumes at step 3.
+- **5a.** The user decides not to delete the session.
+    - 5a1. FitFlow aborts the delete session command.<br>
+      Use case ends.
+
+---
+
+**Use case 12: Modify session for multiple clients**
+
+**MSS**
+
+1. User requests to <ins>view schedule (Use Case 4)</ins> to find the session to modify.
+2. User requests to modify the specific session with new details.
+3. FitFlow stores the new session details for the client.
+4. FitFlow modifies the session details on the displayed client list.<br>
+   Use case ends.
+
+**Extensions**
+
+- **2a.** The given client(s) is invalid or the session details are given in the wrong format.
+    - 2a1. FitFlow shows an error message and prompts the user the format of the command.
+    - 2a2. User re-enters the command.<br>
+      Steps 2a1-2a2 repeat until the command is entered correctly.<br>
+      Use case resumes at step 3.
+
+---
+
+**Use case 13: Set reminder for session**
+
+**MSS**
+
+1. User requests to <ins>view schedule (Use Case 4)</ins> to find a session to set a reminder.
+2. User requests to set a reminder for the specific session at a given timing before the session (e.g. 10 minutes).
+3. FitFlow stores a reminder for the specified session.
+4. FitFlow will prompt the user at the given timing before the session.
+
+**Extensions**
+
+- **2a.** The given timing is invalid.
     - 2a1. FitFlow shows an error message and prompts the user the format of the command.
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
@@ -523,6 +613,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Above Average Typing Seed**: Refers to a user capable of typing text (in natural language) at a faster rate than the typical user, enabling quick entry of commands or form data.
+* **Client's Details**: This includes session details, training goals, medical history, gym location, and contact number.
 * **Command Line Interface (CLI)**: A text-based interface that accepts typed commands. Users interact with the application by entering commands, rather than by clicking or tapping on-screen elements.
 * **Contact**: An individual entry in the system’s address book or database, typically including (at minimum) a **name** and **contact number**.
 * **Fast Typist (Fast Typing)**: A user who can input typed text swiftly, increasing overall efficiency when using a CLI-based or text-based system.

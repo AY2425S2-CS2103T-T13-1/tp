@@ -8,6 +8,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RecurringSchedule;
@@ -38,6 +39,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setRecurringSchedule(person.getRecurringSchedule());
         descriptor.setEmail(person.getEmail());
         descriptor.setLocation(person.getLocation());
+        descriptor.setOneTimeSchedules(person.getOneTimeSchedules());
         descriptor.setTags(person.getTags());
     }
 
@@ -82,6 +84,17 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code OneTimeSchedule} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withOneTimeSchedules(String... oneTimeSchedules) {
+        Set<OneTimeSchedule> oneTimeScheduleSet = Stream.of(oneTimeSchedules)
+                .map(OneTimeSchedule::new)
+                .collect(Collectors.toSet());
+        descriptor.setOneTimeSchedules(oneTimeScheduleSet);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
@@ -94,4 +107,5 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptor build() {
         return descriptor;
     }
+
 }

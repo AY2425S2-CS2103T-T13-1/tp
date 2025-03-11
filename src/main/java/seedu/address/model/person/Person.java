@@ -24,19 +24,21 @@ public class Person {
     // Data fields
     private final RecurringSchedule recurringSchedule;
     private final Location location;
+    private final Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, RecurringSchedule recurringSchedule,
-                  Email email, Location location, Set<Tag> tags) {
-        requireAllNonNull(name, phone, recurringSchedule, email, location, tags);
+                  Email email, Location location, Set<OneTimeSchedule> oneTimeSchedule, Set<Tag> tags) {
+        requireAllNonNull(name, phone, recurringSchedule, email, location, oneTimeSchedule, tags);
         this.name = name;
         this.phone = phone;
         this.recurringSchedule = recurringSchedule;
         this.email = email;
         this.location = location;
+        this.oneTimeSchedules.addAll(oneTimeSchedule);
         this.tags.addAll(tags);
     }
 
@@ -57,6 +59,10 @@ public class Person {
 
     public Location getLocation() {
         return location;
+    }
+
+    public Set<OneTimeSchedule> getOneTimeSchedules() {
+        return Collections.unmodifiableSet(oneTimeSchedules);
     }
 
     /**
@@ -101,13 +107,14 @@ public class Person {
                 && recurringSchedule.equals(otherPerson.recurringSchedule)
                 && email.equals(otherPerson.email)
                 && location.equals(otherPerson.location)
+                && oneTimeSchedules.equals(otherPerson.oneTimeSchedules)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, recurringSchedule, email, location, tags);
+        return Objects.hash(name, phone, recurringSchedule, email, location, oneTimeSchedules, tags);
     }
 
     @Override
@@ -118,6 +125,7 @@ public class Person {
                 .add("recurringSchedule", recurringSchedule)
                 .add("email", email)
                 .add("location", location)
+                .add("oneTimeSchedule", oneTimeSchedules)
                 .add("tags", tags)
                 .toString();
     }
