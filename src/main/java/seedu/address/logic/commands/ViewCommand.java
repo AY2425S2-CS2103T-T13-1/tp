@@ -78,7 +78,7 @@ public class ViewCommand extends Command {
     private List<String> findMatchingOneTimeSchedule(Person person, String keyword) {
         Set<OneTimeSchedule> oneTimeSchedules = person.getOneTimeSchedules();
         List<String> matchingTimes = oneTimeSchedules.stream()
-                .filter(schedule -> schedule.getDate().equalsIgnoreCase(keyword))
+                .filter(schedule -> schedule.getDateString().equalsIgnoreCase(keyword))
                 .map(schedule -> String.format("%s-%s", schedule.getStartTime(),
                         schedule.getEndTime()))
                 .toList();
