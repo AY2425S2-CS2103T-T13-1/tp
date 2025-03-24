@@ -43,7 +43,6 @@ public class OneTimeSchedule extends Schedule {
      */
     public OneTimeSchedule(String schedule) {
         super(validateThenExtractStartTime(schedule), extractEndTime(schedule)); // Call Schedule constructor
-
         this.date = localDatePaser(extractDate(schedule));
     }
     private static String validateThenExtractStartTime(String schedule) {
@@ -137,7 +136,7 @@ public class OneTimeSchedule extends Schedule {
 
     @Override
     public String toString() {
-        return "[" + date.toString() + " " + startTime + " " + endTime + "]";
+        return "[" + getDateString() + " " + startTime + " " + endTime + "]";
     }
 
     @Override
@@ -160,7 +159,7 @@ public class OneTimeSchedule extends Schedule {
 
     @Override
     public int hashCode() {
-        String toHash = date.toString() + " " + startTime + " " + endTime;
+        String toHash = getDateString() + " " + startTime + " " + endTime;
         return toHash.hashCode();
     }
 
