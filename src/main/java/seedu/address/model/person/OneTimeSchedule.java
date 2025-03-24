@@ -1,11 +1,11 @@
 package seedu.address.model.person;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * Represents a Person's training date in the address book.
@@ -69,6 +69,10 @@ public class OneTimeSchedule extends Schedule {
         return date;
     }
 
+    public String getDateString() {
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yy"));
+    }
+
     /**
      * Formats a {@code String date} and returns a normalized date {@code String}.
      * Single-digit days and months will be padded with a leading zero. Leading and
@@ -76,7 +80,7 @@ public class OneTimeSchedule extends Schedule {
      * Expected input format: {@code "[d]d/[m]m"} or {@code "[d]d/[m]m/yy"}
      *
      * @param date the date {@code String} to be formatted and normalized; must not be {@code null}.
-     * @return a normalized date {@code String} in the format {@code "dd/MM"} or {@code "dd/MM/yy"}.
+     * @return a normalized date {@code String} in the format {@code "dd/MM/yyyy"} or {@code "dd/MM/yy"}.
      * @throws NullPointerException if the given {@code date} is {@code null}.
      */
     public static String formatDate(String date) {
@@ -95,7 +99,8 @@ public class OneTimeSchedule extends Schedule {
             String trimmedYear = dateComponents[2].trim();
             normalizedDate = normalizedDay + "/" + normalizedMonth + "/" + trimmedYear;
         } else {
-            normalizedDate = normalizedDay + "/" + normalizedMonth;
+            normalizedDate = normalizedDay + "/" + normalizedMonth + "/"
+                    + LocalDate.now().getYear() % 100; //Last 2 digits
         }
         return normalizedDate;
     }
@@ -109,7 +114,7 @@ public class OneTimeSchedule extends Schedule {
      */
     public static LocalDate localDatePaser(String date) {
         List<DateTimeFormatter> inputFormats = List.of(
-            DateTimeFormatter.ofPattern("dd/MM"),
+            DateTimeFormatter.ofPattern("dd/MM/yyyy"),
             DateTimeFormatter.ofPattern("dd/MM/yy")
         );
 
@@ -133,7 +138,7 @@ public class OneTimeSchedule extends Schedule {
 
     @Override
     public String toString() {
-        return "[" + date + " " + startTime + " " + endTime + "]";
+        return "[" + date.toString() + " " + startTime + " " + endTime + "]";
     }
 
     @Override
@@ -156,7 +161,7 @@ public class OneTimeSchedule extends Schedule {
 
     @Override
     public int hashCode() {
-        String toHash = date + " " + startTime + " " + endTime;
+        String toHash = date.toString() + " " + startTime + " " + endTime;
         return toHash.hashCode();
     }
 
