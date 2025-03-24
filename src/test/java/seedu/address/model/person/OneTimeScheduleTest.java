@@ -111,11 +111,6 @@ public class OneTimeScheduleTest {
 
     @Test
     public void testLocalDateParser_validDates() {
-        // Test for "dd/MM/yyyy" format
-        String date1 = "25/12/2025";
-        LocalDate expectedDate1 = LocalDate.of(2025, 12, 25);
-        assertEquals(expectedDate1, OneTimeSchedule.localDatePaser(date1));
-
         // Test for "dd/MM/yy" format
         String date2 = "25/12/25"; // Should parse as 25th Dec 2025
         LocalDate expectedDate2 = LocalDate.of(2025, 12, 25);

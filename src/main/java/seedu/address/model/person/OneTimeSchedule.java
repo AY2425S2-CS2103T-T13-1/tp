@@ -80,7 +80,7 @@ public class OneTimeSchedule extends Schedule {
      * Expected input format: {@code "[d]d/[m]m"} or {@code "[d]d/[m]m/yy"}
      *
      * @param date the date {@code String} to be formatted and normalized; must not be {@code null}.
-     * @return a normalized date {@code String} in the format {@code "dd/MM/yyyy"} or {@code "dd/MM/yy"}.
+     * @return a normalized date {@code String} in the format {@code "dd/MM/yy"}.
      * @throws NullPointerException if the given {@code date} is {@code null}.
      */
     public static String formatDate(String date) {
@@ -114,7 +114,6 @@ public class OneTimeSchedule extends Schedule {
      */
     public static LocalDate localDatePaser(String date) {
         List<DateTimeFormatter> inputFormats = List.of(
-            DateTimeFormatter.ofPattern("dd/MM/yyyy"),
             DateTimeFormatter.ofPattern("dd/MM/yy")
         );
 
