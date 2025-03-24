@@ -37,8 +37,7 @@ public class ScheduleContainsKeywordPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         boolean oneTimeScheduleMatches = person.getOneTimeSchedules().stream()
-                .anyMatch(schedule -> StringUtil.containsWordIgnoreCase(
-                        schedule.getDateString(), keyword));
+                .anyMatch(schedule -> StringUtil.containsWordIgnoreCase(schedule.getDate(), keyword));
         boolean recurringScheduleMatches = person.getRecurringSchedules().stream()
                 .anyMatch(schedule -> StringUtil.containsWordIgnoreCase(
                         String.valueOf(schedule.getDay()), keyword));

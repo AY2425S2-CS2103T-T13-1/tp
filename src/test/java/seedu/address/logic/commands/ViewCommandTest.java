@@ -97,7 +97,7 @@ public class ViewCommandTest {
     @Test
     public void execute_dateKeyword_multiplePersonsFound() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, "02/02/25")).append("\n\n");
+        sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, "02/02")).append("\n\n");
         sb.append("Benson Meier: 1200-1400\n").append("Daniel Meier: 1000-1200\n");
         String expectedMessage = sb.toString().trim();
         ScheduleContainsKeywordPredicate predicate = preparePredicate("2/2");
