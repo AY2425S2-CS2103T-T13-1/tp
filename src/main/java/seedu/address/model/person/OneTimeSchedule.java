@@ -107,7 +107,7 @@ public class OneTimeSchedule extends Schedule {
 
     /**
      * Formats a {@code String date} and returns a LocalDate date {@link LocalDate}.
-     * It accepts input in the formats {@code "[d]d/[m]m"} or {@code "[d]d/[m]m/yy"},
+     * It accepts input in the format {@code "[d]d/[m]m/yy"},
      *
      * @param date the date {@code String} to parse; must not be {@code null}.
      * @return a LocalDate date {@link LocalDate} representing the parsed date.
