@@ -1,4 +1,9 @@
 package seedu.address.model.person;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -30,7 +35,7 @@ public class OneTimeSchedule extends Schedule {
         + "([01][0-9]|2[0-3])[0-5][0-9]\\s" // Start time
         + "([01][0-9]|2[0-3])[0-5][0-9]"; // End time
 
-    public final String date;
+    public final LocalDate date;
     /**
      * Constructs a {@code OneTimeSchedule}.
      *
@@ -38,7 +43,8 @@ public class OneTimeSchedule extends Schedule {
      */
     public OneTimeSchedule(String schedule) {
         super(validateThenExtractStartTime(schedule), extractEndTime(schedule)); // Call Schedule constructor
-        this.date = extractDate(schedule);
+
+        this.date = localDatePaser(extractDate(schedule));
     }
     private static String validateThenExtractStartTime(String schedule) {
         requireNonNull(schedule);
@@ -59,7 +65,7 @@ public class OneTimeSchedule extends Schedule {
         return schedule.split(" ")[2];
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -92,6 +98,29 @@ public class OneTimeSchedule extends Schedule {
             normalizedDate = normalizedDay + "/" + normalizedMonth;
         }
         return normalizedDate;
+    }
+
+    /**
+     * Formats a {@code String date} and returns a LocalDate date {@link LocalDate}.
+     * It accepts input in the formats {@code "[d]d/[m]m"} or {@code "[d]d/[m]m/yy"},
+     *
+     * @param date the date {@code String} to parse; must not be {@code null}.
+     * @return a LocalDate date {@link LocalDate} representing the parsed date.
+     */
+    public static LocalDate localDatePaser(String date) {
+        List<DateTimeFormatter> inputFormats = List.of(
+            DateTimeFormatter.ofPattern("dd/MM"),
+            DateTimeFormatter.ofPattern("dd/MM/yy")
+        );
+
+        for (DateTimeFormatter formatter : inputFormats) {
+            try {
+                return LocalDate.parse(date, formatter);
+            } catch (Exception e) {
+                // try next format
+            }
+        }
+        throw new IllegalArgumentException("Invalid date format: " + date); // Will never throw
     }
 
     /**
