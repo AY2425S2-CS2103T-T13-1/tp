@@ -7,6 +7,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 public class OneTimeScheduleTest {
 
     @Test
@@ -105,5 +107,26 @@ public class OneTimeScheduleTest {
 
         // different end time -> returns false
         assertFalse(oneTimeSchedule.equals(new OneTimeSchedule("2/2 1000 1300"))); // End time differs
+    }
+
+    @Test
+    public void testLocalDateParser_validDates() {
+        // Test for "dd/MM/yyyy" format
+        String date1 = "25/12/2025";
+        LocalDate expectedDate1 = LocalDate.of(2025, 12, 25);
+        assertEquals(expectedDate1, OneTimeSchedule.localDatePaser(date1));
+
+        // Test for "dd/MM/yy" format
+        String date2 = "25/12/25"; // Should parse as 25th Dec 2025
+        LocalDate expectedDate2 = LocalDate.of(2025, 12, 25);
+        assertEquals(expectedDate2, OneTimeSchedule.localDatePaser(date2));
+    }
+
+    @Test
+    public void testLocalDateParser_invalidDate() {
+        String invalidDate = "31-12-2025"; // Invalid format
+        assertThrows(IllegalArgumentException.class, () -> {
+            OneTimeSchedule.localDatePaser(invalidDate);
+        });
     }
 }
