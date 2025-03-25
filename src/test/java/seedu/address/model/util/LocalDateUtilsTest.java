@@ -8,8 +8,6 @@ import java.time.Year;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.util.LocalDateUtils;
-
 public class LocalDateUtilsTest {
     @Test
     public void testFormatDateString_validInputsWithoutYear() {
@@ -64,11 +62,11 @@ public class LocalDateUtilsTest {
         // Test for "dd/MM/yy" format
         String date1 = "01/01/23"; // Should parse as 1st Jan 2023
         LocalDate expectedDate1 = LocalDate.of(2023, 1, 1);
-        assertEquals(expectedDate1, LocalDateUtils.localDatePaser(date1));
+        assertEquals(expectedDate1, LocalDateUtils.localDateParser(date1));
 
         String date2 = "25/12/25"; // Should parse as 25th Dec 2025
         LocalDate expectedDate2 = LocalDate.of(2025, 12, 25);
-        assertEquals(expectedDate2, LocalDateUtils.localDatePaser(date2));
+        assertEquals(expectedDate2, LocalDateUtils.localDateParser(date2));
     }
 
     @Test
@@ -76,17 +74,17 @@ public class LocalDateUtilsTest {
         // Test invalid date formats (should throw IllegalArgumentException)
         String invalidDate1 = "31-12-2025"; // Wrong separator
         assertThrows(IllegalArgumentException.class, () -> {
-            LocalDateUtils.localDatePaser(invalidDate1);
+            LocalDateUtils.localDateParser(invalidDate1);
         });
 
         String invalidDate2 = "32/01/23"; // Invalid day
         assertThrows(IllegalArgumentException.class, () -> {
-            LocalDateUtils.localDatePaser(invalidDate2);
+            LocalDateUtils.localDateParser(invalidDate2);
         });
 
         String invalidDate3 = "00/00/00"; // Invalid date
         assertThrows(IllegalArgumentException.class, () -> {
-            LocalDateUtils.localDatePaser(invalidDate3);
+            LocalDateUtils.localDateParser(invalidDate3);
         });
     }
 }

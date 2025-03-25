@@ -44,7 +44,7 @@ public class OneTimeSchedule extends Schedule {
      */
     public OneTimeSchedule(String schedule) {
         super(validateThenExtractStartTime(schedule), extractEndTime(schedule)); // Call Schedule constructor
-        this.date = LocalDateUtils.localDatePaser(extractDate(schedule));
+        this.date = LocalDateUtils.localDateParser(extractDate(schedule));
     }
     private static String validateThenExtractStartTime(String schedule) {
         requireNonNull(schedule);

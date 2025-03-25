@@ -49,7 +49,7 @@ public class LocalDateUtils {
      * @param date the date {@code String} to parse; must not be {@code null}.
      * @return a LocalDate date {@link LocalDate} representing the parsed date.
      */
-    public static LocalDate localDatePaser(String date) {
+    public static LocalDate localDateParser(String date) {
         List<DateTimeFormatter> inputFormats = List.of(
                 DateTimeFormatter.ofPattern("dd/MM/yy")
         );
