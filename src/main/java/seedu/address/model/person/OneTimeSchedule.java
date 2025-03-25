@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import seedu.address.model.util.LocalDateUtils;
 
@@ -44,7 +43,7 @@ public class OneTimeSchedule extends Schedule {
      */
     public OneTimeSchedule(String schedule) {
         super(validateThenExtractStartTime(schedule), extractEndTime(schedule)); // Call Schedule constructor
-        this.date = LocalDateUtils.localDateParser(extractDate(schedule));
+        this.date = extractDate(schedule);
     }
     private static String validateThenExtractStartTime(String schedule) {
         requireNonNull(schedule);
@@ -52,9 +51,9 @@ public class OneTimeSchedule extends Schedule {
         return extractStartTime(schedule);
     }
 
-    private static String extractDate(String schedule) {
+    private static LocalDate extractDate(String schedule) {
         String datePart = schedule.split(" ")[0];
-        return LocalDateUtils.formatDateString(datePart);
+        return LocalDateUtils.localDateParser(datePart);
     }
 
     private static String extractStartTime(String schedule) {
@@ -70,7 +69,7 @@ public class OneTimeSchedule extends Schedule {
     }
 
     public String getDateString() {
-        return date.format(DateTimeFormatter.ofPattern("dd/MM/yy"));
+        return LocalDateUtils.toString(date);
     }
 
     /**
@@ -83,7 +82,7 @@ public class OneTimeSchedule extends Schedule {
 
     @Override
     public String toString() {
-        return "[" + getDateString() + " " + startTime + " " + endTime + "]";
+        return "[" + LocalDateUtils.toString(getDate()) + " " + startTime + " " + endTime + "]";
     }
 
     @Override

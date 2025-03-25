@@ -50,17 +50,22 @@ public class LocalDateUtils {
      * @return a LocalDate date {@link LocalDate} representing the parsed date.
      */
     public static LocalDate localDateParser(String date) {
+        String normalizedDate = formatDateString(date);
         List<DateTimeFormatter> inputFormats = List.of(
                 DateTimeFormatter.ofPattern("dd/MM/yy")
         );
 
         for (DateTimeFormatter formatter : inputFormats) {
             try {
-                return LocalDate.parse(date, formatter);
+                return LocalDate.parse(normalizedDate, formatter);
             } catch (Exception e) {
                 // try next format
             }
         }
         throw new IllegalArgumentException("Invalid date format: " + date); // Will never throw
+    }
+
+    public static String toString(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yy"));
     }
 }
