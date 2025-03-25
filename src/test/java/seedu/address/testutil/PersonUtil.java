@@ -45,8 +45,8 @@ public class PersonUtil {
         sb.append(PREFIX_MEDICAL_HISTORY + person.getMedicalHistory().value + " ");
         sb.append(PREFIX_LOCATION + person.getLocation().value + " ");
         person.getOneTimeSchedules().stream().forEach(
-                s -> sb.append(PREFIX_ONETIMESCHEDULE + s.getDate() + " " + s.getStartTime() + " "
-                        + s.getEndTime() + " ")
+                s -> sb.append(PREFIX_ONETIMESCHEDULE + s.getDateString()
+                       + " " + s.getStartTime() + " " + s.getEndTime() + " ")
         );
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")

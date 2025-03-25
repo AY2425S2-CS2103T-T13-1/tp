@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 public class OneTimeScheduleTest {
@@ -62,9 +64,9 @@ public class OneTimeScheduleTest {
     @Test
     void formatDate_validInputs_shouldReturnNormalizedDate() {
         // Test without year
-        assertEquals("01/01", OneTimeSchedule.formatDate("1/1"));
-        assertEquals("09/12", OneTimeSchedule.formatDate("9/12"));
-        assertEquals("31/10", OneTimeSchedule.formatDate("31/10"));
+        assertEquals("01/01/25", OneTimeSchedule.formatDate("1/1"));
+        assertEquals("09/12/25", OneTimeSchedule.formatDate("9/12"));
+        assertEquals("31/10/25", OneTimeSchedule.formatDate("31/10"));
 
         // Test with year
         assertEquals("01/01/23", OneTimeSchedule.formatDate("1/1/23"));
@@ -72,7 +74,7 @@ public class OneTimeScheduleTest {
         assertEquals("31/10/20", OneTimeSchedule.formatDate("31/10/20"));
 
         // Test with already normalized input
-        assertEquals("01/01", OneTimeSchedule.formatDate("01/01"));
+        assertEquals("01/01/25", OneTimeSchedule.formatDate("01/01"));
         assertEquals("31/12/23", OneTimeSchedule.formatDate("31/12/23"));
     }
 
@@ -105,5 +107,21 @@ public class OneTimeScheduleTest {
 
         // different end time -> returns false
         assertFalse(oneTimeSchedule.equals(new OneTimeSchedule("2/2 1000 1300"))); // End time differs
+    }
+
+    @Test
+    public void testLocalDateParser_validDates() {
+        // Test for "dd/MM/yy" format
+        String date2 = "25/12/25"; // Should parse as 25th Dec 2025
+        LocalDate expectedDate2 = LocalDate.of(2025, 12, 25);
+        assertEquals(expectedDate2, OneTimeSchedule.localDatePaser(date2));
+    }
+
+    @Test
+    public void testLocalDateParser_invalidDate() {
+        String invalidDate = "31-12-2025"; // Invalid format
+        assertThrows(IllegalArgumentException.class, () -> {
+            OneTimeSchedule.localDatePaser(invalidDate);
+        });
     }
 }
