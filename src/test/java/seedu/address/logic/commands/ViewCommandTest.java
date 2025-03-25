@@ -73,7 +73,8 @@ public class ViewCommandTest {
     public void execute_dayKeyword_multiplePersonsFound() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, "Monday")).append("\n\n");
-        sb.append("1. Alice Pauline: 1400-1600\n").append("2. Benson Meier: 1400-1600\n").append("3. Carl Kurz: 1400-1600\n");
+        sb.append("1. Alice Pauline: 1400-1600\n").append("2. Benson Meier: 1400-1600\n")
+                .append("3. Carl Kurz: 1400-1600\n");
         String expectedMessage = sb.toString().trim();
         ScheduleContainsKeywordPredicate predicate = preparePredicate("Monday");
         ViewCommand command = new ViewCommand(predicate);
