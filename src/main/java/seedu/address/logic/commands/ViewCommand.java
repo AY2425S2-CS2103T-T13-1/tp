@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -66,6 +67,7 @@ public class ViewCommand extends Command {
         LocalDate todayDate = LocalDate.now();
         int daysUntilTarget = (day.getValue() - todayDate.getDayOfWeek().getValue() + 7) % 7;
         LocalDate targetDate = todayDate.plusDays(daysUntilTarget);
+        AtomicInteger index = new AtomicInteger(1);
 
         model.getFilteredPersonList().forEach(person -> {
             List<String> recurringTimes = findMatchingRecurringSchedule(person, day);
@@ -73,7 +75,8 @@ public class ViewCommand extends Command {
             List<String> allTimes = new ArrayList<>();
             allTimes.addAll(recurringTimes);
             allTimes.addAll(oneTimeTimes);
-            sb.append(person.getName()).append(": ").append(String.join(", ", allTimes)).append("\n");
+            sb.append(index.getAndIncrement()).append(". ").append(person.getName()).append(": ")
+                    .append(String.join(", ", allTimes)).append("\n");
         });
         return sb.toString().trim();
     }
@@ -82,6 +85,7 @@ public class ViewCommand extends Command {
         StringBuilder sb = new StringBuilder();
         LocalDate normalizedDate = predicate.getDateToFind();
         DayOfWeek targetDayOfWeek = normalizedDate.getDayOfWeek();
+        AtomicInteger index = new AtomicInteger(1);
 
         model.getFilteredPersonList().forEach(person -> {
             List<String> oneTimeTimes = findMatchingOneTimeSchedule(person, normalizedDate);
@@ -89,7 +93,8 @@ public class ViewCommand extends Command {
             List<String> allTimes = new ArrayList<>();
             allTimes.addAll(oneTimeTimes);
             allTimes.addAll(recurringTimes);
-            sb.append(person.getName()).append(": ").append(String.join(", ", allTimes)).append("\n");
+            sb.append(index.getAndIncrement()).append(". ").append(person.getName()).append(": ")
+                    .append(String.join(", ", allTimes)).append("\n");
         });
         return sb.toString().trim();
     }

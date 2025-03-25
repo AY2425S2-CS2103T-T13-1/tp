@@ -10,6 +10,11 @@ import java.util.List;
  * Functions to interact with LocalDate.
  */
 public class LocalDateUtils {
+    public static final String DAY_REGEX = "([0-9]|[0-2][0-9]|3[0-1])";
+    public static final String MONTH_REGEX = "([0-9]|0[1-9]|1[0-2])";
+    public static final String YEAR_REGEX = "(/\\d{2})?";
+    public static final String DATE_REGEX = generateDateRegex();
+
     /**
      * Formats a {@code String date} and returns a normalized date {@code String}.
      * Single-digit days and months will be padded with a leading zero. Leading and
@@ -63,6 +68,25 @@ public class LocalDateUtils {
             }
         }
         throw new IllegalArgumentException("Invalid date format: " + date); // Will never throw
+    }
+
+    /**
+     * Checks if the given date string matches the expected date format.
+     * The expected format is {@code "dd/MM"} or {@code "dd/MM/yy"}, where:
+     *   {@code dd} is a one or two-digit day (01-31).
+     *   {@code MM} is a one or two-digit month (01-12).
+     *   {@code yy} is an optional two-digit year.
+     *
+     * @param date the date string to validate.
+     * @return {@code true} if the date string matches the expected format, {@code false} otherwise.
+     */
+    public static boolean isValidDateString(String date) {
+        requireNonNull(date);
+        return date.matches(DATE_REGEX);
+    }
+
+    public static String generateDateRegex() {
+        return DAY_REGEX + "/" + MONTH_REGEX + YEAR_REGEX;
     }
 
     public static String toString(LocalDate date) {
