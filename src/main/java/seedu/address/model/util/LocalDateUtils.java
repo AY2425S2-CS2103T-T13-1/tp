@@ -10,9 +10,9 @@ import java.util.List;
  * Functions to interact with LocalDate.
  */
 public class LocalDateUtils {
-    public static final String DAY_REGEX = "([0-9]|[0-2][0-9]|3[0-1])";
-    public static final String MONTH_REGEX = "([0-9]|0[1-9]|1[0-2])";
-    public static final String YEAR_REGEX = "(/\\d{2})?";
+    public static final String DAY_REGEX = "[0-9]|[0-2][0-9]|3[0-1]";
+    public static final String MONTH_REGEX = "[0-9]|0[1-9]|1[0-2]";
+    public static final String YEAR_REGEX = "\\d{2}";
     public static final String DATE_REGEX = generateDateRegex();
 
     /**
@@ -86,7 +86,7 @@ public class LocalDateUtils {
     }
 
     public static String generateDateRegex() {
-        return DAY_REGEX + "/" + MONTH_REGEX + YEAR_REGEX;
+        return "(" + DAY_REGEX + ")/(" + MONTH_REGEX + ")(/" + YEAR_REGEX + ")?";
     }
 
     public static String toString(LocalDate date) {
