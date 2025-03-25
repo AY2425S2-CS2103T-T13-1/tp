@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -84,14 +85,14 @@ public class ViewCommandTest {
     @Test
     public void execute_dayTruncatedKeyword_multiplePersonsFound() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, "mon")).append("\n\n");
-        sb.append("Alice Pauline: 1400-1600\n").append("Benson Meier: 1400-1600\n").append("Carl Kurz: 1400-1600\n");
+        sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, "fri")).append("\n\n");
+        sb.append("Daniel Meier: 1700-1900\n").append("Elle Meyer: 1000-1200\n");
         String expectedMessage = sb.toString().trim();
-        ScheduleContainsKeywordPredicate predicate = preparePredicate("mon");
+        ScheduleContainsKeywordPredicate predicate = preparePredicate("fri");
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(DANIEL, ELLE), model.getFilteredPersonList());
     }
 
     @Test
