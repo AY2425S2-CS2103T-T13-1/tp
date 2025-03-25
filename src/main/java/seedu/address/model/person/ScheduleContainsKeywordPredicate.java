@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
@@ -12,6 +14,8 @@ import seedu.address.model.util.LocalDateUtils;
  */
 public class ScheduleContainsKeywordPredicate implements Predicate<Person> {
     private final String keyword;
+    private final DayOfWeek dayToFind;
+    private final LocalDate dateToFind;
 
     /**
      * Constructs a {@code ScheduleContainsKeywordPredicate} with the specified keyword.
@@ -22,10 +26,17 @@ public class ScheduleContainsKeywordPredicate implements Predicate<Person> {
      * @param keyword The keyword to match against a person's schedules.
      */
     public ScheduleContainsKeywordPredicate(String keyword) {
+        this.keyword = keyword;
         if (DayOfWeekUtils.isDayOfWeek(keyword)) {
-            this.keyword = DayOfWeekUtils.getPascalCaseName(DayOfWeekUtils.fromString(keyword));
+            DayOfWeek day = DayOfWeekUtils.fromString(keyword);
+            this.dayToFind = day;
+            LocalDate todayDate = LocalDate.now();
+            int daysUntilTarget = (day.getValue() - todayDate.getDayOfWeek().getValue() + 7) % 7;
+            this.dateToFind = todayDate.plusDays(daysUntilTarget);
         } else {
-            this.keyword = LocalDateUtils.formatDateString(keyword);
+            LocalDate normalizedDate = LocalDateUtils.localDateParser(keyword);
+            this.dateToFind = normalizedDate;
+            this.dayToFind = normalizedDate.getDayOfWeek();
         }
     }
 
@@ -33,14 +44,24 @@ public class ScheduleContainsKeywordPredicate implements Predicate<Person> {
         return keyword;
     }
 
+    public DayOfWeek getDayToFind() {
+        return dayToFind;
+    }
+
+    public LocalDate getDateToFind() {
+        return dateToFind;
+    }
+
     @Override
     public boolean test(Person person) {
+        String searchDate = LocalDateUtils.toString(dateToFind);
+        String searchDay = dayToFind.toString();
         boolean oneTimeScheduleMatches = person.getOneTimeSchedules().stream()
                 .anyMatch(schedule -> StringUtil.containsWordIgnoreCase(
-                        schedule.getDateString(), keyword));
+                        schedule.getDateString(), searchDate));
         boolean recurringScheduleMatches = person.getRecurringSchedules().stream()
                 .anyMatch(schedule -> StringUtil.containsWordIgnoreCase(
-                        String.valueOf(schedule.getDay()), keyword));
+                        String.valueOf(schedule.getDay()), searchDay));
         return oneTimeScheduleMatches || recurringScheduleMatches;
     }
 
