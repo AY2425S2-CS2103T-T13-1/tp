@@ -82,7 +82,7 @@ public class OneTimeSchedule extends Schedule {
 
     @Override
     public String toString() {
-        return "[" + LocalDateUtils.toString(getDate()) + " " + startTime + " " + endTime + "]";
+        return "[" + getDateString() + " " + startTime + " " + endTime + "]";
     }
 
     @Override
