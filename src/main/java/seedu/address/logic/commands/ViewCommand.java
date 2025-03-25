@@ -56,7 +56,7 @@ public class ViewCommand extends Command {
         if (DayOfWeekUtils.isDayOfWeek(keyword)) {
             searchResult = resultGivenDay(model);
         } else {
-            searchResult = resultGivenDayOfWeek(model);
+            searchResult = resultGivenDate(model);
         }
         return new CommandResult(sb.append(searchResult).toString().trim());
     }
@@ -81,7 +81,7 @@ public class ViewCommand extends Command {
         return sb.toString().trim();
     }
 
-    private String resultGivenDayOfWeek(Model model) {
+    private String resultGivenDate(Model model) {
         StringBuilder sb = new StringBuilder();
         LocalDate normalizedDate = predicate.getDateToFind();
         DayOfWeek targetDayOfWeek = normalizedDate.getDayOfWeek();
