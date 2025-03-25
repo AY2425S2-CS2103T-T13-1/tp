@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.util.DayOfWeek;
+import seedu.address.model.util.DayOfWeekUtils;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
@@ -23,8 +23,8 @@ public class ScheduleContainsKeywordPredicate implements Predicate<Person> {
      * @param keyword The keyword to match against a person's schedules.
      */
     public ScheduleContainsKeywordPredicate(String keyword) {
-        if (DayOfWeek.isDayOfWeek(keyword)) {
-            this.keyword = String.valueOf(DayOfWeek.fromString(keyword));
+        if (DayOfWeekUtils.isDayOfWeek(keyword)) {
+            this.keyword = DayOfWeekUtils.getPascalCaseName(DayOfWeekUtils.fromString(keyword));
         } else {
             this.keyword = formatDate(keyword);
         }

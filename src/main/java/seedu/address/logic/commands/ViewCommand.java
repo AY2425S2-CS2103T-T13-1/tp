@@ -13,7 +13,7 @@ import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.person.ScheduleContainsKeywordPredicate;
-import seedu.address.model.util.DayOfWeek;
+import seedu.address.model.util.DayOfWeekUtils;
 
 /**
  * Finds and lists all persons in address book who has sessions that matches any of the argument keywords.
@@ -48,7 +48,7 @@ public class ViewCommand extends Command {
             sb.append("No clients found!");
             return new CommandResult(sb.toString().trim());
         }
-        if (DayOfWeek.isDayOfWeek(keyword)) {
+        if (DayOfWeekUtils.isDayOfWeek(keyword)) {
             //search recurringSchedule
             model.getFilteredPersonList().forEach(person -> {
                 List<String> matchingTimes = findMatchingRecurringSchedule(person, keyword);

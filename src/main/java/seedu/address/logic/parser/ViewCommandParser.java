@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.model.util.DayOfWeek.isDayOfWeek;
+import static seedu.address.model.util.DayOfWeekUtils.isDayOfWeek;
 
 import java.util.regex.Pattern;
 
