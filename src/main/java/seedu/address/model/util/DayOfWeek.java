@@ -90,7 +90,6 @@ public enum DayOfWeek {
             regex.append(day.getPascalCaseName()); // Full name (e.g., "Monday")
             regex.append("|").append(day.getAbbreviation()); // Short name (e.g., "Mon")
         }
-        System.out.println(regex.toString());
         return regex.toString();
     }
 
