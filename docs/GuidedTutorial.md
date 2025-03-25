@@ -31,6 +31,7 @@ Let's try out some basic commands to get a feel for how the app works!
 
     You will see that the Client List now shows you Roy Balakrishnan at index 1. The `find` command is helpful for quickly finding someone in your client list.
 
+
 2. To see all the clients again, type `list` in the Textbox and hit Enter.
 
     You can now see all the current clients in the Client List. You can also scroll down on the list to see more clients.
@@ -77,6 +78,38 @@ Now that you've gotten the hang of viewing the clients in FitFlow, let's try add
 
     You will realise that David has been removed from the client list, and the indexes of everyone after has been shifted up by 1. The index of the clients in the list will always be in running order, starting from 1.
 
+For more information on the commands used in this section, check them out in our User Guide.
+* [**`add`**](UserGuide.md#adding-a-client-add)
+* [**`edit`**](UserGuide.md#editing-a-client--edit)
+* [**`delete`**](UserGuide.md#deleting-a-client--delete)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Viewing schedules
+
+One key feature of FitFlow is the ease in which you can view your schedules for different days. We will use the `view` command to do this.
+
+1. Type in `view Monday` in the Textbox and hit Enter.
+
+    You should see three clients pop up in the Client List, and the Output Box shows their schedules. If you `display` each of these clients, you can see that they indeed have recurring schedules on Monday.
+
+
+2. Type in `view 25/02` in the Textbox and hit Enter.
+
+    Like before, you will see two client show up, who have a one-time schedule on 25/02
+
+This feature is incredibly convenient in helping you see the schedules you have for the week, and on specific days.
+
+For more information on this command, check out the [**`view`**](UserGuide.md#viewing-schedules-view) section in our User Guide.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Moving forward...
+
+Now that you've completed the guided tutorial on FitFlow, it's time for you to try it out for yourself.
+
+Type in [**`clear`**](UserGuide.md#clearing-all-entries--clear) in the Text Box and hit Enter. This will clear all the dummy client data from the application.
+
+You can now start to add your own clients and use FitFlow to improve your workflow!
+
+If you would like to see a brief overview of the commands while using the app, type in [**`help`**](UserGuide.md#help--help) and hit Enter. Follow the instructions in the Output Box to find out more about each command.
