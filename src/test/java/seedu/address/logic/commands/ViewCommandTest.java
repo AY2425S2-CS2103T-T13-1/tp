@@ -73,7 +73,7 @@ public class ViewCommandTest {
     public void execute_dayKeyword_multiplePersonsFound() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, "Monday")).append("\n\n");
-        sb.append("Alice Pauline: 1400-1600\n").append("Benson Meier: 1400-1600\n").append("Carl Kurz: 1400-1600\n");
+        sb.append("1. Alice Pauline: 1400-1600\n").append("2. Benson Meier: 1400-1600\n").append("3. Carl Kurz: 1400-1600\n");
         String expectedMessage = sb.toString().trim();
         ScheduleContainsKeywordPredicate predicate = preparePredicate("Monday");
         ViewCommand command = new ViewCommand(predicate);
@@ -86,7 +86,7 @@ public class ViewCommandTest {
     public void execute_dayTruncatedKeyword_multiplePersonsFound() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, "fri")).append("\n\n");
-        sb.append("Daniel Meier: 1700-1900\n").append("Elle Meyer: 1000-1200\n");
+        sb.append("1. Daniel Meier: 1700-1900\n").append("2. Elle Meyer: 1000-1200\n");
         String expectedMessage = sb.toString().trim();
         ScheduleContainsKeywordPredicate predicate = preparePredicate("fri");
         ViewCommand command = new ViewCommand(predicate);
@@ -99,7 +99,7 @@ public class ViewCommandTest {
     public void execute_dateKeyword_multiplePersonsFound() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, "2/2")).append("\n\n");
-        sb.append("Benson Meier: 1200-1400\n").append("Daniel Meier: 1000-1200\n");
+        sb.append("1. Benson Meier: 1200-1400\n").append("2. Daniel Meier: 1000-1200\n");
         String expectedMessage = sb.toString().trim();
         ScheduleContainsKeywordPredicate predicate = preparePredicate("2/2");
         ViewCommand command = new ViewCommand(predicate);
