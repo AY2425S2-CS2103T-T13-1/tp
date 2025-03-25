@@ -103,6 +103,12 @@ Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_S
 A client can have any number of recurring schedule, one time schedule, or tags (including 0)
 </div>
 
+<div markdown="block" class="alert alert-important">:exclamation: **Note**
+A client should have at least have a name and a phone number to be added
+Any date provided that excludes year will be treated as a date in the current year
+</div>
+
+
 Examples:
 * `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
 * `add n/Betsy Crowe t/friend g/Lose weight l/Jurong GymBox p/1234567 mh/Lower back injury rs/Wed 1500 1700`
@@ -148,12 +154,12 @@ DATE Format: `DD/MM[/YY]`
 * The search is case-insensitive. e.g. `Monday` will match `monday`.
 * A day or date field must be provided.
 * For DAY, short-form is allowed, i.e. `Monday` will match with `mon`.
-* For DATE, the format has to be (DD/MM[/YY]) but the year can be omitted, the day and month must have a leading 0 if it is a single digit. e.g. `14/02` or `07/01/25`.
+* For DATE, the format has to be ([D]D/[M]M[/YY]) but the year can be omitted, the day and month may exclude the leading 0 if it is a single digit. e.g. `14/2` matches with `14/02` and `7/1/25` matches with `07/01/25`.
 
 Examples:
 * `view Tue` returns the list of clients with sessions on Tuesday.
 * `view 25/02/25` returns the list of clients with sessions on 25/02/25.
-* `view 21/04` returns the list of clients with sessions on 21/04 regardless of year.
+* `view 21/04` returns the list of clients with sessions on 21/04 in today's year of usage.
 * `view Monday` returns the list of clients with sessions on Monday. <br>
     ![result for 'view Monday'](images/viewMonday.png)
 
@@ -169,6 +175,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots
 * Existing values will be updated to the input values.
 * When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e it is not cumulative.
 * You can remove all the client's recurring schedules, one time schedules and tags by typing `rs/`, `ots/`, and `t/` respectively without specifying any value after it.
+
+<div markdown="block" class="alert alert-important">:exclamation: **Note**
+Any date provided that excludes year will be treated as a date in the current year
+</div>
 
 Examples:
 *  `edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400` Edits the phone number, location, and one time schedule of the 1st client to be `91234567`, `Anytime Fitness`, and `4/4 1200 1400` respectively.
