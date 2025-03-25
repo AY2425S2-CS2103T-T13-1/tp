@@ -1,12 +1,11 @@
 package seedu.address.model.person;
 
-import static seedu.address.model.person.OneTimeSchedule.formatDate;
-
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.util.DayOfWeekUtils;
+import seedu.address.model.util.LocalDateUtils;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
@@ -26,7 +25,7 @@ public class ScheduleContainsKeywordPredicate implements Predicate<Person> {
         if (DayOfWeekUtils.isDayOfWeek(keyword)) {
             this.keyword = DayOfWeekUtils.getPascalCaseName(DayOfWeekUtils.fromString(keyword));
         } else {
-            this.keyword = formatDate(keyword);
+            this.keyword = LocalDateUtils.formatDateString(keyword);
         }
     }
 
