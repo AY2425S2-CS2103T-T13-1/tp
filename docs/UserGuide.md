@@ -136,6 +136,21 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`.<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Displaying a client's details: `display`
+
+Display a client's full details in the client list, identified by the index number used in the displayed client list.
+
+Format: `display INDEX`
+
+* Diplays the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive integer** 1, 2, 3, …​.
+
+Examples:
+* `display 1` will display the details of the person at index 1
+* `display 5` will display the details of the person at index 5
+* `find Betsy` followed by `display 1` displays the details of the 1st client in the results of the `find` command.
+
 
 ### View: `view`
 
