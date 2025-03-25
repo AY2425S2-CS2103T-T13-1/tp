@@ -54,6 +54,12 @@ FitFlow is a **desktop app for personal trainers in Singapore to manage their cl
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Guided Tutorial
+
+To get a feel for the app before actually starting to use it, check out our [_Guided Tutorial_](GuidedTutorial.md).
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -152,7 +158,7 @@ Examples:
 * `find Betsy` followed by `display 1` displays the details of the 1st client in the results of the `find` command.
 
 
-### View: `view`
+### Viewing Schedules: `view`
 
 Displays the sessions the personal trainer has with clients on that day.
 
