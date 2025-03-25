@@ -39,7 +39,7 @@ You may have noticed that there are not many details being shown in the Client l
 
 To see the full details of a client, try the following.
 
-1. Type `display 1` in the Textbox and hit Enter.
+3. Type `display 1` in the Textbox and hit Enter.
 
     You can now see that Alex Yeoh's full details are displayed in the Output Box. You can try `display` with the other indexes currently shown in the client list to see the details of other clients.
 
@@ -59,7 +59,23 @@ For more information on the commands used in this section, check them out in our
 
 Now that you've gotten the hang of viewing the clients in FitFlow, let's try adding, editing, and deleting!
 
+1. Try typing in the following command and hitting Enter.
 
+    `add n/John Doe p/91827364 rs/Mon 0900 1100 ots/27/11 1400 1600 g/Exercise for health mh/Dislocated right shoulder l/ActiveSG Clementi t/Friend`
+    ![Add Client](images/AddClient.png)
+    You should see a new message in the Output Box, showing the details of the person you added. Notice how John Doe has been given an index of 7, since he was the latest added client.
+
+
+2. Suppose you keyed in the goals for John Doe wrongly. You can easily update his details using the `edit` command. Try using the following command.
+
+    `edit 7 g/Exercise for strength`
+    ![Edit Client](images/EditClient.png)
+    Notice that the goals for John has been updated. If you use the `display` command, you will see this new goal as well.
+
+
+3. Removing a client from the list is simple. Let's try to remove David Li. To do so, type `delete 4` and hit Enter.
+
+    You will realise that David has been removed from the client list, and the indexes of everyone after has been shifted up by 1. The index of the clients in the list will always be in running order, starting from 1.
 
 --------------------------------------------------------------------------------------------------------------------
 
