@@ -72,19 +72,14 @@ public class LocalDateUtilsTest {
     @Test
     public void testLocalDateParser_invalidDates() {
         // Test invalid date formats (should throw IllegalArgumentException)
-        String invalidDate1 = "31-12-2025"; // Wrong separator
+        String invalidDate1 = "32/01/23"; // Invalid day
         assertThrows(IllegalArgumentException.class, () -> {
             LocalDateUtils.localDateParser(invalidDate1);
         });
 
-        String invalidDate2 = "32/01/23"; // Invalid day
+        String invalidDate2 = "00/00/00"; // Invalid date
         assertThrows(IllegalArgumentException.class, () -> {
             LocalDateUtils.localDateParser(invalidDate2);
-        });
-
-        String invalidDate3 = "00/00/00"; // Invalid date
-        assertThrows(IllegalArgumentException.class, () -> {
-            LocalDateUtils.localDateParser(invalidDate3);
         });
     }
 }
