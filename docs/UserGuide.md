@@ -104,7 +104,7 @@ A client can have any number of recurring schedule, one time schedule, or tags (
 </div>
 
 <div markdown="block" class="alert alert-important">:exclamation: **Note**
-A client should have at least have a name and a phone number to be added
+A client should have at least have a name and a phone number to be added<br>
 Any date provided that excludes year will be treated as a date in the current year
 </div>
 
