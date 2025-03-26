@@ -152,7 +152,6 @@ public class EditCommand extends Command {
                 conflicts.add(existingPerson.getName() + ": " + result.getConflictDescription());
             }
         }
-        
         return conflicts;
     }
 

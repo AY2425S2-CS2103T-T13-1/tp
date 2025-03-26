@@ -163,13 +163,11 @@ public class EditCommandTest {
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccessWithPotentialConflicts(editCommand, model, expectedModel);
-        
         // Verify edit was applied despite conflict
         Person editedFirstPerson = model.getFilteredPersonList().get(0);
         assertTrue(editedFirstPerson.getRecurringSchedules().stream()
                 .anyMatch(s -> s.toString().contains("Monday") && s.toString().contains("1500 1700")));
     }
-    
     @Test
     public void execute_editPersonWithConflictingOneTimeSchedule_success() {
 
@@ -193,13 +191,11 @@ public class EditCommandTest {
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccessWithPotentialConflicts(editCommand, model, expectedModel);
-        
         // Verify edit was applied despite conflict
         Person editedFirstPerson = model.getFilteredPersonList().get(0);
         assertTrue(editedFirstPerson.getOneTimeSchedules().stream()
                 .anyMatch(s -> s.toString().contains("15/10") && s.toString().contains("1100 1300")));
     }
-    
     @Test
     public void execute_editPersonWithConflictingRecurringAndOneTimeSchedule_success() {
 
@@ -223,7 +219,6 @@ public class EditCommandTest {
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccessWithPotentialConflicts(editCommand, model, expectedModel);
-        
         // Verify edit was applied despite conflict
         Person editedFirstPerson = model.getFilteredPersonList().get(0);
         assertTrue(editedFirstPerson.getOneTimeSchedules().stream()

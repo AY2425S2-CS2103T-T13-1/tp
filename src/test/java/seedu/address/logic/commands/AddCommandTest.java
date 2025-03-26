@@ -76,7 +76,6 @@ public class AddCommandTest {
 
         assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
     }
-    
     @Test
     public void execute_personWithConflictingOneTimeSchedule_addsPersonWithWarning() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
@@ -246,7 +245,7 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
-        
+
         @Override
         public ObservableList<Person> getFilteredPersonList() {
             return FXCollections.observableArrayList(personsAdded);
