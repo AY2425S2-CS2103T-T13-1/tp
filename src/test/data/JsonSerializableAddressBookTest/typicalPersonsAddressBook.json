@@ -3,7 +3,7 @@
   "persons" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
-    "recurringSchedule": ["Mon 1400 1600", "Wed 1500 1700"],
+    "recurringSchedule": ["Monday 1400 1600", "Wednesday 1500 1700"],
     "goals" : "Get fitter",
     "medicalHistory" : "Twisted right ankle",
     "location" : "123, Jurong West Ave 6, #08-111",
@@ -12,7 +12,7 @@
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
-    "recurringSchedule": ["Mon 1400 1600"],
+    "recurringSchedule": ["Monday 1400 1600"],
     "goals" : "Lose weight",
     "medicalHistory" : "Fractured right ankle",
     "location" : "311, Clementi Ave 2, #02-25",
@@ -21,7 +21,7 @@
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
-    "recurringSchedule": ["Mon 1400 1600"],
+    "recurringSchedule": ["Monday 1400 1600"],
     "goals" : "Gain muscle mass",
     "medicalHistory" : "Fractured right hand",
     "location" : "wall street",
@@ -30,7 +30,7 @@
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
-    "recurringSchedule": [],
+    "recurringSchedule": ["Friday 1700 1900"],
     "goals" : "Get stronger",
     "medicalHistory" : "Dislocated left shoulder",
     "location" : "10th street",
@@ -43,7 +43,7 @@
     "goals" : "Work on stamina",
     "medicalHistory" : "High blood pressure",
     "location" : "michegan ave",
-    "oneTimeSchedule" : [ ],
+    "oneTimeSchedule" : [ "28/03/25 1000 1200" ],
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
