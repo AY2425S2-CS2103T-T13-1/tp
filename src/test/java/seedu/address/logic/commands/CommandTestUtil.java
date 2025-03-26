@@ -124,7 +124,8 @@ public class CommandTestUtil {
      * - the command execution was successful (including for AddCommand and EditCommand with potential conflicts) <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
-    public static void assertCommandSuccessWithPotentialConflicts(Command command, Model actualModel, Model expectedModel) {
+    public static void assertCommandSuccessWithPotentialConflicts(Command command, Model actualModel,
+                                                                  Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             // We don't check the actual message content as it may contain conflict messages
