@@ -17,8 +17,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.OneTimeSchedule;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.person.ScheduleConflictDetector;
 import seedu.address.model.person.ScheduleConflictResult;
@@ -112,7 +112,8 @@ public class AddCommand extends Command {
 
         // Check recurring schedules
         for (RecurringSchedule recurringSchedule : toAdd.getRecurringSchedules()) {
-            ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, recurringSchedule);
+            ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson,
+                    recurringSchedule);
             if (result.hasConflict()) {
                 conflicts.add(existingPerson.getName() + ": " + result.getConflictDescription());
             }
@@ -120,7 +121,8 @@ public class AddCommand extends Command {
 
         // Check one-time schedules
         for (OneTimeSchedule oneTimeSchedule : toAdd.getOneTimeSchedules()) {
-            ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, oneTimeSchedule);
+            ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson,
+                    oneTimeSchedule);
             if (result.hasConflict()) {
                 conflicts.add(existingPerson.getName() + ": " + result.getConflictDescription());
             }

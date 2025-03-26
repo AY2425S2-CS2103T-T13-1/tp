@@ -11,13 +11,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.ArrayList;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -124,7 +124,8 @@ public class EditCommand extends Command {
                 }
             }
 
-            conflictsMsg.append("\n\n").append(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+            conflictsMsg.append("\n\n").append(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
+                    Messages.format(editedPerson)));
             return new CommandResult(conflictsMsg.toString());
         }
 
@@ -139,7 +140,8 @@ public class EditCommand extends Command {
 
         // Check recurring schedules
         for (RecurringSchedule recurringSchedule : editedPerson.getRecurringSchedules()) {
-            ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, recurringSchedule);
+            ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson,
+                    recurringSchedule);
             if (result.hasConflict()) {
                 conflicts.add(existingPerson.getName() + ": " + result.getConflictDescription());
             }
@@ -147,7 +149,8 @@ public class EditCommand extends Command {
 
         // Check one-time schedules
         for (OneTimeSchedule oneTimeSchedule : editedPerson.getOneTimeSchedules()) {
-            ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, oneTimeSchedule);
+            ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson,
+                    oneTimeSchedule);
             if (result.hasConflict()) {
                 conflicts.add(existingPerson.getName() + ": " + result.getConflictDescription());
             }

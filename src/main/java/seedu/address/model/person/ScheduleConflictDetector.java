@@ -45,7 +45,8 @@ public class ScheduleConflictDetector {
                     int newEndMinutes = convertTimeToMinutes(newRecurringSchedule.getEndTime());
 
                     if (hasTimeOverlap(newStartMinutes, newEndMinutes, existingStartMinutes, existingEndMinutes)) {
-                        String description = "Recurring schedule conflict with one-time schedule on " + existingSchedule.getDateString()
+                        String description = "Recurring schedule conflict with one-time schedule on "
+                                + existingSchedule.getDateString()
                                 + " between " + newSchedule.getStartTime() + "-" + newSchedule.getEndTime()
                                 + " and " + existingSchedule.getStartTime() + "-" + existingSchedule.getEndTime();
                         return new ScheduleConflictResult(description, existingSchedule);
