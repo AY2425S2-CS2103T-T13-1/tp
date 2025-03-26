@@ -154,7 +154,7 @@ DATE Format: `DD/MM[/YY]`
 * The search is case-insensitive. e.g. `Monday` will match `monday`.
 * A day or date field must be provided.
 * For DAY, short-form is allowed, i.e. `Monday` will match with `mon`.
-* For DATE, the format has to be ([D]D/[M]M[/YY]) but the year can be omitted, the day and month may exclude the leading 0 if it is a single digit. e.g. `14/2` matches with `14/02` and `7/1/25` matches with `07/01/25`.
+* For DATE, the format has to be ([D]D/[M]M[/YY]) but the year can be omitted, the day and month may exclude the leading 0 if it is a single digit. e.g. `14/2` matches with `14/02/25` and `7/1/25` matches with `07/01/25`.
 
 Examples:
 * `view Tue` returns the list of clients with sessions on Tuesday.
