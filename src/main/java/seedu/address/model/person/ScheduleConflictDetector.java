@@ -16,7 +16,7 @@ public class ScheduleConflictDetector {
     public static ScheduleConflictResult checkScheduleConflict(Person person, Schedule newSchedule) {
         if (newSchedule instanceof RecurringSchedule) {
             RecurringSchedule newRecurringSchedule = (RecurringSchedule) newSchedule;
-            
+
             // Check against existing recurring schedules
             for (RecurringSchedule existingSchedule : person.getRecurringSchedules()) {
                 if (existingSchedule.getDay().equals(newRecurringSchedule.getDay())) {
@@ -24,26 +24,26 @@ public class ScheduleConflictDetector {
                     int existingEndMinutes = convertTimeToMinutes(existingSchedule.getEndTime());
                     int newStartMinutes = convertTimeToMinutes(newRecurringSchedule.getStartTime());
                     int newEndMinutes = convertTimeToMinutes(newRecurringSchedule.getEndTime());
-                    
+
                     if (hasTimeOverlap(newStartMinutes, newEndMinutes, existingStartMinutes, existingEndMinutes)) {
-                        String description = "Recurring schedule conflict on " + existingSchedule.getDay() 
+                        String description = "Recurring schedule conflict on " + existingSchedule.getDay()
                                 + " between " + newSchedule.getStartTime() + "-" + newSchedule.getEndTime()
                                 + " and " + existingSchedule.getStartTime() + "-" + existingSchedule.getEndTime();
                         return new ScheduleConflictResult(description, existingSchedule);
                     }
                 }
             }
-            
+
             // Check against existing one-time schedules
             for (OneTimeSchedule existingSchedule : person.getOneTimeSchedules()) {
                 java.time.DayOfWeek oneTimeDayOfWeek = existingSchedule.getDate().getDayOfWeek();
-                
+
                 if (oneTimeDayOfWeek.equals(newRecurringSchedule.getDay())) {
                     int existingStartMinutes = convertTimeToMinutes(existingSchedule.getStartTime());
                     int existingEndMinutes = convertTimeToMinutes(existingSchedule.getEndTime());
                     int newStartMinutes = convertTimeToMinutes(newRecurringSchedule.getStartTime());
                     int newEndMinutes = convertTimeToMinutes(newRecurringSchedule.getEndTime());
-                    
+
                     if (hasTimeOverlap(newStartMinutes, newEndMinutes, existingStartMinutes, existingEndMinutes)) {
                         String description = "Recurring schedule conflict with one-time schedule on " + existingSchedule.getDateString()
                                 + " between " + newSchedule.getStartTime() + "-" + newSchedule.getEndTime()
@@ -54,7 +54,7 @@ public class ScheduleConflictDetector {
             }
         } else if (newSchedule instanceof OneTimeSchedule) {
             OneTimeSchedule newOneTimeSchedule = (OneTimeSchedule) newSchedule;
-            
+
             // Check against existing one-time schedules
             for (OneTimeSchedule existingSchedule : person.getOneTimeSchedules()) {
                 if (existingSchedule.getDate().equals(newOneTimeSchedule.getDate())) {
@@ -62,7 +62,7 @@ public class ScheduleConflictDetector {
                     int existingEndMinutes = convertTimeToMinutes(existingSchedule.getEndTime());
                     int newStartMinutes = convertTimeToMinutes(newOneTimeSchedule.getStartTime());
                     int newEndMinutes = convertTimeToMinutes(newOneTimeSchedule.getEndTime());
-                    
+
                     if (hasTimeOverlap(newStartMinutes, newEndMinutes, existingStartMinutes, existingEndMinutes)) {
                         String description = "One-time schedule conflict on " + existingSchedule.getDateString()
                                 + " between " + newSchedule.getStartTime() + "-" + newSchedule.getEndTime()
@@ -71,19 +71,19 @@ public class ScheduleConflictDetector {
                     }
                 }
             }
-            
+
             // Check against existing recurring schedules
             java.time.DayOfWeek oneTimeDayOfWeek = newOneTimeSchedule.getDate().getDayOfWeek();
-            
+
             for (RecurringSchedule existingSchedule : person.getRecurringSchedules()) {
                 if (existingSchedule.getDay().equals(oneTimeDayOfWeek)) {
                     int existingStartMinutes = convertTimeToMinutes(existingSchedule.getStartTime());
                     int existingEndMinutes = convertTimeToMinutes(existingSchedule.getEndTime());
                     int newStartMinutes = convertTimeToMinutes(newOneTimeSchedule.getStartTime());
                     int newEndMinutes = convertTimeToMinutes(newOneTimeSchedule.getEndTime());
-                    
+
                     if (hasTimeOverlap(newStartMinutes, newEndMinutes, existingStartMinutes, existingEndMinutes)) {
-                        String description = "One-time schedule conflict with recurring schedule on " 
+                        String description = "One-time schedule conflict with recurring schedule on "
                                 + existingSchedule.getDay() + " (" + newOneTimeSchedule.getDateString() + ")"
                                 + " between " + newSchedule.getStartTime() + "-" + newSchedule.getEndTime()
                                 + " and " + existingSchedule.getStartTime() + "-" + existingSchedule.getEndTime();
@@ -92,13 +92,13 @@ public class ScheduleConflictDetector {
                 }
             }
         }
-        
+
         return new ScheduleConflictResult();
     }
 
     /**
      * Checks if there is a time overlap between two time ranges.
-     * 
+     *
      * @param start1 Start time of first range in minutes.
      * @param end1 End time of first range in minutes.
      * @param start2 Start time of second range in minutes.
@@ -109,10 +109,10 @@ public class ScheduleConflictDetector {
         // Check if one range starts after the other ends
         return !(end1 <= start2 || end2 <= start1);
     }
-    
+
     /**
      * Converts a time string in format "HHmm" to minutes since midnight.
-     * 
+     *
      * @param time Time in format "HHmm".
      * @return Number of minutes since midnight.
      */
