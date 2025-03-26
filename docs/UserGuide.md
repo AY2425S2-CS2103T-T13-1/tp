@@ -104,7 +104,7 @@ A client can have any number of recurring schedule, one time schedule, or tags (
 </div>
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note**
-A client should have at least have a name and a phone number to be added
+A client should have at least have a name and a phone number to be added<br>
 Any date provided that excludes year will be treated as a date in the current year
 </div>
 
@@ -178,7 +178,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots
 * When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e it is not cumulative.
 * You can remove all the client's recurring schedules, one time schedules and tags by typing `rs/`, `ots/`, and `t/` respectively without specifying any value after it.
 
-<div markdown="block" class="alert alert-important">:exclamation: **Note**
+<div markdown="block" class="alert alert-warning">:exclamation: **Note**
 Any date provided that excludes year will be treated as a date in the current year
 </div>
 
