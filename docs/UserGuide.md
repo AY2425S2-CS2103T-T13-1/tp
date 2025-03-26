@@ -3,7 +3,35 @@ layout: page
 title: User Guide
 ---
 
+## About FitFlow
+
 FitFlow is a **desktop app for personal trainers in Singapore to manage their clients, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FitFlow can manage your clients faster than traditional GUI apps.
+
+
+## Using this Guide
+
+The purpose of this user guide is to **help you install FitFlow**, as well as be a **resource you can refer to** if you require any additional help.
+
+You can use the [Table of contents](#table-of-contents) to navigate directly to what you're looking for.
+
+<div style="page-break-after: always;"></div>
+
+<div markdown="block" class="alert alert-info">:bulb: **Tips/Info**
+
+These boxes contain important/useful information or tips that can help you with using FitFlow.
+</div>
+
+<div markdown="block" class="alert alert-warning">:exclamation: **Note**
+
+These boxes indicate information that you should take note of to avoid running into problems.
+</div>
+
+<div markdown="block" class="alert alert-danger">:rotating_light: **Caution**
+
+These boxes indicate warnings about potential negative outcomes.
+</div>
+
+## Table of Contents
 
 * Table of Contents
 {:toc}
@@ -99,7 +127,7 @@ Adds a client to FitFlow.
 
 Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-info">:bulb: **Tip:**
 A client can have any number of recurring schedule, one time schedule, or tags (including 0).
 </div>
 
@@ -191,6 +219,10 @@ Examples:
 
 Deletes the specified client from FitFlow.
 
+<div markdown="span" class="alert alert-danger">
+:rotating_light: **This command is irreversible. Use with caution.**
+</div>
+
 Format: `delete INDEX`
 
 * Deletes the client at the specified `INDEX`.
@@ -212,6 +244,10 @@ Format: `exit`
 ### Clearing all entries : `clear`
 
 Clears all entries from FitFlow.
+
+<div markdown="span" class="alert alert-danger">
+:rotating_light: **This command is irreversible. Use with caution.**
+</div>
 
 Format: `clear`
 
