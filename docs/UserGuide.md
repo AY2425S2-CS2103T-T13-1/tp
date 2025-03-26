@@ -103,7 +103,7 @@ Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_S
 A client can have any number of recurring schedule, one time schedule, or tags (including 0)
 </div>
 
-<div markdown="block" class="alert alert-important">:exclamation: **Note**
+<div markdown="block" class="alert alert-warning">:exclamation: **Note**
 A client should have at least have a name and a phone number to be added<br>
 Any date provided that excludes year will be treated as a date in the current year
 </div>
