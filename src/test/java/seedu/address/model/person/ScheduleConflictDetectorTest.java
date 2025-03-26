@@ -12,10 +12,9 @@ public class ScheduleConflictDetectorTest {
 
     @Test
     public void checkScheduleConflict_recurringScheduleOverlapping_returnsConflict() {
-        // Create a new recurring schedule
+
         RecurringSchedule newSchedule = new RecurringSchedule("Monday 1000 1200");
-        
-        // Create a person with an overlapping schedule
+
         Set<RecurringSchedule> recurringSchedules = new HashSet<>();
         recurringSchedules.add(new RecurringSchedule("Monday 1100 1300")); // Overlaps
         
@@ -33,10 +32,9 @@ public class ScheduleConflictDetectorTest {
     
     @Test
     public void checkScheduleConflict_recurringScheduleNoOverlap_returnsNoConflict() {
-        // Create a new recurring schedule
+
         RecurringSchedule newSchedule = new RecurringSchedule("Monday 1000 1200");
-        
-        // Create a person with non-overlapping schedules
+
         Set<RecurringSchedule> recurringSchedules = new HashSet<>();
         recurringSchedules.add(new RecurringSchedule("Monday 1300 1500")); // No overlap (different time)
         recurringSchedules.add(new RecurringSchedule("Tuesday 1000 1200")); // No overlap (different day)
@@ -52,14 +50,13 @@ public class ScheduleConflictDetectorTest {
     
     @Test
     public void checkScheduleConflict_oneTimeScheduleOverlapping_returnsConflict() {
-        // Create a new one-time schedule (we need to use a date that exists)
-        OneTimeSchedule newSchedule = new OneTimeSchedule("15/10/22 1000 1200");
-        
-        // Create a person with an overlapping schedule
+
+        OneTimeSchedule newSchedule = new OneTimeSchedule("15/10 1000 1200");
+
         Set<RecurringSchedule> recurringSchedules = new HashSet<>();
         
         Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
-        oneTimeSchedules.add(new OneTimeSchedule("15/10/22 1100 1300")); // Overlaps
+        oneTimeSchedules.add(new OneTimeSchedule("15/10 1100 1300")); // Overlaps
         
         Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
         
@@ -73,15 +70,14 @@ public class ScheduleConflictDetectorTest {
     
     @Test
     public void checkScheduleConflict_oneTimeScheduleNoOverlap_returnsNoConflict() {
-        // Create a new one-time schedule
-        OneTimeSchedule newSchedule = new OneTimeSchedule("15/10/22 1000 1200");
-        
-        // Create a person with non-overlapping schedules
+
+        OneTimeSchedule newSchedule = new OneTimeSchedule("15/10 1000 1200");
+
         Set<RecurringSchedule> recurringSchedules = new HashSet<>();
         
         Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
-        oneTimeSchedules.add(new OneTimeSchedule("15/10/22 1300 1500")); // No overlap (different time)
-        oneTimeSchedules.add(new OneTimeSchedule("16/10/22 1000 1200")); // No overlap (different date)
+        oneTimeSchedules.add(new OneTimeSchedule("15/10 1300 1500")); // No overlap (different time)
+        oneTimeSchedules.add(new OneTimeSchedule("16/10 1000 1200")); // No overlap (different date)
         
         Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
         
@@ -92,10 +88,9 @@ public class ScheduleConflictDetectorTest {
     
     @Test
     public void checkScheduleConflict_sameExactTime_returnsConflict() {
-        // Create a new recurring schedule
+
         RecurringSchedule newSchedule = new RecurringSchedule("Monday 1000 1200");
-        
-        // Create a person with exactly the same schedule time
+
         Set<RecurringSchedule> recurringSchedules = new HashSet<>();
         recurringSchedules.add(new RecurringSchedule("Monday 1000 1200")); // Exact same time
         
@@ -110,14 +105,13 @@ public class ScheduleConflictDetectorTest {
 
     @Test
     public void checkScheduleConflict_recurringWithOneTime_returnsConflict() {
-        // Create a new recurring schedule on Monday
+
         RecurringSchedule newSchedule = new RecurringSchedule("Monday 1000 1200");
-        
-        // Create a person with a one-time schedule on a Monday (15/08/22 was a Monday)
+
         Set<RecurringSchedule> recurringSchedules = new HashSet<>();
         
         Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
-        oneTimeSchedules.add(new OneTimeSchedule("15/08/22 1100 1300")); // Overlaps
+        oneTimeSchedules.add(new OneTimeSchedule("31/03 1100 1300")); // Overlaps
         
         Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
         
@@ -128,10 +122,9 @@ public class ScheduleConflictDetectorTest {
     
     @Test
     public void checkScheduleConflict_oneTimeWithRecurring_returnsConflict() {
-        // Create a new one-time schedule (15/08/22 was a Monday)
-        OneTimeSchedule newSchedule = new OneTimeSchedule("15/08/22 1000 1200");
-        
-        // Create a person with a recurring schedule on Mondays
+
+        OneTimeSchedule newSchedule = new OneTimeSchedule("31/03 1000 1200");
+
         Set<RecurringSchedule> recurringSchedules = new HashSet<>();
         recurringSchedules.add(new RecurringSchedule("Monday 1100 1300")); // Overlaps
         
@@ -146,10 +139,9 @@ public class ScheduleConflictDetectorTest {
     
     @Test
     public void checkScheduleConflict_recurringBoundaryCase_noConflict() {
-        // Create a new recurring schedule
+
         RecurringSchedule newSchedule = new RecurringSchedule("Monday 1200 1400");
-        
-        // Create a person with a schedule that ends exactly when the new one starts
+
         Set<RecurringSchedule> recurringSchedules = new HashSet<>();
         recurringSchedules.add(new RecurringSchedule("Monday 1000 1200")); // Ends right when new one starts
         
@@ -164,14 +156,13 @@ public class ScheduleConflictDetectorTest {
     
     @Test
     public void checkScheduleConflict_oneTimeBoundaryCase_noConflict() {
-        // Create a new one-time schedule
-        OneTimeSchedule newSchedule = new OneTimeSchedule("15/10/22 1200 1400");
-        
-        // Create a person with a one-time schedule that ends exactly when the new one starts
+
+        OneTimeSchedule newSchedule = new OneTimeSchedule("31/03 1200 1400");
+
         Set<RecurringSchedule> recurringSchedules = new HashSet<>();
         
         Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
-        oneTimeSchedules.add(new OneTimeSchedule("15/10/22 1000 1200")); // Ends right when new one starts
+        oneTimeSchedules.add(new OneTimeSchedule("31/03 1000 1200")); // Ends right when new one starts
         
         Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
         

@@ -57,56 +57,46 @@ public class AddCommandTest {
     @Test
     public void execute_personWithConflictingSchedule_addsPersonWithWarning() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        
-        // Add a person with a recurring schedule on Monday
+
         Person existingPerson = new PersonBuilder()
                 .withName("Existing Person")
                 .withRecurringSchedules("Monday 1400 1600")
                 .build();
         modelStub.addPerson(existingPerson);
-        
-        // Create a new person with a conflicting schedule
+
         Person newPerson = new PersonBuilder()
                 .withName("New Person")
                 .withRecurringSchedules("Monday 1500 1700")
                 .build();
-        
-        // Execute the command
+
         CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
-        
-        // Verify that the person is added despite the conflict
+
         assertEquals(2, modelStub.personsAdded.size());
         assertTrue(modelStub.personsAdded.contains(newPerson));
-        
-        // Verify the command result contains the conflict warning
+
         assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
     }
     
     @Test
     public void execute_personWithConflictingOneTimeSchedule_addsPersonWithWarning() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        
-        // Add a person with a one-time schedule
+
         Person existingPerson = new PersonBuilder()
                 .withName("Existing Person")
                 .withOneTimeSchedules("15/10 1000 1200")
                 .build();
         modelStub.addPerson(existingPerson);
-        
-        // Create a new person with a conflicting one-time schedule
+
         Person newPerson = new PersonBuilder()
                 .withName("New Person")
                 .withOneTimeSchedules("15/10 1100 1300")
                 .build();
-        
-        // Execute the command
+
         CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
-        
-        // Verify that the person is added despite the conflict
+
         assertEquals(2, modelStub.personsAdded.size());
         assertTrue(modelStub.personsAdded.contains(newPerson));
-        
-        // Verify the command result contains the conflict warning
+
         assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
     }
 
