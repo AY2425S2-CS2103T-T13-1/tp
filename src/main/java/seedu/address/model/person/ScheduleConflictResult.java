@@ -49,4 +49,4 @@ public class ScheduleConflictResult {
     public Schedule getConflictingSchedule() {
         return conflictingSchedule;
     }
-} 
+}

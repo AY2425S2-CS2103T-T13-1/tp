@@ -65,7 +65,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_SCHEDULE_CONFLICT = 
+    public static final String MESSAGE_SCHEDULE_CONFLICT =
             "Note: The person has been edited, but there are schedule conflicts: %1$s";
 
     private final Index index;
@@ -98,7 +98,7 @@ public class EditCommand extends Command {
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        
+
         // Check for schedule conflicts with existing persons
         List<String> conflicts = new ArrayList<>();
         for (Person existingPerson : lastShownList) {
@@ -111,23 +111,23 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        
+
         // If there are conflicts, add them to the success message
         if (!conflicts.isEmpty()) {
             StringBuilder conflictsMsg = new StringBuilder();
             conflictsMsg.append(String.format(MESSAGE_SCHEDULE_CONFLICT, "")).append("\n");
-            
+
             for (int i = 0; i < conflicts.size(); i++) {
                 conflictsMsg.append(conflicts.get(i));
                 if (i < conflicts.size() - 1) {
                     conflictsMsg.append("\n\n");
                 }
             }
-            
+
             conflictsMsg.append("\n\n").append(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
             return new CommandResult(conflictsMsg.toString());
         }
-        
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -136,7 +136,7 @@ public class EditCommand extends Command {
      */
     private List<String> checkConflictsWithPerson(Person existingPerson, Person editedPerson) {
         List<String> conflicts = new ArrayList<>();
-        
+
         // Check recurring schedules
         for (RecurringSchedule recurringSchedule : editedPerson.getRecurringSchedules()) {
             ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, recurringSchedule);
@@ -144,7 +144,7 @@ public class EditCommand extends Command {
                 conflicts.add(existingPerson.getName() + ": " + result.getConflictDescription());
             }
         }
-        
+
         // Check one-time schedules
         for (OneTimeSchedule oneTimeSchedule : editedPerson.getOneTimeSchedules()) {
             ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, oneTimeSchedule);

@@ -56,4 +56,4 @@ public class ScheduleConflictResultTest {
         ScheduleConflictResult result = new ScheduleConflictResult("Description", schedule);
         assertEquals(schedule, result.getConflictingSchedule());
     }
-} 
+}

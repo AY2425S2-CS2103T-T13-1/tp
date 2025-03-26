@@ -121,4 +121,4 @@ public class ScheduleConflictDetector {
         int minutes = Integer.parseInt(time.substring(2));
         return hours * 60 + minutes;
     }
-} 
+}

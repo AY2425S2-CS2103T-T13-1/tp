@@ -186,4 +186,4 @@ public class ScheduleConflictDetectorTest {
             new HashSet<>()
         );
     }
-} 
+}

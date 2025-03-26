@@ -56,7 +56,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-    public static final String MESSAGE_SCHEDULE_CONFLICT = 
+    public static final String MESSAGE_SCHEDULE_CONFLICT =
             "Note: The person has been added, but there are schedule conflicts: %1$s";
 
     private final Person toAdd;
@@ -76,7 +76,7 @@ public class AddCommand extends Command {
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        
+
         // Check for schedule conflicts with existing persons before adding
         List<String> conflicts = new ArrayList<>();
         for (Person existingPerson : model.getFilteredPersonList()) {
@@ -84,32 +84,32 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        
+
         // If there are conflicts, add them to the success message
         if (!conflicts.isEmpty()) {
             StringBuilder conflictsMsg = new StringBuilder();
             conflictsMsg.append(String.format(MESSAGE_SCHEDULE_CONFLICT, "")).append("\n");
-            
+
             for (int i = 0; i < conflicts.size(); i++) {
                 conflictsMsg.append(conflicts.get(i));
                 if (i < conflicts.size() - 1) {
                     conflictsMsg.append("\n\n");
                 }
             }
-            
+
             conflictsMsg.append("\n\n").append(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
             return new CommandResult(conflictsMsg.toString());
         }
-        
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
-    
+
     /**
      * Checks for schedule conflicts between the person to add and an existing person.
      */
     private List<String> checkConflictsWithPerson(Person existingPerson) {
         List<String> conflicts = new ArrayList<>();
-        
+
         // Check recurring schedules
         for (RecurringSchedule recurringSchedule : toAdd.getRecurringSchedules()) {
             ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, recurringSchedule);
@@ -117,7 +117,7 @@ public class AddCommand extends Command {
                 conflicts.add(existingPerson.getName() + ": " + result.getConflictDescription());
             }
         }
-        
+
         // Check one-time schedules
         for (OneTimeSchedule oneTimeSchedule : toAdd.getOneTimeSchedules()) {
             ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, oneTimeSchedule);
@@ -125,7 +125,7 @@ public class AddCommand extends Command {
                 conflicts.add(existingPerson.getName() + ": " + result.getConflictDescription());
             }
         }
-        
+
         return conflicts;
     }
 
