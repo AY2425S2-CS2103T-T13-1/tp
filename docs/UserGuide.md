@@ -103,7 +103,7 @@ Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_S
 A client can have any number of recurring schedule, one time schedule, or tags (including 0)
 </div>
 
-<div markdown="block" class="alert alert-important">:exclamation: **Note**
+<div markdown="block" class="alert alert-warning">:exclamation: **Note**
 A client should have at least have a name and a phone number to be added
 Any date provided that excludes year will be treated as a date in the current year
 </div>
@@ -162,20 +162,6 @@ Examples:
 * `view 21/04` returns the list of clients with sessions on 21/04 in today's year of usage.
 * `view Monday` returns the list of clients with sessions on Monday. <br>
     ![result for 'view Monday'](images/viewMonday.png)
-
-### Display a client's details : `display`
-
-Displays an existing client`s details in FitFlow.
-
-Format: `display INDEX`
-
-* Displays the client at the specified `INDEX`. 
-* The index refers to the index number shown in the displayed client list. 
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `display 2` displays the 2nd client`s details from FitFlow.
-* `view Monday` followed by `display 1` displays the 1st client in the results of the `view Monday` command.
 
 
 ### Editing a client : `edit`
