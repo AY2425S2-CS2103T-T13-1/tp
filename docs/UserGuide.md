@@ -223,6 +223,7 @@ Deletes the specified client from FitFlow.
 :rotating_light: **This command is irreversible. Use with caution.**
 </div>
 
+<p></p>
 
 Format: `delete INDEX`
 
@@ -250,6 +251,7 @@ Clears all entries from FitFlow.
 :rotating_light: **This command is irreversible. Use with caution.**
 </div>
 
+<p></p>
 
 Format: `clear`
 
