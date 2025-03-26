@@ -155,6 +155,13 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Using Help within the application itself
+
+The following activity diagram summarizes what happens when a user executes a help command:
+![Help Command Activity Diagram](images/HelpCommandActivityDiagram.png)
+
+The command makes use of the `/` prefix to check for the parameters provided. If the parameter is valid (meaning it is one of the other commands available in FitFlow), it will show the message usage of that command requested.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
