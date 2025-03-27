@@ -64,7 +64,8 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the FitFlow.";
+    public static final String MESSAGE_DUPLICATE_PHONE = "The phone number provided already exists in FitFlow.";
     public static final String MESSAGE_SCHEDULE_CONFLICT =
             "Note: The person has been edited, but there are schedule conflicts:\n\n";
 
@@ -97,6 +98,10 @@ public class EditCommand extends Command {
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (model.hasPhone(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PHONE);
         }
 
         // Check for schedule conflicts with existing persons
