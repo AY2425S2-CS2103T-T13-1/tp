@@ -55,17 +55,29 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_duplicateNumber_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        Person validPersonNewName = new PersonBuilder().withName("New Person").build(); // still has same default number
+        AddCommand addCommand = new AddCommand(validPersonNewName);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PHONE, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void execute_personWithConflictingRecurringSchedule_addsPersonWithWarning() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
 
         Person existingPerson = new PersonBuilder()
                 .withName("Existing Person")
+                .withPhone("91234567")
                 .withRecurringSchedules("Monday 1400 1600")
                 .build();
         modelStub.addPerson(existingPerson);
 
         Person newPerson = new PersonBuilder()
                 .withName("New Person")
+                .withPhone("87654321")
                 .withRecurringSchedules("Monday 1500 1700")
                 .build();
 
@@ -74,18 +86,21 @@ public class AddCommandTest {
         assertTrue(modelStub.personsAdded.contains(newPerson));
         assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
     }
+
     @Test
     public void execute_personWithConflictingOneTimeSchedule_addsPersonWithWarning() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
 
         Person existingPerson = new PersonBuilder()
                 .withName("Existing Person")
+                .withPhone("91234567")
                 .withOneTimeSchedules("31/03 1000 1200")
                 .build();
         modelStub.addPerson(existingPerson);
 
         Person newPerson = new PersonBuilder()
                 .withName("New Person")
+                .withPhone("87654321")
                 .withOneTimeSchedules("31/03 1100 1300")
                 .build();
 
@@ -101,12 +116,14 @@ public class AddCommandTest {
 
         Person existingPerson = new PersonBuilder()
                 .withName("Existing Person")
+                .withPhone("91234567")
                 .withRecurringSchedules("Monday 1000 1200")
                 .build();
         modelStub.addPerson(existingPerson);
 
         Person newPerson = new PersonBuilder()
                 .withName("New Person")
+                .withPhone("87654321")
                 .withOneTimeSchedules("31/03 1100 1300")
                 .build();
 
@@ -214,6 +231,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasPhone(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             return FXCollections.observableArrayList();
         }
@@ -240,6 +262,12 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public boolean hasPhone(Person person) {
+            requireNonNull(person);
+            return this.person.hasSamePhone(person);
+        }
     }
 
     /**
@@ -252,6 +280,12 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public boolean hasPhone(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::hasSamePhone);
         }
 
         @Override
