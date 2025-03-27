@@ -179,6 +179,10 @@ Format: `view DAY/DATE`
 DAY Format: `Monday` or `Mon`
 DATE Format: `DD/MM[/YY]`
 
+<div markdown="block" class="alert alert-warning">:exclamation: **Note**
+Any date provided that excludes year will be treated as a date in the current year.
+</div>
+
 * The search is case-insensitive. e.g. `Monday` will match `monday`.
 * A day or date field must be provided.
 * For DAY, short-form is allowed, i.e. `Monday` will match with `mon`.
