@@ -100,7 +100,7 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (model.hasPhone(editedPerson)) {
+        if (!personToEdit.hasSamePhone(editedPerson) && model.hasPhone(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PHONE);
         }
 
