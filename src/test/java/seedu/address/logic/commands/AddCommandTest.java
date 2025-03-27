@@ -55,7 +55,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_personWithConflictingSchedule_addsPersonWithWarning() throws Exception {
+    public void execute_personWithConflictingRecurringSchedule_addsPersonWithWarning() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
 
         Person existingPerson = new PersonBuilder()
@@ -70,7 +70,7 @@ public class AddCommandTest {
                 .build();
 
         CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
-
+        
         assertEquals(2, modelStub.personsAdded.size());
         assertTrue(modelStub.personsAdded.contains(newPerson));
 
@@ -82,13 +82,36 @@ public class AddCommandTest {
 
         Person existingPerson = new PersonBuilder()
                 .withName("Existing Person")
-                .withOneTimeSchedules("15/10 1000 1200")
+                .withOneTimeSchedules("31/03 1000 1200")
                 .build();
         modelStub.addPerson(existingPerson);
 
         Person newPerson = new PersonBuilder()
                 .withName("New Person")
-                .withOneTimeSchedules("15/10 1100 1300")
+                .withOneTimeSchedules("31/03 1100 1300")
+                .build();
+
+        CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
+        
+        assertEquals(2, modelStub.personsAdded.size());
+        assertTrue(modelStub.personsAdded.contains(newPerson));
+
+        assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
+    }
+
+    @Test
+    public void execute_personWithConflictingRecurringAndOneTimeSchedule_addsPersonWithWarning() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        Person existingPerson = new PersonBuilder()
+                .withName("Existing Person")
+                .withRecurringSchedules("Monday 1000 1200")
+                .build();
+        modelStub.addPerson(existingPerson);
+
+        Person newPerson = new PersonBuilder()
+                .withName("New Person")
+                .withOneTimeSchedules("31/03 1100 1300")
                 .build();
 
         CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
@@ -243,7 +266,12 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            // Create an address book with the current list of persons
+            AddressBook addressBook = new AddressBook();
+            for (Person person : personsAdded) {
+                addressBook.addPerson(person);
+            }
+            return addressBook;
         }
 
         @Override

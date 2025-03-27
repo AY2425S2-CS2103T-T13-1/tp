@@ -66,7 +66,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_SCHEDULE_CONFLICT =
-            "Note: The person has been edited, but there are schedule conflicts: %1$s";
+            "Note: The person has been edited, but there are schedule conflicts:\n\n";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -101,7 +101,7 @@ public class EditCommand extends Command {
 
         // Check for schedule conflicts with existing persons
         List<String> conflicts = new ArrayList<>();
-        for (Person existingPerson : lastShownList) {
+        for (Person existingPerson : model.getAddressBook().getPersonList()) {
             // Skip the person being edited
             if (existingPerson.equals(personToEdit)) {
                 continue;
@@ -115,16 +115,13 @@ public class EditCommand extends Command {
         // If there are conflicts, add them to the success message
         if (!conflicts.isEmpty()) {
             StringBuilder conflictsMsg = new StringBuilder();
-            conflictsMsg.append(String.format(MESSAGE_SCHEDULE_CONFLICT, "")).append("\n");
+            conflictsMsg.append(MESSAGE_SCHEDULE_CONFLICT);
 
-            for (int i = 0; i < conflicts.size(); i++) {
-                conflictsMsg.append(conflicts.get(i));
-                if (i < conflicts.size() - 1) {
-                    conflictsMsg.append("\n\n");
-                }
+            for (String conflict : conflicts) {
+                conflictsMsg.append(conflict).append("\n\n");
             }
 
-            conflictsMsg.append("\n\n").append(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
+            conflictsMsg.append(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
                     Messages.format(editedPerson)));
             return new CommandResult(conflictsMsg.toString());
         }
@@ -133,28 +130,29 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Checks for schedule conflicts between the edited person and an existing person.
+     * Checks for schedule conflicts between the editedPerson and an existing person.
      */
     private List<String> checkConflictsWithPerson(Person existingPerson, Person editedPerson) {
         List<String> conflicts = new ArrayList<>();
 
-        // Check recurring schedules
-        for (RecurringSchedule recurringSchedule : editedPerson.getRecurringSchedules()) {
-            ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson,
-                    recurringSchedule);
+        // Check each recurring schedule
+        for (RecurringSchedule schedule : editedPerson.getRecurringSchedules()) {
+            ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, schedule);
             if (result.hasConflict()) {
-                conflicts.add(existingPerson.getName() + ": " + result.getConflictDescription());
+                conflicts.add(String.format("%s with %s", result.getConflictDescription(), 
+                        existingPerson.getName()));
             }
         }
 
-        // Check one-time schedules
-        for (OneTimeSchedule oneTimeSchedule : editedPerson.getOneTimeSchedules()) {
-            ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson,
-                    oneTimeSchedule);
+        // Check each one-time schedule
+        for (OneTimeSchedule schedule : editedPerson.getOneTimeSchedules()) {
+            ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, schedule);
             if (result.hasConflict()) {
-                conflicts.add(existingPerson.getName() + ": " + result.getConflictDescription());
+                conflicts.add(String.format("%s with %s", result.getConflictDescription(), 
+                        existingPerson.getName()));
             }
         }
+
         return conflicts;
     }
 
