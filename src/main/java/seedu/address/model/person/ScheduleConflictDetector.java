@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import java.time.DayOfWeek;
-
 /**
  * Utility class for detecting conflicts between schedules.
  */
