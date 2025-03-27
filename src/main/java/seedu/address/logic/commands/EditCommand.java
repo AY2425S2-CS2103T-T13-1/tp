@@ -139,7 +139,7 @@ public class EditCommand extends Command {
         for (RecurringSchedule schedule : editedPerson.getRecurringSchedules()) {
             ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, schedule);
             if (result.hasConflict()) {
-                conflicts.add(String.format("%s with %s", result.getConflictDescription(), 
+                conflicts.add(String.format("%s with %s", result.getConflictDescription(),
                         existingPerson.getName()));
             }
         }
@@ -148,7 +148,7 @@ public class EditCommand extends Command {
         for (OneTimeSchedule schedule : editedPerson.getOneTimeSchedules()) {
             ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, schedule);
             if (result.hasConflict()) {
-                conflicts.add(String.format("%s with %s", result.getConflictDescription(), 
+                conflicts.add(String.format("%s with %s", result.getConflictDescription(),
                         existingPerson.getName()));
             }
         }

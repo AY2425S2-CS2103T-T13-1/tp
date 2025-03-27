@@ -111,7 +111,7 @@ public class AddCommand extends Command {
         for (RecurringSchedule schedule : toAdd.getRecurringSchedules()) {
             ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, schedule);
             if (result.hasConflict()) {
-                conflicts.add(String.format("%s with %s", result.getConflictDescription(), 
+                conflicts.add(String.format("%s with %s", result.getConflictDescription(),
                         existingPerson.getName()));
             }
         }
@@ -120,7 +120,7 @@ public class AddCommand extends Command {
         for (OneTimeSchedule schedule : toAdd.getOneTimeSchedules()) {
             ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, schedule);
             if (result.hasConflict()) {
-                conflicts.add(String.format("%s with %s", result.getConflictDescription(), 
+                conflicts.add(String.format("%s with %s", result.getConflictDescription(),
                         existingPerson.getName()));
             }
         }

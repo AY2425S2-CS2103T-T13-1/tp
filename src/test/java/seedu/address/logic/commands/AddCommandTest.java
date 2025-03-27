@@ -70,10 +70,8 @@ public class AddCommandTest {
                 .build();
 
         CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
-        
         assertEquals(2, modelStub.personsAdded.size());
         assertTrue(modelStub.personsAdded.contains(newPerson));
-
         assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
     }
     @Test
@@ -92,10 +90,8 @@ public class AddCommandTest {
                 .build();
 
         CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
-        
         assertEquals(2, modelStub.personsAdded.size());
         assertTrue(modelStub.personsAdded.contains(newPerson));
-
         assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
     }
 
