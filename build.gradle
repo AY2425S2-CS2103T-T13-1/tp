@@ -70,7 +70,13 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveBaseName = "FitFlow"
+    archiveVersion = "v1.4"
+    archiveClassifier = null
+}
+
+run {
+    enableAssertions = true
 }
 
 defaultTasks 'clean', 'test'
