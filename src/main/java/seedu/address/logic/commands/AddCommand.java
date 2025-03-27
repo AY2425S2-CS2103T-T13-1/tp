@@ -10,11 +10,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RecurringSchedule;
+import seedu.address.model.person.ScheduleConflictDetector;
+import seedu.address.model.person.ScheduleConflictResult;
 
 /**
  * Adds a person to the address book.
@@ -49,6 +56,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SCHEDULE_CONFLICT =
+            "Note: The person has been added, but there are schedule conflicts:\n\n";
 
     private final Person toAdd;
 
@@ -68,8 +77,55 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        // Check for schedule conflicts with existing persons
+        List<String> conflicts = new ArrayList<>();
+        for (Person existingPerson : model.getAddressBook().getPersonList()) {
+            conflicts.addAll(checkConflictsWithPerson(existingPerson, toAdd));
+        }
+
         model.addPerson(toAdd);
+
+        // If there are conflicts, add them to the success message
+        if (!conflicts.isEmpty()) {
+            StringBuilder conflictsMsg = new StringBuilder();
+            conflictsMsg.append(MESSAGE_SCHEDULE_CONFLICT);
+
+            for (String conflict : conflicts) {
+                conflictsMsg.append(conflict).append("\n\n");
+            }
+
+            conflictsMsg.append(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+            return new CommandResult(conflictsMsg.toString());
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    /**
+     * Checks for schedule conflicts between the person to add and an existing person.
+     */
+    private List<String> checkConflictsWithPerson(Person existingPerson, Person toAdd) {
+        List<String> conflicts = new ArrayList<>();
+
+        // Check each recurring schedule
+        for (RecurringSchedule schedule : toAdd.getRecurringSchedules()) {
+            ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, schedule);
+            if (result.hasConflict()) {
+                conflicts.add(String.format("%s with %s", result.getConflictDescription(),
+                        existingPerson.getName()));
+            }
+        }
+
+        // Check each one-time schedule
+        for (OneTimeSchedule schedule : toAdd.getOneTimeSchedules()) {
+            ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, schedule);
+            if (result.hasConflict()) {
+                conflicts.add(String.format("%s with %s", result.getConflictDescription(),
+                        existingPerson.getName()));
+            }
+        }
+
+        return conflicts;
     }
 
     @Override

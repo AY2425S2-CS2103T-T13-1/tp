@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -51,6 +52,70 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_personWithConflictingRecurringSchedule_addsPersonWithWarning() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        Person existingPerson = new PersonBuilder()
+                .withName("Existing Person")
+                .withRecurringSchedules("Monday 1400 1600")
+                .build();
+        modelStub.addPerson(existingPerson);
+
+        Person newPerson = new PersonBuilder()
+                .withName("New Person")
+                .withRecurringSchedules("Monday 1500 1700")
+                .build();
+
+        CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
+        assertEquals(2, modelStub.personsAdded.size());
+        assertTrue(modelStub.personsAdded.contains(newPerson));
+        assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
+    }
+    @Test
+    public void execute_personWithConflictingOneTimeSchedule_addsPersonWithWarning() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        Person existingPerson = new PersonBuilder()
+                .withName("Existing Person")
+                .withOneTimeSchedules("31/03 1000 1200")
+                .build();
+        modelStub.addPerson(existingPerson);
+
+        Person newPerson = new PersonBuilder()
+                .withName("New Person")
+                .withOneTimeSchedules("31/03 1100 1300")
+                .build();
+
+        CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
+        assertEquals(2, modelStub.personsAdded.size());
+        assertTrue(modelStub.personsAdded.contains(newPerson));
+        assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
+    }
+
+    @Test
+    public void execute_personWithConflictingRecurringAndOneTimeSchedule_addsPersonWithWarning() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        Person existingPerson = new PersonBuilder()
+                .withName("Existing Person")
+                .withRecurringSchedules("Monday 1000 1200")
+                .build();
+        modelStub.addPerson(existingPerson);
+
+        Person newPerson = new PersonBuilder()
+                .withName("New Person")
+                .withOneTimeSchedules("31/03 1100 1300")
+                .build();
+
+        CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
+
+        assertEquals(2, modelStub.personsAdded.size());
+        assertTrue(modelStub.personsAdded.contains(newPerson));
+
+        assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
     }
 
     @Test
@@ -150,7 +215,7 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
+            return FXCollections.observableArrayList();
         }
 
         @Override
@@ -197,7 +262,17 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            // Create an address book with the current list of persons
+            AddressBook addressBook = new AddressBook();
+            for (Person person : personsAdded) {
+                addressBook.addPerson(person);
+            }
+            return addressBook;
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return FXCollections.observableArrayList(personsAdded);
         }
     }
 

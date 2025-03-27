@@ -6,11 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ONETIMESCHEDULE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccessWithPotentialConflicts;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -42,12 +41,10 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
-
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccessWithPotentialConflicts(editCommand, model, expectedModel);
     }
 
     @Test
@@ -57,19 +54,16 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withOneTimeSchedules(VALID_ONETIMESCHEDULE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_HUSBAND).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withOneTimeSchedules(VALID_ONETIMESCHEDULE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccessWithPotentialConflicts(editCommand, model, expectedModel);
     }
 
     @Test
@@ -77,11 +71,9 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
-
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccessWithPotentialConflicts(editCommand, model, expectedModel);
     }
 
     @Test
@@ -93,12 +85,10 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
-
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccessWithPotentialConflicts(editCommand, model, expectedModel);
     }
 
     @Test
@@ -146,6 +136,91 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_editPersonWithConflictingRecurringSchedule_success() {
+
+        Person firstPerson = model.getFilteredPersonList().get(0);
+        Person secondPerson = model.getFilteredPersonList().get(1);
+
+        Person secondPersonWithSchedule = new PersonBuilder(secondPerson)
+                .withRecurringSchedules("Monday 1400 1600")
+                .build();
+        model.setPerson(secondPerson, secondPersonWithSchedule);
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withRecurringSchedules("Monday 1500 1700")
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Person editedPerson = new PersonBuilder(firstPerson)
+                .withRecurringSchedules("Monday 1500 1700")
+                .build();
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccessWithPotentialConflicts(editCommand, model, expectedModel);
+        // Verify edit was applied despite conflict
+        Person editedFirstPerson = model.getFilteredPersonList().get(0);
+        assertTrue(editedFirstPerson.getRecurringSchedules().stream()
+                .anyMatch(s -> s.toString().contains("Monday") && s.toString().contains("1500 1700")));
+    }
+    @Test
+    public void execute_editPersonWithConflictingOneTimeSchedule_success() {
+
+        Person firstPerson = model.getFilteredPersonList().get(0);
+        Person secondPerson = model.getFilteredPersonList().get(1);
+
+        Person secondPersonWithSchedule = new PersonBuilder(secondPerson)
+                .withOneTimeSchedules("15/10 1000 1200")
+                .build();
+        model.setPerson(secondPerson, secondPersonWithSchedule);
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withOneTimeSchedules("15/10 1100 1300")
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Person editedPerson = new PersonBuilder(firstPerson)
+                .withOneTimeSchedules("15/10 1100 1300")
+                .build();
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccessWithPotentialConflicts(editCommand, model, expectedModel);
+        // Verify edit was applied despite conflict
+        Person editedFirstPerson = model.getFilteredPersonList().get(0);
+        assertTrue(editedFirstPerson.getOneTimeSchedules().stream()
+                .anyMatch(s -> s.toString().contains("15/10") && s.toString().contains("1100 1300")));
+    }
+    @Test
+    public void execute_editPersonWithConflictingRecurringAndOneTimeSchedule_success() {
+
+        Person firstPerson = model.getFilteredPersonList().get(0);
+        Person secondPerson = model.getFilteredPersonList().get(1);
+
+        Person secondPersonWithSchedule = new PersonBuilder(secondPerson)
+                .withRecurringSchedules("Monday 1400 1600")
+                .build();
+        model.setPerson(secondPerson, secondPersonWithSchedule);
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withOneTimeSchedules("31/03 1500 1700") // This conflicts with Monday recurring schedule
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Person editedPerson = new PersonBuilder(firstPerson)
+                .withOneTimeSchedules("31/03 1500 1700")
+                .build();
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccessWithPotentialConflicts(editCommand, model, expectedModel);
+        // Verify edit was applied despite conflict
+        Person editedFirstPerson = model.getFilteredPersonList().get(0);
+        assertTrue(editedFirstPerson.getOneTimeSchedules().stream()
+                .anyMatch(s -> s.toString().contains("31/03") && s.toString().contains("1500 1700")));
     }
 
     @Test

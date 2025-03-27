@@ -27,11 +27,11 @@ FitFlow is a **desktop app for personal trainers in Singapore to manage their cl
    Some example commands you can try:
 
    * `add n/John Doe p/81234567` : Adds a client named `John Doe` to the FitFlow.
-   
+
    * `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends` : Adds a client named `Alice Pauline` with many details such as her schedule, fitness goal, medical history and location.
 
    * `find John Doe` : Finds a specific client and displays their name and phone number.
-   
+
    * `view monday` : Displays the sessions the personal trainer has with the clients on that day.
 
    * `view 17/2/25` : Displays the sessions the personal trainer has with the clients on that day.
