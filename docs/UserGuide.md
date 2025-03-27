@@ -3,7 +3,35 @@ layout: page
 title: User Guide
 ---
 
+## About FitFlow
+
 FitFlow is a **desktop app for personal trainers in Singapore to manage their clients, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FitFlow can manage your clients faster than traditional GUI apps.
+
+
+## Using this Guide
+
+The purpose of this user guide is to **help you install FitFlow**, as well as be a **resource you can refer to** if you require any additional help.
+
+You can use the [Table of contents](#table-of-contents) to navigate directly to what you're looking for.
+
+<div style="page-break-after: always;"></div>
+
+<div markdown="block" class="alert alert-info">:bulb: **Tips/Info**
+
+These boxes contain important/useful information or tips that can help you with using FitFlow.
+</div>
+
+<div markdown="block" class="alert alert-warning">:exclamation: **Note**
+
+These boxes indicate information that you should take note of to avoid running into problems.
+</div>
+
+<div markdown="block" class="alert alert-danger">:rotating_light: **Caution**
+
+These boxes indicate warnings about potential negative outcomes.
+</div>
+
+## Table of Contents
 
 * Table of Contents
 {:toc}
@@ -15,15 +43,15 @@ FitFlow is a **desktop app for personal trainers in Singapore to manage their cl
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-T13-1/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-T13-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your FitFlow app.
+3. Copy the file to the folder you want to use as the _home folder_ for your FitFlow app.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fitflow.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fitflow.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will display the list of available commands in FitFlow.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will display the list of available commands in FitFlow.<br>
    Some example commands you can try:
 
    * `add n/John Doe p/81234567` : Adds a client named `John Doe` to the FitFlow.
@@ -50,7 +78,7 @@ FitFlow is a **desktop app for personal trainers in Singapore to manage their cl
 
    * `exit` : Exits the FitFlow app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -105,9 +133,15 @@ Adds a client to FitFlow.
 
 Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can have any number of recurring schedule, one time schedule, or tags (including 0)
+<div markdown="span" class="alert alert-info">:bulb: **Tip:**
+A client can have any number of recurring schedule, one time schedule, or tags (including 0).
 </div>
+
+<div markdown="block" class="alert alert-warning">:exclamation: **Note**
+A client should have at least have a name and a phone number to be added.<br>
+Any date provided that excludes year will be treated as a date in the current year.
+</div>
+
 
 Examples:
 * `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
@@ -129,13 +163,13 @@ Find clients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only the name and contact number of the client will be displayed
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only the name and contact number of the client will be displayed.
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 * Clients matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
 * `find John` returns `john` and `John Doe`.
@@ -166,15 +200,19 @@ Format: `view DAY/DATE`
 DAY Format: `Monday` or `Mon`
 DATE Format: `DD/MM[/YY]`
 
+<div markdown="block" class="alert alert-warning">:exclamation: **Note**
+Any date provided that excludes year will be treated as a date in the current year.
+</div>
+
 * The search is case-insensitive. e.g. `Monday` will match `monday`.
 * A day or date field must be provided.
 * For DAY, short-form is allowed, i.e. `Monday` will match with `mon`.
-* For DATE, the format has to be (DD/MM[/YY]) but the year can be omitted, the day and month must have a leading 0 if it is a single digit. e.g. `14/02` or `07/01/25`.
+* For DATE, the format has to be ([D]D/[M]M[/YY]) but the year can be omitted, the day and month may exclude the leading 0 if it is a single digit. e.g. `14/2` matches with `14/02/25` and `7/1/25` matches with `07/01/25`.
 
 Examples:
 * `view Tue` returns the list of clients with sessions on Tuesday.
 * `view 25/02/25` returns the list of clients with sessions on 25/02/25.
-* `view 21/04` returns the list of clients with sessions on 21/04 regardless of year.
+* `view 21/04` returns the list of clients with sessions on 21/04 in today's year of usage.
 * `view Monday` returns the list of clients with sessions on Monday. <br>
     ![result for 'view Monday'](images/viewMonday.png)
 
@@ -185,11 +223,17 @@ Edits an existing client in FitFlow.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`
 
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`. 
+* The index refers to the index number shown in the displayed client list. 
+* The index **must be a positive integer** 1, 2, 3, …​.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e it is not cumulative.
 * You can remove all the client's recurring schedules, one time schedules and tags by typing `rs/`, `ots/`, and `t/` respectively without specifying any value after it.
+
+<div markdown="block" class="alert alert-warning">:exclamation: **Note**
+Any date provided that excludes year will be treated as a date in the current year.
+</div>
 
 Examples:
 *  `edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400` Edits the phone number, location, and one time schedule of the 1st client to be `91234567`, `Anytime Fitness`, and `4/4 1200 1400` respectively.
@@ -199,6 +243,12 @@ Examples:
 ### Deleting a client : `delete`
 
 Deletes the specified client from FitFlow.
+
+<div markdown="span" class="alert alert-danger">
+:rotating_light: **This command is irreversible. Use with caution.**
+</div>
+
+<p></p>
 
 Format: `delete INDEX`
 
@@ -221,6 +271,12 @@ Format: `exit`
 ### Clearing all entries : `clear`
 
 Clears all entries from FitFlow.
+
+<div markdown="span" class="alert alert-danger">
+:rotating_light: **This command is irreversible. Use with caution.**
+</div>
+
+<p></p>
 
 Format: `clear`
 
@@ -268,7 +324,8 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [t/TAG]…​` <br> e.g., `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
 **List** | `list` <br> e.g., `list`
 **Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find John`
-**View** | `view [DAY] [DAY_SHORT_FORM] [DATE (DD/MM[/YY])]` <br> e.g., `view schedule Monday`
+**Display** | `display INDEX`<br> e.g., `display 2`
+**View** | `view [DAY] [DAY_SHORT_FORM] [DATE (DD/MM[/YY])]` <br> e.g., `view Monday`
 **Edit** | `edit edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Exit** | `exit`
