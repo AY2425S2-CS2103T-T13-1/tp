@@ -121,6 +121,22 @@ public class CommandTestUtil {
 
     /**
      * Executes the given {@code command}, confirms that <br>
+     * - the command execution was successful (including for AddCommand and EditCommand with potential conflicts) <br>
+     * - the {@code actualModel} matches {@code expectedModel}
+     */
+    public static void assertCommandSuccessWithPotentialConflicts(Command command, Model actualModel,
+                                                                  Model expectedModel) {
+        try {
+            CommandResult result = command.execute(actualModel);
+            // We don't check the actual message content as it may contain conflict messages
+            assertEquals(expectedModel, actualModel);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
