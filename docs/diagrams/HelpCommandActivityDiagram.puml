@@ -1,0 +1,38 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes a help command;
+:HelpCommandParser
+parses the given input;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([no parameters provided])
+    :HelpCommand helpMessage
+    is a generic help message;
+else ([at least 1 parameter provided])
+    if () then ([one parameter])
+        if () then ([valid parameter])
+            :HelpCommand helpMessage
+            is message usage of parameter;
+        else ([invalid parameter])
+            :HelpCommand helpMessage
+            is a generic help message;
+        endif
+    else ([more than one parameter])
+        :Throw ParseException for
+        multiple parameters;
+        :Inform User of the
+        wrong usage of help;
+        stop
+    endif
+endif
+
+:Display help usage in
+command result to User;
+
+stop
+@enduml
