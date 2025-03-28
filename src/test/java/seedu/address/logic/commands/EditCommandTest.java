@@ -113,6 +113,27 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_duplicatePhoneUnfilteredList_failure() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).withName("New Person").build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PHONE);
+    }
+
+    @Test
+    public void execute_duplicatePhoneFilteredList_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        // edit person in filtered list into someone with duplicate number in address book
+        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder(personInList).withName("New Person").build());
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PHONE);
+    }
+
+    @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
@@ -166,6 +187,7 @@ public class EditCommandTest {
         assertTrue(editedFirstPerson.getRecurringSchedules().stream()
                 .anyMatch(s -> s.toString().contains("Monday") && s.toString().contains("1500 1700")));
     }
+
     @Test
     public void execute_editPersonWithConflictingOneTimeSchedule_success() {
 
@@ -194,6 +216,7 @@ public class EditCommandTest {
         assertTrue(editedFirstPerson.getOneTimeSchedules().stream()
                 .anyMatch(s -> s.toString().contains("15/10") && s.toString().contains("1100 1300")));
     }
+
     @Test
     public void execute_editPersonWithConflictingRecurringAndOneTimeSchedule_success() {
 
