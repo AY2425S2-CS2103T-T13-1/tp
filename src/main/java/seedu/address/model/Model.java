@@ -76,6 +76,11 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Returns true if a person with the same phone number as {@code person} exists in the address book.
+     */
+    boolean hasPhone(Person person);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

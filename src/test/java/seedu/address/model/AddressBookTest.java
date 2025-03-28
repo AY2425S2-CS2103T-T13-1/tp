@@ -82,6 +82,29 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasPhone_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasPhone(null));
+    }
+
+    @Test
+    public void hasPhone_phoneNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasPhone(ALICE));
+    }
+
+    @Test
+    public void hasPhone_phoneInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        assertTrue(addressBook.hasPhone(ALICE));
+    }
+
+    @Test
+    public void hasPhone_personWithSamePhoneFieldInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        Person newNamePerson = new PersonBuilder(ALICE).withName("New Person").build();
+        assertTrue(addressBook.hasPhone(newNamePerson));
+    }
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }

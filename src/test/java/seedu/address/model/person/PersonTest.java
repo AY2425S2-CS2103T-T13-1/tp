@@ -55,6 +55,27 @@ public class PersonTest {
     }
 
     @Test
+    public void hasSamePhone() {
+        // same object -> returns true
+        assertTrue(ALICE.hasSamePhone(ALICE));
+
+        // null -> returns false
+        assertFalse(ALICE.hasSamePhone(null));
+
+        // same phone, all other attributes different -> returns true
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB)
+                .withGoals(VALID_GOALS_BOB).withMedicalHistory(VALID_MEDICAL_HISTORY_BOB)
+                .withLocation(VALID_LOCATION_BOB).withOneTimeSchedules(VALID_ONETIMESCHEDULE_BOB)
+                .withRecurringSchedules(VALID_RECURRING_SCHEDULE_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.hasSamePhone(editedAlice));
+
+        // different phone, all other attributes same -> returns false
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(ALICE.hasSamePhone(editedAlice));
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();
