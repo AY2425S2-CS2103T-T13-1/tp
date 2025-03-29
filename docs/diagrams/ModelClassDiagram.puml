@@ -14,14 +14,10 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Location
+Class Address
 Class Name
 Class Phone
-Class Tags
-Class Goals
-Class RecurringSchedules
-Class OneTimeSchedules
-Class MedicalHistory
+Class Tag
 
 Class I #FFFFFF
 }
@@ -42,18 +38,14 @@ AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
-Person *--> Location
-Person *--> Goals
-Person *--> MedicalHistory
-Person *--> "*" Tags
-Person *--> "*" RecurringSchedules
-Person *--> "*" OneTimeSchedules
+Person *--> Address
+Person *--> "*" Tag
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Location
+Phone -[hidden]right-> Address
 
 ModelManager --> "~* filtered" Person
 @enduml
