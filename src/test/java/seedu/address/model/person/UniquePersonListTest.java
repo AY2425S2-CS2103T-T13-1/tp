@@ -50,6 +50,29 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void containsPhone_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.containsPhone(null));
+    }
+
+    @Test
+    public void containPhone_personNotInList_returnsFalse() {
+        assertFalse(uniquePersonList.containsPhone(ALICE));
+    }
+
+    @Test
+    public void containsPhone_personInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        assertTrue(uniquePersonList.containsPhone(ALICE));
+    }
+
+    @Test
+    public void containsPhone_personWithSamePhoneFieldInAddressBook_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        Person newNamePerson = new PersonBuilder(ALICE).withName("New Person").build();
+        assertTrue(uniquePersonList.containsPhone(newNamePerson));
+    }
+
+    @Test
     public void add_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePersonList.add(null));
     }

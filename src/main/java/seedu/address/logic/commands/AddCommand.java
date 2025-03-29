@@ -55,7 +55,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the FitFlow.";
+    public static final String MESSAGE_DUPLICATE_PHONE = "The phone number provided already exists in FitFlow.";
     public static final String MESSAGE_SCHEDULE_CONFLICT =
             "Note: The person has been added, but there are schedule conflicts:\n\n";
 
@@ -75,6 +76,10 @@ public class AddCommand extends Command {
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (model.hasPhone(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PHONE);
         }
 
         // Check for schedule conflicts with existing persons

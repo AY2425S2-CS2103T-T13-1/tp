@@ -131,7 +131,7 @@ public class CommandTestUtil {
             // We don't check the actual message content as it may contain conflict messages
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
-            throw new AssertionError("Execution of command should not fail.", ce);
+            throw new AssertionError("Execution of command should not fail: ", ce);
         }
     }
 
