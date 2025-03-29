@@ -48,6 +48,7 @@ public class TypicalPersons {
             .withLocation("10th street")
             .withOneTimeSchedules("02/02/25 1000 1200").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822241")
+            .withRecurringSchedules("Friday 1000 1200")
             .withGoals("Work on stamina").withMedicalHistory("High blood pressure")
             .withLocation("michegan ave")
             .withOneTimeSchedules("28/03/25 1000 1200").build();
