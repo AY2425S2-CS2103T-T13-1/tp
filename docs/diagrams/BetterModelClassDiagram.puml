@@ -16,5 +16,9 @@ Person -up-> "*" Tag
 
 Person *--> Name
 Person *--> Phone
-Person *--> Address
+Person *--> Location
+Person *--> Goals
+Person *--> MedicalHistory
+Person *--> "*" RecurringSchedules
+Person *--> "*" OneTimeSchedules
 @enduml
