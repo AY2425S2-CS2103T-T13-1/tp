@@ -39,11 +39,11 @@
   }, {
     "name" : "Elle Meyer",
     "phone" : "94822241",
-    "recurringSchedule": [],
+    "recurringSchedule": ["Friday 1000 1200"],
     "goals" : "Work on stamina",
     "medicalHistory" : "High blood pressure",
     "location" : "michegan ave",
-    "oneTimeSchedule" : [ "28/03/25 1000 1200" ],
+    "oneTimeSchedule" : [ "28/03 1000 1200" ],
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
