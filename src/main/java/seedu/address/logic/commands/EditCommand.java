@@ -150,7 +150,8 @@ public class EditCommand extends Command {
                 String conflictPrefix = description.substring(0, betweenIndex);
                 conflicts.add(String.format("%s between %s with %s and %s with %s",
                         conflictPrefix,
-                        result.getConflictingSchedule().getStartTime() + "-" + result.getConflictingSchedule().getEndTime(),
+                        result.getConflictingSchedule().getStartTime() + "-"
+                                + result.getConflictingSchedule().getEndTime(),
                         existingPerson.getName(),
                         schedule.getStartTime() + "-" + schedule.getEndTime(),
                         editedPerson.getName()));
@@ -167,7 +168,8 @@ public class EditCommand extends Command {
                 String conflictPrefix = description.substring(0, betweenIndex);
                 conflicts.add(String.format("%s between %s with %s and %s with %s",
                         conflictPrefix,
-                        result.getConflictingSchedule().getStartTime() + "-" + result.getConflictingSchedule().getEndTime(),
+                        result.getConflictingSchedule().getStartTime() + "-"
+                                + result.getConflictingSchedule().getEndTime(),
                         existingPerson.getName(),
                         schedule.getStartTime() + "-" + schedule.getEndTime(),
                         editedPerson.getName()));
