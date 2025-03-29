@@ -148,8 +148,7 @@ public class EditCommand extends Command {
 
                 int betweenIndex = description.indexOf(" between ");
                 String conflictPrefix = description.substring(0, betweenIndex);
-                
-                conflicts.add(String.format("%s between %s with %s and %s with %s", 
+                conflicts.add(String.format("%s between %s with %s and %s with %s",
                         conflictPrefix,
                         result.getConflictingSchedule().getStartTime() + "-" + result.getConflictingSchedule().getEndTime(),
                         existingPerson.getName(),
@@ -166,8 +165,7 @@ public class EditCommand extends Command {
                 // Extract just the conflict type and date/day
                 int betweenIndex = description.indexOf(" between ");
                 String conflictPrefix = description.substring(0, betweenIndex);
-                
-                conflicts.add(String.format("%s between %s with %s and %s with %s", 
+                conflicts.add(String.format("%s between %s with %s and %s with %s",
                         conflictPrefix,
                         result.getConflictingSchedule().getStartTime() + "-" + result.getConflictingSchedule().getEndTime(),
                         existingPerson.getName(),
