@@ -16,7 +16,6 @@ public class HelpCommandParser implements Parser<HelpCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public HelpCommand parse(String args) throws ParseException {
-
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_COMMAND);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COMMAND);
