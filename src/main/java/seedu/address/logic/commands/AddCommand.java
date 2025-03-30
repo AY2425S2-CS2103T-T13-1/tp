@@ -116,8 +116,17 @@ public class AddCommand extends Command {
         for (RecurringSchedule schedule : toAdd.getRecurringSchedules()) {
             ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, schedule);
             if (result.hasConflict()) {
-                conflicts.add(String.format("%s with %s", result.getConflictDescription(),
-                        existingPerson.getName()));
+                String description = result.getConflictDescription();
+
+                int betweenIndex = description.indexOf(" between ");
+                String conflictPrefix = description.substring(0, betweenIndex);
+                conflicts.add(String.format("%s between %s with %s and %s with %s",
+                        conflictPrefix,
+                        result.getConflictingSchedule().getStartTime() + "-"
+                                + result.getConflictingSchedule().getEndTime(),
+                        existingPerson.getName(),
+                        schedule.getStartTime() + "-" + schedule.getEndTime(),
+                        toAdd.getName()));
             }
         }
 
@@ -125,8 +134,17 @@ public class AddCommand extends Command {
         for (OneTimeSchedule schedule : toAdd.getOneTimeSchedules()) {
             ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, schedule);
             if (result.hasConflict()) {
-                conflicts.add(String.format("%s with %s", result.getConflictDescription(),
-                        existingPerson.getName()));
+                String description = result.getConflictDescription();
+                // Extract just the conflict type and date/day
+                int betweenIndex = description.indexOf(" between ");
+                String conflictPrefix = description.substring(0, betweenIndex);
+                conflicts.add(String.format("%s between %s with %s and %s with %s",
+                        conflictPrefix,
+                        result.getConflictingSchedule().getStartTime() + "-"
+                                + result.getConflictingSchedule().getEndTime(),
+                        existingPerson.getName(),
+                        schedule.getStartTime() + "-" + schedule.getEndTime(),
+                        toAdd.getName()));
             }
         }
 
