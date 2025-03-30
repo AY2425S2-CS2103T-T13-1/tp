@@ -59,7 +59,7 @@ public class ScheduleConflictDetector {
                 if (existingSchedule.getDay().equals(oneTimeDayOfWeek)) {
                     if (hasTimeOverlapBetweenSchedules(newSchedule, existingSchedule)) {
                         String description = createConflictDescription(newSchedule, existingSchedule,
-                                "One-time schedule conflict with recurring schedule on " 
+                                "One-time schedule conflict with recurring schedule on "
                                 + existingSchedule.getDay() + " (" + newOneTimeSchedule.getDateString() + ")");
                         return new ScheduleConflictResult(description, existingSchedule);
                     }
@@ -88,7 +88,7 @@ public class ScheduleConflictDetector {
                 if (schedule1.getDay().equals(schedule2.getDay())) {
                     if (hasTimeOverlapBetweenSchedules(schedule1, schedule2)) {
                         String conflictPrefix = "Internal recurring schedule conflict on " + schedule1.getDay();
-                        conflicts.add(String.format("%s between %s and %s (same person)", 
+                        conflicts.add(String.format("%s between %s and %s (same person)",
                                 conflictPrefix,
                                 schedule1.getStartTime() + "-" + schedule1.getEndTime(),
                                 schedule2.getStartTime() + "-" + schedule2.getEndTime()));
@@ -106,7 +106,7 @@ public class ScheduleConflictDetector {
                 if (schedule1.getDate().equals(schedule2.getDate())) {
                     if (hasTimeOverlapBetweenSchedules(schedule1, schedule2)) {
                         String conflictPrefix = "Internal one-time schedule conflict on " + schedule1.getDateString();
-                        conflicts.add(String.format("%s between %s and %s (same person)", 
+                        conflicts.add(String.format("%s between %s and %s (same person)",
                                 conflictPrefix,
                                 schedule1.getStartTime() + "-" + schedule1.getEndTime(),
                                 schedule2.getStartTime() + "-" + schedule2.getEndTime()));
@@ -120,9 +120,9 @@ public class ScheduleConflictDetector {
                 // Check if one-time schedule day of week matches recurring schedule day
                 if (oneTimeSchedule.getDate().getDayOfWeek().equals(recurringSchedule.getDay())) {
                     if (hasTimeOverlapBetweenSchedules(recurringSchedule, oneTimeSchedule)) {
-                        String conflictPrefix = "Internal schedule conflict between recurring and one-time schedule on " 
+                        String conflictPrefix = "Internal schedule conflict between recurring and one-time schedule on "
                                 + recurringSchedule.getDay() + " (" + oneTimeSchedule.getDateString() + ")";
-                        conflicts.add(String.format("%s between %s and %s (same person)", 
+                        conflicts.add(String.format("%s between %s and %s (same person)",
                                 conflictPrefix,
                                 recurringSchedule.getStartTime() + "-" + recurringSchedule.getEndTime(),
                                 oneTimeSchedule.getStartTime() + "-" + oneTimeSchedule.getEndTime()));
@@ -164,7 +164,7 @@ public class ScheduleConflictDetector {
 
     /**
      * Checks if there is a time overlap between two time ranges.
-     * 
+     *
      * @param start1 Start time of first range in minutes.
      * @param end1 End time of first range in minutes.
      * @param start2 Start time of second range in minutes.
@@ -177,7 +177,7 @@ public class ScheduleConflictDetector {
     }
     /**
      * Converts a time string in format "HHmm" to minutes since midnight.
-     * 
+     *
      * @param time Time in format "HHmm".
      * @return Number of minutes since midnight.
      */
