@@ -162,6 +162,13 @@ The following activity diagram summarizes what happens when a user executes a he
 
 The command makes use of the `/` prefix to check for the parameters provided. If the parameter is valid (meaning it is one of the other commands available in FitFlow), it will show the message usage of that command requested.
 
+### Using View within the application itself
+
+The following activity diagram summarizes what happens when a user executes a view command:
+![View Command Activity Diagram](images/ViewCommandActivityDiagram.png)
+
+The command takes in a DAY/DATE parameter. If the parameter is valid, it will list the clients' schedules for the given day or date.
+
 ### Using Display within the application itself
 
 The following activity diagram summarizes what happens when a user executes a display command:
@@ -169,6 +176,7 @@ The following activity diagram summarizes what happens when a user executes a di
 
 The command takes in a positive integer parameter. If the parameter is valid (meaning it is less than or equal to the number of clients), it will display the client's details at the index.
 
+### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
