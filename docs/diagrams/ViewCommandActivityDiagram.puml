@@ -13,14 +13,16 @@ parses the given input;
 if () then ([valid parameter (DAY/DATE)])
     :Get filteredList from Model;
     if () then ([filteredList is empty])
-        :Update view message;
+        :Updates view message
+         to "No Clients found!";
     else ([filteredList is not empty])
-        :Update view message;
+        :     Updates view message
+        to show the clients' schedules;
     endif
 else ([invalid parameter])
     :Throw ParseException for
-    invalid command format;
-    :Inform User of the
+      invalid command format;
+    :      Inform User of the
     format for view command;
     stop
 endif
