@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +35,8 @@ public class ScheduleConflictDetector {
                 if (oneTimeDayOfWeek.equals(newRecurringSchedule.getDay())) {
                     if (hasTimeOverlapBetweenSchedules(newSchedule, existingSchedule)) {
                         String description = createConflictDescription(newSchedule, existingSchedule,
-                                "Recurring schedule conflict with one-time schedule on " + existingSchedule.getDateString());
+                                "Recurring schedule conflict with one-time schedule on "
+                                        + existingSchedule.getDateString());
                         return new ScheduleConflictResult(description, existingSchedule);
                     }
                 }
