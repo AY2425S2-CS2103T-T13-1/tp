@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -244,6 +245,113 @@ public class EditCommandTest {
         Person editedFirstPerson = model.getFilteredPersonList().get(0);
         assertTrue(editedFirstPerson.getOneTimeSchedules().stream()
                 .anyMatch(s -> s.toString().contains("31/03") && s.toString().contains("1500 1700")));
+    }
+
+    @Test
+    public void execute_editPersonWithInternalRecurringScheduleConflict_success() throws CommandException {
+        Person firstPerson = model.getFilteredPersonList().get(0);
+
+        // Create conflicting recurring schedules (same day, overlapping times)
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withRecurringSchedules("Monday 1000 1200", "Monday 1100 1300")
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Person editedPerson = new PersonBuilder(firstPerson)
+                .withRecurringSchedules("Monday 1000 1200", "Monday 1100 1300")
+                .build();
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        CommandResult result = editCommand.execute(model);
+        
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        assertTrue(result.getFeedbackToUser().contains("schedule conflicts"));
+        assertTrue(result.getFeedbackToUser().contains("Internal recurring schedule conflict"));
+        assertTrue(result.getFeedbackToUser().contains("same person"));
+    }
+
+    @Test
+    public void execute_editPersonWithInternalOneTimeScheduleConflict_success() throws CommandException {
+        Person firstPerson = model.getFilteredPersonList().get(0);
+
+        // Create conflicting one-time schedules (same date, overlapping times)
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withOneTimeSchedules("15/04/25 1000 1200", "15/04/25 1100 1300")
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Person editedPerson = new PersonBuilder(firstPerson)
+                .withOneTimeSchedules("15/04/25 1000 1200", "15/04/25 1100 1300")
+                .build();
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        CommandResult result = editCommand.execute(model);
+        
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        assertTrue(result.getFeedbackToUser().contains("schedule conflicts"));
+        assertTrue(result.getFeedbackToUser().contains("Internal one-time schedule conflict"));
+        assertTrue(result.getFeedbackToUser().contains("same person"));
+    }
+
+    @Test
+    public void execute_editPersonWithInternalRecurringAndOneTimeConflict_success() throws CommandException {
+        Person firstPerson = model.getFilteredPersonList().get(0);
+
+        // Create a recurring schedule that conflicts with a one-time schedule
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withRecurringSchedules("Monday 1000 1200")
+                .withOneTimeSchedules("21/04/25 1100 1300")
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Person editedPerson = new PersonBuilder(firstPerson)
+                .withRecurringSchedules("Monday 1000 1200")
+                .withOneTimeSchedules("21/04/25 1100 1300")
+                .build();
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        CommandResult result = editCommand.execute(model);
+        
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        assertTrue(result.getFeedbackToUser().contains("schedule conflicts"));
+        assertTrue(result.getFeedbackToUser().contains("Internal schedule conflict between recurring and one-time schedule"));
+        assertTrue(result.getFeedbackToUser().contains("same person"));
+    }
+
+    @Test
+    public void execute_editPersonWithBothInternalAndExternalConflicts_success() throws CommandException {
+        Person firstPerson = model.getFilteredPersonList().get(0);
+        Person secondPerson = model.getFilteredPersonList().get(1);
+
+        // Setup external conflict by adding a schedule to second person
+        Person secondPersonWithSchedule = new PersonBuilder(secondPerson)
+                .withRecurringSchedules("Monday 1400 1600")
+                .build();
+        model.setPerson(secondPerson, secondPersonWithSchedule);
+
+        // Add both internal conflicts and conflicts with the second person
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withRecurringSchedules("Monday 1000 1200", "Monday 1100 1300", "Monday 1500 1700")
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Person editedPerson = new PersonBuilder(firstPerson)
+                .withRecurringSchedules("Monday 1000 1200", "Monday 1100 1300", "Monday 1500 1700")
+                .build();
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        CommandResult result = editCommand.execute(model);
+        
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        assertTrue(result.getFeedbackToUser().contains("schedule conflicts"));
+        
+        // Should contain both internal and external conflict messages
+        assertTrue(result.getFeedbackToUser().contains("Internal recurring schedule conflict"));
+        assertTrue(result.getFeedbackToUser().contains("Recurring schedule conflict on MONDAY between"));
     }
 
     @Test

@@ -136,6 +136,98 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_personWithInternalRecurringScheduleConflict_addsPersonWithWarning() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        // Create a person with conflicting recurring schedules (same day, overlapping times)
+        Person newPerson = new PersonBuilder()
+                .withName("New Person")
+                .withPhone("87654321")
+                .withRecurringSchedules("Monday 1000 1200", "Monday 1100 1300")
+                .build();
+
+        CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
+        
+        assertEquals(1, modelStub.personsAdded.size());
+        assertTrue(modelStub.personsAdded.contains(newPerson));
+        assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
+        assertTrue(commandResult.getFeedbackToUser().contains("Internal recurring schedule conflict"));
+        assertTrue(commandResult.getFeedbackToUser().contains("same person"));
+    }
+
+    @Test
+    public void execute_personWithInternalOneTimeScheduleConflict_addsPersonWithWarning() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        // Create a person with conflicting one-time schedules (same date, overlapping times)
+        Person newPerson = new PersonBuilder()
+                .withName("New Person")
+                .withPhone("87654321")
+                .withOneTimeSchedules("15/04/25 1000 1200", "15/04/25 1100 1300")
+                .build();
+
+        CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
+        
+        assertEquals(1, modelStub.personsAdded.size());
+        assertTrue(modelStub.personsAdded.contains(newPerson));
+        assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
+        assertTrue(commandResult.getFeedbackToUser().contains("Internal one-time schedule conflict"));
+        assertTrue(commandResult.getFeedbackToUser().contains("same person"));
+    }
+
+    @Test
+    public void execute_personWithInternalRecurringAndOneTimeConflict_addsPersonWithWarning() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        // Create a person with a recurring schedule that conflicts with a one-time schedule
+        // Assuming 21/04/25 is a Monday
+        Person newPerson = new PersonBuilder()
+                .withName("New Person")
+                .withPhone("87654321")
+                .withRecurringSchedules("Monday 1000 1200")
+                .withOneTimeSchedules("21/04/25 1100 1300")
+                .build();
+
+        CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
+        
+        assertEquals(1, modelStub.personsAdded.size());
+        assertTrue(modelStub.personsAdded.contains(newPerson));
+        assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
+        assertTrue(commandResult.getFeedbackToUser().contains("Internal schedule conflict between recurring and one-time schedule"));
+        assertTrue(commandResult.getFeedbackToUser().contains("same person"));
+    }
+
+    @Test
+    public void execute_personWithBothInternalAndExternalConflicts_addsPersonWithAllWarnings() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        // Add an existing person with a schedule
+        Person existingPerson = new PersonBuilder()
+                .withName("Existing Person")
+                .withPhone("91234567")
+                .withRecurringSchedules("Monday 1400 1600")
+                .build();
+        modelStub.addPerson(existingPerson);
+
+        // Create a new person with both internal conflicts and conflicts with the existing person
+        Person newPerson = new PersonBuilder()
+                .withName("New Person")
+                .withPhone("87654321")
+                .withRecurringSchedules("Monday 1000 1200", "Monday 1100 1300", "Monday 1500 1700")
+                .build();
+
+        CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
+        
+        assertEquals(2, modelStub.personsAdded.size());
+        assertTrue(modelStub.personsAdded.contains(newPerson));
+        assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
+        
+        // Should contain both internal and external conflict messages
+        assertTrue(commandResult.getFeedbackToUser().contains("Internal recurring schedule conflict"));
+        assertTrue(commandResult.getFeedbackToUser().contains("Recurring schedule conflict on MONDAY between"));
+    }
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();

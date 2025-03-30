@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -169,6 +171,88 @@ public class ScheduleConflictDetectorTest {
         // Should not detect a conflict since they're exactly adjacent
         ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(person, newSchedule);
         assertFalse(result.hasConflict());
+    }
+
+    @Test
+    public void checkInternalScheduleConflicts_noConflict_returnsEmptyList() {
+        Set<RecurringSchedule> recurringSchedules = new HashSet<>();
+        recurringSchedules.add(new RecurringSchedule("Monday 1000 1200"));
+        recurringSchedules.add(new RecurringSchedule("Tuesday 1000 1200"));
+        
+        Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
+        oneTimeSchedules.add(new OneTimeSchedule("15/10 1000 1200"));
+        oneTimeSchedules.add(new OneTimeSchedule("16/10 1000 1200"));
+        
+        Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
+        
+        List<String> conflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(person);
+        assertEquals(0, conflicts.size(), "Should not detect any internal conflicts");
+    }
+    
+    @Test
+    public void checkInternalScheduleConflicts_recurringSchedulesConflict_returnsConflict() {
+        Set<RecurringSchedule> recurringSchedules = new HashSet<>();
+        recurringSchedules.add(new RecurringSchedule("Monday 1000 1200"));
+        recurringSchedules.add(new RecurringSchedule("Monday 1100 1300")); // Overlaps with first schedule
+        
+        Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
+        
+        Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
+        
+        List<String> conflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(person);
+        assertEquals(1, conflicts.size(), "Should detect one internal conflict");
+        assertTrue(conflicts.get(0).contains("Internal recurring schedule conflict on MONDAY"));
+        assertTrue(conflicts.get(0).contains("same person"));
+    }
+    
+    @Test
+    public void checkInternalScheduleConflicts_oneTimeSchedulesConflict_returnsConflict() {
+        Set<RecurringSchedule> recurringSchedules = new HashSet<>();
+        
+        Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
+        oneTimeSchedules.add(new OneTimeSchedule("15/10 1000 1200"));
+        oneTimeSchedules.add(new OneTimeSchedule("15/10 1100 1300")); // Overlaps with first schedule
+        
+        Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
+        
+        List<String> conflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(person);
+        assertEquals(1, conflicts.size(), "Should detect one internal conflict");
+        assertTrue(conflicts.get(0).contains("Internal one-time schedule conflict on 15/10"));
+        assertTrue(conflicts.get(0).contains("same person"));
+    }
+    
+    @Test
+    public void checkInternalScheduleConflicts_recurringAndOneTimeSchedulesConflict_returnsConflict() {
+        Set<RecurringSchedule> recurringSchedules = new HashSet<>();
+        recurringSchedules.add(new RecurringSchedule("Monday 1000 1200"));
+        
+        Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
+        oneTimeSchedules.add(new OneTimeSchedule("31/03 1100 1300")); // Assuming 31/03 is a Monday
+        
+        Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
+        
+        List<String> conflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(person);
+        assertEquals(1, conflicts.size(), "Should detect one internal conflict");
+        assertTrue(conflicts.get(0).contains("Internal schedule conflict between recurring and one-time schedule"));
+        assertTrue(conflicts.get(0).contains("same person"));
+    }
+    
+    @Test
+    public void checkInternalScheduleConflicts_multipleConflicts_returnsAllConflicts() {
+        Set<RecurringSchedule> recurringSchedules = new HashSet<>();
+        recurringSchedules.add(new RecurringSchedule("Monday 1000 1200"));
+        recurringSchedules.add(new RecurringSchedule("Monday 1100 1300")); // Conflicts with first recurring
+        recurringSchedules.add(new RecurringSchedule("Tuesday 1000 1200"));
+        
+        Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
+        oneTimeSchedules.add(new OneTimeSchedule("31/03 1100 1300")); // Conflicts with Monday recurring
+        oneTimeSchedules.add(new OneTimeSchedule("15/10 1000 1200"));
+        oneTimeSchedules.add(new OneTimeSchedule("15/10 1100 1300")); // Conflicts with another one-time
+        
+        Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
+        
+        List<String> conflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(person);
+        assertEquals(4, conflicts.size(), "Should detect four internal conflicts");
     }
 
     /**
