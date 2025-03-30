@@ -264,7 +264,6 @@ public class EditCommandTest {
         expectedModel.setPerson(firstPerson, editedPerson);
 
         CommandResult result = editCommand.execute(model);
-        
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
         assertTrue(result.getFeedbackToUser().contains("schedule conflicts"));
         assertTrue(result.getFeedbackToUser().contains("Internal recurring schedule conflict"));
@@ -288,7 +287,6 @@ public class EditCommandTest {
         expectedModel.setPerson(firstPerson, editedPerson);
 
         CommandResult result = editCommand.execute(model);
-        
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
         assertTrue(result.getFeedbackToUser().contains("schedule conflicts"));
         assertTrue(result.getFeedbackToUser().contains("Internal one-time schedule conflict"));
@@ -314,7 +312,6 @@ public class EditCommandTest {
         expectedModel.setPerson(firstPerson, editedPerson);
 
         CommandResult result = editCommand.execute(model);
-        
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
         assertTrue(result.getFeedbackToUser().contains("schedule conflicts"));
         assertTrue(result.getFeedbackToUser().contains("Internal schedule conflict between recurring and one-time schedule"));
@@ -345,10 +342,8 @@ public class EditCommandTest {
         expectedModel.setPerson(firstPerson, editedPerson);
 
         CommandResult result = editCommand.execute(model);
-        
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
         assertTrue(result.getFeedbackToUser().contains("schedule conflicts"));
-        
         // Should contain both internal and external conflict messages
         assertTrue(result.getFeedbackToUser().contains("Internal recurring schedule conflict"));
         assertTrue(result.getFeedbackToUser().contains("Recurring schedule conflict on MONDAY between"));

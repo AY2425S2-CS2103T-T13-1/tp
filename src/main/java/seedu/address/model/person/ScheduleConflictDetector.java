@@ -20,7 +20,6 @@ public class ScheduleConflictDetector {
     public static ScheduleConflictResult checkScheduleConflict(Person person, Schedule newSchedule) {
         if (newSchedule instanceof RecurringSchedule) {
             RecurringSchedule newRecurringSchedule = (RecurringSchedule) newSchedule;
-            
             // Check against existing recurring schedules
             for (RecurringSchedule existingSchedule : person.getRecurringSchedules()) {
                 if (existingSchedule.getDay().equals(newRecurringSchedule.getDay())) {
@@ -31,11 +30,9 @@ public class ScheduleConflictDetector {
                     }
                 }
             }
-            
             // Check against existing one-time schedules
             for (OneTimeSchedule existingSchedule : person.getOneTimeSchedules()) {
                 java.time.DayOfWeek oneTimeDayOfWeek = existingSchedule.getDate().getDayOfWeek();
-                
                 if (oneTimeDayOfWeek.equals(newRecurringSchedule.getDay())) {
                     if (hasTimeOverlapBetweenSchedules(newSchedule, existingSchedule)) {
                         String description = createConflictDescription(newSchedule, existingSchedule,
@@ -46,7 +43,6 @@ public class ScheduleConflictDetector {
             }
         } else if (newSchedule instanceof OneTimeSchedule) {
             OneTimeSchedule newOneTimeSchedule = (OneTimeSchedule) newSchedule;
-            
             // Check against existing one-time schedules
             for (OneTimeSchedule existingSchedule : person.getOneTimeSchedules()) {
                 if (existingSchedule.getDate().equals(newOneTimeSchedule.getDate())) {
@@ -57,10 +53,8 @@ public class ScheduleConflictDetector {
                     }
                 }
             }
-            
             // Check against existing recurring schedules
             java.time.DayOfWeek oneTimeDayOfWeek = newOneTimeSchedule.getDate().getDayOfWeek();
-            
             for (RecurringSchedule existingSchedule : person.getRecurringSchedules()) {
                 if (existingSchedule.getDay().equals(oneTimeDayOfWeek)) {
                     if (hasTimeOverlapBetweenSchedules(newSchedule, existingSchedule)) {
@@ -72,7 +66,6 @@ public class ScheduleConflictDetector {
                 }
             }
         }
-        
         return new ScheduleConflictResult();
     }
 
@@ -85,14 +78,12 @@ public class ScheduleConflictDetector {
      */
     public static List<String> checkInternalScheduleConflicts(Person person) {
         List<String> conflicts = new ArrayList<>();
-        
         // Check each recurring schedule against other recurring schedules
         List<RecurringSchedule> recurringSchedules = new ArrayList<>(person.getRecurringSchedules());
         for (int i = 0; i < recurringSchedules.size(); i++) {
             for (int j = i + 1; j < recurringSchedules.size(); j++) {
                 RecurringSchedule schedule1 = recurringSchedules.get(i);
                 RecurringSchedule schedule2 = recurringSchedules.get(j);
-                
                 // If on the same day, check for time overlap
                 if (schedule1.getDay().equals(schedule2.getDay())) {
                     if (hasTimeOverlapBetweenSchedules(schedule1, schedule2)) {
@@ -105,14 +96,12 @@ public class ScheduleConflictDetector {
                 }
             }
         }
-        
         // Check each one-time schedule against other one-time schedules
         List<OneTimeSchedule> oneTimeSchedules = new ArrayList<>(person.getOneTimeSchedules());
         for (int i = 0; i < oneTimeSchedules.size(); i++) {
             for (int j = i + 1; j < oneTimeSchedules.size(); j++) {
                 OneTimeSchedule schedule1 = oneTimeSchedules.get(i);
                 OneTimeSchedule schedule2 = oneTimeSchedules.get(j);
-                
                 // If on the same date, check for time overlap
                 if (schedule1.getDate().equals(schedule2.getDate())) {
                     if (hasTimeOverlapBetweenSchedules(schedule1, schedule2)) {
@@ -125,7 +114,6 @@ public class ScheduleConflictDetector {
                 }
             }
         }
-        
         // Check recurring schedules against one-time schedules
         for (RecurringSchedule recurringSchedule : recurringSchedules) {
             for (OneTimeSchedule oneTimeSchedule : oneTimeSchedules) {
@@ -142,7 +130,6 @@ public class ScheduleConflictDetector {
                 }
             }
         }
-        
         return conflicts;
     }
 
@@ -188,7 +175,6 @@ public class ScheduleConflictDetector {
         // Check if one range starts after the other ends
         return !(end1 <= start2 || end2 <= start1);
     }
-    
     /**
      * Converts a time string in format "HHmm" to minutes since midnight.
      * 

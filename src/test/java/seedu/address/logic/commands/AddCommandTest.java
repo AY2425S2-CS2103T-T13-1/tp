@@ -147,7 +147,6 @@ public class AddCommandTest {
                 .build();
 
         CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
-        
         assertEquals(1, modelStub.personsAdded.size());
         assertTrue(modelStub.personsAdded.contains(newPerson));
         assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
@@ -167,7 +166,6 @@ public class AddCommandTest {
                 .build();
 
         CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
-        
         assertEquals(1, modelStub.personsAdded.size());
         assertTrue(modelStub.personsAdded.contains(newPerson));
         assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
@@ -189,7 +187,6 @@ public class AddCommandTest {
                 .build();
 
         CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
-        
         assertEquals(1, modelStub.personsAdded.size());
         assertTrue(modelStub.personsAdded.contains(newPerson));
         assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
@@ -217,11 +214,9 @@ public class AddCommandTest {
                 .build();
 
         CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
-        
         assertEquals(2, modelStub.personsAdded.size());
         assertTrue(modelStub.personsAdded.contains(newPerson));
         assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
-        
         // Should contain both internal and external conflict messages
         assertTrue(commandResult.getFeedbackToUser().contains("Internal recurring schedule conflict"));
         assertTrue(commandResult.getFeedbackToUser().contains("Recurring schedule conflict on MONDAY between"));

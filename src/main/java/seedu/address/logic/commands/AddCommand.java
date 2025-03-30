@@ -84,13 +84,11 @@ public class AddCommand extends Command {
 
         // Check for internal schedule conflicts first (conflicts within the same person)
         List<String> internalConflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(toAdd);
-        
         // Check for schedule conflicts with existing persons
         List<String> externalConflicts = new ArrayList<>();
         for (Person existingPerson : model.getAddressBook().getPersonList()) {
             externalConflicts.addAll(checkConflictsWithPerson(existingPerson, toAdd));
         }
-        
         // Combine all conflicts
         List<String> allConflicts = new ArrayList<>();
         allConflicts.addAll(internalConflicts);
