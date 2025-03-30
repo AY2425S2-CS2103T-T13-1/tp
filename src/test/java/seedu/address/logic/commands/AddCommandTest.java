@@ -190,7 +190,8 @@ public class AddCommandTest {
         assertEquals(1, modelStub.personsAdded.size());
         assertTrue(modelStub.personsAdded.contains(newPerson));
         assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
-        assertTrue(commandResult.getFeedbackToUser().contains("Internal schedule conflict between recurring and one-time schedule"));
+        assertTrue(commandResult.getFeedbackToUser()
+                .contains("Internal schedule conflict between recurring and one-time schedule"));
         assertTrue(commandResult.getFeedbackToUser().contains("same person"));
     }
 

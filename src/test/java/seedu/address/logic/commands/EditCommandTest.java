@@ -314,7 +314,8 @@ public class EditCommandTest {
         CommandResult result = editCommand.execute(model);
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
         assertTrue(result.getFeedbackToUser().contains("schedule conflicts"));
-        assertTrue(result.getFeedbackToUser().contains("Internal schedule conflict between recurring and one-time schedule"));
+        assertTrue(result.getFeedbackToUser()
+                .contains("Internal schedule conflict between recurring and one-time schedule"));
         assertTrue(result.getFeedbackToUser().contains("same person"));
     }
 
