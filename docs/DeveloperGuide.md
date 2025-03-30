@@ -162,7 +162,13 @@ The following activity diagram summarizes what happens when a user executes a he
 
 The command makes use of the `/` prefix to check for the parameters provided. If the parameter is valid (meaning it is one of the other commands available in FitFlow), it will show the message usage of that command requested.
 
-### \[Proposed\] Undo/redo feature
+### Using Display within the application itself
+
+The following activity diagram summarizes what happens when a user executes a display command:
+![Display Command Activity Diagram](images/DisplayCommandActivityDiagram.png)
+
+The command takes in a positive integer parameter. If the parameter is valid (meaning it is less than or equal to the number of clients), it will display the client's details at the index.
+
 
 #### Proposed Implementation
 
