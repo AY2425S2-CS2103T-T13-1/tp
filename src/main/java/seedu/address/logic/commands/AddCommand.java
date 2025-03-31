@@ -54,11 +54,11 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the FitFlow.";
+    public static final String MESSAGE_SUCCESS = "New client added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the FitFlow.";
     public static final String MESSAGE_DUPLICATE_PHONE = "The phone number provided already exists in FitFlow.";
     public static final String MESSAGE_SCHEDULE_CONFLICT =
-            "Note: The person has been added, but there are schedule conflicts:\n\n";
+            "Note: The client has been added, but there are schedule conflicts:\n\n";
 
     private final Person toAdd;
 
@@ -82,20 +82,26 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PHONE);
         }
 
+        // Check for internal schedule conflicts first (conflicts within the same person)
+        List<String> internalConflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(toAdd);
         // Check for schedule conflicts with existing persons
-        List<String> conflicts = new ArrayList<>();
+        List<String> externalConflicts = new ArrayList<>();
         for (Person existingPerson : model.getAddressBook().getPersonList()) {
-            conflicts.addAll(checkConflictsWithPerson(existingPerson, toAdd));
+            externalConflicts.addAll(checkConflictsWithPerson(existingPerson, toAdd));
         }
+        // Combine all conflicts
+        List<String> allConflicts = new ArrayList<>();
+        allConflicts.addAll(internalConflicts);
+        allConflicts.addAll(externalConflicts);
 
         model.addPerson(toAdd);
 
         // If there are conflicts, add them to the success message
-        if (!conflicts.isEmpty()) {
+        if (!allConflicts.isEmpty()) {
             StringBuilder conflictsMsg = new StringBuilder();
             conflictsMsg.append(MESSAGE_SCHEDULE_CONFLICT);
 
-            for (String conflict : conflicts) {
+            for (String conflict : allConflicts) {
                 conflictsMsg.append(conflict).append("\n\n");
             }
 
