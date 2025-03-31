@@ -46,19 +46,24 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         String keyword = predicate.getKeyword();
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, keyword)).append("\n\n");
+        String messageHeader = buildMessageHeader(keyword);
+
         if (model.getFilteredPersonList().isEmpty()) {
-            sb.append("No clients found!");
-            return new CommandResult(sb.toString().trim());
+            return new CommandResult(messageHeader + "No clients found!");
         }
-        String searchResult;
-        if (DayOfWeekUtils.isDayOfWeek(keyword)) {
-            searchResult = resultGivenDay(model);
-        } else {
-            searchResult = resultGivenDate(model);
-        }
-        return new CommandResult(sb.append(searchResult).toString().trim());
+
+        String searchResult = fetchSearchResult(model, keyword);
+        return new CommandResult(messageHeader + searchResult);
+    }
+
+    private String buildMessageHeader(String keyword) {
+        return String.format(Messages.MESSAGE_SCHEDULES_LISTED, keyword) + "\n\n";
+    }
+
+    private String fetchSearchResult(Model model, String keyword) {
+        return DayOfWeekUtils.isDayOfWeek(keyword)
+                ? resultGivenDay(model)
+                : resultGivenDate(model);
     }
 
     private String resultGivenDay(Model model) {
