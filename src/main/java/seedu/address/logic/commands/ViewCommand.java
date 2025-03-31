@@ -64,6 +64,7 @@ public class ViewCommand extends Command {
     private String resultGivenDay(Model model) {
         StringBuilder sb = new StringBuilder();
         DayOfWeek day = predicate.getDayToFind();
+        //Find the date with the nearest given day
         LocalDate todayDate = LocalDate.now();
         int daysUntilTarget = (day.getValue() - todayDate.getDayOfWeek().getValue() + 7) % 7;
         LocalDate targetDate = todayDate.plusDays(daysUntilTarget);
