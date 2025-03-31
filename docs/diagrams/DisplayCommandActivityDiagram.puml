@@ -1,0 +1,35 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes a display command;
+:DisplayCommandParser
+parses the given input;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([valid parameter (positive integer)])
+   if () then ([more than number of clients])
+       :Throw CommandException for
+       invalid person index;
+       :Inform User of
+       invalid index;
+       stop
+   else ([else])
+       :DisplayCommand targetIndex
+       set to index;
+       :Display indexed client's details
+       in command result to User;
+       stop
+   endif
+else ([invalid parameter])
+        :Throw ParseException for
+        invalid parameter;
+        :Inform User of the
+        right usage of display;
+        stop
+endif
+
+@enduml

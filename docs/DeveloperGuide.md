@@ -169,6 +169,13 @@ The following activity diagram summarizes what happens when a user executes a vi
 
 The command takes in a DAY/DATE parameter. If the parameter is valid, it will list the clients' schedules for the given day or date.
 
+### Using Display within the application itself
+
+The following activity diagram summarizes what happens when a user executes a display command:
+![Display Command Activity Diagram](images/DisplayCommandActivityDiagram.png)
+
+The command takes in a positive integer parameter. If the parameter is valid (meaning it is less than or equal to the number of clients), it will display the client's details at the index.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

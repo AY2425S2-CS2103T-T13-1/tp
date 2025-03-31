@@ -183,7 +183,7 @@ Display a client's full details in the client list, identified by the index numb
 
 Format: `display INDEX`
 
-* Diplays the client at the specified `INDEX`.
+* Displays the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​.
 
