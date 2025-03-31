@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.HelpCommand.GENERIC_HELP_MESSAGE;
 import static seedu.address.logic.commands.HelpCommand.INVALID_PARAMETER_MESSAGE;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +21,12 @@ public class HelpCommandTest {
     public void execute_help_success() {
         CommandResult expectedCommandResult = new CommandResult(GENERIC_HELP_MESSAGE);
         assertCommandSuccess(new HelpCommand("", false), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_helpWithNonEmptyCommandRequested_assertFail() {
+        HelpCommand helpCommand = new HelpCommand("123", false);
+        assertThrows(AssertionError.class, () -> helpCommand.execute(model));
     }
 
     @Test
@@ -96,6 +103,7 @@ public class HelpCommandTest {
     public void equals() {
         HelpCommand helpAddCommand = new HelpCommand("add", true);
         HelpCommand helpEditCommand = new HelpCommand("edit", true);
+        HelpCommand helpGenericCommand = new HelpCommand("", false);
 
         // same object -> returns true
         assertTrue(helpAddCommand.equals(helpAddCommand));
@@ -112,6 +120,7 @@ public class HelpCommandTest {
 
         // different commandRequested -> returns false
         assertFalse(helpAddCommand.equals(helpEditCommand));
+        assertFalse(helpAddCommand.equals(helpGenericCommand));
     }
 
     @Test
