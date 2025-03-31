@@ -162,6 +162,13 @@ The following activity diagram summarizes what happens when a user executes a he
 
 The command makes use of the `/` prefix to check for the parameters provided. If the parameter is valid (meaning it is one of the other commands available in FitFlow), it will show the message usage of that command requested.
 
+### Adding/Editing a Client
+
+The following activity diagram summarizes the workflow of when a client is added or edited in FitFlow.
+![Add_Edit Command Activity Diagram](images/AddCommand_EditCommandActivityDiagram.png)
+
+The commands check for schedule conflicts between the client being added/edited and other existing clients stored in FitFlow and warns the user of any such conflicting timings.
+
 ### Using View within the application itself
 
 The following activity diagram summarizes what happens when a user executes a view command:

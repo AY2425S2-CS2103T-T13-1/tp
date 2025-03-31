@@ -1,0 +1,36 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User invokes AddCommand/EditCommand;
+:Add/Edit CommandParser parses arguments;
+:ArgumentTokenizer tokenizes attributes;
+if () then ([duplicate prefixes detected])
+    :Show error for duplicate prefixes;
+    stop
+else ([else])
+    :Parse attributes into classes;
+    if () then ([has attribute parsing error])
+        :Display attribute parsing error;
+        stop
+    else ([else])
+        :Create Person instance with supplied attributes;
+        :Create Add/Edit Command instance with Person instance;
+        :Execute Add/Edit Command instance;
+        if () then ([person/phone already exists in FitFlow])
+            :Display duplicate person/phone error;
+            stop
+        else ([else])
+            :Add person to FitFlow;
+            :Save persons to JSON file;
+            if () then ([schedule conflict detected])
+                :Add warning message of conflicting schedule;
+            else ([else])
+            endif
+                :Display successful add/edit command result;
+                stop
+        endif
+    endif
+endif
+@enduml
