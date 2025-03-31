@@ -17,9 +17,7 @@ public class HelpCommand extends Command {
             + "Example: "
             + COMMAND_WORD + "add";
 
-    public static final String GENERIC_HELP_MESSAGE = "Here are a list of basic commands you can use in FitFlow."
-            + " For more information on each command, type one of the following.\n"
-            + "\nhelp " + PREFIX_COMMAND + AddCommand.COMMAND_WORD
+    public static final String COMMAND_LIST = "\n\nhelp " + PREFIX_COMMAND + AddCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + ListCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + EditCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + FindCommand.COMMAND_WORD
@@ -28,18 +26,31 @@ public class HelpCommand extends Command {
             + "\nhelp " + PREFIX_COMMAND + DeleteCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + ClearCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + ExitCommand.COMMAND_WORD;
+    public static final String GENERIC_HELP_MESSAGE = "Here are a list of basic commands you can use in Fit Flow."
+            + " For more information on each command, type one of the following."
+            + COMMAND_LIST;
+    public static final String INVALID_PARAMETER_MESSAGE = "The command provided is invalid! "
+            + "Please use one of the valid commands listed below:"
+            + COMMAND_LIST;
 
     private final String commandRequested;
+    private final boolean isParameterGiven;
 
     /**
      * Creates a HelpCommand with the specified commandRequested
      */
-    public HelpCommand(String commandRequested) {
+    public HelpCommand(String commandRequested, boolean isParameterGiven) {
         this.commandRequested = commandRequested;
+        this.isParameterGiven = isParameterGiven;
     }
 
     @Override
     public CommandResult execute(Model model) {
+        if (!isParameterGiven) {
+            assert commandRequested.isEmpty();
+            return new CommandResult(GENERIC_HELP_MESSAGE);
+        }
+
         String helpMessage;
 
         switch (commandRequested.toLowerCase()) {
@@ -71,7 +82,7 @@ public class HelpCommand extends Command {
             helpMessage = ViewCommand.MESSAGE_USAGE;
             break;
         default:
-            helpMessage = GENERIC_HELP_MESSAGE;
+            helpMessage = INVALID_PARAMETER_MESSAGE;
             break;
         }
 
@@ -90,13 +101,15 @@ public class HelpCommand extends Command {
         }
 
         HelpCommand otherAddCommand = (HelpCommand) other;
-        return commandRequested.equals(otherAddCommand.commandRequested);
+        return commandRequested.equals(otherAddCommand.commandRequested)
+                && isParameterGiven == otherAddCommand.isParameterGiven;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("commandRequested", commandRequested)
+                .add("isParameterGiven", isParameterGiven)
                 .toString();
     }
 }

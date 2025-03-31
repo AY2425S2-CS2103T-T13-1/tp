@@ -17,10 +17,13 @@ public class HelpCommandParser implements Parser<HelpCommand> {
      */
     public HelpCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_COMMAND);
+        if (argMultimap.getValue(PREFIX_COMMAND).isEmpty()) {
+            return new HelpCommand("", false);
+        }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COMMAND);
         String commandRequested = argMultimap.getValue(PREFIX_COMMAND).orElse("");
 
-        return new HelpCommand(commandRequested);
+        return new HelpCommand(commandRequested, true);
     }
 }
