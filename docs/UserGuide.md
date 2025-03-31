@@ -48,7 +48,15 @@ These boxes indicate warnings about potential negative outcomes.
 3. Copy the file to the folder you want to use as the _home folder_ for your FitFlow app.
 
 4. Go to your home folder and double-click on the `.jar` file to launch the application.</br>
-    4a. Alternatively, if you are more familiar with computers, you can open a command terminal, `cd` into your home folder, and use the `java -jar fitflow.jar` command to run the application.<br>
+    * If the above does not work, try the below steps:
+        1. Open a command terminal for your operating system.
+            * Windows: Press Windows button + X on the keyboard. Click on Terminal.
+            * macOS: Press Command (⌘) + Space on the keyboard and search for "Terminal". Open the Terminal application.
+            * Linux: Press Ctrl + Alt + T. The terminal application should open.
+        2. Change the directory you are currently in to the home folder, using the command `cd`.
+            * A simple way to find the directory is to go to the home folder your normal file browsing app and copying the directory at the address bar. For example, the command could be `cd ~/Downloads/FitFlowFolder`.
+        3. Use the `java -jar <FitFlow Filename>.jar` command to run the application.
+    
     A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
     ![Ui](images/Ui.png)
 
