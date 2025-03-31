@@ -15,7 +15,7 @@ public class ClearCommand extends Command {
             + "Format: "
             + COMMAND_WORD + "\n\n"
             + "Example: " + COMMAND_WORD;
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "FitFlow has been cleared!";
 
 
     @Override

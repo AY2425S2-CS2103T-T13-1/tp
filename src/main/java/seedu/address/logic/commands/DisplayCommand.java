@@ -25,7 +25,7 @@ public class DisplayCommand extends Command {
             + COMMAND_WORD + " INDEX (must be a positive integer)\n\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DISPLAY_PERSON_SUCCESS = "Display Person: %1$s";
+    public static final String MESSAGE_DISPLAY_PERSON_SUCCESS = "Display Client: %1$s";
 
     private final Index targetIndex;
 

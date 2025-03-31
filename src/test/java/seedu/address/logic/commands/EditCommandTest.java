@@ -267,7 +267,7 @@ public class EditCommandTest {
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
         assertTrue(result.getFeedbackToUser().contains("schedule conflicts"));
         assertTrue(result.getFeedbackToUser().contains("Internal recurring schedule conflict"));
-        assertTrue(result.getFeedbackToUser().contains("same person"));
+        assertTrue(result.getFeedbackToUser().contains("same client"));
     }
 
     @Test
@@ -290,7 +290,7 @@ public class EditCommandTest {
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
         assertTrue(result.getFeedbackToUser().contains("schedule conflicts"));
         assertTrue(result.getFeedbackToUser().contains("Internal one-time schedule conflict"));
-        assertTrue(result.getFeedbackToUser().contains("same person"));
+        assertTrue(result.getFeedbackToUser().contains("same client"));
     }
 
     @Test
@@ -316,7 +316,7 @@ public class EditCommandTest {
         assertTrue(result.getFeedbackToUser().contains("schedule conflicts"));
         assertTrue(result.getFeedbackToUser()
                 .contains("Internal schedule conflict between recurring and one-time schedule"));
-        assertTrue(result.getFeedbackToUser().contains("same person"));
+        assertTrue(result.getFeedbackToUser().contains("same client"));
     }
 
     @Test
