@@ -60,14 +60,17 @@ public class ScheduleContainsKeywordPredicateTest {
     }
 
     @Test
-    public void test_scheduleDoesNotContainKeyword_returnsFalse() {
+    public void test_scheduleDoesNotContainDay_returnsFalse() {
         // Non-matching day
         ScheduleContainsKeywordPredicate predicate = new ScheduleContainsKeywordPredicate("Tuesday");
         assertFalse(predicate.test(new PersonBuilder().withName("Alice")
                 .withRecurringSchedules("Monday 1200 1400").build()));
+    }
 
+    @Test
+    public void test_scheduleDoesNotContainDate_returnsFalse() {
         // Non-matching date
-        predicate = new ScheduleContainsKeywordPredicate("12/6");
+        ScheduleContainsKeywordPredicate predicate = new ScheduleContainsKeywordPredicate("12/6");
         assertFalse(predicate.test(new PersonBuilder().withName("Alice")
                 .withOneTimeSchedules("02/04 1200 1400").build()));
     }
