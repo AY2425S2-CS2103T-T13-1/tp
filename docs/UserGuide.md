@@ -47,9 +47,10 @@ These boxes indicate warnings about potential negative outcomes.
 
 3. Copy the file to the folder you want to use as the _home folder_ for your FitFlow app.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fitflow.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Go to your home folder and double-click on the `.jar` file to launch the application.</br>
+    4a. Alternatively, if you are more familiar with computers, you can open a command terminal, `cd` into your home folder, and use the `java -jar fitflow.jar` command to run the application.<br>
+    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will display the list of available commands in FitFlow.<br>
    Some example commands you can try:
@@ -131,7 +132,7 @@ Examples:
 
 Adds a client to FitFlow.
 
-Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 A client can have any number of recurring schedule, one time schedule, or tags (including 0).
@@ -143,6 +144,17 @@ Any date provided that excludes year will be treated as a date in the current ye
 A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
 Use the edit command to rectify any conflicting schedules.
 </div>
+
+* For `NAME`, `GOALS`, `MEDICAL_HISTORY`, and `LOCATION`, these fields accept all ASCII characters.
+* For `PHONE_NUMBER`, any 8-digit number starting with 6, 8, or 9 is accepted.
+* For `RECURRING SCHEDULE`, use the format `DAY START_TIME END_TIME`.
+  * `DAY` can be any day of the week i.e. `Monday`. You can use 3-letter short-form days as well i.e. `Mon`.
+  * `START_TIME` and `END_TIME` should be 4 digits, in 24-hour format.
+* For `ONE_TIME_SCHEDULE`, use the format `DATE START_TIME END_TIME`.
+  * `DATE` should be in the format `[D]D/[M]M[/YY]`.
+    * The day and month of the date can have its leading `0` omitted if it is single digit.
+    * The year of the date can be omitted. In this case, the application will assume the current year.
+  * `START_TIME` and `END_TIME` should be 4 digits, in 24-hour format.
 
 Examples:
 * `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
@@ -158,6 +170,7 @@ Format: `list`
 Examples:
 * `list` displays and indexes all the clients in FitFlow.
 
+
 ### Locating clients by name: `find`
 
 Find clients whose names contain any of the given keywords.
@@ -165,17 +178,18 @@ Find clients whose names contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* The order of the keywords does not matter. i.e. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only the name and contact number of the client will be displayed.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Only the name and contact number of the client will be displayed. To see a client's full details, refer to the [**`display`**](#displaying-a-clients-details-display) section.
+* Only full words will be matched i.e. `Han` will not match `Hans`.
 * Clients matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+  i.e. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
 * `find John` returns `john` and `John Doe`.
 * `find alex david` returns `Alex Yeoh`, `David Li`.<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![Result for 'find alex david'](images/findAlexDavidResult.png)
+
 
 ### Displaying a client's details: `display`
 
@@ -183,7 +197,7 @@ Display a client's full details in the client list, identified by the index numb
 
 Format: `display INDEX`
 
-* Diplays the client at the specified `INDEX`.
+* Displays the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​.
 
@@ -195,26 +209,28 @@ Examples:
 
 ### Viewing Schedules: `view`
 
-Displays the sessions the personal trainer has with clients on that day.
+Displays the sessions the personal trainer has with clients on that day or date.
 
-Format: `view DAY/DATE`
-DAY Format: `Monday` or `Mon`
-DATE Format: `DD/MM[/YY]`
+Format: `view DAY/DATE` </br>
+DAY Format: `Monday` or `Mon`</br>
+DATE Format: `[D]D/[M]M[/YY]`
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note**
 Any date provided that excludes year will be treated as a date in the current year.
 </div>
 
-* The search is case-insensitive. e.g. `Monday` will match `monday`.
+* The search is case-insensitive. i.e. `Monday` will match `monday`.
 * A day or date field must be provided.
-* For DAY, short-form is allowed, i.e. `Monday` will match with `mon`.
-* For DATE, the format has to be ([D]D/[M]M[/YY]) but the year can be omitted, the day and month may exclude the leading 0 if it is a single digit. e.g. `14/2` matches with `14/02/25` and `7/1/25` matches with `07/01/25`.
+* For `DAY`, 3-letter short-form is allowed, i.e. `Monday` will match with `mon`.
+* For `DATE`, the format has to be `[D]D/[M]M[/YY]` e.g. `14/2` matches with `14/02/25` and `7/1/25` matches with `07/01/25`.
+  * The day and month of the date can have its leading `0` omitted if it is single digit.
+  * The year of the date can be omitted. In this case, the application will assume the current year.
 
 Examples:
 * `view Tue` returns the list of clients with sessions on Tuesday.
 * `view 25/02/25` returns the list of clients with sessions on 25/02/25.
 * `view 21/04` returns the list of clients with sessions on 21/04 in today's year of usage.
-* `view Monday` returns the list of clients with sessions on Monday. <br>
+* `view Monday` returns the list of clients with sessions on Monday.<br>
     ![result for 'view Monday'](images/viewMonday.png)
 
 
@@ -224,6 +240,12 @@ Edits an existing client in FitFlow.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`
 
+<div markdown="block" class="alert alert-warning">:exclamation: **Note**
+Any date provided that excludes year will be treated as a date in the current year.<br>
+A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
+Use the edit command to rectify any conflicting schedules.
+</div>
+
 * Edits the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​.
@@ -231,12 +253,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots
 * Existing values will be updated to the input values.
 * When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e it is not cumulative.
 * You can remove all the client's recurring schedules, one time schedules and tags by typing `rs/`, `ots/`, and `t/` respectively without specifying any value after it.
-
-<div markdown="block" class="alert alert-warning">:exclamation: **Note**
-Any date provided that excludes year will be treated as a date in the current year.<br>
-A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
-Use the edit command to rectify any conflicting schedules.
-</div>
+* For more details on how each field should be formatted, refer to the [**`add`**](#adding-a-client-add) section.
 
 Examples:
 *  `edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400` Edits the phone number, location, and one time schedule of the 1st client to be `91234567`, `Anytime Fitness`, and `4/4 1200 1400` respectively.
@@ -247,13 +264,11 @@ Examples:
 
 Deletes the specified client from FitFlow.
 
+Format: `delete INDEX`
+
 <div markdown="span" class="alert alert-danger">
 :rotating_light: **This command is irreversible. Use with caution.**
 </div>
-
-<p></p>
-
-Format: `delete INDEX`
 
 * Deletes the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
@@ -275,13 +290,11 @@ Format: `exit`
 
 Clears all entries from FitFlow.
 
+Format: `clear`
+
 <div markdown="span" class="alert alert-danger">
 :rotating_light: **This command is irreversible. Use with caution.**
 </div>
-
-<p></p>
-
-Format: `clear`
 
 
 ### Saving the data
@@ -293,22 +306,13 @@ FitFlow data are saved in the hard disk automatically after any command that cha
 
 FitFlow data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-[//]: # (<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**)
-
-[//]: # ()
-[//]: # (</div>)
-
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FitFlow home folder.
+**A**: Install the app in the other computer and overwrite the sample data file it creates with the file that contains the data of your previous FitFlow home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
