@@ -362,8 +362,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to find a specific client.
-2. FitFlow shows the details of the client on the app.<br>
+1. User requests to find a specific client with a keyword.
+2. FitFlow shows the list of clients with the given keyword on the app.<br>
    Use case ends.
 
 **Extensions**
@@ -397,7 +397,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case 5: Delete Client**
+**Use case 5: Display Client's details**
+
+**MSS**
+
+1. User requests to <ins>find client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
+2. User requests to display the specific client's details.
+3. FitFlow shows the details of the client on the app.<br>
+   Use case ends.
+
+**Extensions**
+
+- **2a.** The client requested to display does not exist.<br>
+    - 1a1. FitFlow tells the User that it was unable to find that client.<br>
+      Use case ends.
+- **1b.** The given client is invalid.<br>
+    - 1b1. FitFlow shows an error message and prompts the user the format of the command.
+    - 1b2. User re-enters the command.<br>
+      Steps 1b1-1b2 repeat until the command is entered correctly.<br>
+      Use case resumes at step 2.
+
+---
+
+
+**Use case 6: Delete Client**
 
 **MSS**
 
@@ -423,7 +446,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case 6: Edit Client's Details**
+**Use case 7: Edit Client's Details**
 
 **MSS**
 
@@ -451,7 +474,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case 7: Add session to client**
+**Use case 8: Add session to client**
 
 **MSS**
 
@@ -473,7 +496,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case 8: Delete session to client**
+**Use case 9: Delete session to client**
 
 **MSS**
 
@@ -495,7 +518,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case 9: Modify session details for client**
+**Use case 10: Modify session details for client**
 
 **MSS**
 
@@ -517,7 +540,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case 10: Add session for multiple clients**
+**Use case 11: Add session for multiple clients**
 
 **MSS**
 
@@ -536,7 +559,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case 11: Delete session for multiple clients**
+**Use case 12: Delete session for multiple clients**
 
 **MSS**
 
@@ -562,7 +585,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case 12: Modify session for multiple clients**
+**Use case 13: Modify session for multiple clients**
 
 **MSS**
 
@@ -582,7 +605,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case 13: Set reminder for session**
+**Use case 14: Set reminder for session**
 
 **MSS**
 
