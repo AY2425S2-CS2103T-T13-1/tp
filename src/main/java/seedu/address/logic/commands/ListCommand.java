@@ -16,7 +16,7 @@ public class ListCommand extends Command {
             + COMMAND_WORD + "\n\n"
             + "Example: " + COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Listed all persons";
-    public static final String MESSAGE_EMPTY_LIST = "No clients found, start adding clients using `add`!";
+    public static final String MESSAGE_EMPTY_LIST = "No clients found, start adding clients using the Add command!";
 
     @Override
     public CommandResult execute(Model model) {
