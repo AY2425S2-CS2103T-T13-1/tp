@@ -1,0 +1,34 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes a view command;
+:ViewCommandParser
+parses the given input;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([valid parameter (DAY/DATE)])
+    :Get filteredList from Model;
+    if () then ([filteredList is empty])
+        :Updates view message
+         to "No Clients found!";
+    else ([filteredList is not empty])
+        :     Updates view message
+        to show the clients' schedules;
+    endif
+else ([invalid parameter])
+    :Throw ParseException for
+      invalid command format;
+    :      Inform User of the
+    format for view command;
+    stop
+endif
+
+:Display view message in
+command result to User;
+
+stop
+@enduml

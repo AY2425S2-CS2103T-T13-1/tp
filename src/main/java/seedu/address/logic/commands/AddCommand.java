@@ -82,20 +82,26 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PHONE);
         }
 
+        // Check for internal schedule conflicts first (conflicts within the same person)
+        List<String> internalConflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(toAdd);
         // Check for schedule conflicts with existing persons
-        List<String> conflicts = new ArrayList<>();
+        List<String> externalConflicts = new ArrayList<>();
         for (Person existingPerson : model.getAddressBook().getPersonList()) {
-            conflicts.addAll(checkConflictsWithPerson(existingPerson, toAdd));
+            externalConflicts.addAll(checkConflictsWithPerson(existingPerson, toAdd));
         }
+        // Combine all conflicts
+        List<String> allConflicts = new ArrayList<>();
+        allConflicts.addAll(internalConflicts);
+        allConflicts.addAll(externalConflicts);
 
         model.addPerson(toAdd);
 
         // If there are conflicts, add them to the success message
-        if (!conflicts.isEmpty()) {
+        if (!allConflicts.isEmpty()) {
             StringBuilder conflictsMsg = new StringBuilder();
             conflictsMsg.append(MESSAGE_SCHEDULE_CONFLICT);
 
-            for (String conflict : conflicts) {
+            for (String conflict : allConflicts) {
                 conflictsMsg.append(conflict).append("\n\n");
             }
 
@@ -116,8 +122,17 @@ public class AddCommand extends Command {
         for (RecurringSchedule schedule : toAdd.getRecurringSchedules()) {
             ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, schedule);
             if (result.hasConflict()) {
-                conflicts.add(String.format("%s with %s", result.getConflictDescription(),
-                        existingPerson.getName()));
+                String description = result.getConflictDescription();
+
+                int betweenIndex = description.indexOf(" between ");
+                String conflictPrefix = description.substring(0, betweenIndex);
+                conflicts.add(String.format("%s between %s with %s and %s with %s",
+                        conflictPrefix,
+                        result.getConflictingSchedule().getStartTime() + "-"
+                                + result.getConflictingSchedule().getEndTime(),
+                        existingPerson.getName(),
+                        schedule.getStartTime() + "-" + schedule.getEndTime(),
+                        toAdd.getName()));
             }
         }
 
@@ -125,8 +140,17 @@ public class AddCommand extends Command {
         for (OneTimeSchedule schedule : toAdd.getOneTimeSchedules()) {
             ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, schedule);
             if (result.hasConflict()) {
-                conflicts.add(String.format("%s with %s", result.getConflictDescription(),
-                        existingPerson.getName()));
+                String description = result.getConflictDescription();
+                // Extract just the conflict type and date/day
+                int betweenIndex = description.indexOf(" between ");
+                String conflictPrefix = description.substring(0, betweenIndex);
+                conflicts.add(String.format("%s between %s with %s and %s with %s",
+                        conflictPrefix,
+                        result.getConflictingSchedule().getStartTime() + "-"
+                                + result.getConflictingSchedule().getEndTime(),
+                        existingPerson.getName(),
+                        schedule.getStartTime() + "-" + schedule.getEndTime(),
+                        toAdd.getName()));
             }
         }
 

@@ -139,9 +139,10 @@ A client can have any number of recurring schedule, one time schedule, or tags (
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note**
 A client should have at least have a name and a phone number to be added.<br>
-Any date provided that excludes year will be treated as a date in the current year.
+Any date provided that excludes year will be treated as a date in the current year.<br>
+A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
+Use the edit command to rectify any conflicting schedules.
 </div>
-
 
 Examples:
 * `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
@@ -182,7 +183,7 @@ Display a client's full details in the client list, identified by the index numb
 
 Format: `display INDEX`
 
-* Diplays the client at the specified `INDEX`.
+* Displays the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​.
 
@@ -223,8 +224,8 @@ Edits an existing client in FitFlow.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`
 
-* Edits the client at the specified `INDEX`. 
-* The index refers to the index number shown in the displayed client list. 
+* Edits the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -232,7 +233,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots
 * You can remove all the client's recurring schedules, one time schedules and tags by typing `rs/`, `ots/`, and `t/` respectively without specifying any value after it.
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note**
-Any date provided that excludes year will be treated as a date in the current year.
+Any date provided that excludes year will be treated as a date in the current year.<br>
+A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
+Use the edit command to rectify any conflicting schedules.
 </div>
 
 Examples:

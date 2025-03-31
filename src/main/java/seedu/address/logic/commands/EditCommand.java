@@ -104,25 +104,31 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PHONE);
         }
 
+        // Check for internal schedule conflicts first (conflicts within the edited person)
+        List<String> internalConflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(editedPerson);
         // Check for schedule conflicts with existing persons
-        List<String> conflicts = new ArrayList<>();
+        List<String> externalConflicts = new ArrayList<>();
         for (Person existingPerson : model.getAddressBook().getPersonList()) {
             // Skip the person being edited
             if (existingPerson.equals(personToEdit)) {
                 continue;
             }
-            conflicts.addAll(checkConflictsWithPerson(existingPerson, editedPerson));
+            externalConflicts.addAll(checkConflictsWithPerson(existingPerson, editedPerson));
         }
+        // Combine all conflicts
+        List<String> allConflicts = new ArrayList<>();
+        allConflicts.addAll(internalConflicts);
+        allConflicts.addAll(externalConflicts);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         // If there are conflicts, add them to the success message
-        if (!conflicts.isEmpty()) {
+        if (!allConflicts.isEmpty()) {
             StringBuilder conflictsMsg = new StringBuilder();
             conflictsMsg.append(MESSAGE_SCHEDULE_CONFLICT);
 
-            for (String conflict : conflicts) {
+            for (String conflict : allConflicts) {
                 conflictsMsg.append(conflict).append("\n\n");
             }
 
@@ -144,8 +150,17 @@ public class EditCommand extends Command {
         for (RecurringSchedule schedule : editedPerson.getRecurringSchedules()) {
             ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, schedule);
             if (result.hasConflict()) {
-                conflicts.add(String.format("%s with %s", result.getConflictDescription(),
-                        existingPerson.getName()));
+                String description = result.getConflictDescription();
+
+                int betweenIndex = description.indexOf(" between ");
+                String conflictPrefix = description.substring(0, betweenIndex);
+                conflicts.add(String.format("%s between %s with %s and %s with %s",
+                        conflictPrefix,
+                        result.getConflictingSchedule().getStartTime() + "-"
+                                + result.getConflictingSchedule().getEndTime(),
+                        existingPerson.getName(),
+                        schedule.getStartTime() + "-" + schedule.getEndTime(),
+                        editedPerson.getName()));
             }
         }
 
@@ -153,8 +168,17 @@ public class EditCommand extends Command {
         for (OneTimeSchedule schedule : editedPerson.getOneTimeSchedules()) {
             ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(existingPerson, schedule);
             if (result.hasConflict()) {
-                conflicts.add(String.format("%s with %s", result.getConflictDescription(),
-                        existingPerson.getName()));
+                String description = result.getConflictDescription();
+                // Extract just the conflict type and date/day
+                int betweenIndex = description.indexOf(" between ");
+                String conflictPrefix = description.substring(0, betweenIndex);
+                conflicts.add(String.format("%s between %s with %s and %s with %s",
+                        conflictPrefix,
+                        result.getConflictingSchedule().getStartTime() + "-"
+                                + result.getConflictingSchedule().getEndTime(),
+                        existingPerson.getName(),
+                        schedule.getStartTime() + "-" + schedule.getEndTime(),
+                        editedPerson.getName()));
             }
         }
 
