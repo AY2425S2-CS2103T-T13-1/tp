@@ -16,12 +16,16 @@ public class ListCommand extends Command {
             + COMMAND_WORD + "\n\n"
             + "Example: " + COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Listed all persons";
-
+    public static final String MESSAGE_EMPTY_LIST = "No clients found, start adding clients using the Add command!";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        if (model.getFilteredPersonList().isEmpty()) {
+            return new CommandResult(MESSAGE_EMPTY_LIST);
+        } else {
+            return new CommandResult(MESSAGE_SUCCESS);
+        }
     }
 }
