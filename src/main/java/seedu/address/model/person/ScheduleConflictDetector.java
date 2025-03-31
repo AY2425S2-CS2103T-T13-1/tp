@@ -88,7 +88,7 @@ public class ScheduleConflictDetector {
                 if (schedule1.getDay().equals(schedule2.getDay())) {
                     if (hasTimeOverlapBetweenSchedules(schedule1, schedule2)) {
                         String conflictPrefix = "Internal recurring schedule conflict on " + schedule1.getDay();
-                        conflicts.add(String.format("%s between %s and %s (same person)",
+                        conflicts.add(String.format("%s between %s and %s (same client)",
                                 conflictPrefix,
                                 schedule1.getStartTime() + "-" + schedule1.getEndTime(),
                                 schedule2.getStartTime() + "-" + schedule2.getEndTime()));
@@ -106,7 +106,7 @@ public class ScheduleConflictDetector {
                 if (schedule1.getDate().equals(schedule2.getDate())) {
                     if (hasTimeOverlapBetweenSchedules(schedule1, schedule2)) {
                         String conflictPrefix = "Internal one-time schedule conflict on " + schedule1.getDateString();
-                        conflicts.add(String.format("%s between %s and %s (same person)",
+                        conflicts.add(String.format("%s between %s and %s (same client)",
                                 conflictPrefix,
                                 schedule1.getStartTime() + "-" + schedule1.getEndTime(),
                                 schedule2.getStartTime() + "-" + schedule2.getEndTime()));
@@ -122,7 +122,7 @@ public class ScheduleConflictDetector {
                     if (hasTimeOverlapBetweenSchedules(recurringSchedule, oneTimeSchedule)) {
                         String conflictPrefix = "Internal schedule conflict between recurring and one-time schedule on "
                                 + recurringSchedule.getDay() + " (" + oneTimeSchedule.getDateString() + ")";
-                        conflicts.add(String.format("%s between %s and %s (same person)",
+                        conflicts.add(String.format("%s between %s and %s (same client)",
                                 conflictPrefix,
                                 recurringSchedule.getStartTime() + "-" + recurringSchedule.getEndTime(),
                                 oneTimeSchedule.getStartTime() + "-" + oneTimeSchedule.getEndTime()));

@@ -62,12 +62,12 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 ";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the FitFlow.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the FitFlow.";
     public static final String MESSAGE_DUPLICATE_PHONE = "The phone number provided already exists in FitFlow.";
     public static final String MESSAGE_SCHEDULE_CONFLICT =
-            "Note: The person has been edited, but there are schedule conflicts:\n\n";
+            "Note: The client has been edited, but there are schedule conflicts:\n\n";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

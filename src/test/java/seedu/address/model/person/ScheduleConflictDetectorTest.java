@@ -195,7 +195,7 @@ public class ScheduleConflictDetectorTest {
         List<String> conflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(person);
         assertEquals(1, conflicts.size(), "Should detect one internal conflict");
         assertTrue(conflicts.get(0).contains("Internal recurring schedule conflict on MONDAY"));
-        assertTrue(conflicts.get(0).contains("same person"));
+        assertTrue(conflicts.get(0).contains("same client"));
     }
     @Test
     public void checkInternalScheduleConflicts_oneTimeSchedulesConflict_returnsConflict() {
@@ -207,7 +207,7 @@ public class ScheduleConflictDetectorTest {
         List<String> conflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(person);
         assertEquals(1, conflicts.size(), "Should detect one internal conflict");
         assertTrue(conflicts.get(0).contains("Internal one-time schedule conflict on 15/10"));
-        assertTrue(conflicts.get(0).contains("same person"));
+        assertTrue(conflicts.get(0).contains("same client"));
     }
     @Test
     public void checkInternalScheduleConflicts_recurringAndOneTimeSchedulesConflict_returnsConflict() {
@@ -219,7 +219,7 @@ public class ScheduleConflictDetectorTest {
         List<String> conflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(person);
         assertEquals(1, conflicts.size(), "Should detect one internal conflict");
         assertTrue(conflicts.get(0).contains("Internal schedule conflict between recurring and one-time schedule"));
-        assertTrue(conflicts.get(0).contains("same person"));
+        assertTrue(conflicts.get(0).contains("same client"));
     }
     @Test
     public void checkInternalScheduleConflicts_multipleConflicts_returnsAllConflicts() {

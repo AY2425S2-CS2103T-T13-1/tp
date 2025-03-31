@@ -17,7 +17,7 @@ public class HelpCommand extends Command {
             + "Example: "
             + COMMAND_WORD + "add";
 
-    public static final String GENERIC_HELP_MESSAGE = "Here are a list of basic commands you can use in Fit Flow."
+    public static final String GENERIC_HELP_MESSAGE = "Here are a list of basic commands you can use in FitFlow."
             + " For more information on each command, type one of the following.\n"
             + "\nhelp " + PREFIX_COMMAND + AddCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + ListCommand.COMMAND_WORD

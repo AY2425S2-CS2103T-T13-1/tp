@@ -15,7 +15,7 @@ public class ListCommand extends Command {
             + "Format: "
             + COMMAND_WORD + "\n\n"
             + "Example: " + COMMAND_WORD;
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS = "Listed all clients";
 
 
     @Override
