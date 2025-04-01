@@ -4,7 +4,6 @@ import java.util.Objects;
 
 /**
  * Class to hold schedule conflict information.
- * Guarantees: immutable
  */
 public class ScheduleConflictResult {
     private final boolean hasConflict;
@@ -29,7 +28,6 @@ public class ScheduleConflictResult {
      */
     public ScheduleConflictResult(String conflictDescription, Schedule conflictingSchedule) {
         Objects.requireNonNull(conflictDescription, "Conflict description cannot be null");
-        // conflictingSchedule can be null in some edge cases
         this.hasConflict = true;
         this.conflictDescription = conflictDescription;
         this.conflictingSchedule = conflictingSchedule;

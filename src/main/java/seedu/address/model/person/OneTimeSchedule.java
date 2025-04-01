@@ -129,7 +129,6 @@ public class OneTimeSchedule extends Schedule {
      * @throws NullPointerException if test is null
      */
     public static boolean isValidOneTimeSchedule(String test) {
-        // We need to explicitly throw NullPointerException here to match the expected behavior in tests
         requireNonNull(test);
         return test.matches(VALIDATION_REGEX);
     }

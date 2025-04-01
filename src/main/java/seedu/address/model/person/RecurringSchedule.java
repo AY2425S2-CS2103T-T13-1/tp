@@ -111,7 +111,6 @@ public class RecurringSchedule extends Schedule {
      * @throws NullPointerException if test is null
      */
     public static boolean isValidRecurringSchedule(String test) {
-        // We need to explicitly throw NullPointerException here to match the expected behavior in tests
         requireNonNull(test);
         return PATTERN.matcher(test).matches();
     }
