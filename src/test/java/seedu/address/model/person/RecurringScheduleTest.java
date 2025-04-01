@@ -21,11 +21,9 @@ public class RecurringScheduleTest {
     public void constructor_invalidSchedule_throwsIllegalArgumentException() {
         // invalid day
         assertThrows(IllegalArgumentException.class, () -> new RecurringSchedule("NoSuchDay 1200 1300"));
-        
         // invalid time format
         assertThrows(IllegalArgumentException.class, () -> new RecurringSchedule("Monday 25:00 1300"));
         assertThrows(IllegalArgumentException.class, () -> new RecurringSchedule("Monday 1200 2500"));
-        
         // invalid schedule format (missing parts)
         assertThrows(IllegalArgumentException.class, () -> new RecurringSchedule("Monday 1200"));
         assertThrows(IllegalArgumentException.class, () -> new RecurringSchedule("Monday"));

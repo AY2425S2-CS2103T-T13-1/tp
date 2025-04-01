@@ -36,7 +36,6 @@ public class OneTimeSchedule extends Schedule {
             + VALIDATION_REGEX_TIME + "$"; // Second HHmm (0000 - 2359)
 
     private final LocalDate date;
-    
     /**
      * Constructs a {@code OneTimeSchedule}.
      *
@@ -50,7 +49,6 @@ public class OneTimeSchedule extends Schedule {
         assert isValidOneTimeSchedule(schedule) : "Schedule should be valid by this point";
         this.date = extractDate(schedule);
     }
-    
     /**
      * Validates the schedule string and extracts the start time if valid.
      *
