@@ -333,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **2a.** User requests to see the specific help page for a command (e.g. help add).
+- 2a. User requests to see the specific help page for a command (e.g. help add).
     - 2a1. FitFlow shows the User the specific command’s help text.<br>
       Use case resumes at step 3.
 
@@ -350,12 +350,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **1a.** The client details are given in the wrong format.
+- 1a. The client details are given in the wrong format.
     - 1a1. FitFlow shows the user the format the client’s details should be entered.
     - 1a2. User enters new data.<br>
       Steps 1a1-1a2 repeat until the data is entered.<br>
       Use case resumes at step 2.
-- **1b.** User provides a session timing that conflicts with an existing session timing.
+- 1b. User provides a session timing that conflicts with an existing session timing.
     - 1b1. FitFlow shows the existing session timing that conflicts with the given session timing.
     - 1b2. FitFlow prompts the user to enter a non-conflicting session timing.
     - 1b3. User re-enters the command.<br>
@@ -374,10 +374,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **1a.** The client being searched for does not exist.<br>
+- 1a. The client being searched for does not exist.<br>
     - 1a1. FitFlow tells the User that it was unable to find a match.<br>
       Use case ends.
-- **1b.** The given client is invalid.<br>
+- 1b. The given client is invalid.<br>
     - 1b1. FitFlow shows an error message and prompts the user the format of the command.
     - 1b2. User re-enters the command.<br>
       Steps 1b1-1b2 repeat until the command is entered correctly.<br>
@@ -395,12 +395,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **1a.** The given day is invalid.
+- 1a. The given day is invalid.
     - 1a1. FitFlow shows an error message and prompts the user the format of the command.
     - 1a2. User re-enters the command.<br>
       Steps 1a1-1a2 repeat until the command is entered correctly.<br>
       Use case resumes at step 2.
-- **1b.** No clients were found to have sessions on given day.
+- 1b. No clients were found to have sessions on given day.
     - 1b1. FitFlow tells the User that the schedule for the given day is empty.<br>
       Use case ends.
 
@@ -417,10 +417,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **2a.** The client requested to display does not exist.<br>
+- 2a. The client requested to display does not exist.<br>
     - 2a1. FitFlow tells the User that it was unable to get the specified client's details.<br>
       Use case ends.
-- **2b.** The given client is invalid.<br>
+- 2b. The given client is invalid.<br>
     - 2b1. FitFlow shows an error message and prompts the user the format of the command.
     - 2b2. User re-enters the command.<br>
       Steps 2b1-2b2 repeat until the command is entered correctly.<br>
@@ -442,14 +442,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **1a.** The list is empty.<br>
+- 1a. The list is empty.<br>
   Use case ends.
-- **2a.** The given client is invalid.
+- 2a. The given client is invalid.
     - 2a1. FitFlow shows an error message and prompts the user the format of the command.
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
       Use case resumes at step 3.
-- **4a.** The user decides not to delete the client.
+- 4a. The user decides not to delete the client.
     - 4a1. FitFlow aborts the delete command.<br>
     Use case ends.
 
@@ -466,14 +466,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **1a.** The list is empty.<br>
+- 1a. The list is empty.<br>
   Use case ends.
-- **2a.** The given client is invalid or the client details are given in the wrong format.
+- 2a. The given client is invalid or the client details are given in the wrong format.
     - 2a1. FitFlow shows an error message and prompts the user the format of the command.
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
       Use case resumes at step 3.
-- **2b.** User provides a session timing that conflicts with an existing session timing.
+- 2b. User provides a session timing that conflicts with an existing session timing.
     - 2b1. FitFlow shows the existing session timing that conflicts with the given session timing.
     - 2b2. FitFlow prompts the user to enter a non-conflicting session timing.
     - 2b3. User re-enters the command.<br>
@@ -493,9 +493,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **1a.** The schedule is empty.<br>
+- 1a. The schedule is empty.<br>
   Use case ends.
-- **2a.** The given client is invalid or the session details are given in the wrong format.
+- 2a. The given client is invalid or the session details are given in the wrong format.
     - 2a1. FitFlow shows an error message and prompts the user the format of the command.
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
@@ -514,9 +514,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **1a.** The schedule is empty.<br>
+- 1a. The schedule is empty.<br>
   Use case ends.
-- **2a.** The given client is invalid or the session given is invalid.
+- 2a. The given client is invalid or the session given is invalid.
     - 2a1. FitFlow shows an error message and prompts the user the format of the command.
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
@@ -535,9 +535,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **1a.** The schedule is empty.<br>
+- 1a. The schedule is empty.<br>
   Use case ends.
-- **2a.** The given client is invalid or the session details are given in the wrong format.
+- 2a. The given client is invalid or the session details are given in the wrong format.
     - 2a1. FitFlow shows an error message and prompts the user the format of the command.
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
@@ -555,7 +555,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **2a.** The given client(s) is invalid or the session details are given in the wrong format.
+- 2a. The given client(s) is invalid or the session details are given in the wrong format.
     - 2a1. FitFlow shows an error message and prompts the user the format of the command.
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
@@ -577,12 +577,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **2a.** The given client(s) is invalid or the session details are given in the wrong format.
+- 2a. The given client(s) is invalid or the session details are given in the wrong format.
     - 2a1. FitFlow shows an error message and prompts the user the format of the command.
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
       Use case resumes at step 3.
-- **5a.** The user decides not to delete the session.
+- 5a. The user decides not to delete the session.
     - 5a1. FitFlow aborts the delete session command.<br>
       Use case ends.
 
@@ -599,7 +599,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **2a.** The given client(s) is invalid or the session details are given in the wrong format.
+- 2a. The given client(s) is invalid or the session details are given in the wrong format.
     - 2a1. FitFlow shows an error message and prompts the user the format of the command.
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
@@ -618,7 +618,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **2a.** The given timing is invalid.
+- 2a. The given timing is invalid.
     - 2a1. FitFlow shows an error message and prompts the user the format of the command.
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
