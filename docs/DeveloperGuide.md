@@ -771,7 +771,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Dealing with corrupted data files
 
-   1. Prerequisites: Ran the <final FitFlow release> jar file.
+   1. Prerequisites: Ran the [final FitFlow release] jar file.
    
    2. Open the FitFlow home folder. Open the Data folder. Open the addressbook.json.
    
