@@ -40,15 +40,12 @@ public class RecurringSchedule extends Schedule {
      */
     public RecurringSchedule(String schedule) {
         super(validateThenExtractStartTime(schedule), extractEndTime(schedule));
-        
         assert schedule != null : "Schedule string cannot be null";
         assert isValidRecurringSchedule(schedule) : "Invalid recurring schedule: " + schedule;
-        
         this.day = extractDay(schedule);
-        logger.fine("Created recurring schedule on day: " + this.day + " with times: " + 
+        logger.fine("Created recurring schedule on day: " + this.day + " with times: " +
                    getStartTime() + "-" + getEndTime());
     }
-    
     private static String validateThenExtractStartTime(String schedule) {
         requireNonNull(schedule);
         checkArgument(isValidRecurringSchedule(schedule), MESSAGE_CONSTRAINTS);

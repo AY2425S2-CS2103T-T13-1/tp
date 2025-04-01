@@ -49,7 +49,7 @@ public class OneTimeSchedule extends Schedule {
         assert schedule != null : "Schedule string cannot be null";
         assert isValidOneTimeSchedule(schedule) : "Invalid one-time schedule: " + schedule;
         this.date = extractDate(schedule);
-        logger.fine("Created one-time schedule on date: " + this.date + " with times: " + 
+        logger.fine("Created one-time schedule on date: " + this.date + " with times: " +
                     getStartTime() + "-" + getEndTime());
     }
     private static String validateThenExtractStartTime(String schedule) {
