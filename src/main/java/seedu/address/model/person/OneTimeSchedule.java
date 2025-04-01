@@ -35,9 +35,8 @@ public class OneTimeSchedule extends Schedule {
     public static final String VALIDATION_REGEX = "^" + LocalDateUtils.DATE_REGEX + "\\s" // Date
             + VALIDATION_REGEX_TIME + "\\s" // First HHmm (0000 - 2359)
             + VALIDATION_REGEX_TIME + "$"; // Second HHmm (0000 - 2359)
-
-    public final LocalDate date;
     private static final Logger logger = LogsCenter.getLogger(OneTimeSchedule.class);
+    public final LocalDate date;
     /**
      * Constructs a {@code OneTimeSchedule}.
      *

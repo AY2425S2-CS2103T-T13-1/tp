@@ -14,9 +14,10 @@ public abstract class Schedule {
     public static final String MESSAGE_TIME_CONSTRAINTS = "End time (second time) must be later than start time"
             + " (first time).";
     public static final String VALIDATION_REGEX_TIME = "(?:[01]\\d|2[0-3])[0-5]\\d"; //HHmm (0000 - 2359)
+    private static final Logger logger = LogsCenter.getLogger(Schedule.class);
     protected final String startTime;
     protected final String endTime;
-    private static final Logger logger = LogsCenter.getLogger(Schedule.class);
+
 
     /**
      * Constructs a {@code Schedule}.

@@ -27,9 +27,9 @@ public class RecurringSchedule extends Schedule {
             "^(?i)(" + DayOfWeekUtils.DAY_OF_WEEK_REGEX + ")\\s"
                     + VALIDATION_REGEX_TIME + "\\s" // First HHmm (0000 - 2359)
                     + VALIDATION_REGEX_TIME + "$"; // Second HHmm (0000 - 2359)
-    public final DayOfWeek day;
     private static final Pattern pattern = Pattern.compile(VALIDATION_REGEX, Pattern.CASE_INSENSITIVE);
     private static final Logger logger = LogsCenter.getLogger(RecurringSchedule.class);
+    public final DayOfWeek day;
 
     /**
      * Constructs a {@code RecurringSchedule}.
