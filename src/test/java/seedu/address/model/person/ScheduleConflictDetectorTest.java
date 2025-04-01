@@ -239,7 +239,7 @@ public class ScheduleConflictDetectorTest {
     @Test
     public void checkScheduleConflict_nullPerson_throwsNullPointerException() {
         RecurringSchedule schedule = new RecurringSchedule("Monday 1000 1200");
-        assertThrows(NullPointerException.class, 
+        assertThrows(NullPointerException.class,
             () -> ScheduleConflictDetector.checkScheduleConflict(null, schedule));
     }
     @Test
@@ -247,25 +247,21 @@ public class ScheduleConflictDetectorTest {
         Set<RecurringSchedule> recurringSchedules = new HashSet<>();
         Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
         Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
-        assertThrows(NullPointerException.class, 
+        assertThrows(NullPointerException.class,
             () -> ScheduleConflictDetector.checkScheduleConflict(person, null));
     }
     @Test
     public void checkInternalScheduleConflicts_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, 
+        assertThrows(NullPointerException.class,
             () -> ScheduleConflictDetector.checkInternalScheduleConflicts(null));
     }
     @Test
     public void hasTimeOverlapBetweenSchedules_handlesInvalidTimeFormats() {
-        // This test ensures our defensive coding properly handles malformed time inputs
-        // We can't directly call the private method, but we can test the public methods that use it
-        
         // Create a person with valid schedules
         Set<RecurringSchedule> recurringSchedules = new HashSet<>();
         Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
         oneTimeSchedules.add(new OneTimeSchedule("15/10 1000 1200"));
         Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
-        
         // Test with valid schedule format - should not throw any exception
         OneTimeSchedule validSchedule = new OneTimeSchedule("15/10 1100 1300");
         ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(person, validSchedule);

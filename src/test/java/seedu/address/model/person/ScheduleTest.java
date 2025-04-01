@@ -64,7 +64,7 @@ public class ScheduleTest {
     public void isValidTime_invalidFormat_returnsFalse() {
         // Incomplete time string
         assertFalse(Schedule.isValidTime("Monday 1000"));
-        // Wrong format 
+        // Wrong format
         assertFalse(Schedule.isValidTime("This is not a schedule"));
         // Invalid time format
         assertFalse(Schedule.isValidTime("Monday 1x00 1200"));
@@ -86,4 +86,4 @@ public class ScheduleTest {
     public void isValidTime_validFormatSameStartAndEndTime_returnsFalse() {
         assertFalse(Schedule.isValidTime("Monday 1000 1000"));
     }
-} 
+}
