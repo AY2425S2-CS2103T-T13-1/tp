@@ -185,5 +185,33 @@ public class RecurringScheduleTest {
         assertEquals("[Sunday 0800 1200]", scheduleFull.toString());
     }
 
-
+    @Test
+    public void extractDay_invalidInput_throwsException() {
+        // Testing the defensive coding for extractDay method indirectly through constructor
+        assertThrows(IllegalArgumentException.class, () -> new RecurringSchedule("InvalidDay 0900 1700"));
+    }
+    @Test
+    public void extractStartTime_invalidInput_throwsException() {
+        // A valid day but invalid start time format
+        assertThrows(IllegalArgumentException.class, () -> new RecurringSchedule("Monday ABC 1700"));
+    }
+    @Test
+    public void extractEndTime_invalidInput_throwsException() {
+        // A valid day and start time but invalid end time format
+        assertThrows(IllegalArgumentException.class, () -> new RecurringSchedule("Monday 0900 XYZ"));
+    }
+    @Test
+    public void isValidRecurringSchedule_returnsProperResults() {
+        // Testing the updated validation logic
+        assertTrue(RecurringSchedule.isValidRecurringSchedule("Monday 0900 1700"));
+        assertFalse(RecurringSchedule.isValidRecurringSchedule(""));
+        assertFalse(RecurringSchedule.isValidRecurringSchedule("InvalidInput"));
+    }
+    @Test
+    public void malformedInput_throwsException() {
+        // Testing that improperly formatted inputs throw exceptions as expected
+        assertThrows(IllegalArgumentException.class, () -> new RecurringSchedule("Monday0900 1700"));
+        assertThrows(IllegalArgumentException.class, () -> new RecurringSchedule("Monday 0900"));
+        assertThrows(IllegalArgumentException.class, () -> new RecurringSchedule(" "));
+    }
 }

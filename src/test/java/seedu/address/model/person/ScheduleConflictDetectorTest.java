@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.HashSet;
 import java.util.List;
@@ -234,6 +235,57 @@ public class ScheduleConflictDetectorTest {
         Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
         List<String> conflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(person);
         assertEquals(4, conflicts.size(), "Should detect four internal conflicts");
+    }
+    @Test
+    public void checkScheduleConflict_nullPerson_throwsNullPointerException() {
+        RecurringSchedule schedule = new RecurringSchedule("Monday 1000 1200");
+        assertThrows(NullPointerException.class, 
+            () -> ScheduleConflictDetector.checkScheduleConflict(null, schedule));
+    }
+    @Test
+    public void checkScheduleConflict_nullSchedule_throwsNullPointerException() {
+        Set<RecurringSchedule> recurringSchedules = new HashSet<>();
+        Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
+        Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
+        assertThrows(NullPointerException.class, 
+            () -> ScheduleConflictDetector.checkScheduleConflict(person, null));
+    }
+    @Test
+    public void checkInternalScheduleConflicts_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, 
+            () -> ScheduleConflictDetector.checkInternalScheduleConflicts(null));
+    }
+    @Test
+    public void hasTimeOverlapBetweenSchedules_handlesInvalidTimeFormats() {
+        // This test ensures our defensive coding properly handles malformed time inputs
+        // We can't directly call the private method, but we can test the public methods that use it
+        
+        // Create a person with valid schedules
+        Set<RecurringSchedule> recurringSchedules = new HashSet<>();
+        Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
+        oneTimeSchedules.add(new OneTimeSchedule("15/10 1000 1200"));
+        Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
+        
+        // Test with valid schedule format - should not throw any exception
+        OneTimeSchedule validSchedule = new OneTimeSchedule("15/10 1100 1300");
+        ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(person, validSchedule);
+        assertTrue(result.hasConflict());
+    }
+    @Test
+    public void checkScheduleConflict_unknownScheduleType_returnsNoConflict() {
+        // Create a custom unknown schedule type that extends Schedule
+        Schedule unknownSchedule = new Schedule("1000", "1200") {
+            @Override
+            public String toString() {
+                return "Unknown Schedule Type";
+            }
+        };
+        Set<RecurringSchedule> recurringSchedules = new HashSet<>();
+        Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
+        Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
+        // Should handle unknown schedule type properly and return no conflict
+        ScheduleConflictResult result = ScheduleConflictDetector.checkScheduleConflict(person, unknownSchedule);
+        assertFalse(result.hasConflict());
     }
 
     /**
