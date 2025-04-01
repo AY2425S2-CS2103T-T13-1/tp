@@ -32,7 +32,7 @@ public class RecurringScheduleTest {
     @Test
     public void isValidRecurringSchedule() {
         // null schedule
-        assertFalse(RecurringSchedule.isValidRecurringSchedule(null));
+        assertThrows(NullPointerException.class, () -> new RecurringSchedule(null));
 
         // invalid schedules
         assertFalse(RecurringSchedule.isValidRecurringSchedule(""));

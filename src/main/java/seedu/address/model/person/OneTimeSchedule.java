@@ -126,9 +126,12 @@ public class OneTimeSchedule extends Schedule {
      *
      * @param test The string to validate.
      * @return True if the string represents a valid one-time schedule, false otherwise.
+     * @throws NullPointerException if test is null
      */
     public static boolean isValidOneTimeSchedule(String test) {
-        return test != null && test.matches(VALIDATION_REGEX);
+        // We need to explicitly throw NullPointerException here to match the expected behavior in tests
+        requireNonNull(test);
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

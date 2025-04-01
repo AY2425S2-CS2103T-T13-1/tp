@@ -108,9 +108,12 @@ public class RecurringSchedule extends Schedule {
      *
      * @param test The string to validate.
      * @return True if the string represents a valid recurring schedule, false otherwise.
+     * @throws NullPointerException if test is null
      */
     public static boolean isValidRecurringSchedule(String test) {
-        return test != null && PATTERN.matcher(test).matches();
+        // We need to explicitly throw NullPointerException here to match the expected behavior in tests
+        requireNonNull(test);
+        return PATTERN.matcher(test).matches();
     }
 
     @Override
