@@ -1,16 +1,12 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.logging.Logger;
-
-import seedu.address.commons.core.LogsCenter;
+import java.util.Objects;
 
 /**
  * Class to hold schedule conflict information.
+ * Guarantees: immutable
  */
 public class ScheduleConflictResult {
-    private static final Logger logger = LogsCenter.getLogger(ScheduleConflictResult.class);
     private final boolean hasConflict;
     private final String conflictDescription;
     private final Schedule conflictingSchedule;
@@ -22,7 +18,6 @@ public class ScheduleConflictResult {
         this.hasConflict = false;
         this.conflictDescription = "";
         this.conflictingSchedule = null;
-        logger.fine("Created ScheduleConflictResult with no conflict");
     }
 
     /**
@@ -30,17 +25,22 @@ public class ScheduleConflictResult {
      *
      * @param conflictDescription Description of the conflict.
      * @param conflictingSchedule The schedule that caused the conflict.
+     * @throws NullPointerException if conflictDescription is null
      */
     public ScheduleConflictResult(String conflictDescription, Schedule conflictingSchedule) {
-        requireNonNull(conflictDescription);
+        Objects.requireNonNull(conflictDescription, "Conflict description cannot be null");
+        // conflictingSchedule can be null in some edge cases
         this.hasConflict = true;
         this.conflictDescription = conflictDescription;
         this.conflictingSchedule = conflictingSchedule;
-        logger.fine("Created ScheduleConflictResult with conflict: " + conflictDescription);
+        // Verify that if we have a conflict, we have a description
+        assert !this.conflictDescription.isEmpty() : "Conflict description should not be empty when a conflict exists";
     }
 
     /**
      * Returns whether there is a conflict.
+     *
+     * @return true if a conflict exists, false otherwise.
      */
     public boolean hasConflict() {
         return hasConflict;
@@ -48,6 +48,8 @@ public class ScheduleConflictResult {
 
     /**
      * Returns a description of the conflict.
+     *
+     * @return The conflict description string, or empty string if no conflict.
      */
     public String getConflictDescription() {
         return conflictDescription;
@@ -55,20 +57,19 @@ public class ScheduleConflictResult {
 
     /**
      * Returns the schedule that caused the conflict.
+     *
+     * @return The conflicting schedule, or null if no conflict.
      */
     public Schedule getConflictingSchedule() {
-        // If there's no conflict, this will return null
-        if (!hasConflict) {
-            logger.fine("Attempted to get conflicting schedule when there is no conflict");
-        }
         return conflictingSchedule;
     }
+    /**
+     * Returns a string representation of the conflict result.
+     *
+     * @return A string describing the conflict or a "No conflict" message.
+     */
     @Override
     public String toString() {
-        if (hasConflict) {
-            return "Conflict: " + conflictDescription;
-        } else {
-            return "No conflict";
-        }
+        return hasConflict ? "Conflict: " + conflictDescription : "No conflict";
     }
 }

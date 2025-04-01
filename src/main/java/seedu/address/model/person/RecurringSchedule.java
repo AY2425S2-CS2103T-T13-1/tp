@@ -4,10 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.DayOfWeek;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.util.DayOfWeekUtils;
 
 /**
@@ -27,9 +25,10 @@ public class RecurringSchedule extends Schedule {
             "^(?i)(" + DayOfWeekUtils.DAY_OF_WEEK_REGEX + ")\\s"
                     + VALIDATION_REGEX_TIME + "\\s" // First HHmm (0000 - 2359)
                     + VALIDATION_REGEX_TIME + "$"; // Second HHmm (0000 - 2359)
-    private static final Pattern pattern = Pattern.compile(VALIDATION_REGEX, Pattern.CASE_INSENSITIVE);
-    private static final Logger logger = LogsCenter.getLogger(RecurringSchedule.class);
-    public final DayOfWeek day;
+
+    private static final Pattern PATTERN = Pattern.compile(VALIDATION_REGEX, Pattern.CASE_INSENSITIVE);
+
+    private final DayOfWeek day;
 
     /**
      * Constructs a {@code RecurringSchedule}.
@@ -38,61 +37,80 @@ public class RecurringSchedule extends Schedule {
      */
     public RecurringSchedule(String schedule) {
         super(validateThenExtractStartTime(schedule), extractEndTime(schedule));
-        assert schedule != null : "Schedule string cannot be null";
-        assert isValidRecurringSchedule(schedule) : "Invalid recurring schedule: " + schedule;
+        requireNonNull(schedule);
+        assert isValidRecurringSchedule(schedule) : "Schedule should be valid by this point";
         this.day = extractDay(schedule);
-        logger.fine("Created recurring schedule on day: " + this.day + " with times: "
-                + getStartTime() + "-" + getEndTime());
     }
+    /**
+     * Validates the schedule string and extracts the start time if valid.
+     *
+     * @param schedule The schedule string to validate and extract from.
+     * @return The extracted start time.
+     * @throws NullPointerException if schedule is null.
+     * @throws IllegalArgumentException if schedule format is invalid.
+     */
     private static String validateThenExtractStartTime(String schedule) {
         requireNonNull(schedule);
         checkArgument(isValidRecurringSchedule(schedule), MESSAGE_CONSTRAINTS);
         return extractStartTime(schedule);
     }
 
+    /**
+     * Extracts the day of week from a valid schedule string.
+     *
+     * @param schedule A valid schedule string.
+     * @return The extracted day of week.
+     */
     private static DayOfWeek extractDay(String schedule) {
-        try {
-            return DayOfWeekUtils.fromString(schedule.split(" ")[0]);
-        } catch (Exception e) {
-            logger.warning("Error extracting day from schedule: " + e.getMessage());
-            throw new IllegalArgumentException("Invalid day format in schedule: " + schedule, e);
-        }
+        requireNonNull(schedule);
+        String[] parts = schedule.split(" ");
+        assert parts.length >= 1 : "Schedule string should have at least day part";
+        return DayOfWeekUtils.fromString(parts[0]);
     }
 
+    /**
+     * Extracts the start time from a valid schedule string.
+     *
+     * @param schedule A valid schedule string.
+     * @return The extracted start time.
+     */
     private static String extractStartTime(String schedule) {
-        try {
-            return schedule.split(" ")[1];
-        } catch (Exception e) {
-            logger.warning("Error extracting start time from schedule: " + e.getMessage());
-            throw new IllegalArgumentException("Invalid start time format in schedule: " + schedule, e);
-        }
+        requireNonNull(schedule);
+        String[] parts = schedule.split(" ");
+        assert parts.length >= 2 : "Schedule string should have at least day and start time parts";
+        return parts[1];
     }
 
+    /**
+     * Extracts the end time from a valid schedule string.
+     *
+     * @param schedule A valid schedule string.
+     * @return The extracted end time.
+     */
     private static String extractEndTime(String schedule) {
-        try {
-            return schedule.split(" ")[2];
-        } catch (Exception e) {
-            logger.warning("Error extracting end time from schedule: " + e.getMessage());
-            throw new IllegalArgumentException("Invalid end time format in schedule: " + schedule, e);
-        }
+        requireNonNull(schedule);
+        String[] parts = schedule.split(" ");
+        assert parts.length >= 3 : "Schedule string should have day, start time, and end time parts";
+        return parts[2];
     }
 
+    /**
+     * Returns the day of the recurring schedule.
+     *
+     * @return The day of week for this schedule.
+     */
     public DayOfWeek getDay() {
         return day;
     }
 
     /**
      * Returns true if a given string is a valid recurring schedule.
+     *
+     * @param test The string to validate.
+     * @return True if the string represents a valid recurring schedule, false otherwise.
      */
     public static boolean isValidRecurringSchedule(String test) {
-        if (test == null) {
-            logger.warning("Null schedule provided to isValidRecurringSchedule");
-        }
-        boolean isValid = pattern.matcher(test).matches();
-        if (!isValid) {
-            logger.fine("Invalid recurring schedule format: " + test);
-        }
-        return isValid;
+        return test != null && PATTERN.matcher(test).matches();
     }
 
     @Override
@@ -107,9 +125,9 @@ public class RecurringSchedule extends Schedule {
         }
 
         RecurringSchedule otherRecurringSchedule = (RecurringSchedule) other;
-        Boolean isDayEquals = day.equals(otherRecurringSchedule.day);
-        Boolean isStartTimeEquals = startTime.equals(otherRecurringSchedule.startTime);
-        Boolean isEndTimeEquals = endTime.equals(otherRecurringSchedule.endTime);
+        boolean isDayEquals = day.equals(otherRecurringSchedule.day);
+        boolean isStartTimeEquals = startTime.equals(otherRecurringSchedule.startTime);
+        boolean isEndTimeEquals = endTime.equals(otherRecurringSchedule.endTime);
         return isDayEquals && isStartTimeEquals && isEndTimeEquals;
     }
 
@@ -122,7 +140,9 @@ public class RecurringSchedule extends Schedule {
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
         return '[' + DayOfWeekUtils.getPascalCaseName(day) + " " + startTime + " " + endTime + ']';
     }
+
 }

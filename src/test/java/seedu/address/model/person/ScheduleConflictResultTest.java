@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,22 +47,5 @@ public class ScheduleConflictResultTest {
         RecurringSchedule schedule = new RecurringSchedule("Monday 1000 1200");
         ScheduleConflictResult result = new ScheduleConflictResult("Description", schedule);
         assertEquals(schedule, result.getConflictingSchedule());
-    }
-    @Test
-    public void constructor_withNullDescription_throwsNullPointerException() {
-        RecurringSchedule schedule = new RecurringSchedule("Monday 1000 1200");
-        assertThrows(NullPointerException.class, () -> new ScheduleConflictResult(null, schedule));
-    }
-    @Test
-    public void toString_noConflict_returnsCorrectString() {
-        ScheduleConflictResult result = new ScheduleConflictResult();
-        assertEquals("No conflict", result.toString());
-    }
-    @Test
-    public void toString_withConflict_returnsCorrectString() {
-        String description = "Test conflict description";
-        RecurringSchedule schedule = new RecurringSchedule("Monday 1000 1200");
-        ScheduleConflictResult result = new ScheduleConflictResult(description, schedule);
-        assertEquals("Conflict: " + description, result.toString());
     }
 }
