@@ -45,20 +45,20 @@ public class ScheduleTest {
     }
     @Test
     public void isValidTime_invalidTimeFormat_throwsException() {
-        assertThrows(IllegalArgumentException.class, () -> 
+        assertThrows(IllegalArgumentException.class, () ->
             Schedule.isValidTime("Monday 12:00 13:00"));
-        assertThrows(IllegalArgumentException.class, () -> 
+        assertThrows(IllegalArgumentException.class, () ->
             Schedule.isValidTime("Monday 1200 25:00"));
-        assertThrows(IllegalArgumentException.class, () -> 
+        assertThrows(IllegalArgumentException.class, () ->
             Schedule.isValidTime("Monday abcd 1300"));
-        assertThrows(IllegalArgumentException.class, () -> 
+        assertThrows(IllegalArgumentException.class, () ->
             Schedule.isValidTime("Monday 1200 efgh"));
     }
     @Test
     public void isValidTime_insufficientParts_throwsException() {
-        assertThrows(IllegalArgumentException.class, () -> 
+        assertThrows(IllegalArgumentException.class, () ->
             Schedule.isValidTime("Monday 1200"));
-        assertThrows(IllegalArgumentException.class, () -> 
+        assertThrows(IllegalArgumentException.class, () ->
             Schedule.isValidTime("Monday"));
     }
     @Test
@@ -77,4 +77,4 @@ public class ScheduleTest {
             return "TestSchedule[" + startTime + "-" + endTime + "]";
         }
     }
-} 
+}
