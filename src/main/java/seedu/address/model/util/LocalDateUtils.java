@@ -87,17 +87,12 @@ public class LocalDateUtils {
             return false;
         }
         String[] parts = date.split("/");
-        try {
-            int day = Integer.parseInt(parts[0]);
-            int month = Integer.parseInt(parts[1]);
-            int year = (parts.length == 3) ? Integer.parseInt(parts[2]) : LocalDate.now().getYear() % 100;
-            //Check days in month
-            int maxDaysInMonth = YearMonth.of(2000 + year, month).lengthOfMonth();
-            return day >= 1 && day <= maxDaysInMonth;
-
-        } catch (NumberFormatException e) {
-            return false; // If parsing fails
-        }
+        int day = Integer.parseInt(parts[0]);
+        int month = Integer.parseInt(parts[1]);
+        int year = (parts.length == 3) ? Integer.parseInt(parts[2]) : LocalDate.now().getYear() % 100;
+        //Check days in month
+        int maxDaysInMonth = YearMonth.of(2000 + year, month).lengthOfMonth();
+        return day >= 1 && day <= maxDaysInMonth;
     }
 
     public static String generateDateRegex() {
