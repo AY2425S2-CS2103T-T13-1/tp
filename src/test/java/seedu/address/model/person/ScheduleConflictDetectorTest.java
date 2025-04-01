@@ -247,43 +247,38 @@ public class ScheduleConflictDetectorTest {
     @Test
     public void checkScheduleConflict_nullPerson_throwsNullPointerException() {
         Schedule schedule = new RecurringSchedule("Monday 1200 1300");
-        assertThrows(NullPointerException.class, () -> 
+        assertThrows(NullPointerException.class, () ->
                 ScheduleConflictDetector.checkScheduleConflict(null, schedule));
     }
 
     @Test
     public void checkScheduleConflict_nullSchedule_throwsNullPointerException() {
         Person person = new PersonBuilder().build();
-        assertThrows(NullPointerException.class, () -> 
+        assertThrows(NullPointerException.class, () ->
                 ScheduleConflictDetector.checkScheduleConflict(person, null));
     }
 
     @Test
     public void checkInternalScheduleConflicts_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> 
+        assertThrows(NullPointerException.class, () ->
                 ScheduleConflictDetector.checkInternalScheduleConflicts(null));
     }
 
     @Test
     public void hasTimeOverlapBetweenSchedules_nullSchedule_throwsNullPointerException() {
         Schedule schedule = new RecurringSchedule("Monday 1200 1300");
-
-        // Test to cover line 246: first parameter null
         Exception exception1 = assertThrows(InvocationTargetException.class, () -> {
             invokeHasTimeOverlapBetweenSchedules(null, schedule);
         });
         assertEquals(null, exception1.getMessage());
-
-        // Test to cover line 247: second parameter null
         Exception exception2 = assertThrows(InvocationTargetException.class, () -> {
             invokeHasTimeOverlapBetweenSchedules(schedule, null);
         });
         assertEquals(null, exception2.getMessage());
     }
 
-    @Test 
+    @Test
     public void convertTimeToMinutes_nullTime_throwsNullPointerException() {
-        // Test to cover line 260: time cannot be null
         Exception exception = assertThrows(InvocationTargetException.class, () -> {
             invokeConvertTimeToMinutes(null);
         });
@@ -293,18 +288,10 @@ public class ScheduleConflictDetectorTest {
     @Test
     public void checkScheduleConflict_unknownScheduleType_fallsThroughToAssert() {
         Person person = new PersonBuilder().build();
-        
-        // Create a test schedule that is not OneTimeSchedule or RecurringSchedule
-        // This will trigger the assert false branch (line 32-33)
         Schedule unknownSchedule = new TestSchedule("1200", "1300");
-        
-        // This will throw an AssertionError due to the assertion on line 33
-        // We're expecting an assertion error because we've designed the test to hit the assert
         assertThrows(AssertionError.class, () -> 
                 ScheduleConflictDetector.checkScheduleConflict(person, unknownSchedule));
     }
-    
-    // Helper method to invoke the private method using reflection
     private boolean invokeHasTimeOverlapBetweenSchedules(Schedule schedule1, Schedule schedule2) 
             throws Exception {
         java.lang.reflect.Method method = ScheduleConflictDetector.class
@@ -312,22 +299,16 @@ public class ScheduleConflictDetectorTest {
         method.setAccessible(true);
         return (boolean) method.invoke(null, schedule1, schedule2);
     }
-    
-    // Helper method to invoke the private method using reflection
     private int invokeConvertTimeToMinutes(String time) throws Exception {
         java.lang.reflect.Method method = ScheduleConflictDetector.class
                 .getDeclaredMethod("convertTimeToMinutes", String.class);
         method.setAccessible(true);
         return (int) method.invoke(null, time);
     }
-    
-    // A test schedule implementation that doesn't match the expected types
-    // This is used to test the assert false block on lines 32-33
     private static class TestSchedule extends Schedule {
         public TestSchedule(String startTime, String endTime) {
             super(startTime, endTime);
         }
-        
         @Override
         public String toString() {
             return "TestSchedule[" + startTime + "-" + endTime + "]";
