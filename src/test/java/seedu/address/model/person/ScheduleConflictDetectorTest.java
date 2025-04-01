@@ -239,21 +239,21 @@ public class ScheduleConflictDetectorTest {
     @Test
     public void checkScheduleConflict_nullPerson_throwsNullPointerException() {
         RecurringSchedule schedule = new RecurringSchedule("Monday 1000 1200");
-        assertThrows(NullPointerException.class,
-            () -> ScheduleConflictDetector.checkScheduleConflict(null, schedule));
+        assertThrows(NullPointerException.class, () -> ScheduleConflictDetector
+                .checkScheduleConflict(null, schedule));
     }
     @Test
     public void checkScheduleConflict_nullSchedule_throwsNullPointerException() {
         Set<RecurringSchedule> recurringSchedules = new HashSet<>();
         Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
         Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
-        assertThrows(NullPointerException.class,
-            () -> ScheduleConflictDetector.checkScheduleConflict(person, null));
+        assertThrows(NullPointerException.class, () -> ScheduleConflictDetector
+                .checkScheduleConflict(person, null));
     }
     @Test
     public void checkInternalScheduleConflicts_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-            () -> ScheduleConflictDetector.checkInternalScheduleConflicts(null));
+        assertThrows(NullPointerException.class, () -> ScheduleConflictDetector
+                .checkInternalScheduleConflicts(null));
     }
     @Test
     public void hasTimeOverlapBetweenSchedules_handlesInvalidTimeFormats() {
