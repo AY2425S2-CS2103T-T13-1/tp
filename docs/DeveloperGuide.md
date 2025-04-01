@@ -711,7 +711,7 @@ testers are expected to do more *exploratory* testing.
 
    2. Double-click the jar file Expected: Shows the GUI with contacts. The most recent window size and location is retained.
 
-### Deleting a person
+### Deleting a client
 
 1. Deleting a client while all clients are being shown
 
@@ -729,7 +729,9 @@ testers are expected to do more *exploratory* testing.
    5. Other incorrect delete commands to try: `delete`, `delete y`, `...` (where y is not a positive integer)<br>
       Expected: Similar to previous.
 
-2. Displaying a client while all clients are being shown
+### Displaying a client
+
+1. Displaying a client while all clients are being shown
 
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
@@ -745,11 +747,17 @@ testers are expected to do more *exploratory* testing.
     5. Other incorrect display commands to try: `display`, `display y`, `...` (where y is not a positive integer)<br>
        Expected: Similar to previous.
 
-3. Viewing clients on a date or day
+### Viewing a client
 
-4. Adding a client to the addressbook
+1. Viewing clients on a date or day
 
-5. Editing a client details in the addressbook
+### Adding a client
+
+1. Adding a client to the addressbook
+
+### Editing a client
+
+1. Editing a client details in the addressbook
 
 ### Saving data
 
