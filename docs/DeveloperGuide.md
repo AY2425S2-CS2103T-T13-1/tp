@@ -360,7 +360,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1b2. FitFlow prompts the user to enter a non-conflicting session timing.
     - 1b3. User re-enters the command.<br>
       Steps 1b1-1b3 repeat until a non-conflicting session timing is provided.<br>
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 ---
 
@@ -424,7 +424,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2b1. FitFlow shows an error message and prompts the user the format of the command.
     - 2b2. User re-enters the command.<br>
       Steps 2b1-2b2 repeat until the command is entered correctly.<br>
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 ---
 
