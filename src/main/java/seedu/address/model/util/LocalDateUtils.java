@@ -3,8 +3,10 @@ package seedu.address.model.util;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Functions to interact with LocalDate.
@@ -82,7 +84,21 @@ public class LocalDateUtils {
      */
     public static boolean isValidDateString(String date) {
         requireNonNull(date);
-        return date.matches(DATE_REGEX);
+        if (!date.matches(DATE_REGEX)) {
+            return false;
+        }
+        String[] parts = date.split("/");
+        try {
+            int day = Integer.parseInt(parts[0]);
+            int month = Integer.parseInt(parts[1]);
+            int year = (parts.length == 3) ? Integer.parseInt(parts[2]) : LocalDate.now().getYear() % 100;
+            //Check days in month
+            int maxDaysInMonth = YearMonth.of(2000 + year, month).lengthOfMonth();
+            return day >= 1 && day <= maxDaysInMonth;
+
+        } catch (NumberFormatException e) {
+            return false; // If parsing fails
+        }
     }
 
     public static String generateDateRegex() {
