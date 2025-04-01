@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.util.LocalDateUtils;
 
 /**
@@ -12,6 +14,7 @@ import seedu.address.model.util.LocalDateUtils;
  * Guarantees: immutable; is valid as declared in {@link #isValidOneTimeSchedule(String)}
  */
 public class OneTimeSchedule extends Schedule {
+    private static final Logger logger = LogsCenter.getLogger(OneTimeSchedule.class);
 
     public static final String MESSAGE_CONSTRAINTS =
         "Dates must be in the format: date start end, either [d/m HHmm HHmm] or [d/m/yy HHmm HHmm].\n"
@@ -43,8 +46,15 @@ public class OneTimeSchedule extends Schedule {
      */
     public OneTimeSchedule(String schedule) {
         super(validateThenExtractStartTime(schedule), extractEndTime(schedule)); // Call Schedule constructor
+        
+        assert schedule != null : "Schedule string cannot be null";
+        assert isValidOneTimeSchedule(schedule) : "Invalid one-time schedule: " + schedule;
+        
         this.date = extractDate(schedule);
+        logger.fine("Created one-time schedule on date: " + this.date + " with times: " + 
+                    getStartTime() + "-" + getEndTime());
     }
+    
     private static String validateThenExtractStartTime(String schedule) {
         requireNonNull(schedule);
         checkArgument(isValidOneTimeSchedule(schedule), MESSAGE_CONSTRAINTS);
@@ -52,16 +62,31 @@ public class OneTimeSchedule extends Schedule {
     }
 
     private static LocalDate extractDate(String schedule) {
-        String datePart = schedule.split(" ")[0];
-        return LocalDateUtils.localDateParser(datePart);
+        try {
+            String datePart = schedule.split(" ")[0];
+            return LocalDateUtils.localDateParser(datePart);
+        } catch (Exception e) {
+            logger.warning("Error extracting date from schedule: " + e.getMessage());
+            throw new IllegalArgumentException("Invalid date format in schedule: " + schedule, e);
+        }
     }
 
     private static String extractStartTime(String schedule) {
-        return schedule.split(" ")[1];
+        try {
+            return schedule.split(" ")[1];
+        } catch (Exception e) {
+            logger.warning("Error extracting start time from schedule: " + e.getMessage());
+            throw new IllegalArgumentException("Invalid start time format in schedule: " + schedule, e);
+        }
     }
 
     private static String extractEndTime(String schedule) {
-        return schedule.split(" ")[2];
+        try {
+            return schedule.split(" ")[2];
+        } catch (Exception e) {
+            logger.warning("Error extracting end time from schedule: " + e.getMessage());
+            throw new IllegalArgumentException("Invalid end time format in schedule: " + schedule, e);
+        }
     }
 
     public LocalDate getDate() {
@@ -76,9 +101,15 @@ public class OneTimeSchedule extends Schedule {
      * Returns true if a given date is a valid one time date.
      */
     public static boolean isValidOneTimeSchedule(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (test == null) {
+            logger.warning("Null schedule provided to isValidOneTimeSchedule");
+        }
+        boolean isValid = test.matches(VALIDATION_REGEX);
+        if (!isValid) {
+            logger.fine("Invalid one-time schedule format: " + test);
+        }
+        return isValid;
     }
-
 
     @Override
     public String toString() {
@@ -108,6 +139,4 @@ public class OneTimeSchedule extends Schedule {
         String toHash = getDateString() + " " + startTime + " " + endTime;
         return toHash.hashCode();
     }
-
-
 }
