@@ -355,6 +355,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1a2. User enters new data.<br>
       Steps 1a1-1a2 repeat until the data is entered.<br>
       Use case resumes at step 2.
+- **1b.** User provides a session timing that conflicts with an existing session timing.
+    - 1b1. FitFlow shows the existing session timing that conflicts with the given session timing.
+    - 1b2. FitFlow prompts the user to enter a non-conflicting session timing.
+    - 1b3. User re-enters the command.<br>
+      Steps 1b1-1b3 repeat until a non-conflicting session timing is provided.<br>
+      Use case resumes at step 3.
 
 ---
 
@@ -394,6 +400,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1a2. User re-enters the command.<br>
       Steps 1a1-1a2 repeat until the command is entered correctly.<br>
       Use case resumes at step 2.
+- **1b.** No clients were found to have sessions on given day.
+    - 1b1. FitFlow tells the User that the schedule for the given day is empty.<br>
+      Use case ends.
 
 ---
 
@@ -409,12 +418,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - **2a.** The client requested to display does not exist.<br>
-    - 1a1. FitFlow tells the User that it was unable to find that client.<br>
+    - 2a1. FitFlow tells the User that it was unable to get the specified client's details.<br>
       Use case ends.
-- **1b.** The given client is invalid.<br>
-    - 1b1. FitFlow shows an error message and prompts the user the format of the command.
-    - 1b2. User re-enters the command.<br>
-      Steps 1b1-1b2 repeat until the command is entered correctly.<br>
+- **2b.** The given client is invalid.<br>
+    - 2b1. FitFlow shows an error message and prompts the user the format of the command.
+    - 2b2. User re-enters the command.<br>
+      Steps 2b1-2b2 repeat until the command is entered correctly.<br>
       Use case resumes at step 2.
 
 ---
@@ -452,8 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <ins>find client (Use Case 3)</ins> or find the client to edit from the displayed client list.
 2. User requests to edit the client's details.
-3. FitFlow stores the new details of the client and indicates success.
-4. FitFlow updates the details of the client on the displayed client list.<br>
+3. FitFlow stores the new details of the client and indicates success.<br>
    Use case ends.
 
 **Extensions**
@@ -465,11 +473,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
       Use case resumes at step 3.
-- **2a.** User provides a session timing that conflicts with an existing session timing.
-    - 2a1. FitFlow shows the existing session timing that conflicts with the given session timing.
-    - 2a2. FitFlow prompts the user to enter a non-conflicting session timing.
-    - 2a3. User re-enters the command.<br>
-      Steps 2a1-2a3 repeat until a non-conflicting session timing is provided.<br>
+- **2b.** User provides a session timing that conflicts with an existing session timing.
+    - 2b1. FitFlow shows the existing session timing that conflicts with the given session timing.
+    - 2b2. FitFlow prompts the user to enter a non-conflicting session timing.
+    - 2b3. User re-enters the command.<br>
+      Steps 2b1-2b3 repeat until a non-conflicting session timing is provided.<br>
       Use case resumes at step 3.
 
 ---
@@ -480,8 +488,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <ins>find client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
 2. User requests to <ins>edit client's details (Use Case 6)</ins> to add a session to the client.
-3. FitFlow stores the new session details to the client details.
-4. FitFlow updates the details on the displayed client list.<br>
+3. FitFlow stores the new session details to the client details.<br>
    Use case ends.
 
 **Extensions**
@@ -502,8 +509,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <ins>find client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
 2. User requests to <ins>edit client's details (Use Case 6)</ins> to delete a session from the client.
-3. FitFlow removes the session details from the client details.
-4. FitFlow removes the session details from the displayed client list.<br>
+3. FitFlow removes the session details from the client details.<br>
    Use case ends.
 
 **Extensions**
@@ -524,8 +530,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <ins>find client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
 2. User requests to <ins>edit client's details (Use Case 6)</ins> to modify session details for the client.
-3. FitFlow stores the new session details for the client.
-4. FitFlow modifies the session details on the displayed client list.<br>
+3. FitFlow stores the new session details for the client.<br>
    Use case ends.
 
 **Extensions**
@@ -545,8 +550,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add a session and includes the clients' names involved with the session.
-2. FitFlow stores the new session details for each of the specified client.
-3. FitFlow modifies the session details on the displayed client list.<br>
+2. FitFlow stores the new session details for each of the specified client.<br>
    Use case ends.
 
 **Extensions**
@@ -568,8 +572,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. FitFlow shows the session details and the clients involved in the session.
 4. FitFlow will prompt the user to confirm the decision to delete.
 5. User confirms.
-6. FitFlow removes the session details for each of the specified clients.
-7. FitFlow removes the session details on the displayed client list.<br>
+6. FitFlow removes the session details for each of the specified clients.<br>
    Use case ends.
 
 **Extensions**
@@ -591,8 +594,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <ins>view schedule (Use Case 4)</ins> to find the session to modify.
 2. User requests to modify the specific session with new details.
-3. FitFlow stores the new session details for the client.
-4. FitFlow modifies the session details on the displayed client list.<br>
+3. FitFlow stores the new session details for the client.<br>
    Use case ends.
 
 **Extensions**
