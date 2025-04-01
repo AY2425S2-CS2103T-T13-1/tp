@@ -1,9 +1,10 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.LogsCenter;
 
@@ -24,7 +25,8 @@ public class ScheduleConflictDetector {
     public static ScheduleConflictResult checkScheduleConflict(Person person, Schedule newSchedule) {
         requireNonNull(person);
         requireNonNull(newSchedule);
-        logger.fine("Checking schedule conflicts for person: " + person.getName() + " with new schedule: " + newSchedule);
+        logger.fine("Checking schedule conflicts for person: " + person.getName() + " with new schedule: "
+                + newSchedule);
         if (newSchedule instanceof RecurringSchedule) {
             RecurringSchedule newRecurringSchedule = (RecurringSchedule) newSchedule;
             // Check against existing recurring schedules

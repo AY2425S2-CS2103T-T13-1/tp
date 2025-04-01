@@ -14,10 +14,9 @@ import seedu.address.model.util.LocalDateUtils;
  * Guarantees: immutable; is valid as declared in {@link #isValidOneTimeSchedule(String)}
  */
 public class OneTimeSchedule extends Schedule {
-    private static final Logger logger = LogsCenter.getLogger(OneTimeSchedule.class);
 
-    public static final String MESSAGE_CONSTRAINTS =
-        "Dates must be in the format: date start end, either [d/m HHmm HHmm] or [d/m/yy HHmm HHmm].\n"
+    public static final String MESSAGE_CONSTRAINTS = "Dates must be in the format: date start end,"
+            + "either [d/m HHmm HHmm] or [d/m/yy HHmm HHmm].\n"
         + "Days and months can be 1 or 2 digits. Years (if included) must be 2 digits. "
         + "Times must be 4 digits in 24-hour format.";
 
@@ -33,12 +32,12 @@ public class OneTimeSchedule extends Schedule {
      * Year: optional, but if present, must be two digits
      * Times: 24-hour time format
      */
-    public static final String VALIDATION_REGEX =
-        "^" + LocalDateUtils.DATE_REGEX + "\\s" // Date
+    public static final String VALIDATION_REGEX = "^" + LocalDateUtils.DATE_REGEX + "\\s" // Date
             + VALIDATION_REGEX_TIME + "\\s" // First HHmm (0000 - 2359)
             + VALIDATION_REGEX_TIME + "$"; // Second HHmm (0000 - 2359)
 
     public final LocalDate date;
+    private static final Logger logger = LogsCenter.getLogger(OneTimeSchedule.class);
     /**
      * Constructs a {@code OneTimeSchedule}.
      *
@@ -49,8 +48,8 @@ public class OneTimeSchedule extends Schedule {
         assert schedule != null : "Schedule string cannot be null";
         assert isValidOneTimeSchedule(schedule) : "Invalid one-time schedule: " + schedule;
         this.date = extractDate(schedule);
-        logger.fine("Created one-time schedule on date: " + this.date + " with times: " +
-                    getStartTime() + "-" + getEndTime());
+        logger.fine("Created one-time schedule on date: " + this.date + " with times: "
+                + getStartTime() + "-" + getEndTime());
     }
     private static String validateThenExtractStartTime(String schedule) {
         requireNonNull(schedule);

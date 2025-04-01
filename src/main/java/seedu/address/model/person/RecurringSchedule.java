@@ -15,7 +15,6 @@ import seedu.address.model.util.DayOfWeekUtils;
  * Guarantees: immutable; name is valid as declared in {@link #isValidRecurringSchedule(String)}
  */
 public class RecurringSchedule extends Schedule {
-    private static final Logger logger = LogsCenter.getLogger(RecurringSchedule.class);
 
     public static final String MESSAGE_CONSTRAINTS = "Recurring schedules should be in the following format:"
             + " [day HHmm HHmm].";
@@ -28,10 +27,9 @@ public class RecurringSchedule extends Schedule {
             "^(?i)(" + DayOfWeekUtils.DAY_OF_WEEK_REGEX + ")\\s"
                     + VALIDATION_REGEX_TIME + "\\s" // First HHmm (0000 - 2359)
                     + VALIDATION_REGEX_TIME + "$"; // Second HHmm (0000 - 2359)
-
-    private static final Pattern pattern = Pattern.compile(VALIDATION_REGEX, Pattern.CASE_INSENSITIVE);
-
     public final DayOfWeek day;
+    private static final Pattern pattern = Pattern.compile(VALIDATION_REGEX, Pattern.CASE_INSENSITIVE);
+    private static final Logger logger = LogsCenter.getLogger(RecurringSchedule.class);
 
     /**
      * Constructs a {@code RecurringSchedule}.
@@ -43,8 +41,8 @@ public class RecurringSchedule extends Schedule {
         assert schedule != null : "Schedule string cannot be null";
         assert isValidRecurringSchedule(schedule) : "Invalid recurring schedule: " + schedule;
         this.day = extractDay(schedule);
-        logger.fine("Created recurring schedule on day: " + this.day + " with times: " +
-                   getStartTime() + "-" + getEndTime());
+        logger.fine("Created recurring schedule on day: " + this.day + " with times: "
+                + getStartTime() + "-" + getEndTime());
     }
     private static String validateThenExtractStartTime(String schedule) {
         requireNonNull(schedule);
