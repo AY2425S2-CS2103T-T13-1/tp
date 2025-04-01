@@ -496,7 +496,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case 9: Delete session to client**
+**Use case 9: Delete session from client**
 
 **MSS**
 
