@@ -289,10 +289,10 @@ public class ScheduleConflictDetectorTest {
     public void checkScheduleConflict_unknownScheduleType_fallsThroughToAssert() {
         Person person = new PersonBuilder().build();
         Schedule unknownSchedule = new TestSchedule("1200", "1300");
-        assertThrows(AssertionError.class, () -> 
+        assertThrows(AssertionError.class, () ->
                 ScheduleConflictDetector.checkScheduleConflict(person, unknownSchedule));
     }
-    private boolean invokeHasTimeOverlapBetweenSchedules(Schedule schedule1, Schedule schedule2) 
+    private boolean invokeHasTimeOverlapBetweenSchedules(Schedule schedule1, Schedule schedule2)
             throws Exception {
         java.lang.reflect.Method method = ScheduleConflictDetector.class
                 .getDeclaredMethod("hasTimeOverlapBetweenSchedules", Schedule.class, Schedule.class);
