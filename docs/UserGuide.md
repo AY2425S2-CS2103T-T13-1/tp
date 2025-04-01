@@ -47,7 +47,7 @@ These boxes indicate warnings about potential negative outcomes.
 
 3. Copy the file to the folder you want to use as the _home folder_ for your FitFlow app.
 
-4. Go to your home folder and double-click on the `.jar` file to launch the application.</br>
+4. Go to your home folder and double-click on the `.jar` file to launch the application.<br>
     * If the above does not work, try the below steps:
         1. Open a command terminal for your operating system.
             * Windows: Press Windows button + X on the keyboard. Click on Terminal.
@@ -219,8 +219,8 @@ Examples:
 
 Displays the sessions the personal trainer has with clients on that day or date.
 
-Format: `view DAY/DATE` </br>
-DAY Format: `Monday` or `Mon`</br>
+Format: `view DAY/DATE`<br>
+DAY Format: `Monday` or `Mon`<br>
 DATE Format: `[D]D/[M]M[/YY]`
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note**
@@ -335,7 +335,7 @@ FitFlow data are saved automatically as a JSON file `[JAR file location]/data/ad
 
 Action | Format, Examples
 --------|------------------
-**Help** | `help [/add] [/view] [/schedule] [/edit] [/delete] [/clear] [/exit]` <br> e.g., `help /add`
+**Help** | `help [/add] [/list] [/edit] [/find] [/display] [/view] [/delete] [/clear] [/exit]` <br> e.g., `help /add`
 **Add** | `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [t/TAG]…​` <br> e.g., `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
 **List** | `list` <br> e.g., `list`
 **Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find John`
