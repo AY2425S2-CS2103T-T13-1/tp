@@ -16,18 +16,15 @@ You can use the [Table of contents](#table-of-contents) to navigate directly to 
 
 <div style="page-break-after: always;"></div>
 
-<div markdown="block" class="alert alert-info">:bulb: **Tips/Info**
-
+<div markdown="block" class="alert alert-info">:bulb: **Tips/Info:**<br>
 These boxes contain important/useful information or tips that can help you with using FitFlow.
 </div>
 
-<div markdown="block" class="alert alert-warning">:exclamation: **Note**
-
+<div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
 These boxes indicate information that you should take note of to avoid running into problems.
 </div>
 
-<div markdown="block" class="alert alert-danger">:rotating_light: **Caution**
-
+<div markdown="block" class="alert alert-danger">:rotating_light: **Caution:**<br>
 These boxes indicate warnings about potential negative outcomes.
 </div>
 
@@ -101,7 +98,7 @@ To get a feel for the app before actually starting to use it, check out our [_Gu
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Tips about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -143,14 +140,14 @@ Adds a client to FitFlow.
 Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
-A client can have any number of recurring schedule, one time schedule, or tags (including 0).
+- A client can have any number of recurring schedule, one time schedule, or tags (including 0).
 </div>
 
-<div markdown="block" class="alert alert-warning">:exclamation: **Note**
-A client should have at least have a name and a phone number to be added.<br>
-Any date provided that excludes year will be treated as a date in the current year.<br>
-A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
-Use the edit command to rectify any conflicting schedules.
+<div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
+- A client should have at least have a name and a phone number to be added.<br>
+- Any date provided that excludes year will be treated as a date in the current year.<br>
+- A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
+- Use the edit command to rectify any conflicting schedules.
 </div>
 
 * For `NAME`, `GOALS`, `MEDICAL_HISTORY`, and `LOCATION`, these fields accept all ASCII characters.
@@ -223,8 +220,8 @@ Format: `view DAY/DATE` </br>
 DAY Format: `Monday` or `Mon`</br>
 DATE Format: `[D]D/[M]M[/YY]`
 
-<div markdown="block" class="alert alert-warning">:exclamation: **Note**
-Any date provided that excludes year will be treated as a date in the current year.
+<div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
+- Any date provided that excludes year will be treated as a date in the current year.
 </div>
 
 * The search is case-insensitive. i.e. `Monday` will match `monday`.
@@ -248,10 +245,10 @@ Edits an existing client in FitFlow.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`
 
-<div markdown="block" class="alert alert-warning">:exclamation: **Note**
-Any date provided that excludes year will be treated as a date in the current year.<br>
-A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
-Use the edit command to rectify any conflicting schedules.
+<div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
+- Any date provided that excludes year will be treated as a date in the current year.<br>
+- A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
+- Use the edit command to rectify any conflicting schedules.
 </div>
 
 * Edits the client at the specified `INDEX`.
@@ -274,8 +271,8 @@ Deletes the specified client from FitFlow.
 
 Format: `delete INDEX`
 
-<div markdown="span" class="alert alert-danger">
-:rotating_light: **This command is irreversible. Use with caution.**
+<div markdown="block" class="alert alert-danger">:rotating_light: **Caution:**<br>
+**This command is irreversible. Use with caution.**
 </div>
 
 * Deletes the client at the specified `INDEX`.
@@ -300,8 +297,8 @@ Clears all entries from FitFlow.
 
 Format: `clear`
 
-<div markdown="span" class="alert alert-danger">
-:rotating_light: **This command is irreversible. Use with caution.**
+<div markdown="block" class="alert alert-danger">:rotating_light: **Caution:**<br>
+**This command is irreversible. Use with caution.**
 </div>
 
 
