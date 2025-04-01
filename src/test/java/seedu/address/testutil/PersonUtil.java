@@ -17,6 +17,7 @@ import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.DayOfWeekUtils;
 
 /**
  * A utility class for Person.
@@ -68,7 +69,8 @@ public class PersonUtil {
                 sb.append(PREFIX_RECURRING_SCHEDULE).append(" ");;
             } else {
                 recurringSchedules.forEach(s -> sb.append(PREFIX_RECURRING_SCHEDULE)
-                        .append(s.day).append(" ").append(s.getStartTime()).append(" ")
+                        .append(DayOfWeekUtils.getPascalCaseName(s.getDay())).append(" ")
+                        .append(s.getStartTime()).append(" ")
                         .append(s.getEndTime()).append(" ")
                 );
             }
@@ -86,7 +88,7 @@ public class PersonUtil {
                 sb.append(PREFIX_ONETIMESCHEDULE).append(" ");
             } else {
                 oneTimeSchedules.forEach(s -> sb.append(PREFIX_ONETIMESCHEDULE)
-                        .append(s.date).append(" ").append(s.getStartTime()).append(" ")
+                        .append(s.getDateString()).append(" ").append(s.getStartTime()).append(" ")
                         .append(s.getEndTime()).append(" "));
             }
         }

@@ -28,7 +28,7 @@ public class RecurringSchedule extends Schedule {
 
     private static final Pattern pattern = Pattern.compile(VALIDATION_REGEX, Pattern.CASE_INSENSITIVE);
 
-    public final DayOfWeek day;
+    private final DayOfWeek day;
 
     /**
      * Constructs a {@code RecurringSchedule}.
