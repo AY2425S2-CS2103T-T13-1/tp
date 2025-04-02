@@ -59,10 +59,23 @@ public class ViewCommand extends Command {
         return new CommandResult(messageHeader + searchResult);
     }
 
+    /**
+     * Builds the message header for the command result.
+     *
+     * @param keyword The keyword used for filtering.
+     * @return The formatted message header.
+     */
     private String buildMessageHeader(String keyword) {
         return String.format(Messages.MESSAGE_SCHEDULES_LISTED, keyword) + "\n\n";
     }
 
+    /**
+     * Fetches the search result based on the given keyword.
+     *
+     * @param model The model containing the list of clients and schedules.
+     * @param keyword The keyword used for filtering.
+     * @return The formatted search result.
+     */
     private String fetchSearchResult(Model model, String keyword) {
         LocalDate date = predicate.getDateToFind();
         return DayOfWeekUtils.isDayOfWeek(keyword)
@@ -70,6 +83,14 @@ public class ViewCommand extends Command {
                 : resultGiven(model, date.getDayOfWeek(), date);
     }
 
+    /**
+     * Generates the result string for the given day and date.
+     *
+     * @param model The model containing the list of clients and schedules.
+     * @param day The day of the week to filter recurring schedules.
+     * @param date The specific date to filter one-time schedules.
+     * @return The formatted result string.
+     */
     private String resultGiven(Model model, DayOfWeek day, LocalDate date) {
         AtomicInteger index = new AtomicInteger(1);
 
@@ -79,6 +100,15 @@ public class ViewCommand extends Command {
                 .trim();
     }
 
+    /**
+     * Formats the schedule of a client for the given day and date.
+     *
+     * @param person The client whose schedule is being formatted.
+     * @param day The day of the week to filter recurring schedules.
+     * @param targetDate The specific date to filter one-time schedules.
+     * @param index The index of the client in the filtered list.
+     * @return The formatted schedule string for the client.
+     */
     private String formatPersonSchedule(Person person, DayOfWeek day, LocalDate targetDate, AtomicInteger index) {
         List<String> recurringTimes = findMatchingRecurringSchedule(person, day);
         List<String> oneTimeTimes = findMatchingOneTimeSchedule(person, targetDate);
@@ -90,6 +120,13 @@ public class ViewCommand extends Command {
                 String.join(", ", allTimes));
     }
 
+    /**
+     * Finds the recurring schedules of a client that match the given day.
+     *
+     * @param person The client whose recurring schedules are being filtered.
+     * @param day The day of the week to filter recurring schedules.
+     * @return A list of formatted recurring schedule times.
+     */
     private List<String> findMatchingRecurringSchedule(Person person, DayOfWeek day) {
         return person.getRecurringSchedules().stream()
                 .filter(schedule -> String.valueOf(schedule.getDay())
@@ -99,6 +136,13 @@ public class ViewCommand extends Command {
                 .toList();
     }
 
+    /**
+     * Finds the one-time schedules of a client that match the given date.
+     *
+     * @param person The client whose one-time schedules are being filtered.
+     * @param date The specific date to filter one-time schedules.
+     * @return A list of formatted one-time schedule times.
+     */
     private List<String> findMatchingOneTimeSchedule(Person person, LocalDate date) {
         return person.getOneTimeSchedules().stream()
                 .filter(schedule -> schedule.getDateString()
