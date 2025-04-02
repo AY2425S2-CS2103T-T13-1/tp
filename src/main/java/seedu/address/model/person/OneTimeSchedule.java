@@ -18,6 +18,10 @@ public class OneTimeSchedule extends Schedule {
         + "Days and months can be 1 or 2 digits. Years (if included) must be 2 digits. "
         + "Times must be 4 digits in 24-hour format.";
 
+    public static final String MESSAGE_DATE_CONSTRAINTS =
+            "Invalid date provided. Ensure the day, month, and year (if included) form a valid calendar date. "
+            + "Days must match the given month (e.g., no 30th February), and leap years must be considered.";
+
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
@@ -131,6 +135,14 @@ public class OneTimeSchedule extends Schedule {
     public static boolean isValidOneTimeSchedule(String test) {
         requireNonNull(test);
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if the given String has a valid date.
+     */
+    public static boolean isValidDate(String test) {
+        String datePart = test.split(" ")[0];
+        return LocalDateUtils.isValidDateString(datePart);
     }
 
     @Override

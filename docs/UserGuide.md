@@ -16,18 +16,15 @@ You can use the [Table of contents](#table-of-contents) to navigate directly to 
 
 <div style="page-break-after: always;"></div>
 
-<div markdown="block" class="alert alert-info">:bulb: **Tips/Info**
-
+<div markdown="block" class="alert alert-info">:bulb: **Tips/Info:**<br>
 These boxes contain important/useful information or tips that can help you with using FitFlow.
 </div>
 
-<div markdown="block" class="alert alert-warning">:exclamation: **Note**
-
+<div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
 These boxes indicate information that you should take note of to avoid running into problems.
 </div>
 
-<div markdown="block" class="alert alert-danger">:rotating_light: **Caution**
-
+<div markdown="block" class="alert alert-danger">:rotating_light: **Caution:**<br>
 These boxes indicate warnings about potential negative outcomes.
 </div>
 
@@ -47,7 +44,7 @@ These boxes indicate warnings about potential negative outcomes.
 
 3. Copy the file to the folder you want to use as the _home folder_ for your FitFlow app.
 
-4. Go to your home folder and double-click on the `.jar` file to launch the application.</br>
+4. Go to your home folder and double-click on the `.jar` file to launch the application.<br>
     * If the above does not work, try the below steps:
         1. Open a command terminal for your operating system.
             * Windows: Press Windows button + X on the keyboard. Click on Terminal.
@@ -101,7 +98,7 @@ To get a feel for the app before actually starting to use it, check out our [_Gu
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Tips about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -143,14 +140,14 @@ Adds a client to FitFlow.
 Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
-A client can have any number of recurring schedule, one time schedule, or tags (including 0).
+- A client can have any number of recurring schedule, one time schedule, or tags (including 0).
 </div>
 
-<div markdown="block" class="alert alert-warning">:exclamation: **Note**
-A client should have at least have a name and a phone number to be added.<br>
-Any date provided that excludes year will be treated as a date in the current year.<br>
-A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
-Use the edit command to rectify any conflicting schedules.
+<div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
+- A client should have at least have a name and a phone number to be added.<br>
+- Any date provided that excludes year will be treated as a date in the current year.<br>
+- A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
+- Use the edit command to rectify any conflicting schedules.
 </div>
 
 * For `NAME`, `GOALS`, `MEDICAL_HISTORY`, and `LOCATION`, these fields accept all ASCII characters.
@@ -163,10 +160,11 @@ Use the edit command to rectify any conflicting schedules.
     * The day and month of the date can have its leading `0` omitted if it is single digit.
     * The year of the date can be omitted. In this case, the application will assume the current year.
   * `START_TIME` and `END_TIME` should be 4 digits, in 24-hour format.
+* To rectify a client's conflicting schedules, refer to the [**`edit`**](#editing-a-client--edit) section.
 
 Examples:
 * `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
-* `add n/Betsy Crowe t/friend g/Lose weight l/Jurong GymBox p/1234567 mh/Lower back injury rs/Wed 1500 1700`
+* `add n/Betsy Crowe t/friend g/Lose weight l/Jurong GymBox p/91234567 mh/Lower back injury rs/Wed 1500 1700`
 
 
 ### Listing all clients: `list`
@@ -219,12 +217,12 @@ Examples:
 
 Displays the sessions the personal trainer has with clients on that day or date.
 
-Format: `view DAY/DATE` </br>
-DAY Format: `Monday` or `Mon`</br>
+Format: `view DAY/DATE`<br>
+DAY Format: `Monday` or `Mon`<br>
 DATE Format: `[D]D/[M]M[/YY]`
 
-<div markdown="block" class="alert alert-warning">:exclamation: **Note**
-Any date provided that excludes year will be treated as a date in the current year.
+<div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
+- Any date provided that excludes year will be treated as a date in the current year.
 </div>
 
 * The search is case-insensitive. i.e. `Monday` will match `monday`.
@@ -248,10 +246,10 @@ Edits an existing client in FitFlow.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`
 
-<div markdown="block" class="alert alert-warning">:exclamation: **Note**
-Any date provided that excludes year will be treated as a date in the current year.<br>
-A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
-Use the edit command to rectify any conflicting schedules.
+<div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
+- Any date provided that excludes year will be treated as a date in the current year.<br>
+- A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
+- Use the edit command to rectify any conflicting schedules.
 </div>
 
 * Edits the client at the specified `INDEX`.
@@ -274,8 +272,8 @@ Deletes the specified client from FitFlow.
 
 Format: `delete INDEX`
 
-<div markdown="span" class="alert alert-danger">
-:rotating_light: **This command is irreversible. Use with caution.**
+<div markdown="block" class="alert alert-danger">:rotating_light: **Caution:**<br>
+**This command is irreversible. Use with caution.**
 </div>
 
 * Deletes the client at the specified `INDEX`.
@@ -300,8 +298,8 @@ Clears all entries from FitFlow.
 
 Format: `clear`
 
-<div markdown="span" class="alert alert-danger">
-:rotating_light: **This command is irreversible. Use with caution.**
+<div markdown="block" class="alert alert-danger">:rotating_light: **Caution:**<br>
+**This command is irreversible. Use with caution.**
 </div>
 
 
@@ -335,7 +333,7 @@ FitFlow data are saved automatically as a JSON file `[JAR file location]/data/ad
 
 Action | Format, Examples
 --------|------------------
-**Help** | `help [/add] [/view] [/schedule] [/edit] [/delete] [/clear] [/exit]` <br> e.g., `help /add`
+**Help** | `help [/add] [/list] [/edit] [/find] [/display] [/view] [/delete] [/clear] [/exit]` <br> e.g., `help /add`
 **Add** | `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [t/TAG]…​` <br> e.g., `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
 **List** | `list` <br> e.g., `list`
 **Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find John`
