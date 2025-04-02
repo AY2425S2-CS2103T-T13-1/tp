@@ -37,7 +37,6 @@ public class RecurringSchedule extends Schedule {
      */
     public RecurringSchedule(String schedule) {
         super(validateThenExtractStartTime(schedule), extractEndTime(schedule));
-        requireNonNull(schedule);
         assert isValidRecurringSchedule(schedule) : "Schedule should be valid by this point";
         this.day = extractDay(schedule);
     }
