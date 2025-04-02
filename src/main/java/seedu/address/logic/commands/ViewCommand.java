@@ -27,7 +27,7 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose sessions contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all clients whose sessions contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n\n"
             + "Format: "
             + COMMAND_WORD + " DAY/DATE\n\n"
@@ -46,24 +46,30 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         String keyword = predicate.getKeyword();
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, keyword)).append("\n\n");
+        String messageHeader = buildMessageHeader(keyword);
+
         if (model.getFilteredPersonList().isEmpty()) {
-            sb.append("No clients found!");
-            return new CommandResult(sb.toString().trim());
+            return new CommandResult(messageHeader + "No clients found!");
         }
-        String searchResult;
-        if (DayOfWeekUtils.isDayOfWeek(keyword)) {
-            searchResult = resultGivenDay(model);
-        } else {
-            searchResult = resultGivenDate(model);
-        }
-        return new CommandResult(sb.append(searchResult).toString().trim());
+
+        String searchResult = fetchSearchResult(model, keyword);
+        return new CommandResult(messageHeader + searchResult);
+    }
+
+    private String buildMessageHeader(String keyword) {
+        return String.format(Messages.MESSAGE_SCHEDULES_LISTED, keyword) + "\n\n";
+    }
+
+    private String fetchSearchResult(Model model, String keyword) {
+        return DayOfWeekUtils.isDayOfWeek(keyword)
+                ? resultGivenDay(model)
+                : resultGivenDate(model);
     }
 
     private String resultGivenDay(Model model) {
         StringBuilder sb = new StringBuilder();
         DayOfWeek day = predicate.getDayToFind();
+        //Find the date with the nearest given day
         LocalDate todayDate = LocalDate.now();
         int daysUntilTarget = (day.getValue() - todayDate.getDayOfWeek().getValue() + 7) % 7;
         LocalDate targetDate = todayDate.plusDays(daysUntilTarget);

@@ -6,7 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 
 /**
- * Format full help instructions for every command for display.
+ * Formats full help instructions for every command for display.
  */
 public class HelpCommand extends Command {
 

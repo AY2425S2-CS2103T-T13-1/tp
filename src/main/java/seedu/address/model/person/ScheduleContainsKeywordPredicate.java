@@ -10,7 +10,7 @@ import seedu.address.model.util.DayOfWeekUtils;
 import seedu.address.model.util.LocalDateUtils;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Schedule} matches any of the keywords given.
  */
 public class ScheduleContainsKeywordPredicate implements Predicate<Person> {
     private final String keyword;
@@ -28,16 +28,18 @@ public class ScheduleContainsKeywordPredicate implements Predicate<Person> {
     public ScheduleContainsKeywordPredicate(String keyword) {
         this.keyword = keyword;
         if (DayOfWeekUtils.isDayOfWeek(keyword)) {
-            DayOfWeek day = DayOfWeekUtils.fromString(keyword);
-            this.dayToFind = day;
-            LocalDate todayDate = LocalDate.now();
-            int daysUntilTarget = (day.getValue() - todayDate.getDayOfWeek().getValue() + 7) % 7;
-            this.dateToFind = todayDate.plusDays(daysUntilTarget);
+            this.dayToFind = DayOfWeekUtils.fromString(keyword);
+            this.dateToFind = calculateNextDateForDay(this.dayToFind);
         } else {
-            LocalDate normalizedDate = LocalDateUtils.localDateParser(keyword);
-            this.dateToFind = normalizedDate;
-            this.dayToFind = normalizedDate.getDayOfWeek();
+            this.dateToFind = LocalDateUtils.localDateParser(keyword);
+            this.dayToFind = this.dateToFind.getDayOfWeek();
         }
+    }
+
+    private LocalDate calculateNextDateForDay(DayOfWeek day) {
+        LocalDate today = LocalDate.now();
+        int daysUntilTarget = (day.getValue() - today.getDayOfWeek().getValue() + 7) % 7;
+        return today.plusDays(daysUntilTarget);
     }
 
     public String getKeyword() {

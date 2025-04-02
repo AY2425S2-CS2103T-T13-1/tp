@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import java.util.Objects;
 
 /**
- * Class to hold schedule conflict information.
+ * Holds schedule conflict information.
  */
 public class ScheduleConflictResult {
     private final boolean hasConflict;
