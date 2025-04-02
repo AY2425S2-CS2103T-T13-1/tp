@@ -22,7 +22,7 @@ import seedu.address.model.util.LocalDateUtils;
 
 /**
  * Finds and lists all persons in address book who has sessions that matches any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class ViewCommand extends Command {
 
@@ -32,9 +32,11 @@ public class ViewCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n\n"
             + "Format: "
             + COMMAND_WORD + " DAY/DATE\n\n"
-            + "Example: " + COMMAND_WORD + " Monday\n"
-            + "Example: " + COMMAND_WORD + " Tue\n"
-            + "Example: " + COMMAND_WORD + " 15/06";
+            + "Example: "
+            + COMMAND_WORD + " Monday\n"
+            + COMMAND_WORD + " Tue\n"
+            + COMMAND_WORD + " 5/6\n"
+            + COMMAND_WORD + "15/06";
 
     private final ScheduleContainsKeywordPredicate predicate;
 
@@ -62,63 +64,19 @@ public class ViewCommand extends Command {
     }
 
     private String fetchSearchResult(Model model, String keyword) {
+        LocalDate date = predicate.getDateToFind();
         return DayOfWeekUtils.isDayOfWeek(keyword)
-                ? resultGivenDay(model)
-                : resultGivenDate(model);
+                ? resultGiven(model, predicate.getDayToFind(), date)
+                : resultGiven(model, date.getDayOfWeek(), date);
     }
 
-//    private String resultGivenDay(Model model) {
-//        StringBuilder sb = new StringBuilder();
-//        DayOfWeek day = predicate.getDayToFind();
-//        //Find the date with the nearest given day
-//        LocalDate todayDate = LocalDate.now();
-//        int daysUntilTarget = (day.getValue() - todayDate.getDayOfWeek().getValue() + 7) % 7;
-//        LocalDate targetDate = todayDate.plusDays(daysUntilTarget);
-//        AtomicInteger index = new AtomicInteger(1);
-//
-//        model.getFilteredPersonList().forEach(person -> {
-//            List<String> recurringTimes = findMatchingRecurringSchedule(person, day);
-//            List<String> oneTimeTimes = findMatchingOneTimeSchedule(person, targetDate);
-//            List<String> allTimes = new ArrayList<>();
-//            allTimes.addAll(recurringTimes);
-//            allTimes.addAll(oneTimeTimes);
-//            sb.append(index.getAndIncrement()).append(". ").append(person.getName()).append(": ")
-//                    .append(String.join(", ", allTimes)).append("\n");
-//        });
-//        return sb.toString().trim();
-//    }
-//
-//    private String resultGivenDate(Model model) {
-//        StringBuilder sb = new StringBuilder();
-//        LocalDate normalizedDate = predicate.getDateToFind();
-//        DayOfWeek targetDayOfWeek = normalizedDate.getDayOfWeek();
-//        AtomicInteger index = new AtomicInteger(1);
-//
-//        model.getFilteredPersonList().forEach(person -> {
-//            List<String> oneTimeTimes = findMatchingOneTimeSchedule(person, normalizedDate);
-//            List<String> recurringTimes = findMatchingRecurringSchedule(person, targetDayOfWeek);
-//            List<String> allTimes = new ArrayList<>();
-//            allTimes.addAll(oneTimeTimes);
-//            allTimes.addAll(recurringTimes);
-//            sb.append(index.getAndIncrement()).append(". ").append(person.getName()).append(": ")
-//                    .append(String.join(", ", allTimes)).append("\n");
-//        });
-//        return sb.toString().trim();
-//    }
-
-    private String resultGivenDay(Model model) {
-        LocalDate targetDate = calculateTargetDate(predicate.getDayToFind());
+    private String resultGiven(Model model, DayOfWeek day, LocalDate date) {
         AtomicInteger index = new AtomicInteger(1);
 
         return model.getFilteredPersonList().stream()
-                .map(person -> formatPersonSchedule(person, predicate.getDayToFind(), targetDate, index))
-                .collect(Collectors.joining("\n"));
-    }
-
-    private LocalDate calculateTargetDate(DayOfWeek day) {
-        LocalDate todayDate = LocalDate.now();
-        int daysUntilTarget = (day.getValue() - todayDate.getDayOfWeek().getValue() + 7) % 7;
-        return todayDate.plusDays(daysUntilTarget);
+                .map(person -> formatPersonSchedule(person, day, date, index))
+                .collect(Collectors.joining(""))
+                .trim();
     }
 
     private String formatPersonSchedule(Person person, DayOfWeek day, LocalDate targetDate, AtomicInteger index) {
@@ -128,38 +86,26 @@ public class ViewCommand extends Command {
         allTimes.addAll(recurringTimes);
         allTimes.addAll(oneTimeTimes);
 
-        return String.format("%d. %s: %s", index.getAndIncrement(), person.getName(), String.join(", ", allTimes));
-    }
-
-    private String resultGivenDate(Model model) {
-        LocalDate normalizedDate = predicate.getDateToFind();
-        AtomicInteger index = new AtomicInteger(1);
-
-        return model.getFilteredPersonList().stream()
-                .map(person -> formatPersonSchedule(person, normalizedDate.getDayOfWeek(), normalizedDate, index))
-                .collect(Collectors.joining("\n"));
+        return String.format("%d. %s: %s\n", index.getAndIncrement(), person.getName(),
+                String.join(", ", allTimes));
     }
 
     private List<String> findMatchingRecurringSchedule(Person person, DayOfWeek day) {
-        String searchDay = day.toString();
-        Set<RecurringSchedule> recurringSchedules = person.getRecurringSchedules();
-        List<String> matchingTimes = recurringSchedules.stream()
-                .filter(schedule -> String.valueOf(schedule.getDay()).equalsIgnoreCase(searchDay))
+        return person.getRecurringSchedules().stream()
+                .filter(schedule -> String.valueOf(schedule.getDay())
+                                                        .equalsIgnoreCase(day.toString()))
                 .map(schedule -> String.format("%s-%s", schedule.getStartTime(),
                         schedule.getEndTime()))
                 .toList();
-        return matchingTimes;
     }
 
     private List<String> findMatchingOneTimeSchedule(Person person, LocalDate date) {
-        String searchDate = LocalDateUtils.toString(date);
-        Set<OneTimeSchedule> oneTimeSchedules = person.getOneTimeSchedules();
-        List<String> matchingTimes = oneTimeSchedules.stream()
-                .filter(schedule -> schedule.getDateString().equalsIgnoreCase(searchDate))
+        return person.getOneTimeSchedules().stream()
+                .filter(schedule -> schedule.getDateString()
+                                .equalsIgnoreCase(LocalDateUtils.toString(date)))
                 .map(schedule -> String.format("%s-%s", schedule.getStartTime(),
                         schedule.getEndTime()))
                 .toList();
-        return matchingTimes;
     }
 
     @Override

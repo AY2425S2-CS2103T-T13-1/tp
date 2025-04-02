@@ -222,7 +222,8 @@ DAY Format: `Monday` or `Mon`<br>
 DATE Format: `[D]D/[M]M[/YY]`
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
-- Any date provided that excludes year will be treated as a date in the current year.
+- Any date provided that excludes year will be treated as a date in the current year.<br>
+- If view a day (i.e. Mon), will also return `ONE_TIME_SCHEDULE` sessions in the coming Monday.
 </div>
 
 * The search is case-insensitive. i.e. `Monday` will match `monday`.
