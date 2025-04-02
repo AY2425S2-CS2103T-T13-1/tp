@@ -49,7 +49,6 @@ public class OneTimeSchedule extends Schedule {
      */
     public OneTimeSchedule(String schedule) {
         super(validateThenExtractStartTime(schedule), extractEndTime(schedule)); // Call Schedule constructor
-        requireNonNull(schedule);
         assert isValidOneTimeSchedule(schedule) : "Schedule should be valid by this point";
         this.date = extractDate(schedule);
     }
@@ -74,7 +73,6 @@ public class OneTimeSchedule extends Schedule {
      * @return The extracted date.
      */
     private static LocalDate extractDate(String schedule) {
-        requireNonNull(schedule);
         String[] parts = schedule.split(" ");
         assert parts.length >= 1 : "Schedule string should have at least date part";
         String datePart = parts[0];
@@ -88,7 +86,6 @@ public class OneTimeSchedule extends Schedule {
      * @return The extracted start time.
      */
     private static String extractStartTime(String schedule) {
-        requireNonNull(schedule);
         String[] parts = schedule.split(" ");
         assert parts.length >= 2 : "Schedule string should have at least date and start time parts";
         return parts[1];
@@ -101,7 +98,6 @@ public class OneTimeSchedule extends Schedule {
      * @return The extracted end time.
      */
     private static String extractEndTime(String schedule) {
-        requireNonNull(schedule);
         String[] parts = schedule.split(" ");
         assert parts.length >= 3 : "Schedule string should have date, start time, and end time parts";
         return parts[2];
@@ -141,6 +137,7 @@ public class OneTimeSchedule extends Schedule {
      * Returns true if the given String has a valid date.
      */
     public static boolean isValidDate(String test) {
+        requireNonNull(test);
         String datePart = test.split(" ")[0];
         return LocalDateUtils.isValidDateString(datePart);
     }
