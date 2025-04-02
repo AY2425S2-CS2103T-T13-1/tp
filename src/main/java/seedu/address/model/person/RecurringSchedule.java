@@ -86,7 +86,6 @@ public class RecurringSchedule extends Schedule {
      * @return The extracted end time.
      */
     private static String extractEndTime(String schedule) {
-        requireNonNull(schedule);
         String[] parts = schedule.split(" ");
         assert parts.length >= 3 : "Schedule string should have day, start time, and end time parts";
         return parts[2];
