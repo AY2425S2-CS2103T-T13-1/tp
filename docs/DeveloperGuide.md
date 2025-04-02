@@ -703,7 +703,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Exit program
 
-   1. Entering exit command. Close the window.
+   1. Enter the exit command. The window closes.
 
    2. Double-click the jar file<br>
    Expected: Shows the GUI with contacts. The most recent window size and location is retained.
@@ -721,7 +721,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No person is deleted. Error details of invalid client index shown in the status message.
 
    4. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details of incorrect format and Right usages are shown in the status message.
+      Expected: No person is deleted. Error details of incorrect format and right usage are shown in the status message.
 
    5. Other incorrect delete commands to try: `delete`, `delete y`, `...` (where y is not a positive integer)<br>
       Expected: Similar to previous.
@@ -739,7 +739,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No person is displayed. Error details of invalid client index shown in the status message.
 
     4. Test case: `display 0`<br>
-       Expected: No person is displayed. Error details of incorrect format and Right usages are shown in the status message.
+       Expected: No person is displayed. Error details of incorrect format and right usage are shown in the status message.
 
     5. Other incorrect display commands to try: `display`, `display y`, `...` (where y is not a positive integer)<br>
        Expected: Similar to previous.
@@ -749,13 +749,13 @@ testers are expected to do more *exploratory* testing.
 1. Finding a client in the client list
 
     1. Test case: `find x` (where x is a complete part of client's name)<br>
-    Expected: Client list only show the contacts that contains the name. Number of clients listed message is shown in the status message.
+    Expected: Client list only shows the contacts that contains the name. Number of clients listed is shown in the status message.
 
     2. Test case: `find x y` (where x and y are complete part of different client's name)<br>
-    Expected: Client list only show the contacts that contains the name. Number of clients listed message is shown in the status message.
+    Expected: Client list only shows the contacts that contains the name. Number of clients listed is shown in the status message.
 
     3. Test case: `find z` (where z is not part of any client's name)<br>
-    Expected: Client list is empty. No clients listed message is shown in the status message.
+    Expected: Client list is empty. 'No clients listed' message is shown in the status message.
 
 ### Saving data
 
@@ -765,7 +765,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Open the FitFlow home folder. Delete the Data folder.
 
-   3. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size is reset.
+   3. Double-click the jar file. <br>
+   Expected: Shows the GUI with a set of sample contacts. The most recent window size and location is retained.
 
 2. Dealing with corrupted data files
 
