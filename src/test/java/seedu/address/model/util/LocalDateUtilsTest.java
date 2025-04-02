@@ -1,6 +1,8 @@
 package seedu.address.model.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -81,5 +83,46 @@ public class LocalDateUtilsTest {
         assertThrows(IllegalArgumentException.class, () -> {
             LocalDateUtils.localDateParser(invalidDate2);
         });
+    }
+
+    @Test
+    public void testIsValidDateString_validDates() {
+        assertTrue(LocalDateUtils.isValidDateString("1/1"));
+        assertTrue(LocalDateUtils.isValidDateString("15/07/45"));
+    }
+
+    @Test
+    public void testIsValidDateString_invalidDays() {
+        assertFalse(LocalDateUtils.isValidDateString("32/01")); // Day exceeds max
+        assertFalse(LocalDateUtils.isValidDateString("00/10")); // Day cannot be 0
+    }
+
+    @Test
+    public void testIsValidDateString_invalidDateInMonth() {
+        assertFalse(LocalDateUtils.isValidDateString("31/04")); // April has only 30 days
+        assertFalse(LocalDateUtils.isValidDateString("30/02/24")); // February max 29 days
+    }
+
+    @Test
+    public void testIsValidDateString_leapYearValidDate() {
+        assertTrue(LocalDateUtils.isValidDateString("29/02/24"));
+    }
+
+    @Test
+    public void testIsValidDateString_commonYearValidDate() {
+        assertTrue(LocalDateUtils.isValidDateString("28/02/25"));
+    }
+
+    @Test
+    public void testIsValidDateString_commonYearInvalidDate() {
+        assertFalse(LocalDateUtils.isValidDateString("29/02/25"));
+    }
+
+    @Test
+    public void testIsValidDateString_nullOrEmptyInput() {
+        assertFalse(LocalDateUtils.isValidDateString("")); // Empty string
+        assertThrows(NullPointerException.class, () -> {
+            LocalDateUtils.isValidDateString(null);
+        }); // Null input should throw exception
     }
 }
