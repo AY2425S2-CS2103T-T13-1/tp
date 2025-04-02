@@ -160,6 +160,7 @@ Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_S
     * The day and month of the date can have its leading `0` omitted if it is single digit.
     * The year of the date can be omitted. In this case, the application will assume the current year.
   * `START_TIME` and `END_TIME` should be 4 digits, in 24-hour format.
+* To rectify a client's conflicting schedules, refer to the [**`edit`**](#editing-a-client--edit) section.
 
 Examples:
 * `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
