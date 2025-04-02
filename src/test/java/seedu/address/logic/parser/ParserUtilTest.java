@@ -29,8 +29,9 @@ public class ParserUtilTest {
     private static final String INVALID_RECURRINGSCHEDULE_2 = "Monday 1400 1200"; //invalid time
     private static final String INVALID_GOALS = " ";
     private static final String INVALID_LOCATION = " ";
-    private static final String INVALID_ONETIMESCHEDULE_1 = "33/1 1000 1200"; //invalid date
+    private static final String INVALID_ONETIMESCHEDULE_1 = "33/1 1000 1200"; //out of range date
     private static final String INVALID_ONETIMESCHEDULE_2 = "2/3 1400 1200"; //invalid time
+    private static final String INVALID_ONETIMESCHEDULE_3 = "31/6 1000 1200"; //invalid date
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -202,6 +203,11 @@ public class ParserUtilTest {
     @Test
     public void parseOneTimeSchedule_invalidTimeOrder_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseOneTimeSchedule(INVALID_ONETIMESCHEDULE_2));
+    }
+
+    @Test
+    public void parseOneTimeSchedule_invalidDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseOneTimeSchedule(INVALID_ONETIMESCHEDULE_3));
     }
 
     @Test

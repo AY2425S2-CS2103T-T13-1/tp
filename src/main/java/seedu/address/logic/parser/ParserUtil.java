@@ -141,6 +141,9 @@ public class ParserUtil {
         if (!OneTimeSchedule.isValidOneTimeSchedule(trimmedOneTimeSchedule)) {
             throw new ParseException(OneTimeSchedule.MESSAGE_CONSTRAINTS);
         }
+        if (!OneTimeSchedule.isValidDate(trimmedOneTimeSchedule)) {
+            throw new ParseException(OneTimeSchedule.MESSAGE_DATE_CONSTRAINTS);
+        }
         if (!OneTimeSchedule.isValidTime(trimmedOneTimeSchedule)) {
             throw new ParseException(OneTimeSchedule.MESSAGE_TIME_CONSTRAINTS);
         }
