@@ -52,6 +52,7 @@ These boxes indicate warnings about potential negative outcomes.
             * Linux: Press Ctrl + Alt + T. The terminal application should open.
         2. Change the directory you are currently in to the home folder, using the command `cd`.
             * A simple way to find the directory is to go to the home folder your normal file browsing app and copying the directory at the address bar. For example, the command could be `cd ~/Downloads/FitFlowFolder`.
+            * Another simple way to navigate to the directory is to go to the home folder and right-click on an empty space, then select the option "Open in terminal" to immediately open a terminal in that directory.
         3. Use the `java -jar <FitFlow Filename>.jar` command to run the application.
 
     A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
