@@ -62,7 +62,6 @@ public class RecurringSchedule extends Schedule {
      * @return The extracted day of week.
      */
     private static DayOfWeek extractDay(String schedule) {
-        requireNonNull(schedule);
         String[] parts = schedule.split(" ");
         assert parts.length >= 1 : "Schedule string should have at least day part";
         return DayOfWeekUtils.fromString(parts[0]);
@@ -75,7 +74,6 @@ public class RecurringSchedule extends Schedule {
      * @return The extracted start time.
      */
     private static String extractStartTime(String schedule) {
-        requireNonNull(schedule);
         String[] parts = schedule.split(" ");
         assert parts.length >= 2 : "Schedule string should have at least day and start time parts";
         return parts[1];
