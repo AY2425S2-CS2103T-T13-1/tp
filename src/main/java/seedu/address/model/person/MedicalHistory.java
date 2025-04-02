@@ -12,8 +12,8 @@ public class MedicalHistory {
     public static final String MESSAGE_CONSTRAINTS = "Medical History can take any values, and it should not be blank";
 
     /*
-     * The first character of medical history cannot be a blank space.
-     * Medical history accepts any ASCII character
+     * The first character of the Medical History must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s][\\p{ASCII}]*";
 
