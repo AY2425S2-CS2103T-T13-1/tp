@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -258,13 +258,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -452,7 +452,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 - 4a. The user decides not to delete the client.
     - 4a1. FitFlow aborts the delete command.<br>
-    Use case ends.
+      Use case ends.
 
 ---
 
@@ -690,91 +690,40 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file<br>
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-2. Saving window preferences
+1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
-   Expected: The most recent window size and location is retained.
+    1. Re-launch the app by double-clicking the jar file.<br>
+       Expected: The most recent window size and location is retained.
 
-3. Exit program
+1. _{ more test cases …​ }_
 
-   1. Entering exit command. Close the window.
+### Deleting a person
 
-   2. Double-click the jar file<br>
-   Expected: Shows the GUI with contacts. The most recent window size and location is retained.
+1. Deleting a person while all persons are being shown
 
-### Deleting a client
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-1. Deleting a client while all clients are being shown
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact is shown in the status message.
-
-   3. Test case: `delete x` (where x is larger than the list size)<br>
-      Expected: No person is deleted. Error details of invalid client index shown in the status message.
-
-   4. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details of incorrect format and Right usages are shown in the status message.
-
-   5. Other incorrect delete commands to try: `delete`, `delete y`, `...` (where y is not a positive integer)<br>
-      Expected: Similar to previous.
-
-### Displaying a client
-
-1. Displaying a client while all clients are being shown
-
-    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
-
-    2. Test case: `display 1`<br>
-       Expected: First contact is displayed from the list. Details of the client is shown in the status message.
-
-    3. Test case: `display x` (where x is larger than the list size)<br>
-       Expected: No person is displayed. Error details of invalid client index shown in the status message.
-
-    4. Test case: `display 0`<br>
-       Expected: No person is displayed. Error details of incorrect format and Right usages are shown in the status message.
-
-    5. Other incorrect display commands to try: `display`, `display y`, `...` (where y is not a positive integer)<br>
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-### Finding a client
-
-1. Finding a client in the client list
-
-    1. Test case: `find x` (where x is a complete part of client's name)<br>
-    Expected: Client list only show the contacts that contains the name. Number of clients listed message is shown in the status message.
-
-    2. Test case: `find x y` (where x and y are complete part of different client's name)<br>
-    Expected: Client list only show the contacts that contains the name. Number of clients listed message is shown in the status message.
-
-    3. Test case: `find z` (where z is not part of any client's name)<br>
-    Expected: Client list is empty. No clients listed message is shown in the status message.
+1. _{ more test cases …​ }_
 
 ### Saving data
 
-1. Dealing with missing data files
+1. Dealing with missing/corrupted data files
 
-   1. Prerequisites: Executed the [final FitFlow release] jar file.
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-   2. Open the FitFlow home folder. Delete the Data folder.
-
-   3. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size is reset.
-
-2. Dealing with corrupted data files
-
-   1. Prerequisites: Executed the [final FitFlow release] jar file.
-
-   2. Open the FitFlow home folder. Open the Data folder. Open the addressbook.json.
-
-   3. In the open addressbook.json. Remove the curly bracket ({) at line 1. Close and Save the file.
-
-   4. Double-click the jar file<br>
-   Expected: Shows the GUI without a set of sample contacts. The most recent window size and location is retained.
+1. _{ more test cases …​ }_
