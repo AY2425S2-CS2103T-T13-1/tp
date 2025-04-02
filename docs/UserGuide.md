@@ -60,7 +60,7 @@ These boxes indicate warnings about potential negative outcomes.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will display the list of available commands in FitFlow.<br>
    Some example commands you can try:
 
-   * `add n/John Doe p/81234567` : Adds a client named `John Doe` to the FitFlow.
+   * `add n/John Doe p/81234567` : Adds a client named `John Doe` to FitFlow.
 
    * `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends` : Adds a client named `Alice Pauline` with many details such as her schedule, fitness goal, medical history and location.
 
@@ -82,7 +82,7 @@ These boxes indicate warnings about potential negative outcomes.
 
    * `clear` : Deletes all clients.
 
-   * `exit` : Exits the FitFlow app.
+   * `exit` : Exits FitFlow app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
