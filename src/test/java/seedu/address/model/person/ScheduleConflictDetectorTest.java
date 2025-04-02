@@ -2,13 +2,17 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.PersonBuilder;
 
 public class ScheduleConflictDetectorTest {
 
@@ -195,7 +199,7 @@ public class ScheduleConflictDetectorTest {
         List<String> conflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(person);
         assertEquals(1, conflicts.size(), "Should detect one internal conflict");
         assertTrue(conflicts.get(0).contains("Internal recurring schedule conflict on MONDAY"));
-        assertTrue(conflicts.get(0).contains("same person"));
+        assertTrue(conflicts.get(0).contains("same client"));
     }
     @Test
     public void checkInternalScheduleConflicts_oneTimeSchedulesConflict_returnsConflict() {
@@ -207,7 +211,7 @@ public class ScheduleConflictDetectorTest {
         List<String> conflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(person);
         assertEquals(1, conflicts.size(), "Should detect one internal conflict");
         assertTrue(conflicts.get(0).contains("Internal one-time schedule conflict on 15/10"));
-        assertTrue(conflicts.get(0).contains("same person"));
+        assertTrue(conflicts.get(0).contains("same client"));
     }
     @Test
     public void checkInternalScheduleConflicts_recurringAndOneTimeSchedulesConflict_returnsConflict() {
@@ -219,7 +223,7 @@ public class ScheduleConflictDetectorTest {
         List<String> conflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(person);
         assertEquals(1, conflicts.size(), "Should detect one internal conflict");
         assertTrue(conflicts.get(0).contains("Internal schedule conflict between recurring and one-time schedule"));
-        assertTrue(conflicts.get(0).contains("same person"));
+        assertTrue(conflicts.get(0).contains("same client"));
     }
     @Test
     public void checkInternalScheduleConflicts_multipleConflicts_returnsAllConflicts() {
@@ -234,6 +238,77 @@ public class ScheduleConflictDetectorTest {
         Person person = createTestPerson(recurringSchedules, oneTimeSchedules);
         List<String> conflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(person);
         assertEquals(4, conflicts.size(), "Should detect four internal conflicts");
+    }
+
+    @Test
+    public void checkScheduleConflict_nullPerson_throwsNullPointerException() {
+        Schedule schedule = new RecurringSchedule("Monday 1200 1300");
+        assertThrows(NullPointerException.class, () ->
+                ScheduleConflictDetector.checkScheduleConflict(null, schedule));
+    }
+
+    @Test
+    public void checkScheduleConflict_nullSchedule_throwsNullPointerException() {
+        Person person = new PersonBuilder().build();
+        assertThrows(NullPointerException.class, () ->
+                ScheduleConflictDetector.checkScheduleConflict(person, null));
+    }
+
+    @Test
+    public void checkInternalScheduleConflicts_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () ->
+                ScheduleConflictDetector.checkInternalScheduleConflicts(null));
+    }
+
+    @Test
+    public void hasTimeOverlapBetweenSchedules_nullSchedule_throwsNullPointerException() {
+        Schedule schedule = new RecurringSchedule("Monday 1200 1300");
+        Exception exception1 = assertThrows(InvocationTargetException.class, () -> {
+            invokeHasTimeOverlapBetweenSchedules(null, schedule);
+        });
+        assertEquals(null, exception1.getMessage());
+        Exception exception2 = assertThrows(InvocationTargetException.class, () -> {
+            invokeHasTimeOverlapBetweenSchedules(schedule, null);
+        });
+        assertEquals(null, exception2.getMessage());
+    }
+
+    @Test
+    public void convertTimeToMinutes_nullTime_throwsNullPointerException() {
+        Exception exception = assertThrows(InvocationTargetException.class, () -> {
+            invokeConvertTimeToMinutes(null);
+        });
+        assertEquals(null, exception.getMessage());
+    }
+
+    @Test
+    public void checkScheduleConflict_unknownScheduleType_fallsThroughToAssert() {
+        Person person = new PersonBuilder().build();
+        Schedule unknownSchedule = new TestSchedule("1200", "1300");
+        assertThrows(AssertionError.class, () ->
+                ScheduleConflictDetector.checkScheduleConflict(person, unknownSchedule));
+    }
+    private boolean invokeHasTimeOverlapBetweenSchedules(Schedule schedule1, Schedule schedule2)
+            throws Exception {
+        java.lang.reflect.Method method = ScheduleConflictDetector.class
+                .getDeclaredMethod("hasTimeOverlapBetweenSchedules", Schedule.class, Schedule.class);
+        method.setAccessible(true);
+        return (boolean) method.invoke(null, schedule1, schedule2);
+    }
+    private int invokeConvertTimeToMinutes(String time) throws Exception {
+        java.lang.reflect.Method method = ScheduleConflictDetector.class
+                .getDeclaredMethod("convertTimeToMinutes", String.class);
+        method.setAccessible(true);
+        return (int) method.invoke(null, time);
+    }
+    private static class TestSchedule extends Schedule {
+        public TestSchedule(String startTime, String endTime) {
+            super(startTime, endTime);
+        }
+        @Override
+        public String toString() {
+            return "TestSchedule[" + startTime + "-" + endTime + "]";
+        }
     }
 
     /**

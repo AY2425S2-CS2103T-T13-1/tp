@@ -151,7 +151,7 @@ public class AddCommandTest {
         assertTrue(modelStub.personsAdded.contains(newPerson));
         assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
         assertTrue(commandResult.getFeedbackToUser().contains("Internal recurring schedule conflict"));
-        assertTrue(commandResult.getFeedbackToUser().contains("same person"));
+        assertTrue(commandResult.getFeedbackToUser().contains("same client"));
     }
 
     @Test
@@ -170,7 +170,7 @@ public class AddCommandTest {
         assertTrue(modelStub.personsAdded.contains(newPerson));
         assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
         assertTrue(commandResult.getFeedbackToUser().contains("Internal one-time schedule conflict"));
-        assertTrue(commandResult.getFeedbackToUser().contains("same person"));
+        assertTrue(commandResult.getFeedbackToUser().contains("same client"));
     }
 
     @Test
@@ -192,7 +192,7 @@ public class AddCommandTest {
         assertTrue(commandResult.getFeedbackToUser().contains("schedule conflicts"));
         assertTrue(commandResult.getFeedbackToUser()
                 .contains("Internal schedule conflict between recurring and one-time schedule"));
-        assertTrue(commandResult.getFeedbackToUser().contains("same person"));
+        assertTrue(commandResult.getFeedbackToUser().contains("same client"));
     }
 
     @Test

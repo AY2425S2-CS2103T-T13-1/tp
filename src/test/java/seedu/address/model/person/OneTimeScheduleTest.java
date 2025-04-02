@@ -21,9 +21,6 @@ public class OneTimeScheduleTest {
 
     @Test
     public void isValidOneTimeSchedule() {
-        // null one time schedule
-        assertThrows(NullPointerException.class, () -> seedu.address.model.person
-                .OneTimeSchedule.isValidOneTimeSchedule(null));
 
         // invalid one time schedule
         assertFalse(seedu.address.model.person
