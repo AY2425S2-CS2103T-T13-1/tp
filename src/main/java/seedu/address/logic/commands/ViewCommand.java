@@ -6,16 +6,13 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.person.ScheduleContainsKeywordPredicate;
 import seedu.address.model.util.DayOfWeekUtils;
 import seedu.address.model.util.LocalDateUtils;
@@ -32,7 +29,7 @@ public class ViewCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n\n"
             + "Format: "
             + COMMAND_WORD + " DAY/DATE\n\n"
-            + "Example: "
+            + "Example:\n"
             + COMMAND_WORD + " Monday\n"
             + COMMAND_WORD + " Tue\n"
             + COMMAND_WORD + " 5/6\n"
@@ -72,7 +69,7 @@ public class ViewCommand extends Command {
     /**
      * Fetches the search result based on the given keyword.
      *
-     * @param model The model containing the list of clients and schedules.
+     * @param model The model containing the list of persons and schedules.
      * @param keyword The keyword used for filtering.
      * @return The formatted search result.
      */
@@ -86,7 +83,7 @@ public class ViewCommand extends Command {
     /**
      * Generates the result string for the given day and date.
      *
-     * @param model The model containing the list of clients and schedules.
+     * @param model The model containing the list of persons and schedules.
      * @param day The day of the week to filter recurring schedules.
      * @param date The specific date to filter one-time schedules.
      * @return The formatted result string.
@@ -101,13 +98,13 @@ public class ViewCommand extends Command {
     }
 
     /**
-     * Formats the schedule of a client for the given day and date.
+     * Formats the schedule of a person for the given day and date.
      *
-     * @param person The client whose schedule is being formatted.
+     * @param person The person whose schedule is being formatted.
      * @param day The day of the week to filter recurring schedules.
      * @param targetDate The specific date to filter one-time schedules.
-     * @param index The index of the client in the filtered list.
-     * @return The formatted schedule string for the client.
+     * @param index The index of the person in the filtered list.
+     * @return The formatted schedule string for the person.
      */
     private String formatPersonSchedule(Person person, DayOfWeek day, LocalDate targetDate, AtomicInteger index) {
         List<String> recurringTimes = findMatchingRecurringSchedule(person, day);
@@ -121,9 +118,9 @@ public class ViewCommand extends Command {
     }
 
     /**
-     * Finds the recurring schedules of a client that match the given day.
+     * Finds the recurring schedules of a person that match the given day.
      *
-     * @param person The client whose recurring schedules are being filtered.
+     * @param person The person whose recurring schedules are being filtered.
      * @param day The day of the week to filter recurring schedules.
      * @return A list of formatted recurring schedule times.
      */
@@ -137,9 +134,9 @@ public class ViewCommand extends Command {
     }
 
     /**
-     * Finds the one-time schedules of a client that match the given date.
+     * Finds the one-time schedules of a person that match the given date.
      *
-     * @param person The client whose one-time schedules are being filtered.
+     * @param person The person whose one-time schedules are being filtered.
      * @param date The specific date to filter one-time schedules.
      * @return A list of formatted one-time schedule times.
      */

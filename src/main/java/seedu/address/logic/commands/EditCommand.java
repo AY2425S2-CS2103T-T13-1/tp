@@ -96,6 +96,26 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        validatePersonUniqueness(model, personToEdit, editedPerson);
+
+        List<String> allConflicts = findAllScheduleConflicts(model, personToEdit, editedPerson);
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return buildCommandResult(editedPerson, allConflicts);
+    }
+
+    /**
+     * Validates that the edited person does not conflict with existing persons in the model.
+     *
+     * @param model The model containing the list of persons.
+     * @param personToEdit The original person being edited.
+     * @param editedPerson The edited person.
+     * @throws CommandException If there are duplicate persons or phones.
+     */
+    private void validatePersonUniqueness(Model model, Person personToEdit, Person editedPerson)
+            throws CommandException {
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -103,37 +123,50 @@ public class EditCommand extends Command {
         if (!personToEdit.hasSamePhone(editedPerson) && model.hasPhone(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PHONE);
         }
+    }
 
+    /**
+     * Finds all schedule conflicts for the edited person.
+     *
+     * @param model The model containing the list of persons.
+     * @param personToEdit The original person being edited.
+     * @param editedPerson The edited person.
+     * @return A list of conflict descriptions.
+     */
+    private List<String> findAllScheduleConflicts(Model model, Person personToEdit, Person editedPerson) {
         // Check for internal schedule conflicts first (conflicts within the edited person)
         List<String> internalConflicts = ScheduleConflictDetector.checkInternalScheduleConflicts(editedPerson);
         // Check for schedule conflicts with existing persons
         List<String> externalConflicts = new ArrayList<>();
         for (Person existingPerson : model.getAddressBook().getPersonList()) {
             // Skip the person being edited
-            if (existingPerson.equals(personToEdit)) {
-                continue;
+            if (!existingPerson.equals(personToEdit)) {
+                externalConflicts.addAll(checkConflictsWithPerson(existingPerson, editedPerson));
             }
-            externalConflicts.addAll(checkConflictsWithPerson(existingPerson, editedPerson));
         }
+
         // Combine all conflicts
         List<String> allConflicts = new ArrayList<>();
         allConflicts.addAll(internalConflicts);
         allConflicts.addAll(externalConflicts);
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return allConflicts;
+    }
 
+    /**
+     * Builds the command result, including any schedule conflicts.
+     *
+     * @param editedPerson The edited person.
+     * @param allConflicts A list of conflict descriptions.
+     * @return The command result.
+     */
+    private CommandResult buildCommandResult(Person editedPerson, List<String> allConflicts) {
         // If there are conflicts, add them to the success message
         if (!allConflicts.isEmpty()) {
             StringBuilder conflictsMsg = new StringBuilder();
             conflictsMsg.append(MESSAGE_SCHEDULE_CONFLICT);
-
-            for (String conflict : allConflicts) {
-                conflictsMsg.append(conflict).append("\n\n");
-            }
-
-            conflictsMsg.append(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
-                    Messages.format(editedPerson)));
+            allConflicts.forEach(conflict -> conflictsMsg.append(conflict).append("\n\n"));
+            conflictsMsg.append(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
             return new CommandResult(conflictsMsg.toString());
         }
 
@@ -141,7 +174,11 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Checks for schedule conflicts between the editedPerson and an existing person.
+     * Checks for schedule conflicts between the edited person and an existing person.
+     *
+     * @param existingPerson The existing person to check conflicts with.
+     * @param editedPerson The edited person.
+     * @return A list of conflict descriptions.
      */
     private List<String> checkConflictsWithPerson(Person existingPerson, Person editedPerson) {
         List<String> conflicts = new ArrayList<>();
@@ -188,6 +225,10 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     *
+     * @param personToEdit The original person being edited.
+     * @param editPersonDescriptor The details to edit the person with.
+     * @return The edited person.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;

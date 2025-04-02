@@ -57,18 +57,12 @@ public class LocalDateUtils {
      */
     public static LocalDate localDateParser(String date) {
         String normalizedDate = formatDateString(date);
-        List<DateTimeFormatter> inputFormats = List.of(
-                DateTimeFormatter.ofPattern("dd/MM/yy")
-        );
 
-        for (DateTimeFormatter formatter : inputFormats) {
-            try {
-                return LocalDate.parse(normalizedDate, formatter);
-            } catch (Exception e) {
-                // try next format
-            }
+        try {
+            return LocalDate.parse(normalizedDate, DateTimeFormatter.ofPattern("dd/MM/yy"));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid date format: " + date);
         }
-        throw new IllegalArgumentException("Invalid date format: " + date); // Will never throw
     }
 
     /**
@@ -89,16 +83,29 @@ public class LocalDateUtils {
         String[] parts = date.split("/");
         int day = Integer.parseInt(parts[0]);
         int month = Integer.parseInt(parts[1]);
-        int year = (parts.length == 3) ? Integer.parseInt(parts[2]) : LocalDate.now().getYear() % 100;
+        int year = (parts.length == 3)
+                ? (LocalDate.now().getYear() / 100) * 100 + Integer.parseInt(parts[2]) // Works for year 2100, 2200...
+                : LocalDate.now().getYear();
         //Check days in month
-        int maxDaysInMonth = YearMonth.of(2000 + year, month).lengthOfMonth();
+        int maxDaysInMonth = YearMonth.of(year, month).lengthOfMonth();
         return day >= 1 && day <= maxDaysInMonth;
     }
 
+    /**
+     * Generates a regex pattern for validating date strings.
+     *
+     * @return A regex pattern that matches valid date strings in the format "dd/MM" or "dd/MM/yy".
+     */
     public static String generateDateRegex() {
         return "(" + DAY_REGEX + ")/(" + MONTH_REGEX + ")(/" + YEAR_REGEX + ")?";
     }
 
+    /**
+     * Converts a {@link LocalDate} to a string in the format "dd/MM/yy".
+     *
+     * @param date The {@link LocalDate} to format.
+     * @return A string representation of the date in the format "dd/MM/yy".
+     */
     public static String toString(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("dd/MM/yy"));
     }
