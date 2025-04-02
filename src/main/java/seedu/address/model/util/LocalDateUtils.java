@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
- * Functions to interact with LocalDate.
+ * Contains functions to interact with LocalDate.
  */
 public class LocalDateUtils {
     public static final String DAY_REGEX = "[0-9]|[0-2][0-9]|3[0-1]";

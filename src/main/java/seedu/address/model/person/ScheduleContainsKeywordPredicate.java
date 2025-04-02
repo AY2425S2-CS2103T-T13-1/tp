@@ -10,7 +10,7 @@ import seedu.address.model.util.DayOfWeekUtils;
 import seedu.address.model.util.LocalDateUtils;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Schedule} matches any of the keywords given.
  */
 public class ScheduleContainsKeywordPredicate implements Predicate<Person> {
     private final String keyword;

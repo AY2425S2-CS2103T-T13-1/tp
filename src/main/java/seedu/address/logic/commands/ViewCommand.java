@@ -27,7 +27,7 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose sessions contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all clients whose sessions contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n\n"
             + "Format: "
             + COMMAND_WORD + " DAY/DATE\n\n"

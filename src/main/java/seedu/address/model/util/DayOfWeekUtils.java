@@ -6,7 +6,7 @@ import java.time.DayOfWeek;
 import java.util.Arrays;
 
 /**
- * Functions to interact with DayOfWeek.
+ * Contains functions to interact with DayOfWeek.
  */
 public class DayOfWeekUtils {
     public static final String DAY_OF_WEEK_REGEX = generateDayOfWeekRegex();
