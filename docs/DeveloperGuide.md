@@ -691,7 +691,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file<br> 
+   2. Double-click the jar file<br>
    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
@@ -705,7 +705,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Entering exit command. Close the window.
 
-   2. Double-click the jar file<br> 
+   2. Double-click the jar file<br>
    Expected: Shows the GUI with contacts. The most recent window size and location is retained.
 
 ### Deleting a client
@@ -762,18 +762,18 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing data files
 
    1. Prerequisites: Executed the [final FitFlow release] jar file.
-   
+
    2. Open the FitFlow home folder. Delete the Data folder.
-   
+
    3. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size is reset.
 
 2. Dealing with corrupted data files
 
    1. Prerequisites: Executed the [final FitFlow release] jar file.
-   
+
    2. Open the FitFlow home folder. Open the Data folder. Open the addressbook.json.
-   
+
    3. In the open addressbook.json. Remove the curly bracket ({) at line 1. Close and Save the file.
-   
+
    4. Double-click the jar file<br>
    Expected: Shows the GUI without a set of sample contacts. The most recent window size and location is retained.
