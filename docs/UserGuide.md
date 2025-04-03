@@ -104,7 +104,7 @@ To get a feel for the app before actually starting to use it, check out our [_Gu
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -183,7 +183,7 @@ Find clients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
 * The order of the keywords does not matter. i.e. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
 * Only the name and contact number of the client will be displayed. To see a client's full details, refer to the [**`display`**](#displaying-a-clients-details-display) section.
@@ -257,7 +257,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots
 * The index **must be a positive integer** 1, 2, 3, …​.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e it is not cumulative.
+* When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e. it is not cumulative.
 * You can remove all the client's recurring schedules, one time schedules and tags by typing `rs/`, `ots/`, and `t/` respectively without specifying any value after it.
 * For more details on how each field should be formatted, refer to the [**`add`**](#adding-a-client-add) section.
 
@@ -333,14 +333,14 @@ FitFlow data are saved automatically as a JSON file `[JAR file location]/data/ad
 
 Action | Format, Examples
 --------|------------------
-**Help** | `help [/add] [/list] [/edit] [/find] [/display] [/view] [/delete] [/clear] [/exit]` <br> e.g., `help /add`
-**Add** | `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [t/TAG]…​` <br> e.g., `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
-**List** | `list` <br> e.g., `list`
-**Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find John`
-**Display** | `display INDEX`<br> e.g., `display 2`
-**View** | `view [DAY] [DAY_SHORT_FORM] [DATE (DD/MM[/YY])]` <br> e.g., `view Monday`
-**Edit** | `edit edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Help** | `help [/add] [/list] [/edit] [/find] [/display] [/view] [/delete] [/clear] [/exit]` <br> e.g. `help /add`
+**Add** | `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [t/TAG]…​` <br> e.g. `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
+**List** | `list` <br> e.g. `list`
+**Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g. `find John`
+**Display** | `display INDEX`<br> e.g. `display 2`
+**View** | `view [DAY] [DAY_SHORT_FORM] [DATE (DD/MM[/YY])]` <br> e.g. `view Monday`
+**Edit** | `edit edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`<br> e.g. `edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400`
+**Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Exit** | `exit`
 **Clear** | `clear`
 
