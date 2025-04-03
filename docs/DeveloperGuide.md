@@ -692,38 +692,90 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file<br>
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file.<br>
+   Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Exit program
 
-### Deleting a person
+   1. Enter the exit command. The window closes.
 
-1. Deleting a person while all persons are being shown
+   2. Double-click the jar file<br>
+   Expected: Shows the GUI with contacts. The most recent window size and location is retained.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Deleting a client
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+1. Deleting a client while all clients are being shown
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact is shown in the status message.
+
+   3. Test case: `delete x` (where x is larger than the list size)<br>
+      Expected: No person is deleted. Error details of invalid client index shown in the status message.
+
+   4. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details of incorrect format and right usage are shown in the status message.
+
+   5. Other incorrect delete commands to try: `delete`, `delete y`, `...` (where y is not a positive integer)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Displaying a client
+
+1. Displaying a client while all clients are being shown
+
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+    2. Test case: `display 1`<br>
+       Expected: First contact is displayed from the list. Details of the client is shown in the status message.
+
+    3. Test case: `display x` (where x is larger than the list size)<br>
+       Expected: No person is displayed. Error details of invalid client index shown in the status message.
+
+    4. Test case: `display 0`<br>
+       Expected: No person is displayed. Error details of incorrect format and right usage are shown in the status message.
+
+    5. Other incorrect display commands to try: `display`, `display y`, `...` (where y is not a positive integer)<br>
+       Expected: Similar to previous.
+
+### Finding a client
+
+1. Finding a client in the client list
+
+    1. Test case: `find x` (where x is a complete part of client's name)<br>
+    Expected: Client list only shows the contacts that contains the name. Number of clients listed is shown in the status message.
+
+    2. Test case: `find x y` (where x and y are complete part of different client's name)<br>
+    Expected: Client list only shows the contacts that contains the name. Number of clients listed is shown in the status message.
+
+    3. Test case: `find z` (where z is not part of any client's name)<br>
+    Expected: Client list is empty. 'No clients listed' message is shown in the status message.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: Executed the [final FitFlow release] jar file.
 
-1. _{ more test cases …​ }_
+   2. Open the FitFlow home folder. Delete the Data folder.
+
+   3. Double-click the jar file. <br>
+   Expected: Shows the GUI with a set of sample contacts. The most recent window size and location is retained.
+
+2. Dealing with corrupted data files
+
+   1. Prerequisites: Executed the [final FitFlow release] jar file.
+
+   2. Open the FitFlow home folder. Open the Data folder. Open the addressbook.json.
+
+   3. In the open addressbook.json. Remove the curly bracket ({) at line 1. Close and Save the file.
+
+   4. Double-click the jar file<br>
+   Expected: Shows the GUI without a set of sample contacts. The most recent window size and location is retained.
