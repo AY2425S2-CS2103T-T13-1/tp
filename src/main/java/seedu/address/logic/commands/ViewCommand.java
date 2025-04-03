@@ -14,7 +14,6 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ScheduleContainsKeywordPredicate;
-import seedu.address.model.util.DayOfWeekUtils;
 import seedu.address.model.util.LocalDateUtils;
 
 /**
@@ -33,7 +32,7 @@ public class ViewCommand extends Command {
             + COMMAND_WORD + " Monday\n"
             + COMMAND_WORD + " Tue\n"
             + COMMAND_WORD + " 5/6\n"
-            + COMMAND_WORD + "15/06";
+            + COMMAND_WORD + " 15/06";
 
     private final ScheduleContainsKeywordPredicate predicate;
 
@@ -52,7 +51,7 @@ public class ViewCommand extends Command {
             return new CommandResult(messageHeader + "No clients found!");
         }
 
-        String searchResult = fetchSearchResult(model, keyword);
+        String searchResult = fetchSearchResult(model);
         return new CommandResult(messageHeader + searchResult);
     }
 
@@ -67,32 +66,17 @@ public class ViewCommand extends Command {
     }
 
     /**
-     * Fetches the search result based on the given keyword.
-     *
-     * @param model The model containing the list of persons and schedules.
-     * @param keyword The keyword used for filtering.
-     * @return The formatted search result.
-     */
-    private String fetchSearchResult(Model model, String keyword) {
-        LocalDate date = predicate.getDateToFind();
-        return DayOfWeekUtils.isDayOfWeek(keyword)
-                ? resultGiven(model, predicate.getDayToFind(), date)
-                : resultGiven(model, date.getDayOfWeek(), date);
-    }
-
-    /**
      * Generates the result string for the given day and date.
      *
      * @param model The model containing the list of persons and schedules.
-     * @param day The day of the week to filter recurring schedules.
-     * @param date The specific date to filter one-time schedules.
      * @return The formatted result string.
      */
-    private String resultGiven(Model model, DayOfWeek day, LocalDate date) {
+    private String fetchSearchResult(Model model) {
         AtomicInteger index = new AtomicInteger(1);
 
         return model.getFilteredPersonList().stream()
-                .map(person -> formatPersonSchedule(person, day, date, index))
+                .map(person -> formatPersonSchedule(person, predicate.getDayToFind(),
+                        predicate.getDateToFind(), index))
                 .collect(Collectors.joining(""))
                 .trim();
     }
@@ -127,7 +111,7 @@ public class ViewCommand extends Command {
     private List<String> findMatchingRecurringSchedule(Person person, DayOfWeek day) {
         return person.getRecurringSchedules().stream()
                 .filter(schedule -> String.valueOf(schedule.getDay())
-                                                        .equalsIgnoreCase(day.toString()))
+                        .equalsIgnoreCase(day.toString()))
                 .map(schedule -> String.format("%s-%s", schedule.getStartTime(),
                         schedule.getEndTime()))
                 .toList();
@@ -143,7 +127,7 @@ public class ViewCommand extends Command {
     private List<String> findMatchingOneTimeSchedule(Person person, LocalDate date) {
         return person.getOneTimeSchedules().stream()
                 .filter(schedule -> schedule.getDateString()
-                                .equalsIgnoreCase(LocalDateUtils.toString(date)))
+                        .equalsIgnoreCase(LocalDateUtils.toString(date)))
                 .map(schedule -> String.format("%s-%s", schedule.getStartTime(),
                         schedule.getEndTime()))
                 .toList();
