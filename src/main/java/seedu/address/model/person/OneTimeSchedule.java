@@ -40,6 +40,7 @@ public class OneTimeSchedule extends Schedule {
             + VALIDATION_REGEX_TIME + "$"; // Second HHmm (0000 - 2359)
 
     private final LocalDate date;
+
     /**
      * Constructs a {@code OneTimeSchedule}.
      *
