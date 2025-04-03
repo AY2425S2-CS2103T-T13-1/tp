@@ -59,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API) `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -297,25 +297,25 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                          | I want to …​                                                                   | So that I can…​                                                                        |
-|----------|----------------------------------|--------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| `* * *`  | user                             | add my clients' contact details and location to the app                         | I can contact them easily if there are any changes in plans                            |
-| `* * *`  | user                             | add my clients' workout goals in the app                                       | I can easily plan workout routines for my clients                                      |
-| `* * *`  | user                             | add my clients' previous or existing injuries in the app                       | I can better plan exercises that avoid aggrevating their injury                        |
-| `* * *`  | user                             | add my clients' preferred location                                             | I can collate a list of clients in the same area to train                              |
-| `* * *`  | user                             | sort my clients' information to see if they match with my schedule             | I can better plan the timing to train while I am free                                  |
-| `* * *`  | new user                         | look at the onboarding/help section                                            | I know the features the app provides and how to use them                               |
-| `* * *`  | new user                         | go through a guided tutorial from the application                              | learn the basic features of the app and test it out                                    |
-| `* * *`  | user                             | view the schedule for each day                                                 | I can plan my day accordingly                                                          |
-| `* * *`  | user                             | update each clients' details                                                   | I can make changes and keep things up to date with what happens IRL                    |
-| `* * *`  | user                             | view client's preference on solo or group trainings                            | I can organise a joint training session to maximise productivity                       |
-| `* *`    | user                             | add recurring events for clients that have training on the same day every week | I don't need to manually add and manage my schedule every single week                  |
-| `* *`    | user                             | be notified of a conflicting timeslot when I update a client's timeslot        | I know which timeslots are not available for my new clients                            |
-| `* *`    | user                             | delete client that I am not training anymore                                   | the client list I have is not messy                                                    |
-| `* *`    | forgetful user                   | set reminders for training sessions                                            | I do not forget or miss a training session with my client                              |
-| `* *`    | user                             | set goal deadlines for clients                                                 | I know which session to have a sit down with client                                    |
-| `*`      | organized user                   | sort my clients chronologically                                                | I will know which clients I will be meeting with soon.                                 |
-| `*`      | user                             | sort my clients based on months or weeks                                       | I can better plan for the clients that are in the upcoming months / weeks              |
+| Priority | As a …​                          | I want to …​                                                                   | So that I can…​                                                           |
+|----------|----------------------------------|--------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| `* * *`  | user                             | add my clients' contact details and location to the app                         | I can contact them easily if there are any changes in plans               |
+| `* * *`  | user                             | add my clients' workout goals in the app                                       | I can easily plan workout routines for my clients                         |
+| `* * *`  | user                             | add my clients' previous or existing injuries in the app                       | I can better plan exercises that avoid aggravating their injury           |
+| `* * *`  | user                             | add my clients' preferred location                                             | I can collate a list of clients in the same area to train                 |
+| `* * *`  | user                             | sort my clients' information to see if they match with my schedule             | I can better plan the timing to train while I am free                     |
+| `* * *`  | new user                         | look at the onboarding/help section                                            | I know the features the app provides and how to use them                  |
+| `* * *`  | new user                         | go through a guided tutorial from the application                              | learn the basic features of the app and test it out                       |
+| `* * *`  | user                             | view the schedule for each day                                                 | I can plan my day accordingly                                             |
+| `* * *`  | user                             | update each clients' details                                                   | I can make changes and keep things up to date with what happens IRL       |
+| `* * *`  | user                             | view client's preference on solo or group trainings                            | I can organise a joint training session to maximise productivity          |
+| `* *`    | user                             | add recurring events for clients that have training on the same day every week | I don't need to manually add and manage my schedule every single week     |
+| `* *`    | user                             | be notified of a conflicting timeslot when I update a client's timeslot        | I know which timeslots are not available for my new clients               |
+| `* *`    | user                             | delete client that I am not training anymore                                   | the client list I have is not messy                                       |
+| `* *`    | forgetful user                   | set reminders for training sessions                                            | I do not forget or miss a training session with my client                 |
+| `* *`    | user                             | set goal deadlines for clients                                                 | I know which session to have a sit down with client                       |
+| `*`      | organized user                   | sort my clients chronologically                                                | I will know which clients I will be meeting with soon.                    |
+| `*`      | user                             | sort my clients based on months or weeks                                       | I can better plan for the clients that are in the upcoming months / weeks |
 
 ### Use cases
 
@@ -658,7 +658,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Above Average Typing Seed**: Refers to a user capable of typing text (in natural language) at a faster rate than the typical user, enabling quick entry of commands or form data.
 * **Client's Details**: This includes session details, training goals, medical history, gym location, and contact number.
 * **Command Line Interface (CLI)**: A text-based interface that accepts typed commands. Users interact with the application by entering commands, rather than by clicking or tapping on-screen elements.
