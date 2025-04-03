@@ -7,7 +7,11 @@ title: User Guide
 
 Managing clients as a personal trainer is never easy. Beyond conducting workouts, trainers must juggle scheduling, track client progress, consider individual goals and medical histories, and ensure each client gets a personalized experience. While popular client management apps like Trainerize, TrueCoach, and My PT Hub offer various features, they come with subscription costs, steep learning curves, and cluttered interfaces. Additionally, these platforms lack built-in conflict detection, forcing trainers to manually track overlapping client schedules.
 
-Introducing FitFlow — **a free desktop app designed specifically for personal trainers in Singapore to streamline client management. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).** FitFlow is able to store clients' details in an organised manner and can intelligently detect and remind trainers if there are scheduling conflicts. If you can type fast, FitFlow helps you manage your clients faster and more efficiently than traditional apps.
+Introducing FitFlow — **a free desktop app designed specifically for personal trainers in Singapore to streamline client management. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).** It provides trainers with a fast and reliable way to store, retrieve, and update client details, including fitness goals, session history, and health information.
+
+What sets FitFlow apart is its intelligent conflict detection system. The app automatically flags scheduling overlaps, helping trainers avoid double bookings and maintain a seamless flow of appointments.
+
+By streamlining administrative tasks, FitFlow lets trainers focus on what matters most—empowering their clients on their fitness journeys.
 
 ## Using this Guide
 
