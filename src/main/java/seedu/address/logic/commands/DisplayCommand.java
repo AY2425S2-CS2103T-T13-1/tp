@@ -19,9 +19,10 @@ public class DisplayCommand extends Command {
     public static final String COMMAND_WORD = "display";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Display a client's full details from the client list, "
+            + ": Display a client full details in the client list, "
             + "identified by the index number used in the displayed client list.\n\n"
-            + "Format: " + COMMAND_WORD + " INDEX (must be a positive integer)\n\n"
+            + "Format: "
+            + COMMAND_WORD + " INDEX (must be a positive integer)\n\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DISPLAY_PERSON_SUCCESS = "Display Client: %1$s";
@@ -38,7 +39,9 @@ public class DisplayCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n"
+                            + DisplayCommand.MESSAGE_USAGE));
         }
 
         Person personToDisplay = lastShownList.get(targetIndex.getZeroBased());

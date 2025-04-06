@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DisplayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -22,7 +23,8 @@ public class DisplayCommandParser implements Parser<DisplayCommand> {
             return new DisplayCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DisplayCommand.MESSAGE_USAGE), pe);
+                    String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n"
+                            + DisplayCommand.MESSAGE_USAGE), pe);
         }
     }
 
