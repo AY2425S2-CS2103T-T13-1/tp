@@ -70,7 +70,7 @@ These boxes indicate warnings about potential negative outcomes.
 
    * `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends` : Adds a client named `Alice Pauline` with many details such as her schedule, fitness goal, medical history and location.
 
-   * `find John Doe` : Finds a specific client and displays their name and phone number.
+   * `find John Doe` : Finds clients whose names match 'John' or 'Doe' and shows their name and phone number in the Client List. The Output Box will show the number of clients found by the application.
 
    * `view monday` : Displays the sessions the personal trainer has with the clients on that day.
 
