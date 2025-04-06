@@ -138,6 +138,8 @@ Examples:
 * `help` will display the description of all the available commands in FitFlow.
 * `help /add` will display the command description and formatting for the add command in FitFlow.
 
+Invalid Examples:
+* `help add`: **Missing slash before command.** Use `help /add`.
 
 ### Adding a client: `add`
 
@@ -175,6 +177,13 @@ Examples:
 `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
 * `add n/Betsy Crowe t/friend g/Lose weight l/Jurong GymBox p/91234567 mh/Lower back injury rs/Wed 1500 1700 rs/Fri 1200 1330`
 
+Invalid Examples:
+* `add n/John`: **Missing required field** `p/PHONE_NUMBER`.
+* `add p/81234567`: **Missing required field** `n/NAME`.
+* `add n/John Doe p/12345678`: **Invalid phone number:** must be 8 digits and start with 6, 8, or 9.
+* `add n/John Doe p/81234567 rs/Monday 9am 11am`: **Invalid time format:** must be 4-digit 24-hour format like `0900`.
+* `add n/John Doe p/81234567 rs/Mon 1600`: **Missing end time in recurring schedule.**
+* `add n/John Doe p/81234567 ots/30/2 1000 1200`: **Invalid date:** 30th February does not exist.
 
 ### Listing all clients: `list`
 
@@ -184,7 +193,6 @@ Format: `list`
 
 Examples:
 * `list` displays and indexes all the clients in FitFlow.
-
 
 ### Locating clients by name: `find`
 
@@ -206,6 +214,9 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`.<br>
   ![Result for 'find alex david'](images/findAlexDavidResult.png)
 
+Invalid Examples:
+* `find`: **No keywords provided.**
+
 
 ### Displaying a client's details: `display`
 
@@ -222,6 +233,11 @@ Examples:
 * `display 5` will display the details of the person at index 5
 * `find Betsy` followed by `display 1` displays the details of the 1st client in the results of the `find` command.
 
+Invalid Examples:
+* `display`: **Missing index.**
+* `display zero`: **Index must be a positive integer.**
+* `display -1`: **Negative index is invalid.**
+* `display 999`: **Index out of bounds, no such client in the displayed list.**
 
 ### Viewing Schedules: `view`
 
@@ -252,6 +268,11 @@ Examples:
 * `view Monday` returns the list of clients with schedules on Monday.<br>
     ![result for 'view Monday'](images/viewMonday.png)
 
+Invalid Examples:
+* `view`: **Missing argument:** must specify a day or date.
+* `View Tueday`: **Misspelled day.** Accepted values include `Tuesday` or `Tue`.
+* `view 32/1/25`: **Invalid date.**
+* `view 14/13/25`: **Invalid month.**
 
 ### Editing a client : `edit`
 
@@ -278,6 +299,12 @@ Examples:
 *  `edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400` Edits the phone number, location, and one time schedule of the 1st client to be `91234567`, `Anytime Fitness`, and `4/4 1200 1400` respectively.
 *  `edit 2 n/Betsy Crower rs/ ots/ t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing recurring schedules, one time schedules and tags.
 
+Invalid Examples:
+* `edit`: **Missing index.**
+* `edit two`: **Index must be a positive integer.**
+* `edit 1`: **No fields provided to update.**
+* `edit 1 p/1234`: **Invalid phone number.**
+* `edit 1 rs/Mon 1000`: **Incomplete recurring schedule (missing end time).**
 
 ### Deleting a client : `delete`
 
@@ -297,6 +324,10 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd client from FitFlow.
 * `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
+Invalid Examples:
+* `delete`: **Missing index.**
+* `delete abc`: **Index must be a positive integer.**
+* `delete 100`: **Index out of bounds, no such client in current list.**
 
 ### Exiting the program : `exit`
 
