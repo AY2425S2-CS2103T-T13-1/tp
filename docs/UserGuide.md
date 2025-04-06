@@ -336,7 +336,8 @@ FitFlow data are saved automatically as a JSON file `[JAR file location]/data/ad
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. The [**view**](#viewing-schedules-view) command currently does not highlight conflicting schedules when used. This is known and will be rectified in a future to make it easier for client's to rectify conflicting schedules.
+3. The [**view**](#viewing-schedules-view) command currently does not highlight conflicting schedules when used. This is known and will be rectified in a future to make it easier for client's to rectify conflicting schedules. It is not prioritised as a user is still able to manually see and rectify conflicting schedules.
+4. The dates are only accepted if the year is in a 2-digit format, not in a 4-digit format. This is known and will be updated in a future update. It is not prioritised as it is unlikely that a user will save a schedule in a year earlier than 2000 and after 2100 for now.
 
 --------------------------------------------------------------------------------------------------------------------
 
