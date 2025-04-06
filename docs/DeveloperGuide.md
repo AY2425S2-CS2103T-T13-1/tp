@@ -59,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API) `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -297,25 +297,25 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                          | I want to …​                                                                   | So that I can…​                                                                        |
-|----------|----------------------------------|--------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| `* * *`  | user                             | add my clients' contact details and location to the app                         | I can contact them easily if there are any changes in plans                            |
-| `* * *`  | user                             | add my clients' workout goals in the app                                       | I can easily plan workout routines for my clients                                      |
-| `* * *`  | user                             | add my clients' previous or existing injuries in the app                       | I can better plan exercises that avoid aggrevating their injury                        |
-| `* * *`  | user                             | add my clients' preferred location                                             | I can collate a list of clients in the same area to train                              |
-| `* * *`  | user                             | sort my clients' information to see if they match with my schedule             | I can better plan the timing to train while I am free                                  |
-| `* * *`  | new user                         | look at the onboarding/help section                                            | I know the features the app provides and how to use them                               |
-| `* * *`  | new user                         | go through a guided tutorial from the application                              | learn the basic features of the app and test it out                                    |
-| `* * *`  | user                             | view the schedule for each day                                                 | I can plan my day accordingly                                                          |
-| `* * *`  | user                             | update each clients' details                                                   | I can make changes and keep things up to date with what happens IRL                    |
-| `* * *`  | user                             | view client's preference on solo or group trainings                            | I can organise a joint training session to maximise productivity                       |
-| `* *`    | user                             | add recurring events for clients that have training on the same day every week | I don't need to manually add and manage my schedule every single week                  |
-| `* *`    | user                             | be notified of a conflicting timeslot when I update a client's timeslot        | I know which timeslots are not available for my new clients                            |
-| `* *`    | user                             | delete client that I am not training anymore                                   | the client list I have is not messy                                                    |
-| `* *`    | forgetful user                   | set reminders for training sessions                                            | I do not forget or miss a training session with my client                              |
-| `* *`    | user                             | set goal deadlines for clients                                                 | I know which session to have a sit down with client                                    |
-| `*`      | organized user                   | sort my clients chronologically                                                | I will know which clients I will be meeting with soon.                                 |
-| `*`      | user                             | sort my clients based on months or weeks                                       | I can better plan for the clients that are in the upcoming months / weeks              |
+| Priority | As a …​                          | I want to …​                                                                   | So that I can…​                                                           |
+|----------|----------------------------------|--------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| `* * *`  | user                             | add my clients' contact details and location to the app                         | I can contact them easily if there are any changes in plans               |
+| `* * *`  | user                             | add my clients' workout goals in the app                                       | I can easily plan workout routines for my clients                         |
+| `* * *`  | user                             | add my clients' previous or existing injuries in the app                       | I can better plan exercises that avoid aggravating their injury           |
+| `* * *`  | user                             | add my clients' preferred location                                             | I can collate a list of clients in the same area to train                 |
+| `* * *`  | user                             | sort my clients' information to see if they match with my schedule             | I can better plan the timing to train while I am free                     |
+| `* * *`  | new user                         | look at the onboarding/help section                                            | I know the features the app provides and how to use them                  |
+| `* * *`  | new user                         | go through a guided tutorial from the application                              | learn the basic features of the app and test it out                       |
+| `* * *`  | user                             | view the schedule for each day                                                 | I can plan my day accordingly                                             |
+| `* * *`  | user                             | update each clients' details                                                   | I can make changes and keep things up to date with what happens IRL       |
+| `* * *`  | user                             | view client's preference on solo or group trainings                            | I can organise a joint training session to maximise productivity          |
+| `* *`    | user                             | add recurring events for clients that have training on the same day every week | I don't need to manually add and manage my schedule every single week     |
+| `* *`    | user                             | be notified of a conflicting timeslot when I update a client's timeslot        | I know which timeslots are not available for my new clients               |
+| `* *`    | user                             | delete client that I am not training anymore                                   | the client list I have is not messy                                       |
+| `* *`    | forgetful user                   | set reminders for training sessions                                            | I do not forget or miss a training session with my client                 |
+| `* *`    | user                             | set goal deadlines for clients                                                 | I know which session to have a sit down with client                       |
+| `*`      | organized user                   | sort my clients chronologically                                                | I will know which clients I will be meeting with soon.                    |
+| `*`      | user                             | sort my clients based on months or weeks                                       | I can better plan for the clients that are in the upcoming months / weeks |
 
 ### Use cases
 
@@ -658,7 +658,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Above Average Typing Seed**: Refers to a user capable of typing text (in natural language) at a faster rate than the typical user, enabling quick entry of commands or form data.
 * **Client's Details**: This includes session details, training goals, medical history, gym location, and contact number.
 * **Command Line Interface (CLI)**: A text-based interface that accepts typed commands. Users interact with the application by entering commands, rather than by clicking or tapping on-screen elements.
@@ -692,38 +692,105 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file<br>
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file.<br>
+   Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Exit program
 
-### Deleting a person
+   1. Enter the exit command. The window closes.
 
-1. Deleting a person while all persons are being shown
+   2. Double-click the jar file<br>
+   Expected: Shows the GUI with contacts. The most recent window size and location is retained.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Deleting a client
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+1. Deleting a client while all clients are being shown
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact is shown in the status message.
+
+   3. Test case: `delete x` (where x is larger than the list size)<br>
+      Expected: No person is deleted. Error details of invalid client index shown in the status message.
+
+   4. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details of incorrect format and right usage are shown in the status message.
+
+   5. Other incorrect delete commands to try: `delete`, `delete y`, `...` (where y is not a positive integer)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Displaying a client
+
+1. Displaying a client while all clients are being shown
+
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+    2. Test case: `display 1`<br>
+       Expected: First contact is displayed from the list. Details of the client is shown in the status message.
+
+    3. Test case: `display x` (where x is larger than the list size)<br>
+       Expected: No person is displayed. Error details of invalid client index shown in the status message.
+
+    4. Test case: `display 0`<br>
+       Expected: No person is displayed. Error details of incorrect format and right usage are shown in the status message.
+
+    5. Other incorrect display commands to try: `display`, `display y`, `...` (where y is not a positive integer)<br>
+       Expected: Similar to previous.
+
+### Finding a client
+
+1. Finding a client in the client list
+
+    1. Test case: `find x` (where x is a complete part of client's name)<br>
+    Expected: Client list only shows the contacts that contains the name. Number of clients listed is shown in the status message.
+
+    2. Test case: `find x y` (where x and y are complete part of different client's name)<br>
+    Expected: Client list only shows the contacts that contains the name. Number of clients listed is shown in the status message.
+
+    3. Test case: `find z` (where z is not part of any client's name)<br>
+    Expected: Client list is empty. 'No clients listed' message is shown in the status message.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: Executed the [final FitFlow release] jar file.
 
-1. _{ more test cases …​ }_
+   2. Open the FitFlow home folder. Delete the Data folder.
+
+   3. Double-click the jar file. <br>
+   Expected: Shows the GUI with a set of sample contacts. The most recent window size and location is retained.
+
+2. Dealing with corrupted data files
+
+   1. Prerequisites: Executed the [final FitFlow release] jar file.
+
+   2. Open the FitFlow home folder. Open the Data folder. Open the addressbook.json.
+
+   3. In the open addressbook.json. Remove the curly bracket ({) at line 1. Close and Save the file.
+
+   4. Double-click the jar file<br>
+   Expected: Shows the GUI without a set of sample contacts. The most recent window size and location is retained.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Team Size: 5
+
+This section addresses the enhancements we plan to add to the application in the future. They address some of the features in our use cases that are not currently implemented within the application.
+
+### Use Case 6 - Step 3: Prompting User for Delete confirmation
+When a client deletes a user, the application does so immediately without any confirmation. This can be undesirable, especially since the `delete` command uses indexes for deletion, which can be mistyped easily.
+
+We plan to have a confirmation message show up in the output box, with details of the client (similar to those shown in `display`), so that the user can verify the client before deleting them from the app. After verification, they can then type 'yes' or 'no' to proceed with or stop the process.
+
+This can be done with a new Confirmation class, which will hold **information about the client** to be deleted, and the code to delete the client in a **nullary function** (function that takes no arguments). Depending on whether the user inputs 'yes' or 'no', the Confirmation object will call the nullary function or finish the process without doing anything to the data.

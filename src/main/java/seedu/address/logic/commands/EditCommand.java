@@ -48,7 +48,7 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed client list. "
             + "Existing values will be overwritten by the input values.\n\n"
             + "Format: "
-            + COMMAND_WORD + " INDEX (must be a positive integer) "
+            + COMMAND_WORD + " INDEX (must be 1 and above) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_RECURRING_SCHEDULE + "RECURRING SCHEDULE] "

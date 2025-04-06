@@ -5,8 +5,13 @@ title: User Guide
 
 ## About FitFlow
 
-FitFlow is a **desktop app for personal trainers in Singapore to manage their clients, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FitFlow can manage your clients faster than traditional GUI apps.
+Managing clients as a personal trainer is never easy. Beyond conducting workouts, trainers must juggle scheduling, track client progress, consider individual goals and medical histories, and ensure each client gets a personalized experience. While popular client management apps like Trainerize, TrueCoach, and My PT Hub offer various features, they come with subscription costs, steep learning curves, and cluttered interfaces. Additionally, these platforms lack built-in conflict detection, forcing trainers to manually track overlapping client schedules.
 
+Introducing FitFlow — **a free desktop app designed specifically for personal trainers in Singapore to streamline client management. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).** It provides trainers with a fast and reliable way to store, retrieve, and update client details, including fitness goals, session history, and health information.
+
+What sets FitFlow apart is its intelligent conflict detection system. The app automatically flags scheduling overlaps, helping trainers avoid double bookings and maintain a seamless flow of appointments.
+
+By streamlining administrative tasks, FitFlow lets trainers focus on what matters most—empowering their clients on their fitness journeys.
 
 ## Using this Guide
 
@@ -52,6 +57,7 @@ These boxes indicate warnings about potential negative outcomes.
             * Linux: Press Ctrl + Alt + T. The terminal application should open.
         2. Change the directory you are currently in to the home folder, using the command `cd`.
             * A simple way to find the directory is to go to the home folder your normal file browsing app and copying the directory at the address bar. For example, the command could be `cd ~/Downloads/FitFlowFolder`.
+            * Another simple way to navigate to the directory is to go to the home folder and right-click on an empty space, then select the option "Open in terminal" to immediately open a terminal in that directory.
         3. Use the `java -jar <FitFlow Filename>.jar` command to run the application.
 
     A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -60,7 +66,7 @@ These boxes indicate warnings about potential negative outcomes.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will display the list of available commands in FitFlow.<br>
    Some example commands you can try:
 
-   * `add n/John Doe p/81234567` : Adds a client named `John Doe` to the FitFlow.
+   * `add n/John Doe p/81234567` : Adds a client named `John Doe` to FitFlow.
 
    * `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends` : Adds a client named `Alice Pauline` with many details such as her schedule, fitness goal, medical history and location.
 
@@ -82,7 +88,7 @@ These boxes indicate warnings about potential negative outcomes.
 
    * `clear` : Deletes all clients.
 
-   * `exit` : Exits the FitFlow app.
+   * `exit` : Exits FitFlow app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -104,7 +110,7 @@ To get a feel for the app before actually starting to use it, check out our [_Gu
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -183,7 +189,7 @@ Find clients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
 * The order of the keywords does not matter. i.e. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
 * Only the name and contact number of the client will be displayed. To see a client's full details, refer to the [**`display`**](#displaying-a-clients-details-display) section.
@@ -258,7 +264,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots
 * The index **must be a positive integer** 1, 2, 3, …​.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e it is not cumulative.
+* When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e. it is not cumulative.
 * You can remove all the client's recurring schedules, one time schedules and tags by typing `rs/`, `ots/`, and `t/` respectively without specifying any value after it.
 * For more details on how each field should be formatted, refer to the [**`add`**](#adding-a-client-add) section.
 
@@ -334,14 +340,14 @@ FitFlow data are saved automatically as a JSON file `[JAR file location]/data/ad
 
 Action | Format, Examples
 --------|------------------
-**Help** | `help [/add] [/list] [/edit] [/find] [/display] [/view] [/delete] [/clear] [/exit]` <br> e.g., `help /add`
-**Add** | `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [t/TAG]…​` <br> e.g., `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
-**List** | `list` <br> e.g., `list`
-**Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find John`
-**Display** | `display INDEX`<br> e.g., `display 2`
-**View** | `view [DAY] [DAY_SHORT_FORM] [DATE (DD/MM[/YY])]` <br> e.g., `view Monday`
-**Edit** | `edit edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Help** | `help [/add] [/list] [/edit] [/find] [/display] [/view] [/delete] [/clear] [/exit]` <br> e.g. `help /add`
+**Add** | `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [t/TAG]…​` <br> e.g. `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
+**List** | `list` <br> e.g. `list`
+**Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g. `find John`
+**Display** | `display INDEX`<br> e.g. `display 2`
+**View** | `view [DAY] [DAY_SHORT_FORM] [DATE (DD/MM[/YY])]` <br> e.g. `view Monday`
+**Edit** | `edit edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`<br> e.g. `edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400`
+**Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Exit** | `exit`
 **Clear** | `clear`
 
