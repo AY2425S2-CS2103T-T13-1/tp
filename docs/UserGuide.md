@@ -260,7 +260,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
 - Any date provided that excludes year will be treated as a date in the current year.<br>
 - A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
-- Use the edit command to rectify any conflicting schedules.
+- Use the edit command to rectify any conflicting schedules. <br>
+- When editing recurring schedules, one time schedules or tags, the **existing parameters** of the client will be **removed** i.e. it is **not cumulative**.
 </div>
 
 * Edits the client at the specified `INDEX`.
@@ -268,7 +269,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots
 * The index **must be a positive integer** 1, 2, 3, …​.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e. it is not cumulative.
 * You can remove all the client's recurring schedules, one time schedules and tags by typing `rs/`, `ots/`, and `t/` respectively without specifying any value after it.
 * For more details on how each field should be formatted, refer to the [**`add`**](#adding-a-client-add) section.
 
@@ -339,6 +339,8 @@ FitFlow data are saved automatically as a JSON file `[JAR file location]/data/ad
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. The [**view**](#viewing-schedules-view) command currently does not highlight conflicting schedules when used. This is known and will be rectified in a future to make it easier for client's to rectify conflicting schedules. It is not prioritised as a user is still able to manually see and rectify conflicting schedules.
 4. The dates are only accepted if the year is in a 2-digit format, not in a 4-digit format. This is known and will be updated in a future update. It is not prioritised as it is unlikely that a user will save a schedule in a year earlier than 2000 and after 2100 for now.
+5. When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e. it is not cumulative. This is a known limitation and the behaviour will be adjusted in an update. It is not prioritised as the user can still add the fields manually.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
