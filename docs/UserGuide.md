@@ -72,9 +72,9 @@ These boxes indicate warnings about potential negative outcomes.
 
    * `find John Doe` : Finds clients whose names match 'John' or 'Doe' and shows their name and phone number in the Client List. The Output Box will show the number of clients found by the application.
 
-   * `view monday` : Displays the sessions the personal trainer has with the clients on that day.
+   * `view monday` : Displays the schedules the personal trainer has with the clients on that day.
 
-   * `view 17/2/25` : Displays the sessions the personal trainer has with the clients on that day.
+   * `view 17/2/25` : Displays the schedules the personal trainer has with the clients on that day.
 
    * `edit 1 p/81234567 rs/Tue 1600 1800 g/Do 10 pull ups` : Edits the details of the 1st client shown in the current list.
 
@@ -154,7 +154,7 @@ Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_S
 - A client is uniquely identified by their name. Thus, you cannot add two clients with the exact same name, regardless of case (i.e. john doe cannot be added with John Doe already in the client list).<br>
 The reason for this is so that you will not be confused on which client is which when trying to look for their details. You must differentiate them in some way before adding.
 - Any date provided that excludes year will be treated as a date in the current year.<br>
-- A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
+- A client with a recurring schedule or one time schedule that conflicts with other clients' schedules will still be added.<br>
 - Use the edit command to rectify any conflicting schedules.
 </div>
 
@@ -225,7 +225,7 @@ Examples:
 
 ### Viewing Schedules: `view`
 
-Displays the sessions the personal trainer has with clients on that day or date.
+Displays the schedules the personal trainer has with clients on that day or date.
 
 Format: `view DAY/DATE`<br>
 DAY Format: `Monday` or `Mon`<br>
@@ -233,7 +233,7 @@ DATE Format: `[D]D/[M]M[/YY]`
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
 - Any date provided that excludes year will be treated as a date in the current year.<br>
-- Viewing a day (i.e. Mon), will also return `ONE_TIME_SCHEDULE` sessions in the coming Monday.
+- Viewing a day (i.e. Mon), will also return `ONE_TIME_SCHEDULE` schedules in the coming Monday.
 </div>
 
 * The search is case-insensitive. i.e. `Monday` will match `monday`.
@@ -244,10 +244,10 @@ DATE Format: `[D]D/[M]M[/YY]`
   * The year of the date can be omitted. In this case, the application will assume the current year.
 
 Examples:
-* `view Tue` returns the list of clients with sessions on Tuesday.
-* `view 25/02/25` returns the list of clients with sessions on 25/02/25.
-* `view 21/04` returns the list of clients with sessions on 21/04 in today's year of usage.
-* `view Monday` returns the list of clients with sessions on Monday.<br>
+* `view Tue` returns the list of clients with schedules on Tuesday.
+* `view 25/02/25` returns the list of clients with schedules on 25/02/25.
+* `view 21/04` returns the list of clients with schedules on 21/04 in today's year of usage.
+* `view Monday` returns the list of clients with schedules on Monday.<br>
     ![result for 'view Monday'](images/viewMonday.png)
 
 
@@ -259,7 +259,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
 - Any date provided that excludes year will be treated as a date in the current year.<br>
-- A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
+- A client with a recurring schedule or one time schedule that conflicts with other clients' schedules will still be added.<br>
 - Use the edit command to rectify any conflicting schedules. <br>
 - When editing recurring schedules, one time schedules or tags, the **existing parameters** of the client will be **removed** i.e. it is **not cumulative**.
 </div>
