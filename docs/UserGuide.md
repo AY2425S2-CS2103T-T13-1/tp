@@ -333,6 +333,7 @@ FitFlow data are saved automatically as a JSON file `[JAR file location]/data/ad
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **If you open FitFlow and find the clients list to be empty**, the file storing the clients' data is likely corrupted. This file can still be found at `data/addressbook.json` from the directory FitFlow is located at. Inputting any command after discovering this issue will cause all remaining data in the `addressbook.json` file to be removed. The remedy is to assess the corrupted file's contents and fill up any missing fields.
 
 --------------------------------------------------------------------------------------------------------------------
 
