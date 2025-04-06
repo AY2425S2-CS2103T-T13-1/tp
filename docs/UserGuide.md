@@ -12,6 +12,7 @@ Introducing FitFlow — **a free desktop app designed specifically for personal 
 What sets FitFlow apart is its intelligent conflict detection system. The app automatically flags scheduling overlaps, helping trainers avoid double bookings and maintain a seamless flow of appointments.
 
 By streamlining administrative tasks, FitFlow lets trainers focus on what matters most—empowering their clients on their fitness journeys.
+<div style="page-break-after: always;"></div>
 
 ## Using this Guide
 
@@ -32,6 +33,7 @@ These boxes indicate information that you should take note of to avoid running i
 <div markdown="block" class="alert alert-danger">:rotating_light: **Caution:**<br>
 These boxes indicate warnings about potential negative outcomes.
 </div>
+<div style="page-break-after: always;"></div>
 
 ## Table of Contents
 
@@ -39,6 +41,7 @@ These boxes indicate warnings about potential negative outcomes.
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -99,6 +102,7 @@ These boxes indicate warnings about potential negative outcomes.
 To get a feel for the app before actually starting to use it, check out our [_Guided Tutorial_](GuidedTutorial.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -145,7 +149,7 @@ Adds a client to FitFlow.
 
 Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-info">:bulb: **Tip:**
+<div markdown="span" class="alert alert-info">:bulb: **Tip:**<br>
 - A client can have any number of recurring schedule, one time schedule, or tags (including 0).<br>
 </div>
 
@@ -327,6 +331,7 @@ FitFlow data are saved automatically as a JSON file `[JAR file location]/data/ad
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -345,6 +350,7 @@ FitFlow data are saved automatically as a JSON file `[JAR file location]/data/ad
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
