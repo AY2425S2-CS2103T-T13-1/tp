@@ -147,12 +147,12 @@ Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_S
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 - A client can have any number of recurring schedule, one time schedule, or tags (including 0).<br>
-- A client is uniquely identified by their name. Thus, you cannot add two clients with the exact same name, regardless of case (i.e. john doe cannot be added with John Doe already in the client list).<br>
-The reason for this is so that you will not be confused on which client is which when trying to look for their details. You must differentiate them in some way before adding.
 </div>
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
 - A client should have at least have a name and a phone number to be added.<br>
+- A client is uniquely identified by their name. Thus, you cannot add two clients with the exact same name, regardless of case (i.e. john doe cannot be added with John Doe already in the client list).<br>
+The reason for this is so that you will not be confused on which client is which when trying to look for their details. You must differentiate them in some way before adding.
 - Any date provided that excludes year will be treated as a date in the current year.<br>
 - A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
 - Use the edit command to rectify any conflicting schedules.
