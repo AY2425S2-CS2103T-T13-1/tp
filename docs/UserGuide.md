@@ -20,8 +20,6 @@ The purpose of this user guide is to **help you install FitFlow**, as well as be
 
 You can use the [Table of contents](#table-of-contents) to navigate directly to what you're looking for.
 
-<div style="page-break-after: always;"></div>
-
 <div markdown="block" class="alert alert-info">:bulb: **Tips/Info:**<br>
 These boxes contain important/useful information or tips that can help you with using FitFlow.
 </div>
