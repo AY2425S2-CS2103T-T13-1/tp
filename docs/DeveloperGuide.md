@@ -797,3 +797,12 @@ When a client deletes a user, the application does so immediately without any co
 We plan to have a confirmation message show up in the output box, with details of the client (similar to those shown in `display`), so that the user can verify the client before deleting them from the app. After verification, they can then type 'yes' or 'no' to proceed with or stop the process.
 
 This can be done with a new Confirmation class, which will hold **information about the client** to be deleted, and the code to delete the client in a **nullary function** (function that takes no arguments). Depending on whether the user inputs 'yes' or 'no', the Confirmation object will call the nullary function or finish the process without doing anything to the data.
+
+### Use Case 14 - Setting a reminder for a session
+Currently, the application does not support reminders for upcoming sessions, which may lead to missed appointments if the user forgets to check the schedule regularly.
+
+We plan to implement a feature that allows users to set reminders for individual sessions. This will improve time management and ensure that trainers do not miss upcoming appointments.
+
+To support this, each `Schedule` object will have an optional `reminderDuration` field (e.g., 10 minutes, 1 hour) that indicates how long before the session the reminder should be triggered. When the application is launched, it will check all upcoming sessions against the current system time. If any reminder falls within the configured window (e.g. now + 10 minutes), a reminder message will be displayed as part of the welcome output to notify the user.
+
+This feature will help users stay informed about imminent sessions, especially useful for trainers with a busy or irregular schedule.
