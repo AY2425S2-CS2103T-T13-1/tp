@@ -779,3 +779,18 @@ testers are expected to do more *exploratory* testing.
 
    4. Double-click the jar file<br>
    Expected: Shows the GUI without a set of sample contacts. The most recent window size and location is retained.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Team Size: 5
+
+This section addressed how to plan to enhancements we plan to add to the application in the future. They address some of the features in our use cases that are not currently implemted within the application.
+
+### Use Case 6 - Step 3: Prompting User for Delete confirmation
+When a client deletes a user, the application does so immediately without any confirmation. This can be undesirable, especially since the `delete` command uses indexes for deletion, which can be mistyped easily.
+
+We plan to add a confirmation message show up on the output box, with details of the client (similar to those shown in `display`), so that the user can verify the client before deleting them from the app. After verification, they can then type 'yes' or 'no' to proceed with or stop the process.
+
+This can be done with a new Confirmation class, which will hold **information about the client** to be deleted, and the code to delete the client in a **nullary function** (function that takes no arguments). Depending on whether the user inputs 'yes' or 'no', the Confirmation object will call the nullary function or finish the process without doing anything to the data.
