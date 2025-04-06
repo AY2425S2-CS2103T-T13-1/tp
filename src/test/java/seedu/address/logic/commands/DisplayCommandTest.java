@@ -50,6 +50,16 @@ public class DisplayCommandTest {
                         + DisplayCommand.MESSAGE_USAGE);
     }
 
+    @Test
+    public void execute_invalidEmptyUnfilteredList_throwsCommandException() {
+        Model emptyModel = new ModelManager();
+        assertTrue(emptyModel.getFilteredPersonList().isEmpty());
+        DisplayCommand displayCommand = new DisplayCommand(INDEX_SECOND_PERSON);
+
+        assertCommandFailure(displayCommand, emptyModel,
+                Messages.MESSAGE_NO_PERSON_TO_DISPLAY);
+    }
+
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
@@ -96,12 +106,4 @@ public class DisplayCommandTest {
         assertEquals(expected, displayCommand.toString());
     }
 
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
-    }
 }
