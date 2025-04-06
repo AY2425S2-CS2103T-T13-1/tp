@@ -20,7 +20,7 @@ else ([at least 1 parameter provided])
             is message usage of parameter;
         else ([invalid parameter])
             :HelpCommand helpMessage
-            is a generic help message;
+            is an invalid command message;
         endif
     else ([more than one parameter])
         :Throw ParseException for
