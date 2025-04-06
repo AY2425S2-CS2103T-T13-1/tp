@@ -784,6 +784,13 @@ Team Size: 5
 
 This section addresses the enhancements we plan to add to the application in the future. They address some of the features in our use cases that are not currently implemented within the application.
 
+### Use Case 2 - Step 1: Adding a new client and Use Case 7 - Step 2: Editing a client's details
+When a user adds a new client or edits an existing one, the application currently reports a conflict if a one-time schedule (that occurred in the past) falls on the same day as a recurring schedule. This is unnecessary, as such conflicts have no impact on future scheduling.
+
+We plan to address this by suppressing conflict reports that involve past one-time schedules, ensuring that only future conflicts are flagged by the application.
+
+To implement this, we will add a check to confirm that the one-time schedule being compared is set in the future before treating it as a conflict.
+
 ### Use Case 6 - Step 3: Prompting User for Delete confirmation
 When a client deletes a user, the application does so immediately without any confirmation. This can be undesirable, especially since the `delete` command uses indexes for deletion, which can be mistyped easily.
 
