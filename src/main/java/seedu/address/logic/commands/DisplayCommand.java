@@ -41,7 +41,7 @@ public class DisplayCommand extends Command {
             throw new CommandException(Messages.MESSAGE_NO_PERSON_TO_DISPLAY);
         } else if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(
-                    String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n\n"
+                    String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n"
                             + DisplayCommand.MESSAGE_USAGE));
         }
 

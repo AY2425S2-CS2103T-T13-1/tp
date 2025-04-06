@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DisplayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -15,6 +16,10 @@ public class DisplayCommandParser implements Parser<DisplayCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DisplayCommand parse(String args) throws ParseException {
+        if (args.isEmpty()) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    DisplayCommand.MESSAGE_USAGE));
+        }
         Index index = ParserUtil.parseIndex(args);
         return new DisplayCommand(index);
     }

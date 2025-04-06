@@ -46,7 +46,7 @@ public class DisplayCommandTest {
         DisplayCommand displayCommand = new DisplayCommand(outOfBoundIndex);
 
         assertCommandFailure(displayCommand, model,
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n\n"
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n"
                         + DisplayCommand.MESSAGE_USAGE);
     }
 
@@ -62,7 +62,7 @@ public class DisplayCommandTest {
         DisplayCommand displayCommand = new DisplayCommand(outOfBoundIndex);
 
         assertCommandFailure(displayCommand, model,
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n\n"
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n"
                         + DisplayCommand.MESSAGE_USAGE);
     }
 
