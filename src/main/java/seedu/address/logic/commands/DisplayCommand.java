@@ -21,7 +21,7 @@ public class DisplayCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Display a client's full details from the client list, "
             + "identified by the index number used in the displayed client list.\n\n"
-            + "Format: " + COMMAND_WORD + " INDEX (must be a positive integer)\n\n"
+            + "Format: " + COMMAND_WORD + " INDEX (must be 1 and above)\n\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DISPLAY_PERSON_SUCCESS = "Display Client: %1$s";

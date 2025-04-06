@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
             + ": Delete a client from the application, "
             + "identified by the index number used in the displayed client list.\n\n"
             + "Format: "
-            + COMMAND_WORD + " INDEX (must be a positive integer)\n\n"
+            + COMMAND_WORD + " INDEX (must be 1 and above)\n\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Client: %1$s";
