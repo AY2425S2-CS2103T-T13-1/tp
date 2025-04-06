@@ -210,8 +210,10 @@ Display a client's full details in the client list, identified by the index numb
 Format: `display INDEX`
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
-- Can be used in conjunction with `find` and `view` to filter the clients based on their name <br> 
-  or the day/date of the schedule with the client.
+- Can be used in conjunction with 
+    - 'list' to show a list of all the clients.<br>
+    - `find` to filter the clients based on their name.<br> 
+    - 'view' to filter the clients based on day/date of the schedule.<br>
 </div>
 
 * Displays the client at the specified `INDEX`.
@@ -220,7 +222,7 @@ Format: `display INDEX`
 
 Examples:
 * `display 5` will display the details of the person at index 5.
-* * `view Mon` followed by `display 1` displays the details of the 1st client in the results of the `find` command.
+* `view Mon` followed by `display 1` displays the details of the 1st client in the results of the `find` command.
 * `find alex david` followed by `display 1` displays the details of the 1st client in the results of the `find` command.
   ![Result for 'display alex'](images/displayAlexDetails.png)
 
