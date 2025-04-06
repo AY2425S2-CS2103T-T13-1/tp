@@ -175,6 +175,7 @@ The reason for this is so that you will not be confused on which client is which
 Examples:
 * This command adds a client who is your _friend_ named _Alice Pauline_ who has the phone number _94351253_. She has weekly sessions on _Monday_ from _1400_ to _1600_, and a standalone appointment on _1st February this year_. She wants to _get fitter_ after she _twisted her right ankle_. You will be having training with her at the _Bishan ActiveSG Gym_.<br>
 `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
+  ![Result for 'add Alice Pauline'](images/addAlicePauline.png)
 * `add n/Betsy Crowe t/friend g/Lose weight l/Jurong GymBox p/91234567 mh/Lower back injury rs/Wed 1500 1700 rs/Fri 1200 1330`
 
 Invalid Examples:
@@ -297,6 +298,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots
 
 Examples:
 *  `edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400` Edits the phone number, location, and one time schedule of the 1st client to be `91234567`, `Anytime Fitness`, and `4/4 1200 1400` respectively.
+   ![Result for 'edit Alice Pauline'](images/editAlicePauline.png)
 *  `edit 2 n/Betsy Crower rs/ ots/ t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing recurring schedules, one time schedules and tags.
 
 Invalid Examples:
