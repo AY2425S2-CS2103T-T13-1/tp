@@ -187,7 +187,8 @@ Examples:
 
 ### Locating clients by name: `find`
 
-Find clients whose names contain any of the given keywords.
+Find clients whose names contain any of the given keywords, showing them in the Client List on the left.<br>
+You can then you [**`display`**](#displaying-a-clients-details-display) to display the details of the client you want.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
