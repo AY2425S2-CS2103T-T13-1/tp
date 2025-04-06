@@ -794,3 +794,8 @@ When a client deletes a user, the application does so immediately without any co
 We plan to have a confirmation message show up in the output box, with details of the client (similar to those shown in `display`), so that the user can verify the client before deleting them from the app. After verification, they can then type 'yes' or 'no' to proceed with or stop the process.
 
 This can be done with a new Confirmation class, which will hold **information about the client** to be deleted, and the code to delete the client in a **nullary function** (function that takes no arguments). Depending on whether the user inputs 'yes' or 'no', the Confirmation object will call the nullary function or finish the process without doing anything to the data.
+
+### Corrupt data file
+If the addressbook.json file is corrupted, FitFlow will open with an empty client list, while the corrupted addressbook.json file will remove all its previous data. FitFlow currently does not inform the user of the corrupted data nor does it fail gracefully.
+
+We plan to show an error message when FitFlow recognises that the data file is corrupted. FitFlow should also move the corrupted file to another location to preserve it if the user wishes to restore the remaining data.
