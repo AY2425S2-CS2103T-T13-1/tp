@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(
-                    String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n"
+                    String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n\n"
                             + DeleteCommand.MESSAGE_USAGE));
         }
 
