@@ -238,7 +238,9 @@ DATE Format: `[D]D/[M]M[/YY]`
 
 * The search is case-insensitive. i.e. `Monday` will match `monday`.
 * A day or date field must be provided.
-* For `DAY`, 3-letter short-form is allowed, i.e. `Monday` will match with `mon`.
+* For `DAY`, 3-letter short-form is allowed, i.e. `Monday` will match with `mon`. Here are a list of accepted `DAY` names:<br>
+`Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`<br>
+`Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun`
 * For `DATE`, the format has to be `[D]D/[M]M[/YY]` e.g. `14/2` matches with `14/02/25` and `7/1/25` matches with `07/01/25`.
   * The day and month of the date can have its leading `0` omitted if it is single digit.
   * The year of the date can be omitted. In this case, the application will assume the current year.
