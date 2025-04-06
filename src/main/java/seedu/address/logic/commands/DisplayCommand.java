@@ -38,7 +38,7 @@ public class DisplayCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (lastShownList.isEmpty()) {
-            throw new CommandException("The list is currently empty, enter \"list\"");
+            throw new CommandException(Messages.MESSAGE_NO_PERSON_TO_DISPLAY);
         } else if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(
                     String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n\n"
