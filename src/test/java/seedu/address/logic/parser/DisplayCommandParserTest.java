@@ -6,7 +6,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DisplayCommand;
 
 /**
@@ -27,8 +26,6 @@ public class DisplayCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a",
-                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n\n"
-                        + DisplayCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(ParserUtil.MESSAGE_INVALID_INDEX));
     }
 }
