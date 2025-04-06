@@ -146,7 +146,9 @@ Adds a client to FitFlow.
 Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
-- A client can have any number of recurring schedule, one time schedule, or tags (including 0).
+- A client can have any number of recurring schedule, one time schedule, or tags (including 0).<br>
+- A client is uniquely identified by their name. Thus, you cannot add two clients with the exact same name, regardless of case (i.e. john doe cannot be added with John Doe already in the client list).<br>
+The reason for this is so that you will not be confused on which client is which when trying to look for their details. You must differentiate them in some way before adding.
 </div>
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
