@@ -154,7 +154,7 @@ Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_S
 - A client is uniquely identified by their name. Thus, you cannot add two clients with the exact same name, regardless of case (i.e. john doe cannot be added with John Doe already in the client list).<br>
 The reason for this is so that you will not be confused on which client is which when trying to look for their details. You must differentiate them in some way before adding.
 - Any date provided that excludes year will be treated as a date in the current year.<br>
-- A client with a recurring schedule or one time schedule that conflicts with other clients' schedules will still be added.<br>
+- A client with a recurring schedule or one time schedule that conflicts internally or with other clients' schedules will still be added.<br>
 - Use the edit command to rectify any conflicting schedules.
 </div>
 
@@ -171,7 +171,7 @@ The reason for this is so that you will not be confused on which client is which
 * To rectify a client's conflicting schedules, refer to the [**`edit`**](#editing-a-client--edit) section.
 
 Examples:
-* This command adds a client who is your _friend_ named _Alice Pauline_ who has the phone number _94351253_. She has weekly seesions on _Monday_ from _1400_ to _1600_, and a standalone appointment on _1st February this year_. She wants to _get fitter_ after she _twisted her right ankle_. You will be having training with her at the _Bishan ActiveSG Gym_.<br>
+* This command adds a client who is your _friend_ named _Alice Pauline_ who has the phone number _94351253_. She has weekly sessions on _Monday_ from _1400_ to _1600_, and a standalone appointment on _1st February this year_. She wants to _get fitter_ after she _twisted her right ankle_. You will be having training with her at the _Bishan ActiveSG Gym_.<br>
 `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
 * `add n/Betsy Crowe t/friend g/Lose weight l/Jurong GymBox p/91234567 mh/Lower back injury rs/Wed 1500 1700 rs/Fri 1200 1330`
 
@@ -189,7 +189,7 @@ Examples:
 ### Locating clients by name: `find`
 
 Find clients whose names contain any of the given keywords, showing them in the Client List on the left.<br>
-You can then you [**`display`**](#displaying-a-clients-details-display) to display the details of the client you want.
+You can then use [**`display`**](#displaying-a-clients-details-display) to display the details of the client you want.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -261,7 +261,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
 - Any date provided that excludes year will be treated as a date in the current year.<br>
-- A client with a recurring schedule or one time schedule that conflicts with other clients' schedules will still be added.<br>
+- A client with a recurring schedule or one time schedule that conflicts internally or with other clients' schedules will still be added.<br>
 - Use the edit command to rectify any conflicting schedules. <br>
 - When editing recurring schedules, one time schedules or tags, the **existing parameters** of the client will be **removed** i.e. it is **not cumulative**.
 </div>
