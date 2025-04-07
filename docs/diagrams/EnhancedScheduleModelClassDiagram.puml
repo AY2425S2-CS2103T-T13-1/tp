@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+AddressBook *-right-> "1" UniquePersonList
+AddressBook *-right-> "1" UniqueTagList
+AddressBook *-right-> "1" UniqueScheduleList
+UniqueTagList -[hidden]up- UniqueScheduleList
+UniqueTagList -[hidden]down- UniquePersonList
+UniqueTagList -[hidden]down- UniquePersonList
+
+UniqueTagList -right-> "*" Tag
+UniquePersonList -right-> Person
+UniqueScheduleList -right-> "*" RecurringSchedule
+UniqueScheduleList -right-> "*" OneTimeSchedule
+
+Person -up-> "*" Tag
+Person "1..*" <-up-> "*" RecurringSchedule
+Person "1..*" <-up-> "*" OneTimeSchedule
+Tag -[hidden]right- RecurringSchedule
+Person -[hidden]right- OneTimeSchedule
+RecurringSchedule -[hidden]right- OneTimeSchedule
+
+class Bend
+
+Person -up- Bend
+Bend -right-> OneTimeSchedule
+RecurringSchedule -right- Bend
+
+hide Bend
+
+Person *--> Name
+Person *--> Phone
+Person *--> Location
+Person *--> Goals
+Person *--> MedicalHistory
+@enduml
