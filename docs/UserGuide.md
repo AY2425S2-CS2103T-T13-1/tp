@@ -271,8 +271,8 @@ Examples:
 
 Invalid Examples:
 * `view`: **Missing argument:** must specify a day or date.
-* `View Tueday`: **Misspelled day.** Accepted values include `Tuesday` or `Tue`.
-* `view 32/1/25`: **Invalid date.**
+* `view Tueday`: **Misspelled day.** Accepted values include `Tuesday` or `Tue`.
+* `view 31/4/25`: **Invalid date.** Take note of the number of days in the month being entered.
 * `view 14/13/25`: **Invalid month.**
 
 ### Editing a client : `edit`
