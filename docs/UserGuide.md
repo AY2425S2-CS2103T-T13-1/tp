@@ -180,12 +180,13 @@ Examples:
 
 ### Listing all clients: `list`
 
-Shows a list of all the clients in FitFlow.
+Always shows a list of all the clients in FitFlow, regardless of any previous commands that might have filtered the list.
 
 Format: `list`
 
 Examples:
 * `list` displays and indexes all the clients in FitFlow.
+* If the list has been filtered because of the `find` command, you can use the `list` command to display the full list of clients again.
 
 
 ### Locating clients by name: `find`
