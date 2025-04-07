@@ -790,3 +790,9 @@ When a client deletes a user, the application does so immediately without any co
 We plan to have a confirmation message show up in the output box, with details of the client (similar to those shown in `display`), so that the user can verify the client before deleting them from the app. After verification, they can then type 'yes' or 'no' to proceed with or stop the process.
 
 This can be done with a new Confirmation class, which will hold **information about the client** to be deleted, and the code to delete the client in a **nullary function** (function that takes no arguments). Depending on whether the user inputs 'yes' or 'no', the Confirmation object will call the nullary function or finish the process without doing anything to the data.
+
+### Foreign Phone Numbers
+Our application right now only accepts Singaporean phone numbers which are 8 digits long and only start with the numbers 6, 8 or 9. However, we plan to expand these constraints so that our application also accepts foreign numbers which might be more than 8 digits long and can start with other numbers.
+
+This can be done by changing the VALIDATION_REGEX in our phone class to accept a string of numbers with any length and that starts with any number.
+
