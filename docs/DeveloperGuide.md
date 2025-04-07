@@ -828,6 +828,11 @@ When adding or editing either one time schedules or recurring schedules, the giv
 
 We intend to fix the parsing of one time schedules and recurring schedules by splitting the parameter given by the user with a different symbol like `-` or `_`, then using the `trim()` method to remove unnecessary whitespaces.
 
+### Corrupt data file
+If the addressbook.json file is corrupted, FitFlow will open with an empty client list, while the corrupted addressbook.json file will remove all its previous data. FitFlow currently does not inform the user of the corrupted data nor does it fail gracefully.
+
+We plan to show an error message when FitFlow recognises that the data file is corrupted. FitFlow should also move the corrupted file to another location to preserve it if the user wishes to restore the remaining data.
+
 ### Foreign Phone Numbers
 Our application right now only accepts Singaporean phone numbers which are 8 digits long and only start with the numbers 6, 8 or 9. However, we plan to expand these constraints so that our application also accepts foreign numbers which might be more than 8 digits long and can start with other numbers.
 
