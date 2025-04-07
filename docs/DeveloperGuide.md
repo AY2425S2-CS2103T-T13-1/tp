@@ -387,7 +387,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - 1a. The client being searched for does not exist.<br>
-    - 1a1. FitFlow shows the list the clients with the keyword on the app.<br>
+    - 1a1. FitFlow shows an empty list of clients on the app.<br>
       Use case ends.
 - 1b. The keyword to find the client is empty.<br>
     - 1b1. FitFlow shows an error message and prompts the user the format of the command.
