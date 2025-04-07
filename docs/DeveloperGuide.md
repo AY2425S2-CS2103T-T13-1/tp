@@ -773,7 +773,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing data files
 
-   1. Prerequisites: Executed the [final FitFlow release] jar file.
+   1. Prerequisites: Executed the FitFlow.jar file.
 
    2. Open the FitFlow home folder. Delete the Data folder.
 
@@ -782,7 +782,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Dealing with corrupted data files
 
-   1. Prerequisites: Executed the [final FitFlow release] jar file.
+   1. Prerequisites: Executed the FitFlow.jar file.
 
    2. Open the FitFlow home folder. Open the Data folder. Open the addressbook.json.
 
