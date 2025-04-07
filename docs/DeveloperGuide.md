@@ -13,6 +13,7 @@ title: Developer Guide
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
 
@@ -66,6 +67,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 <img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -83,6 +85,7 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -114,6 +117,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S2-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -133,7 +137,7 @@ The `Model` component,
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
-
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -151,6 +155,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -162,6 +167,7 @@ The following activity diagram summarizes what happens when a user executes a he
 ![Help Command Activity Diagram](images/HelpCommandActivityDiagram.png)
 
 The command makes use of the `/` prefix to check for the parameters provided. If the parameter is valid (meaning it is one of the other commands available in FitFlow), it will show the message usage of that command requested.
+<div style="page-break-after: always;"></div>
 
 ### Adding/Editing a Client
 
@@ -169,6 +175,7 @@ The following activity diagram summarizes the workflow of when a client is added
 ![Add_Edit Command Activity Diagram](images/AddCommand_EditCommandActivityDiagram.png)
 
 The commands check for schedule conflicts between the client being added/edited and other existing clients stored in FitFlow and warns the user of any such conflicting timings.
+<div style="page-break-after: always;"></div>
 
 ### Using View within the application itself
 
@@ -176,6 +183,7 @@ The following activity diagram summarizes what happens when a user executes a vi
 ![View Command Activity Diagram](images/ViewCommandActivityDiagram.png)
 
 The command takes in a DAY/DATE parameter. If the parameter is valid, it will list the clients' schedules for the given day or date.
+<div style="page-break-after: always;"></div>
 
 ### Using Display within the application itself
 
@@ -183,6 +191,7 @@ The following activity diagram summarizes what happens when a user executes a di
 ![Display Command Activity Diagram](images/DisplayCommandActivityDiagram.png)
 
 The command takes in a positive integer parameter. If the parameter is valid (meaning it is less than or equal to the number of clients), it will display the client's details at the index.
+<div style="page-break-after: always;"></div>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -267,6 +276,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -292,6 +302,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * organise group workout sessions with clients who have similar exercise profiles and live close together
 
 **Value proposition**: streamlines client management, workout planning, and scheduling, maximizing productivity
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -316,6 +327,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                             | set goal deadlines for clients                                                 | I know which session to have a sit down with client                       |
 | `*`      | organized user                   | sort my clients chronologically                                                | I will know which clients I will be meeting with soon.                    |
 | `*`      | user                             | sort my clients based on months or weeks                                       | I can better plan for the clients that are in the upcoming months / weeks |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -622,6 +635,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -651,6 +665,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Notes about project scope:
 1. The application is not required to provide suggestions on schedules to the user.
 2. The application is meant for a single-user.
+<div style="page-break-after: always;"></div>
 
 ### Glossary
 
@@ -671,7 +686,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Single-File Application**: An application distributed as a single executable or JAR file, avoiding the need for extra installations or additional dependencies on the user’s system.
 * **Single-User Application**: Intended for use by one person at a time, with no requirement for multi-user logins or collaborative functionality.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -777,6 +792,7 @@ testers are expected to do more *exploratory* testing.
    Expected: Shows the GUI without a set of sample contacts. The most recent window size and location is retained.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
 
@@ -784,12 +800,33 @@ Team Size: 5
 
 This section addresses the enhancements we plan to add to the application in the future. They address some of the features in our use cases that are not currently implemented within the application.
 
+### Use Case 2 - Step 1: Adding a new client and Use Case 7 - Step 2: Editing a client's details
+When a user adds a new client or edits an existing one, the application currently reports a conflict if a one-time schedule (that occurred in the past) falls on the same day as a recurring schedule. This is unnecessary, as such conflicts have no impact on future scheduling.
+
+We plan to address this by suppressing conflict reports that involve past one-time schedules, ensuring that only future conflicts are flagged by the application.
+
+To implement this, we will add a check to confirm that the one-time schedule being compared is set in the future before treating it as a conflict.
+
 ### Use Case 6 - Step 3: Prompting User for Delete confirmation
 When a client deletes a user, the application does so immediately without any confirmation. This can be undesirable, especially since the `delete` command uses indexes for deletion, which can be mistyped easily.
 
 We plan to have a confirmation message show up in the output box, with details of the client (similar to those shown in `display`), so that the user can verify the client before deleting them from the app. After verification, they can then type 'yes' or 'no' to proceed with or stop the process.
 
 This can be done with a new Confirmation class, which will hold **information about the client** to be deleted, and the code to delete the client in a **nullary function** (function that takes no arguments). Depending on whether the user inputs 'yes' or 'no', the Confirmation object will call the nullary function or finish the process without doing anything to the data.
+
+### Use Case 14 - Setting a reminder for a session
+Currently, the application does not support reminders for upcoming sessions, which may lead to missed appointments if the user forgets to check the schedule regularly.
+
+We plan to implement a feature that allows users to set reminders for individual sessions. This will improve time management and ensure that trainers do not miss upcoming appointments.
+
+To support this, each `Schedule` object will have an optional `reminderDuration` field (e.g., 10 minutes, 1 hour) that indicates how long before the session the reminder should be triggered. When the application is launched, it will check all upcoming sessions against the current system time. If any reminder falls within the configured window (e.g. now + 10 minutes), a reminder message will be displayed as part of the welcome output to notify the user.
+
+This feature will help users stay informed about imminent sessions, especially useful for trainers with a busy or irregular schedule.
+
+### Trim unnecessary whitespaces in parameters for One Time Schedules and Recurring Schedules
+When adding or editing either one time schedules or recurring schedules, the given date/day and time may not be parsed due to additional whitespace characters between the date/day and time. (i.e. an `edit` command with the prefix and parameter `rs/Monday   1400 1600` or `rs/Monday 1400   1600`will display an error). 
+
+We intend to fix the parsing of one time schedules and recurring schedules by splitting the parameter given by the user with a different symbol like `-` or `_`, then using the `trim()` method to remove unnecessary whitespaces.
 
 ### Corrupt data file
 If the addressbook.json file is corrupted, FitFlow will open with an empty client list, while the corrupted addressbook.json file will remove all its previous data. FitFlow currently does not inform the user of the corrupted data nor does it fail gracefully.
