@@ -198,6 +198,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`.
 * The order of the keywords does not matter. i.e. `Hans Bo` will match `Bo Hans`.
+* You do not need to include the name tag in the keyword, e.g. if you want to search for the name 'Alex' it should be `find Alex` and not `find n/Alex`.
 * Only the name is searched.
 * Only the name and contact number of the client will be displayed. To see a client's full details, refer to the [**`display`**](#displaying-a-clients-details-display) section.
 * Only full words will be matched i.e. `Han` will not match `Hans`.
