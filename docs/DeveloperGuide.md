@@ -806,3 +806,8 @@ When a client deletes a user, the application does so immediately without any co
 We plan to have a confirmation message show up in the output box, with details of the client (similar to those shown in `display`), so that the user can verify the client before deleting them from the app. After verification, they can then type 'yes' or 'no' to proceed with or stop the process.
 
 This can be done with a new Confirmation class, which will hold **information about the client** to be deleted, and the code to delete the client in a **nullary function** (function that takes no arguments). Depending on whether the user inputs 'yes' or 'no', the Confirmation object will call the nullary function or finish the process without doing anything to the data.
+
+### Trim unnecessary whitespaces in parameters for One Time Schedules and Recurring Schedules
+When adding or editing either one time schedules or recurring schedules, the given date/day and time may not be parsed due to additional whitespace characters between the date/day and time. (i.e. an `edit` command with the prefix and parameter `rs/Monday   1400 1600` or `rs/Monday 1400   1600`will display an error). 
+
+We intend to fix the parsing of one time schedules and recurring schedules by splitting the parameter given by the user with a different symbol like `-` or `_`, then using the `trim()` method to remove unnecessary whitespaces.
