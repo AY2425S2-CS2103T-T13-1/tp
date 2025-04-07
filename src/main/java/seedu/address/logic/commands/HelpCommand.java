@@ -26,7 +26,7 @@ public class HelpCommand extends Command {
             + "\nhelp " + PREFIX_COMMAND + DeleteCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + ClearCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + ExitCommand.COMMAND_WORD;
-    public static final String GENERIC_HELP_MESSAGE = "Here are a list of basic commands you can use in Fit Flow."
+    public static final String GENERIC_HELP_MESSAGE = "Here are a list of basic commands you can use in FitFlow."
             + " For more information on each command, type one of the following."
             + COMMAND_LIST;
     public static final String INVALID_PARAMETER_MESSAGE = "The command provided is invalid! "
