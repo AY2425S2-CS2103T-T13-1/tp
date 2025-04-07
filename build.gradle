@@ -67,7 +67,7 @@ dependencies {
 
 shadowJar {
     archiveBaseName = "FitFlow"
-    archiveVersion = "v1.5"
+    archiveVersion = "v1.6"
     archiveClassifier = null
 }
 
