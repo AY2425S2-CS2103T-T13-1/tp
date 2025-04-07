@@ -16,8 +16,9 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View a client in the client list whose names contain "
-            + "any of the specified keywords (case-insensitive) and displays them as a list with index numbers. This"
-            + "list contains only client names and their respective phone numbers.\n\n"
+            + "any of the specified keywords (case-insensitive) and displays them as a list with index numbers. You "
+            + "do not need to include the '/n' tag in the keyword. This list contains only client names and their "
+            + "respective phone numbers.\n\n"
             + "Format: "
             + COMMAND_WORD + " [KEYWORD]\n\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
@@ -32,8 +33,10 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        String keywords = String.join(" ", predicate.getKeywords());
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW + keywords,
+                        model.getFilteredPersonList().size()));
     }
 
     @Override
