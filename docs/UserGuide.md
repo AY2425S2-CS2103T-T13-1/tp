@@ -238,7 +238,7 @@ Invalid Examples:
 * `display`: **Missing index.**
 * `display zero`: **Index must be a positive integer.**
 * `display -1`: **Negative index is invalid.**
-* `display 999`: **Index out of bounds, no such client in the displayed list.**
+* `display 999`: **Index out of bounds, no such client in the displayed list.** (Assumption: There are lesser than 999 clients in the displayed list.)
 
 ### Viewing Schedules: `view`
 
@@ -329,7 +329,7 @@ Examples:
 Invalid Examples:
 * `delete`: **Missing index.**
 * `delete abc`: **Index must be a positive integer.**
-* `delete 100`: **Index out of bounds, no such client in current list.**
+* `delete 100`: **Index out of bounds, no such client in current list.** (Assumption: There are lesser than 999 clients in the displayed list.)
 
 ### Exiting the program : `exit`
 
