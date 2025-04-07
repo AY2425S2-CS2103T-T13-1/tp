@@ -333,7 +333,7 @@ Examples:
 Invalid Examples:
 * `delete`: **Missing index.**
 * `delete abc`: **Index must be a positive integer.**
-* `delete 100`: **Index out of bounds, no such client in current list.** (Assumption: There are lesser than 999 clients in the displayed list.)
+* `delete 100`: **Index out of bounds, no such client in current list.** (Assumption: There are lesser than 100 clients in the displayed list.)
 
 ### Exiting the program : `exit`
 
