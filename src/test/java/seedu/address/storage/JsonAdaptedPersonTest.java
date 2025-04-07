@@ -26,7 +26,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_MEDICAL_HISTORY = "é©";
     private static final String INVALID_LOCATION = " ";
     private static final String INVALID_ONETIMESCHEDULE = "40/01 1000 1200";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "friendé";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
