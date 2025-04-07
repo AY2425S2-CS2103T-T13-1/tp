@@ -74,7 +74,7 @@ public class CommandTestUtil {
     public static final String INVALID_LOCATION_DESC = " " + PREFIX_LOCATION; // empty string not allowed for addresses
     // empty string not allowed for one time date
     public static final String INVALID_ONETIMESCHEDULE_DESC = " " + PREFIX_ONETIMESCHEDULE + "abc";
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubbyé"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

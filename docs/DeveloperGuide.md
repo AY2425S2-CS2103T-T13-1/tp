@@ -13,6 +13,7 @@ title: Developer Guide
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
 
@@ -66,6 +67,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 <img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -83,6 +85,7 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -114,6 +117,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S2-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -133,7 +137,7 @@ The `Model` component,
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
-
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -151,6 +155,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -162,6 +167,7 @@ The following activity diagram summarizes what happens when a user executes a he
 ![Help Command Activity Diagram](images/HelpCommandActivityDiagram.png)
 
 The command makes use of the `/` prefix to check for the parameters provided. If the parameter is valid (meaning it is one of the other commands available in FitFlow), it will show the message usage of that command requested.
+<div style="page-break-after: always;"></div>
 
 ### Adding/Editing a Client
 
@@ -169,6 +175,7 @@ The following activity diagram summarizes the workflow of when a client is added
 ![Add_Edit Command Activity Diagram](images/AddCommand_EditCommandActivityDiagram.png)
 
 The commands check for schedule conflicts between the client being added/edited and other existing clients stored in FitFlow and warns the user of any such conflicting timings.
+<div style="page-break-after: always;"></div>
 
 ### Using View within the application itself
 
@@ -176,6 +183,7 @@ The following activity diagram summarizes what happens when a user executes a vi
 ![View Command Activity Diagram](images/ViewCommandActivityDiagram.png)
 
 The command takes in a DAY/DATE parameter. If the parameter is valid, it will list the clients' schedules for the given day or date.
+<div style="page-break-after: always;"></div>
 
 ### Using Display within the application itself
 
@@ -183,6 +191,7 @@ The following activity diagram summarizes what happens when a user executes a di
 ![Display Command Activity Diagram](images/DisplayCommandActivityDiagram.png)
 
 The command takes in a positive integer parameter. If the parameter is valid (meaning it is less than or equal to the number of clients), it will display the client's details at the index.
+<div style="page-break-after: always;"></div>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -267,6 +276,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -292,6 +302,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * organise group workout sessions with clients who have similar exercise profiles and live close together
 
 **Value proposition**: streamlines client management, workout planning, and scheduling, maximizing productivity
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -316,6 +327,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                             | set goal deadlines for clients                                                 | I know which session to have a sit down with client                       |
 | `*`      | organized user                   | sort my clients chronologically                                                | I will know which clients I will be meeting with soon.                    |
 | `*`      | user                             | sort my clients based on months or weeks                                       | I can better plan for the clients that are in the upcoming months / weeks |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -356,12 +369,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1a2. User enters new data.<br>
       Steps 1a1-1a2 repeat until the data is entered.<br>
       Use case resumes at step 2.
-- 1b. User provides a session timing that conflicts with an existing session timing.
-    - 1b1. FitFlow shows the existing session timing that conflicts with the given session timing.
-    - 1b2. FitFlow prompts the user to enter a non-conflicting session timing.
-    - 1b3. User re-enters the command.<br>
-      Steps 1b1-1b3 repeat until a non-conflicting session timing is provided.<br>
-      Use case resumes at step 2.
+- 1b. User provides a schedule timing that conflicts with an existing schedule timing.
+    - 1b1. FitFlow stores the details of the client.
+    - 1b2. FitFlow shows the existing schedule timing that conflicts with the given schedule timing, along with a warning.<br>
+      Use case resumes at step 3.
 
 ---
 
@@ -391,7 +402,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to view their schedule on a specific day.
-2. FitFlow shows the list of clients that have a session for the specified day.<br>
+2. FitFlow shows the list of clients that have a schedule for the specified day.<br>
    Use case ends.
 
 **Extensions**
@@ -401,7 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1a2. User re-enters the command.<br>
       Steps 1a1-1a2 repeat until the command is entered correctly.<br>
       Use case resumes at step 2.
-- 1b. No clients were found to have sessions on given day.
+- 1b. No clients were found to have schedule on given day.
     - 1b1. FitFlow tells the User that the schedule for the given day is empty.<br>
       Use case ends.
 
@@ -474,12 +485,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
       Use case resumes at step 3.
-- 2b. User provides a session timing that conflicts with an existing session timing.
-    - 2b1. FitFlow shows the existing session timing that conflicts with the given session timing.
-    - 2b2. FitFlow prompts the user to enter a non-conflicting session timing.
-    - 2b3. User re-enters the command.<br>
-      Steps 2b1-2b3 repeat until a non-conflicting session timing is provided.<br>
-      Use case resumes at step 3.
+- 2b. User provides a schedule timing that conflicts with an existing schedule timing.
+    - 2b1. FitFlow stores the details of the client.
+    - 2b2. FitFlow shows the existing schedule timing that conflicts with the given schedule timing, along with a warning.<br>
+      Use case ends.
 
 ---
 
@@ -626,6 +635,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -655,6 +665,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Notes about project scope:
 1. The application is not required to provide suggestions on schedules to the user.
 2. The application is meant for a single-user.
+<div style="page-break-after: always;"></div>
 
 ### Glossary
 
@@ -675,7 +686,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Single-File Application**: An application distributed as a single executable or JAR file, avoiding the need for extra installations or additional dependencies on the user’s system.
 * **Single-User Application**: Intended for use by one person at a time, with no requirement for multi-user logins or collaborative functionality.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -781,6 +792,7 @@ testers are expected to do more *exploratory* testing.
    Expected: Shows the GUI without a set of sample contacts. The most recent window size and location is retained.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
 
