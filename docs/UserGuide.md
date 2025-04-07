@@ -12,14 +12,13 @@ Introducing FitFlow — **a free desktop app designed specifically for personal 
 What sets FitFlow apart is its intelligent conflict detection system. The app automatically flags scheduling overlaps, helping trainers avoid double bookings and maintain a seamless flow of appointments.
 
 By streamlining administrative tasks, FitFlow lets trainers focus on what matters most—empowering their clients on their fitness journeys.
+<div style="page-break-after: always;"></div>
 
 ## Using this Guide
 
 The purpose of this user guide is to **help you install FitFlow**, as well as be a **resource you can refer to** if you require any additional help.
 
 You can use the [Table of contents](#table-of-contents) to navigate directly to what you're looking for.
-
-<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">:bulb: **Tips/Info:**<br>
 These boxes contain important/useful information or tips that can help you with using FitFlow.
@@ -32,6 +31,7 @@ These boxes indicate information that you should take note of to avoid running i
 <div markdown="block" class="alert alert-danger">:rotating_light: **Caution:**<br>
 These boxes indicate warnings about potential negative outcomes.
 </div>
+<div style="page-break-after: always;"></div>
 
 ## Table of Contents
 
@@ -39,6 +39,7 @@ These boxes indicate warnings about potential negative outcomes.
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -70,11 +71,11 @@ These boxes indicate warnings about potential negative outcomes.
 
    * `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends` : Adds a client named `Alice Pauline` with many details such as her schedule, fitness goal, medical history and location.
 
-   * `find John Doe` : Finds a specific client and displays their name and phone number.
+   * `find John Doe` : Finds clients whose names match 'John' or 'Doe' and shows their name and phone number in the Client List. The Output Box will show the number of clients found by the application.
 
-   * `view monday` : Displays the sessions the personal trainer has with the clients on that day.
+   * `view monday` : Displays the schedules the personal trainer has with the clients on that day.
 
-   * `view 17/2/25` : Displays the sessions the personal trainer has with the clients on that day.
+   * `view 17/2/25` : Displays the schedules the personal trainer has with the clients on that day.
 
    * `edit 1 p/81234567 rs/Tue 1600 1800 g/Do 10 pull ups` : Edits the details of the 1st client shown in the current list.
 
@@ -99,6 +100,7 @@ These boxes indicate warnings about potential negative outcomes.
 To get a feel for the app before actually starting to use it, check out our [_Guided Tutorial_](GuidedTutorial.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -145,18 +147,20 @@ Adds a client to FitFlow.
 
 Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-info">:bulb: **Tip:**
-- A client can have any number of recurring schedule, one time schedule, or tags (including 0).
+<div markdown="span" class="alert alert-info">:bulb: **Tip:**<br>
+- A client can have any number of recurring schedule, one time schedule, or tags (including 0).<br>
 </div>
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
 - A client should have at least have a name and a phone number to be added.<br>
+- A client is uniquely identified by their name. Thus, you cannot add two clients with the exact same name, regardless of case (i.e. john doe cannot be added with John Doe already in the client list).<br>
+The reason for this is so that you will not be confused on which client is which when trying to look for their details. You must differentiate them in some way before adding.
 - Any date provided that excludes year will be treated as a date in the current year.<br>
-- A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
+- A client with a recurring schedule or one time schedule that conflicts internally or with other clients' schedules will still be added.<br>
 - Use the edit command to rectify any conflicting schedules.
 </div>
 
-* For `NAME`, `GOALS`, `MEDICAL_HISTORY`, and `LOCATION`, these fields accept all ASCII characters.
+* For `NAME`, `GOALS`, `MEDICAL_HISTORY`, `LOCATION`, and `TAG`, these fields accept all ASCII characters.
 * For `PHONE_NUMBER`, any 8-digit number starting with 6, 8, or 9 is accepted.
 * For `RECURRING SCHEDULE`, use the format `DAY START_TIME END_TIME`.
   * `DAY` can be any day of the week i.e. `Monday`. You can use 3-letter short-form days as well i.e. `Mon`.
@@ -169,28 +173,32 @@ Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_S
 * To rectify a client's conflicting schedules, refer to the [**`edit`**](#editing-a-client--edit) section.
 
 Examples:
-* `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
-* `add n/Betsy Crowe t/friend g/Lose weight l/Jurong GymBox p/91234567 mh/Lower back injury rs/Wed 1500 1700`
+* This command adds a client who is your _friend_ named _Alice Pauline_ who has the phone number _94351253_. She has weekly sessions on _Monday_ from _1400_ to _1600_, and a standalone appointment on _1st February this year_. She wants to _get fitter_ after she _twisted her right ankle_. You will be having training with her at the _Bishan ActiveSG Gym_.<br>
+`add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
+* `add n/Betsy Crowe t/friend g/Lose weight l/Jurong GymBox p/91234567 mh/Lower back injury rs/Wed 1500 1700 rs/Fri 1200 1330`
 
 
 ### Listing all clients: `list`
 
-Shows a list of all the clients in FitFlow.
+Always shows a list of all the clients in FitFlow, regardless of any previous commands that might have filtered the list.
 
 Format: `list`
 
 Examples:
 * `list` displays and indexes all the clients in FitFlow.
+* If the list has been filtered because of the `find` command, you can use the `list` command to display the full list of clients again.
 
 
 ### Locating clients by name: `find`
 
-Find clients whose names contain any of the given keywords.
+Find clients whose names contain any of the given keywords, showing them in the Client List on the left.<br>
+You can then use [**`display`**](#displaying-a-clients-details-display) to display the details of the client you want.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`.
 * The order of the keywords does not matter. i.e. `Hans Bo` will match `Bo Hans`.
+* You do not need to include the name tag in the keyword, e.g. if you want to search for the name 'Alex' it should be `find Alex` and not `find n/Alex`.
 * Only the name is searched.
 * Only the name and contact number of the client will be displayed. To see a client's full details, refer to the [**`display`**](#displaying-a-clients-details-display) section.
 * Only full words will be matched i.e. `Han` will not match `Hans`.
@@ -229,7 +237,7 @@ Examples:
 
 ### Viewing Schedules: `view`
 
-Displays the sessions the personal trainer has with clients on that day or date.
+Displays the schedules the personal trainer has with clients on that day or date.
 
 Format: `view DAY/DATE`<br>
 DAY Format: `Monday` or `Mon`<br>
@@ -237,21 +245,23 @@ DATE Format: `[D]D/[M]M[/YY]`
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
 - Any date provided that excludes year will be treated as a date in the current year.<br>
-- Viewing a day (i.e. Mon), will also return `ONE_TIME_SCHEDULE` sessions in the coming Monday.
+- Viewing a day (i.e. Mon), will also return `ONE_TIME_SCHEDULE` schedules in the coming Monday.
 </div>
 
 * The search is case-insensitive. i.e. `Monday` will match `monday`.
 * A day or date field must be provided.
-* For `DAY`, 3-letter short-form is allowed, i.e. `Monday` will match with `mon`.
+* For `DAY`, 3-letter short-form is allowed, i.e. `Monday` will match with `mon`. Here are a list of accepted `DAY` names:<br>
+`Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`<br>
+`Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun`
 * For `DATE`, the format has to be `[D]D/[M]M[/YY]` e.g. `14/2` matches with `14/02/25` and `7/1/25` matches with `07/01/25`.
   * The day and month of the date can have its leading `0` omitted if it is single digit.
   * The year of the date can be omitted. In this case, the application will assume the current year.
 
 Examples:
-* `view Tue` returns the list of clients with sessions on Tuesday.
-* `view 25/02/25` returns the list of clients with sessions on 25/02/25.
-* `view 21/04` returns the list of clients with sessions on 21/04 in today's year of usage.
-* `view Monday` returns the list of clients with sessions on Monday.<br>
+* `view Tue` returns the list of clients with schedules on Tuesday.
+* `view 25/02/25` returns the list of clients with schedules on 25/02/25.
+* `view 21/04` returns the list of clients with schedules on 21/04 in today's year of usage.
+* `view Monday` returns the list of clients with schedules on Monday.<br>
     ![result for 'view Monday'](images/viewMonday.png)
 
 
@@ -263,8 +273,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
 - Any date provided that excludes year will be treated as a date in the current year.<br>
-- A client with a recurring schedule or one time schedule that conflicts with other clients' sessions will still be added.<br>
-- Use the edit command to rectify any conflicting schedules.
+- A client with a recurring schedule or one time schedule that conflicts internally or with other clients' schedules will still be added.<br>
+- Use the edit command to rectify any conflicting schedules. <br>
+- When editing recurring schedules, one time schedules or tags, the **existing parameters** of the client will be **removed** i.e. it is **not cumulative**.
 </div>
 
 * Edits the client at the specified `INDEX`.
@@ -272,7 +283,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots
 * The index **must be a positive integer** 1, 2, 3, …​.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e. it is not cumulative.
 * You can remove all the client's recurring schedules, one time schedules and tags by typing `rs/`, `ots/`, and `t/` respectively without specifying any value after it.
 * For more details on how each field should be formatted, refer to the [**`add`**](#adding-a-client-add) section.
 
@@ -329,6 +339,7 @@ FitFlow data are saved automatically as a JSON file `[JAR file location]/data/ad
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -341,20 +352,25 @@ FitFlow data are saved automatically as a JSON file `[JAR file location]/data/ad
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. The [**view**](#viewing-schedules-view) command currently does not highlight conflicting schedules when used. This is known and will be rectified in a future to make it easier for client's to rectify conflicting schedules. It is not prioritised as a user is still able to manually see and rectify conflicting schedules.
+4. The dates are only accepted if the year is in a 2-digit format, not in a 4-digit format. This is known and will be updated in a future update. It is not prioritised as it is unlikely that a user will save a schedule in a year earlier than 2000 and after 2100 for now.
+5. When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e. it is not cumulative. This is a known limitation and the behaviour will be adjusted in an update. It is not prioritised as the user can still add the fields manually.
+
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
 Action | Format, Examples
 --------|------------------
 **Help** | `help [/add] [/list] [/edit] [/find] [/display] [/view] [/delete] [/clear] [/exit]` <br> e.g. `help /add`
-**Add** | `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [t/TAG]…​` <br> e.g. `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
+**Add** | `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​` <br> e.g. `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
 **List** | `list` <br> e.g. `list`
 **Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g. `find John`
 **Display** | `display INDEX`<br> e.g. `display 2`
-**View** | `view [DAY] [DAY_SHORT_FORM] [DATE (DD/MM[/YY])]` <br> e.g. `view Monday`
-**Edit** | `edit edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`<br> e.g. `edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400`
+**View** | `view DAY/DATE` <br> e.g. `view Monday`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`<br> e.g. `edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Exit** | `exit`
 **Clear** | `clear`
