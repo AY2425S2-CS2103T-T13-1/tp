@@ -790,3 +790,14 @@ When a client deletes a user, the application does so immediately without any co
 We plan to have a confirmation message show up in the output box, with details of the client (similar to those shown in `display`), so that the user can verify the client before deleting them from the app. After verification, they can then type 'yes' or 'no' to proceed with or stop the process.
 
 This can be done with a new Confirmation class, which will hold **information about the client** to be deleted, and the code to delete the client in a **nullary function** (function that takes no arguments). Depending on whether the user inputs 'yes' or 'no', the Confirmation object will call the nullary function or finish the process without doing anything to the data.
+
+### Use Case 11-13: Adding, Editing and Removing a schedule for multiple clients
+Currently, each session is associated to only 1 client. A trainer could have multiple clients in a schedule, which can not be represented with the application's current set of features.
+
+We plan to abstract schedules into a separate object that can also store a list of clients. So clients can be associated with multiple schedules, and each schedule can have multiple clients.
+
+This can be done with a new `UniqueScheduleList` that is a singleton in the `AddressBook`, which contains all existing schedules of the user. Each schedule will be associated with 1 or more clients, while a client remains associated with 0 or more sessions. This will allow us to create a new command that can add/edit/delete a session for multiple clients at a time.
+
+Below is a proposed class diagram of the association described in the previous line:
+
+![EnhancedScheduleModelClassDiagram](images/EnhancedScheduleModelClassDiagram.png)
