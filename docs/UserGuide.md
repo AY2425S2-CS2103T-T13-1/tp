@@ -12,14 +12,13 @@ Introducing FitFlow — **a free desktop app designed specifically for personal 
 What sets FitFlow apart is its intelligent conflict detection system. The app automatically flags scheduling overlaps, helping trainers avoid double bookings and maintain a seamless flow of appointments.
 
 By streamlining administrative tasks, FitFlow lets trainers focus on what matters most—empowering their clients on their fitness journeys.
+<div style="page-break-after: always;"></div>
 
 ## Using this Guide
 
 The purpose of this user guide is to **help you install FitFlow**, as well as be a **resource you can refer to** if you require any additional help.
 
 You can use the [Table of contents](#table-of-contents) to navigate directly to what you're looking for.
-
-<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">:bulb: **Tips/Info:**<br>
 These boxes contain important/useful information or tips that can help you with using FitFlow.
@@ -32,6 +31,7 @@ These boxes indicate information that you should take note of to avoid running i
 <div markdown="block" class="alert alert-danger">:rotating_light: **Caution:**<br>
 These boxes indicate warnings about potential negative outcomes.
 </div>
+<div style="page-break-after: always;"></div>
 
 ## Table of Contents
 
@@ -39,6 +39,7 @@ These boxes indicate warnings about potential negative outcomes.
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -99,6 +100,7 @@ These boxes indicate warnings about potential negative outcomes.
 To get a feel for the app before actually starting to use it, check out our [_Guided Tutorial_](GuidedTutorial.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -147,7 +149,7 @@ Adds a client to FitFlow.
 
 Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-info">:bulb: **Tip:**
+<div markdown="span" class="alert alert-info">:bulb: **Tip:**<br>
 - A client can have any number of recurring schedule, one time schedule, or tags (including 0).<br>
 </div>
 
@@ -188,12 +190,13 @@ Invalid Examples:
 
 ### Listing all clients: `list`
 
-Shows a list of all the clients in FitFlow.
+Always shows a list of all the clients in FitFlow, regardless of any previous commands that might have filtered the list.
 
 Format: `list`
 
 Examples:
 * `list` displays and indexes all the clients in FitFlow.
+* If the list has been filtered because of the `find` command, you can use the `list` command to display the full list of clients again.
 
 ### Locating clients by name: `find`
 
@@ -204,6 +207,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`.
 * The order of the keywords does not matter. i.e. `Hans Bo` will match `Bo Hans`.
+* You do not need to include the name tag in the keyword, e.g. if you want to search for the name 'Alex' it should be `find Alex` and not `find n/Alex`.
 * Only the name is searched.
 * Only the name and contact number of the client will be displayed. To see a client's full details, refer to the [**`display`**](#displaying-a-clients-details-display) section.
 * Only full words will be matched i.e. `Han` will not match `Hans`.
@@ -360,6 +364,7 @@ FitFlow data are saved automatically as a JSON file `[JAR file location]/data/ad
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -375,10 +380,11 @@ FitFlow data are saved automatically as a JSON file `[JAR file location]/data/ad
 3. The [**view**](#viewing-schedules-view) command currently does not highlight conflicting schedules when used. This is known and will be rectified in a future to make it easier for client's to rectify conflicting schedules. It is not prioritised as a user is still able to manually see and rectify conflicting schedules.
 4. The dates are only accepted if the year is in a 2-digit format, not in a 4-digit format. This is known and will be updated in a future update. It is not prioritised as it is unlikely that a user will save a schedule in a year earlier than 2000 and after 2100 for now.
 5. When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e. it is not cumulative. This is a known limitation and the behaviour will be adjusted in an update. It is not prioritised as the user can still add the fields manually.
-6. Past one-time schedules that fall on the same day as a recurring schedule are reported as schedule conflicts. This is a known issue and will be addressed in a future update. It is not prioritised as it does not hinder the user’s ability to plan effectively—only future scheduling is typically relevant, and users can still interpret the conflict warnings accordingly.
-
+6. When adding or editing either one time schedules or recurring schedules, the given date/day and time may not be parsed due to additional whitespace characters between the date/day and time. (i.e. an `edit` command with the prefix and parameter `rs/Monday   1400 1600` or `rs/Monday 1400   1600`will display an error). This is a known limitation for `add` and `edit` commands when adding/editing clients with the `ots/` prefix and/or `rs/` prefix. The remedy is to remove the additional whitespaces and ensure that there is only 1 whitespace separating the date/day and times.
+7. Past one-time schedules that fall on the same day as a recurring schedule are reported as schedule conflicts. This is a known issue and will be addressed in a future update. It is not prioritised as it does not hinder the user’s ability to plan effectively—only future scheduling is typically relevant, and users can still interpret the conflict warnings accordingly.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
