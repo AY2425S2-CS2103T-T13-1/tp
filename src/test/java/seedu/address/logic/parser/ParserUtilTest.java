@@ -32,7 +32,7 @@ public class ParserUtilTest {
     private static final String INVALID_ONETIMESCHEDULE_1 = "33/1 1000 1200"; //out of range date
     private static final String INVALID_ONETIMESCHEDULE_2 = "2/3 1400 1200"; //invalid time
     private static final String INVALID_ONETIMESCHEDULE_3 = "31/6 1000 1200"; //invalid date
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "friendé";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "88888888";

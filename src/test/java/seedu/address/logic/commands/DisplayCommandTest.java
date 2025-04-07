@@ -45,7 +45,19 @@ public class DisplayCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DisplayCommand displayCommand = new DisplayCommand(outOfBoundIndex);
 
-        assertCommandFailure(displayCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(displayCommand, model,
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n"
+                        + DisplayCommand.MESSAGE_USAGE);
+    }
+
+    @Test
+    public void execute_invalidEmptyUnfilteredList_throwsCommandException() {
+        Model emptyModel = new ModelManager();
+        assertTrue(emptyModel.getFilteredPersonList().isEmpty());
+        DisplayCommand displayCommand = new DisplayCommand(INDEX_SECOND_PERSON);
+
+        assertCommandFailure(displayCommand, emptyModel,
+                Messages.MESSAGE_NO_PERSON_TO_DISPLAY);
     }
 
 
@@ -59,7 +71,9 @@ public class DisplayCommandTest {
 
         DisplayCommand displayCommand = new DisplayCommand(outOfBoundIndex);
 
-        assertCommandFailure(displayCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(displayCommand, model,
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n"
+                        + DisplayCommand.MESSAGE_USAGE);
     }
 
     @Test
@@ -92,12 +106,4 @@ public class DisplayCommandTest {
         assertEquals(expected, displayCommand.toString());
     }
 
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
-    }
 }

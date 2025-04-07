@@ -14,9 +14,8 @@ import seedu.address.model.util.LocalDateUtils;
 public class OneTimeSchedule extends Schedule {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Dates must be in the format: date start end, either [d/m HHmm HHmm] or [d/m/yy HHmm HHmm].\n"
-        + "Days and months can be 1 or 2 digits. Years (if included) must be 2 digits. "
-        + "Times must be 4 digits in 24-hour format.";
+            "One-time schedules should be in the following format: [date HHmm HHmm]. \n"
+                    + "Date Formats: d/m or d/m/yy";
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Invalid date provided. Ensure the day, month, and year (if included) form a valid calendar date. "
