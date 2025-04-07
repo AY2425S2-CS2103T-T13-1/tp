@@ -347,7 +347,7 @@ FitFlow data are saved automatically as a JSON file `[JAR file location]/data/ad
 3. The [**view**](#viewing-schedules-view) command currently does not highlight conflicting schedules when used. This is known and will be rectified in a future to make it easier for client's to rectify conflicting schedules. It is not prioritised as a user is still able to manually see and rectify conflicting schedules.
 4. The dates are only accepted if the year is in a 2-digit format, not in a 4-digit format. This is known and will be updated in a future update. It is not prioritised as it is unlikely that a user will save a schedule in a year earlier than 2000 and after 2100 for now.
 5. When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e. it is not cumulative. This is a known limitation and the behaviour will be adjusted in an update. It is not prioritised as the user can still add the fields manually.
-
+6. When adding or editing either one time schedules or recurring schedules, the given date/day and time may not be parsed due to additional whitespace characters between the date/day and time. (i.e. an `edit` command with the prefix and parameter `rs/Monday   1400 1600` or `rs/Monday 1400   1600`will display an error). This is a known limitation for `add` and `edit` commands when adding/editing clients with the `ots/` prefix and/or `rs/` prefix. The remedy is to remove the additional whitespaces and ensure that there is only 1 whitespace separating the date/day and times.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
