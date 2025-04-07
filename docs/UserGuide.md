@@ -160,7 +160,7 @@ The reason for this is so that you will not be confused on which client is which
 - Use the edit command to rectify any conflicting schedules.
 </div>
 
-* For `NAME`, `GOALS`, `MEDICAL_HISTORY`, and `LOCATION`, these fields accept all ASCII characters.
+* For `NAME`, `GOALS`, `MEDICAL_HISTORY`, `LOCATION`, and `TAG`, these fields accept all ASCII characters.
 * For `PHONE_NUMBER`, any 8-digit number starting with 6, 8, or 9 is accepted.
 * For `RECURRING SCHEDULE`, use the format `DAY START_TIME END_TIME`.
   * `DAY` can be any day of the week i.e. `Monday`. You can use 3-letter short-form days as well i.e. `Mon`.
