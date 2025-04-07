@@ -800,12 +800,28 @@ Team Size: 5
 
 This section addresses the enhancements we plan to add to the application in the future. They address some of the features in our use cases that are not currently implemented within the application.
 
+### Use Case 2 - Step 1: Adding a new client and Use Case 7 - Step 2: Editing a client's details
+When a user adds a new client or edits an existing one, the application currently reports a conflict if a one-time schedule (that occurred in the past) falls on the same day as a recurring schedule. This is unnecessary, as such conflicts have no impact on future scheduling.
+
+We plan to address this by suppressing conflict reports that involve past one-time schedules, ensuring that only future conflicts are flagged by the application.
+
+To implement this, we will add a check to confirm that the one-time schedule being compared is set in the future before treating it as a conflict.
+
 ### Use Case 6 - Step 3: Prompting User for Delete confirmation
 When a client deletes a user, the application does so immediately without any confirmation. This can be undesirable, especially since the `delete` command uses indexes for deletion, which can be mistyped easily.
 
 We plan to have a confirmation message show up in the output box, with details of the client (similar to those shown in `display`), so that the user can verify the client before deleting them from the app. After verification, they can then type 'yes' or 'no' to proceed with or stop the process.
 
 This can be done with a new Confirmation class, which will hold **information about the client** to be deleted, and the code to delete the client in a **nullary function** (function that takes no arguments). Depending on whether the user inputs 'yes' or 'no', the Confirmation object will call the nullary function or finish the process without doing anything to the data.
+
+### Use Case 14 - Setting a reminder for a session
+Currently, the application does not support reminders for upcoming sessions, which may lead to missed appointments if the user forgets to check the schedule regularly.
+
+We plan to implement a feature that allows users to set reminders for individual sessions. This will improve time management and ensure that trainers do not miss upcoming appointments.
+
+To support this, each `Schedule` object will have an optional `reminderDuration` field (e.g., 10 minutes, 1 hour) that indicates how long before the session the reminder should be triggered. When the application is launched, it will check all upcoming sessions against the current system time. If any reminder falls within the configured window (e.g. now + 10 minutes), a reminder message will be displayed as part of the welcome output to notify the user.
+
+This feature will help users stay informed about imminent sessions, especially useful for trainers with a busy or irregular schedule.
 
 ### Trim unnecessary whitespaces in parameters for One Time Schedules and Recurring Schedules
 When adding or editing either one time schedules or recurring schedules, the given date/day and time may not be parsed due to additional whitespace characters between the date/day and time. (i.e. an `edit` command with the prefix and parameter `rs/Monday   1400 1600` or `rs/Monday 1400   1600`will display an error). 
