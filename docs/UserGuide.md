@@ -231,9 +231,9 @@ Format: `display INDEX`
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**<br>
 - Can be used in conjunction with 
-    - 'list' to show a list of all the clients.<br>
+    - `list` to show a list of all the clients.<br>
     - `find` to filter the clients based on the keyword.<br> 
-    - 'view' to filter the clients based on day/date of the schedule.<br>
+    - `view` to filter the clients based on day/date of the schedule.<br>
 </div>
 
 * Displays the client at the specified `INDEX`.
